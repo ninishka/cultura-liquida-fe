@@ -19,6 +19,7 @@ import {
   Number,
   ArrowButtons,
   BuyButton,
+  Price
 } from './styled'
 
 import icon1 from '../icons/icon_caps.svg'
@@ -99,6 +100,7 @@ const Melena = () => {
          </ArrowButtons>
       </AmountItem>  
       <BuyButton>Comprar</BuyButton>
+      <Price>90 000 COP</Price>
     </BuyWrap>
 
   </MelenaMain>

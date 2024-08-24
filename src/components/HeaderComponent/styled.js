@@ -39,7 +39,6 @@ export const CartWrap = styled.div`
   &:hover{
     background-color: #252525;
   }
-
 `
 
 export const StyledButton = styled.button`
@@ -52,9 +51,13 @@ export const StyledButton = styled.button`
   color: #FFFFFF;
   margin: 0px 20px;
   cursor: pointer;
+  font-weight: 400;
+  font-size: 16px;
+
   @media (max-width: 726px) {
     display: none;
   }
+
   &:hover{
     background-color: #252525;
   }

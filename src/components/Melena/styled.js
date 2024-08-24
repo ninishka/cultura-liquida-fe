@@ -14,6 +14,7 @@ export const TitleFrame = styled.div`
 export const TitleH1 = styled.h1`
   font-size: 72px;
   margin: 0;
+  font-weight: 600;
 `
 export const Description = styled.h5`
   font-size: 24px;
@@ -43,7 +44,6 @@ export const Item = styled.div`
   cursor: pointer;
   width: 216px;
   height: 62px;
-  
   &:hover{
     background-color: #252525;
   }
@@ -55,7 +55,8 @@ export const  Icon = styled.img`
 
 `
 export const TextDesc = styled.h6`
-
+  font-weight: 400;
+  font-size: 16px;
 `
 
 export const Checkbox = styled.input`
@@ -142,8 +143,15 @@ export const BuyButton = styled.button`
   height: 52px;
   color: #fff;
   font-weight: 600;
-
+  border: none;
+  font-size: 16px;
   &:hover{
-    background-color: #252525;
+    background-color: #F2C94C;
   }
+`
+
+export const Price = styled.p`
+ font-size: 36px;
+ font-weight: 500;
+ margin: 0;
 `

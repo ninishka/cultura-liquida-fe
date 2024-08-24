@@ -1,10 +1,38 @@
+@font-face {
+  font-family: 'Mohave';
+  src: url('/static/Mohave-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Mohave';
+  src: url('/static/Mohave-VariableFont_wght.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Mohave';
+  src: url('/static/Mohave-VariableFont_wght.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Mohave';
+  src: url('/static/Mohave-VariableFont_wght.ttf') format('truetype');
+  font-weight: 700;
+}
+
+
+
 body {
   margin: 0;
   background-color: #333333;
   color: #FFFFFF;
+  font-family: 'Mohave', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+  font-family: 'Mohave', sans-serif;
 }
+
+
