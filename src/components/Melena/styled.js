@@ -2,10 +2,18 @@ import styled from 'styled-components'
 
 export const MelenaMain = styled.section`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border-top: 2px solid #9F9F9F;
   margin: 20px 40px;
   border-bottom: 2px solid #9F9F9F;
+  @media (max-width: 1220px) {
+    flex-direction: column;
+  }
+`
+
+export const ContentWrapper = styled.div`
+  width: 60%;
+  margin-top: 50px;
 `
 
 export const TitleFrame = styled.div`
@@ -14,10 +22,13 @@ export const TitleFrame = styled.div`
 export const TitleH1 = styled.h1`
   font-size: 72px;
   margin: 0;
+  letter-spacing: 2%;
   font-weight: 600;
 `
 export const Description = styled.h5`
   font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 2%;
   margin: 0;
 `
 
@@ -28,11 +39,15 @@ export const FrameForTwo = styled.div`
 export const Release = styled.h6`
   color: lightgray;
   font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 24px;
 `
+
 export const CheckBoxGroup = styled.div`
  display: flex;
  flex-direction: row;
- /* justify-content: space-between; */
 `
 export const Item = styled.div`
   display: flex;
@@ -154,4 +169,11 @@ export const Price = styled.p`
  font-size: 36px;
  font-weight: 500;
  margin: 0;
+`
+export const ImageWrapper = styled.div`
+
+`
+
+export const MelenaImage = styled.img`
+ height: 560px;
 `
