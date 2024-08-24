@@ -20,21 +20,6 @@ export const UlItself = styled.ul`
   flex-direction: row;
 `
 
-export const LiDiv = styled.div`
-  display: block;
-  transition: all 0.3s ease;
-  padding: 15px;
-  border: 2px solid transparent;
-  border-radius: 16px 16px 16px 16px;
-  box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); /* was not in design but i thought it would bemore visible this way */
-  &:hover{
-    background-color: #252525;
-  }
-  @media (max-width: 726px) {
-    display: none;
-  }
-`
-
 export const LiItself = styled.li`
   list-style-type: none;
 `
@@ -47,11 +32,31 @@ export const Cart = styled.img`
 export const CartWrap = styled.div`
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
-  padding:  12px 15px 12px 15px;
+  padding:  6px 9px 6px 9px;
   margin-right: 30px;
+  /* box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); */
+
   &:hover{
     background-color: #252525;
   }
-  box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
+
+`
+
+export const StyledButton = styled.button`
+  display: block;
+  transition: all 0.3s ease;
+  padding: 15px;
+  border: 2px solid transparent;
+  border-radius: 16px 16px 16px 16px;
+  background-color: #333333;
+  color: #FFFFFF;
+  margin: 0px 20px;
+  cursor: pointer;
+  @media (max-width: 726px) {
+    display: none;
+  }
+  &:hover{
+    background-color: #252525;
+  }
 
 `
