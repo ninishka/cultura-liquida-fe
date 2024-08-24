@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-
 import {
   MelenaMain,
   ContentWrapper,
+  ImageWrapperDesktop,
+  ImageWrapperMobile,
+  MelenaImage,
   TitleFrame,
   TitleH1,
   Description,
@@ -14,6 +16,7 @@ import {
   TextDesc,
   Checkbox,
   BuyWrap,
+  AmountWrapper,
   AmountItem,
   Prev,
   Next,
@@ -21,8 +24,6 @@ import {
   ArrowButtons,
   BuyButton,
   Price,
-  MelenaImage,
-  ImageWrapper,
 } from './styled'
 
 import icon1 from '../icons/icon_caps.svg'
@@ -38,36 +39,21 @@ const checkBoxes = [
   {
     id: '1',
     icon: icon1,
-    text: 'Cápsulas'
-  },
-  {
-    id: '2',
-    icon: icon2,
-    text: 'Extracto 100ml'
-  },
-  {
-    id: '3',
-    icon: icon3,
-    text: 'Extracto 30ml'
-  },
-
-]
-
-const changedImg = [
-  {
-    id: '1',
+    text: 'Cápsulas',
     src: melenacaps,
   },
   {
     id: '2',
+    icon: icon2,
+    text: 'Extracto 100ml',
     src: melenaextract,
   },
   {
     id: '3',
+    icon: icon3,
+    text: 'Extracto 30ml',
     src: melenaextract,
-
   },
-
 ]
 
 const Melena = () => {
@@ -78,7 +64,7 @@ const Melena = () => {
     if(checkedState !== id) setCheckedState(id)
   }
 
-  const filterdContent = changedImg.filter(({ id }) => id === checkedState)
+  const filterdContent = checkBoxes.filter(({ id }) => id === checkedState)
 
 // sometimes when i put func (for example: console.log() ) u need to know the sintaxis differents
 // onClick={console.log('prev')} <-- this gonna be called automaticly on render time
@@ -90,6 +76,11 @@ const Melena = () => {
         <TitleH1>MELENA DE LEON</TitleH1>
         <Description>Cuerpo fructífero de hongos y micelio de Hericium erinaceus.</Description>
       </TitleFrame>
+      {filterdContent.map(({ src }) => (
+        <ImageWrapperMobile>
+          <MelenaImage src={src}/>
+        </ImageWrapperMobile>
+      ))}
       <FrameForTwo>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
@@ -110,29 +101,31 @@ const Melena = () => {
         </CheckBoxGroup>
       </FrameForTwo>
       <BuyWrap>
-        <AmountItem>
-          <ArrowButtons onClick={() => {
-            if(count > 1)  setCount(count - 1)
+        <AmountWrapper>
+          <AmountItem>
+            <ArrowButtons onClick={() => {
+              if(count > 1)  setCount(count - 1)
             }}>
-            <Prev src={arrowprev}/>
-          </ArrowButtons>
-          {/* invisible button is still working around img, need  fix later */}
-          <Number>{count}</Number>
-          <ArrowButtons  onClick={() => setCount(count + 1)}>
-            <Next src={arrownext}/>
-          </ArrowButtons>
-        </AmountItem>  
-        <BuyButton>Comprar</BuyButton>
+              <Prev src={arrowprev}/>
+            </ArrowButtons>
+            {/* invisible button is still working around img, need  fix later */}
+            <Number>{count}</Number>
+            <ArrowButtons  onClick={() => setCount(count + 1)}>
+              <Next src={arrownext}/>
+            </ArrowButtons>
+          </AmountItem>  
+          <BuyButton>Comprar</BuyButton>
+        </AmountWrapper>
         <Price>90 000 COP</Price>
       </BuyWrap>
     </ContentWrapper>
-    <ImageWrapper>
       {filterdContent.map(({ src }) => (
-        <MelenaImage src={src}/>
+        <ImageWrapperDesktop>
+          <MelenaImage src={src}/>
+        </ImageWrapperDesktop>
       ))}
-    </ImageWrapper>
   </MelenaMain>
-)
+  )
 }
 
 export default Melena;
