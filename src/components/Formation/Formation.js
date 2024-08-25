@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import {
   MelenaMain,
   ContentWrapper,
@@ -29,30 +29,7 @@ import {
 import arrownext from '../../assets/icons/arrow_next.svg'
 import arrowprev from '../../assets/icons/arrow_prev.svg'
 
-
-
-// const checkBoxes = [
-//   {
-//     id: '1',
-//     icon: icon1,
-//     text: 'Cápsulas',
-//     src: melenacaps,
-//   },
-//   {
-//     id: '2',
-//     icon: icon2,
-//     text: 'Extracto 100ml',
-//     src: melenaextract,
-//   },
-//   {
-//     id: '3',
-//     icon: icon3,
-//     text: 'Extracto 30ml',
-//     src: melenaextract,
-//   },
-// ]
-
-const Formation = ({checkBoxes}) => {
+const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
   const [ count, setCount ] = useState(1)
 
@@ -60,7 +37,7 @@ const Formation = ({checkBoxes}) => {
     if(checkedState !== id) setCheckedState(id)
   }
 
-  const filterdContent = checkBoxes.filter(({ id }) => id === checkedState)
+  const filterdContent = formationData.filter(({ id }) => id === checkedState)
 
 // sometimes when i put func (for example: console.log() ) u need to know the sintaxis differents
 // onClick={console.log('prev')} <-- this gonna be called automaticly on render time
@@ -69,8 +46,12 @@ const Formation = ({checkBoxes}) => {
   <MelenaMain>
     <ContentWrapper>
       <TitleFrame>
-        <TitleH1>MELENA DE LEON</TitleH1>
-        <Description>Cuerpo fructífero de hongos y micelio de Hericium erinaceus.</Description>
+        {formationDataTitle.map(({ title, description}) => (
+          <Fragment key={title}>
+            <TitleH1>{title}</TitleH1>
+            <Description>{description}</Description>  
+          </Fragment>
+        ))}
       </TitleFrame>
       {filterdContent.map(({ src }) => (
         <ImageWrapperMobile>
@@ -80,7 +61,7 @@ const Formation = ({checkBoxes}) => {
       <FrameForTwo>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
-        {checkBoxes.map(({text, icon, id}) => (
+        {formationData.map(({text, icon, id}) => (
           <Item key={id} onClick={() => rechecking(id)}> 
           {/* remake it to radio button later */}
               <Checkbox 
