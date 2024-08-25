@@ -5,7 +5,7 @@ import Melena from './components/Melena/Melena'
 import Reishi from './components/Reishi/Reishi'
 import Cola from './components/Cola/Cola'
 import MelenaBenefit from './components/MelenaBenefit/MelenaBenefit'
-
+import Indications from './components/Indications/Indications'
 
 function App() {
   const [displayingItem, setDisplayingItem] = useState('1')
@@ -15,6 +15,7 @@ function App() {
       <HeaderComponent setDisplayingItem={setDisplayingItem} />
       {displayingItem === '1' && <Melena />}
       {displayingItem === '1' && <MelenaBenefit />}
+      {displayingItem === '1' && <Indications />}
       {displayingItem === '2' && <Reishi />}
       {displayingItem === '3' && <Cola />}
     </>
