@@ -26,37 +26,33 @@ import {
   Price,
 } from './styled'
 
-import icon1 from '../icons/icon_caps.svg'
-import icon2 from '../icons/icon_ex100.svg'
-import icon3 from '../icons/icon_ex30.svg'
-import arrownext from '../icons/arrow_next.svg'
-import arrowprev from '../icons/arrow_prev.svg'
-import melenacaps from '../icons/Frame_878.png'
-import melenaextract from '../icons/Frame_87.png'
+import arrownext from '../../assets/icons/arrow_next.svg'
+import arrowprev from '../../assets/icons/arrow_prev.svg'
 
 
-const checkBoxes = [
-  {
-    id: '1',
-    icon: icon1,
-    text: 'Cápsulas',
-    src: melenacaps,
-  },
-  {
-    id: '2',
-    icon: icon2,
-    text: 'Extracto 100ml',
-    src: melenaextract,
-  },
-  {
-    id: '3',
-    icon: icon3,
-    text: 'Extracto 30ml',
-    src: melenaextract,
-  },
-]
 
-const Melena = () => {
+// const checkBoxes = [
+//   {
+//     id: '1',
+//     icon: icon1,
+//     text: 'Cápsulas',
+//     src: melenacaps,
+//   },
+//   {
+//     id: '2',
+//     icon: icon2,
+//     text: 'Extracto 100ml',
+//     src: melenaextract,
+//   },
+//   {
+//     id: '3',
+//     icon: icon3,
+//     text: 'Extracto 30ml',
+//     src: melenaextract,
+//   },
+// ]
+
+const Formation = ({checkBoxes}) => {
   const [ checkedState, setCheckedState ] = useState('1')
   const [ count, setCount ] = useState(1)
 
@@ -128,4 +124,4 @@ const Melena = () => {
   )
 }
 
-export default Melena;
+export default Formation;

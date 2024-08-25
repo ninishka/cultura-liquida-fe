@@ -4,14 +4,13 @@ import {
   HeaderFull,
   UlItself,
   StyledButton,
-  // LiDiv,
   LiItself,
   Cart,
   CartWrap,
 } from './styled'
 
-import Logo from '../icons/logo_full 1.svg'
-import CartIcon from '../icons/icon_cart.svg'
+import Logo from '../../assets/icons/logo_full 1.svg'
+import CartIcon from '../../assets/icons/icon_cart.svg'
 import data from './../data'
 
 const HeaderComponent = ({ setDisplayingItem }) => (
