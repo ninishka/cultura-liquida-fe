@@ -14,15 +14,12 @@ const App = () => {
   return (
     <>
       <HeaderComponent setDisplayingItem={setDisplayingItem} />
-      {productContentComponents.map(({itemNumber}) => (
-        <ProductContent
-          key={itemNumber}
-          indicationsData={indicationsData}
-          {...getActiveComponent(displayingItem)}
-        />
-      ))}
+      <ProductContent
+        key={displayingItem}
+        indicationsData={indicationsData}
+        {...getActiveComponent(displayingItem)}
+      />
       <FooterComponent setDisplayingItem={setDisplayingItem} />
-
     </>
   );
 }
