@@ -2,15 +2,30 @@ import styled from 'styled-components'
 
 export const FooterFull = styled.footer`
   display: flex;
+  flex-direction: column;
+  background-color: #252525;
+`
+export const HeaderLikeFooter = styled.div`
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: #252525;
-  height: 260px;
+  height: 130px;
+  margin-top: 50px;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    height: auto;
+  }
 `
 
 export const LogoFull = styled.div`
  margin-left: 30px;
+
+ @media (max-width: 850px) {
+    margin-left: 0;
+  }
 `
 export const LogoItself = styled.img`
   width: 131px;
@@ -19,6 +34,7 @@ export const LogoItself = styled.img`
 export const UlItself = styled.ul`
   display: flex;
   flex-direction: row;
+  padding: 0;
 `
 
 export const LiItself = styled.li`
@@ -29,15 +45,21 @@ export const Contacts = styled.img`
   width: 40px;
   height: 52;
   margin: 6px;
+
+  @media (max-width: 850px) {
+    width: 60px;
+  }
 `
 export const LastFooter = styled.div`
-
-`
-export const SomeText = styled.p`
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 25px;
 `
 
 export const ContactWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   border-radius: 16px 16px 16px 16px;
   padding:  6px 9px 6px 9px;
   margin-right: 30px;
@@ -46,6 +68,9 @@ export const ContactWrapper = styled.div`
   /* &:hover{
     background-color: #252525;
   } */
+  @media (max-width: 850px) {
+    margin-right: 0;
+  }
 `
 
 export const StyledButton = styled.button`
@@ -54,19 +79,17 @@ export const StyledButton = styled.button`
   padding: 15px;
   border: 2px solid transparent;
   border-radius: 16px 16px 16px 16px;
-  background-color: #333333;
+  background-color: #252525;
   color: #FFFFFF;
   margin: 0px 20px;
   cursor: pointer;
   font-weight: 400;
   font-size: 16px;
-
-  @media (max-width: 726px) {
-    display: none;
-  }
-
   &:hover{
-    background-color: #252525;
+    background-color:#333333;
   }
 
+  @media (max-width: 850px) {
+   margin:  3px 4px;
+  }
 `

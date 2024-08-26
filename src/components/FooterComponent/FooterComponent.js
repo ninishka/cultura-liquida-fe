@@ -2,6 +2,7 @@ import {
   LogoFull,
   LogoItself,
   FooterFull,
+  HeaderLikeFooter,
   TwoFooterWrap,
   UlItself,
   StyledButton,
@@ -9,11 +10,9 @@ import {
   Contacts,
   ContactWrapper,
   LastFooter,
-  SomeText,
 } from './styled'
 
 import Logo from '../../assets/icons/logo_full 1.svg'
-import CartIcon from '../../assets/icons/icon_cart.svg'
 import data from './../data'
 
 import telegram from '../../assets/icons/telegram.png'
@@ -23,6 +22,7 @@ import phone from '../../assets/icons/phone_1.png'
 
 const FooterComponent = ({ setDisplayingItem }) => (
   <FooterFull>
+    <HeaderLikeFooter>
     <LogoFull>
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
@@ -45,10 +45,11 @@ const FooterComponent = ({ setDisplayingItem }) => (
       <a href="https://www.instagram.com/_culturaliquida" target="_blank"><Contacts src={instagram} alt="instagram"/></a>
       <a href="tel:+573218669199"><Contacts src={phone} alt="phonenumber"/></a>
     </ContactWrapper>
-    {/* <LastFooter>
-      <SomeText>2024 año. Cultura Liquida. Reservados todos los derechos.</SomeText>
-      <SomeText>Designed by Energy Lynx</SomeText>
-    </LastFooter> */}
+    </HeaderLikeFooter>
+    <LastFooter>
+      <p>2024 año. Cultura Liquida. Reservados todos los derechos.</p>
+      <p>Designed by Energy Lynx</p>
+    </LastFooter>
   </FooterFull>
 )
 

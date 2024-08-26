@@ -5,6 +5,8 @@ export const HeaderFull = styled.header`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #9F9F9F;
+  margin: 10px 10px;
 `
 
 export const LogoFull = styled.div`

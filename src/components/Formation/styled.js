@@ -3,8 +3,7 @@ import styled from 'styled-components'
 export const MelenaMain = styled.section`
   display: flex;
   flex-direction: row;
-  border-top: 2px solid #9F9F9F;
-  margin: 20px 40px;
+  margin: 10px 15px;
   border-bottom: 2px solid #9F9F9F;
 
   @media (max-width: 1220px) {
@@ -110,12 +109,14 @@ export const Item = styled.div`
   height: 62px;
 
   @media (max-width: 850px) {
-    width: 93px;
+    width: 70px;
     height: 125px;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
+    margin-right: 15px;
+    margin: 10px 1vh;
   }
 
   &:hover{
@@ -182,6 +183,7 @@ export const BuyWrap = styled.div`
 
   @media (max-width: 1220px) {
     justify-content: center;
+    margin: 10px 1vh;
   } 
   
   @media (max-width: 850px) {

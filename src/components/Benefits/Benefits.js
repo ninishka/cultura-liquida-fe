@@ -5,7 +5,8 @@ import {
   DescrWrapper,
   Description,
   BenefitsCards,
-  Card
+  Card,
+  DescriptionCard
 } from './styled'
 
 const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
@@ -27,7 +28,7 @@ const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
       {benefitsCardsData.map(({src, description}) => (
         <Card key={description}>
           <img src={src} alt={description} />
-          <p>{description}</p>
+          <DescriptionCard>{description}</DescriptionCard>
         </Card>
       ))}
     </BenefitsCards>

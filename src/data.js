@@ -13,12 +13,20 @@ import img6 from './assets/icons/icon_LM6.png'
 
 import indicationsMelena from './assets/icons/icon_indications_for_the_use.png'
 import indicationsReishi from './assets/icons/icon_indications_for_the_use_R.png'
+import indicationsCola from './assets/icons/icon_indications_for_the_use_C.png'
 
 import reishiextract from './assets/icons/Frame_87R.png'
 import imgR1 from './assets/icons/icon_LR1.svg'
 import imgR3 from './assets/icons/icon_LR2.svg'
 import imgR4 from './assets/icons/icon_LR3.svg'
 import imgR6 from './assets/icons/icon_LR4.svg'
+
+import colaextract from './assets/icons/Frame_87C.png'
+import imgC1 from './assets/icons/icon_LC1.svg'
+import imgC2 from './assets/icons/icon_LC2.svg'
+import imgC4 from './assets/icons/icon_LC5.svg'
+import imgC5 from './assets/icons/icon_LC4.svg'
+
 
 const melenaFormationDataTitle = [
   {
@@ -152,7 +160,62 @@ const reishiBenefitsCardsData = [
 
 // ======================= //
 
-// PLACE HERE THE COLA DATA
+const colaFormationDataTitle = [
+  {
+    title: 'COLA DE PAVO, EXTRACTO',
+    description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
+  }
+]
+
+const colaFormationData = [
+  {
+    id: '1',
+    icon: icon2,
+    text: 'Extracto 100ml',
+    src: colaextract,
+  },
+  {
+    id: '2',
+    icon: icon3,
+    text: 'Extracto 30ml',
+    src: colaextract,
+  },
+]
+
+const colaBenefitsHeaderData = [
+  {
+    title: 'DE LA COLA DE PAVO',
+    description1: `Trametes es un hongo que activa el sistema inmunológico estimulando las células inmunitarias. Se mejoran las funciones del organismo en la lucha contra infecciones, resfriados, patógenos, virus, bacterias e infecciones. Esto se debe al alto contenido de polisacáridos.`,
+    description2: `Destruye infecciones, toxinas y patógenos que ingresan a la sangre, previene la formación de células cancerosas y ayuda a los glóbulos blancos a destruirlas en las primeras etapas. Trametes ha demostrado ser eficaz en la prevención del VPH, la psoriasis y las enfermedades renales.`,
+  }
+]
+
+const colaBenefitsCardsData = [
+  {
+    src: imgC1,
+    description: 'Elimina la ansiedad y la irritabilidad'
+  },
+  {
+    src: imgC2,
+    description: 'Prevención contra bacterias y virus'
+  },
+  {
+    src: img5,
+    description: 'Limpia los intestinos de toxinas y desechos el funcionamiento del sistema cardiovascular'
+  },
+  {
+    src: imgC4,
+    description: 'Tiene un efecto beneficioso sobre la función renal'
+  },
+  {
+    src: imgC5,
+    description: 'Restaura la piel'
+  },
+  {
+    src: img2,
+    description: 'Mejora de la inmunidad'
+  },
+]
 
 // ======================= //
 
@@ -173,5 +236,12 @@ export const productContentComponents = [
     benefitsCardsData: reishiBenefitsCardsData,
     indicationsImg: indicationsReishi
   },
-  // Add one more 
+  {
+    itemNumber: '3',
+    formationDataTitle: colaFormationDataTitle,
+    formationData: colaFormationData,
+    benefitsHeaderData: colaBenefitsHeaderData,
+    benefitsCardsData: colaBenefitsCardsData,
+    indicationsImg: indicationsCola
+  },
 ];
