@@ -19,7 +19,7 @@ import { DataContext } from '../../App.js';
 
 
 const Counter = ({ count, setCount, noBtn, temporalChoise }) => {
-  const { setchoosedGood } = useContext(DataContext);
+  const { setChoosedGood } = useContext(DataContext);
 
   return (                             
   <BuyWrap>
@@ -33,10 +33,24 @@ const Counter = ({ count, setCount, noBtn, temporalChoise }) => {
         {/* invisible button is still working around img, need  fix later */}
         <Number>{count}</Number>
         <ArrowButtons  onClick={() => setCount(count + 1)}>
-          <Next src={arrownext}/>
+          <Next src={arrownext} />
         </ArrowButtons>
       </AmountItem>  
-      {!noBtn && <BuyButton onClick={() => setchoosedGood(temporalChoise)}>Comprar</BuyButton>}
+      {!noBtn && <BuyButton onClick={() => {
+        // setChoosedGood(temporalChoise)
+
+        setChoosedGood(prevTemporalChoise => {
+          const hasDuplicate = prevTemporalChoise.some(({text}) => text === temporalChoise[0].text)
+        
+          if (!hasDuplicate) {
+            return [...prevTemporalChoise, ...temporalChoise]
+          } else {
+            return prevTemporalChoise;
+          }
+        })
+      }}>
+        Comprar
+      </BuyButton>}
     </AmountWrapper>
     <Price>90 000 COP</Price>
   </BuyWrap>

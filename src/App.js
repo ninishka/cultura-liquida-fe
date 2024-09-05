@@ -15,10 +15,10 @@ export const DataContext = createContext();
 const App = () => {
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showModal, setShowModal] = useState(false);
-  const [choosedGood, setchoosedGood] = useState([]);
+  const [choosedGood, setChoosedGood] = useState([]);
   
   return (
-    <DataContext.Provider value={{ choosedGood, setchoosedGood }}>
+    <DataContext.Provider value={{ choosedGood, setChoosedGood }}>
       <HeaderComponent setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} />
       {showModal && (
           <Modal showModal={showModal} setShowModal={setShowModal} />
@@ -26,7 +26,7 @@ const App = () => {
       <ProductContent
         key={displayingItem}
         indicationsData={indicationsData}
-        setchoosedGood={setchoosedGood}
+        setChoosedGood={setChoosedGood}
         {...getActiveComponent(displayingItem)}
       />
       <FooterComponent setDisplayingItem={setDisplayingItem} />

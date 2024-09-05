@@ -55,7 +55,7 @@ import {
 const Modal = ({ showModal, setShowModal  }) => {
   const [displayingItem, setDisplayingItem] = useState('1');
   const [ count, setCount ] = useState(1)
-  const { choosedGood, setchoosedGood } = useContext(DataContext);
+  const { choosedGood } = useContext(DataContext);
     
   return (
     <FullModal showModal={showModal} displayingItem={displayingItem}>
@@ -64,7 +64,7 @@ const Modal = ({ showModal, setShowModal  }) => {
           <ModalTitle>Tu carrito de la compra</ModalTitle>
              <CartItemsWrap>
                 {choosedGood.map(({src, title, description, text}) => (
-                  <CartItem>
+                  <CartItem key={text}>
                     <CartImg src={src}/>
                     <TextWrapper>
                       <Title>{title.toUpperCase()}</Title>

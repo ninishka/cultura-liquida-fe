@@ -22,13 +22,20 @@ import {
 const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
   const [ count, setCount ] = useState(1)
-  const [ temporalChoise, setTemporalChoise ] = useState({})
+  const [ temporalChoise, setTemporalChoise ] = useState([])
   const filterdContent = formationData.filter(({ id }) => id === checkedState)
 
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
-  }
 
+      const { text } = formationData.find(item => item.id === id);
+
+      if (text) {
+        setTemporalChoise(() => ([
+          {...formationDataTitle[0], ...filterdContent[0], text}
+        ]));
+      }
+  }
 
 // sometimes when i put func (for example: console.log() ) u need to know the sintaxis differents
 // onClick={console.log('prev')} <-- this gonna be called automaticly on render time
@@ -54,12 +61,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
         {formationData.map(({text, icon, id}) => (
-          <Item key={id} onClick={() => {
-            rechecking(id)
-            setTemporalChoise([{
-              ...formationDataTitle[0], text, ...filterdContent[0]
-            }])
-          }}> 
+          <Item key={id} onClick={() => rechecking(id)}> 
           {/* remake it to radio button later */}
               <Checkbox 
                 type="checkbox" 
