@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'
 
 import {
   BuyWrap,
@@ -15,11 +15,11 @@ import {
 
 import arrownext from '../../assets/icons/arrow_next.svg'
 import arrowprev from '../../assets/icons/arrow_prev.svg'
-import { DataContext } from '../../App.js';
+import { DataContext } from '../../App.js'
 
 
 const Counter = ({ count, setCount, noBtn, temporalChoise }) => {
-  const { setChoosedGood } = useContext(DataContext);
+  const { setChoosedGood } = useContext(DataContext)
 
   return (                             
   <BuyWrap>
@@ -45,7 +45,7 @@ const Counter = ({ count, setCount, noBtn, temporalChoise }) => {
           if (!hasDuplicate) {
             return [...prevTemporalChoise, ...temporalChoise]
           } else {
-            return prevTemporalChoise;
+            return prevTemporalChoise
           }
         })
       }}>

@@ -1,4 +1,5 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react'
+import { DataContext } from '../../App.js'
 
 import Counter from '../Counter/Counter'
 import {
@@ -20,20 +21,18 @@ import {
 } from './styled'
 
 const Formation = ({ formationDataTitle, formationData }) => {
+  const { count, setCount } = useContext(DataContext)
   const [ checkedState, setCheckedState ] = useState('1')
-  const [ count, setCount ] = useState(1)
   const [ temporalChoise, setTemporalChoise ] = useState([])
   const filterdContent = formationData.filter(({ id }) => id === checkedState)
 
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
-
-      const { text } = formationData.find(item => item.id === id);
-
+      const { text } = formationData.find(item => item.id === id)
       if (text) {
         setTemporalChoise(() => ([
           {...formationDataTitle[0], ...filterdContent[0], text}
-        ]));
+        ]))
       }
   }
 
@@ -87,4 +86,4 @@ const Formation = ({ formationDataTitle, formationData }) => {
   )
 }
 
-export default Formation;
+export default Formation

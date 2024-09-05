@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { DataContext } from '../../App.js';
+import React, { useState, useContext } from 'react'
+import { DataContext } from '../../App.js'
 import Counter from '../Counter/Counter'
 import {
   ModalWrapper,
@@ -53,9 +53,8 @@ import {
 // ]
 
 const Modal = ({ showModal, setShowModal  }) => {
-  const [displayingItem, setDisplayingItem] = useState('1');
-  const [ count, setCount ] = useState(1)
-  const { choosedGood } = useContext(DataContext);
+  const { count, setCount, choosedGood } = useContext(DataContext)
+  const [displayingItem, setDisplayingItem] = useState('1')
     
   return (
     <FullModal showModal={showModal} displayingItem={displayingItem}>
@@ -79,7 +78,7 @@ const Modal = ({ showModal, setShowModal  }) => {
         </ContentWrapper>
       </ModalWrapper>
     </FullModal>
-)};
+)}
 
 
 export default Modal

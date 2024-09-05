@@ -9,29 +9,27 @@ const getActiveComponent = selectedItem => {
   return productContentComponents.find(({ itemNumber }) => itemNumber === selectedItem)
 }
 
-export const DataContext = createContext();
+export const DataContext = createContext()
 
 
 const App = () => {
   const [displayingItem, setDisplayingItem] = useState('1')
-  const [showModal, setShowModal] = useState(false);
-  const [choosedGood, setChoosedGood] = useState([]);
-  
+  const [showModal, setShowModal] = useState(false)
+  const [choosedGood, setChoosedGood] = useState([])
+  const [ count, setCount ] = useState(1)
+
   return (
-    <DataContext.Provider value={{ choosedGood, setChoosedGood }}>
+    <DataContext.Provider value={{ choosedGood, setChoosedGood, count, setCount }}>
       <HeaderComponent setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} />
-      {showModal && (
-          <Modal showModal={showModal} setShowModal={setShowModal} />
-      )}
+      {showModal && <Modal setShowModal={setShowModal} />}
       <ProductContent
         key={displayingItem}
         indicationsData={indicationsData}
-        setChoosedGood={setChoosedGood}
         {...getActiveComponent(displayingItem)}
       />
       <FooterComponent setDisplayingItem={setDisplayingItem} />
     </DataContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App
