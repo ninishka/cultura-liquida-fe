@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import Counter from '../Counter/Counter'
 import {
   MelenaMain,
   ContentWrapper,
@@ -15,19 +16,7 @@ import {
   Icon,
   TextDesc,
   Checkbox,
-  BuyWrap,
-  AmountWrapper,
-  AmountItem,
-  Prev,
-  Next,
-  Number,
-  ArrowButtons,
-  BuyButton,
-  Price,
 } from './styled'
-
-import arrownext from '../../assets/icons/arrow_next.svg'
-import arrowprev from '../../assets/icons/arrow_prev.svg'
 
 const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
@@ -77,24 +66,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
           ))}
         </CheckBoxGroup>
       </FrameForTwo>
-      <BuyWrap>
-        <AmountWrapper>
-          <AmountItem>
-            <ArrowButtons onClick={() => {
-              if(count > 1)  setCount(count - 1)
-            }}>
-              <Prev src={arrowprev}/>
-            </ArrowButtons>
-            {/* invisible button is still working around img, need  fix later */}
-            <Number>{count}</Number>
-            <ArrowButtons  onClick={() => setCount(count + 1)}>
-              <Next src={arrownext}/>
-            </ArrowButtons>
-          </AmountItem>  
-          <BuyButton>Comprar</BuyButton>
-        </AmountWrapper>
-        <Price>90 000 COP</Price>
-      </BuyWrap>
+      <Counter count={count} setCount={setCount} />
     </ContentWrapper>
       {filterdContent.map(({ src }) => (
         <ImageWrapperDesktop>

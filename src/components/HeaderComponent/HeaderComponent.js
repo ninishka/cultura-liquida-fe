@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+
+
 import {
   LogoFull,
   LogoItself,
@@ -13,7 +16,12 @@ import Logo from '../../assets/icons/logo_full 1.svg'
 import CartIcon from '../../assets/icons/icon_cart.svg'
 import data from './../data'
 
-const HeaderComponent = ({ setDisplayingItem }) => (
+const HeaderComponent = ({ setDisplayingItem, setShowModal }) => {
+  const handleIconClick = () => {
+    setShowModal(true);
+  };
+
+  return (
   <HeaderFull>
     <LogoFull>
       <LogoItself src={Logo} alt="Company Logo" />
@@ -32,10 +40,10 @@ const HeaderComponent = ({ setDisplayingItem }) => (
         })} 
       </UlItself>
     </nav>
-    <CartWrap>
+    <CartWrap onClick={handleIconClick}>
       <Cart src={CartIcon} alt="cart logo" />
     </CartWrap>
   </HeaderFull>
-)
+)}
 
 export default HeaderComponent;
