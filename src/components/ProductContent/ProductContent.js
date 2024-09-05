@@ -3,12 +3,12 @@ import Benefits from '../Benefits/Benefits'
 import Indications from '../Indications/Indications'
 
 const ProductContent = ({
-  formationDataTitle, formationData, benefitsHeaderData, benefitsCardsData, indicationsData, indicationsImg
+  setchoosedGood, formationDataTitle, formationData, benefitsHeaderData, benefitsCardsData, indicationsData, indicationsImg
 }) => {
 
   return (
     <div>
-      <Formation formationDataTitle={formationDataTitle} formationData={formationData} />
+      <Formation formationDataTitle={formationDataTitle} formationData={formationData} setchoosedGood={setchoosedGood} />
       <Benefits 
         benefitsHeaderData={benefitsHeaderData} 
         benefitsCardsData={benefitsCardsData} 

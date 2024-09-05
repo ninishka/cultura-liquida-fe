@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+
 import {
   BuyWrap,
   AmountWrapper,
@@ -13,9 +15,13 @@ import {
 
 import arrownext from '../../assets/icons/arrow_next.svg'
 import arrowprev from '../../assets/icons/arrow_prev.svg'
+import { DataContext } from '../../App.js';
 
 
-const Counter = ({ count, setCount, noBtn }) => (                             
+const Counter = ({ count, setCount, noBtn, temporalChoise }) => {
+  const { setchoosedGood } = useContext(DataContext);
+
+  return (                             
   <BuyWrap>
     <AmountWrapper>
       <AmountItem>
@@ -30,9 +36,10 @@ const Counter = ({ count, setCount, noBtn }) => (
           <Next src={arrownext}/>
         </ArrowButtons>
       </AmountItem>  
-      {!noBtn && <BuyButton>Comprar</BuyButton>}
+      {!noBtn && <BuyButton onClick={() => setchoosedGood(temporalChoise)}>Comprar</BuyButton>}
     </AmountWrapper>
     <Price>90 000 COP</Price>
   </BuyWrap>
-)
+)}
+
 export default Counter

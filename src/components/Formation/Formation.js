@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+
 import Counter from '../Counter/Counter'
 import {
   MelenaMain,
@@ -21,16 +22,18 @@ import {
 const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
   const [ count, setCount ] = useState(1)
+  const [ temporalChoise, setTemporalChoise ] = useState({})
+  const filterdContent = formationData.filter(({ id }) => id === checkedState)
 
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
   }
 
-  const filterdContent = formationData.filter(({ id }) => id === checkedState)
 
 // sometimes when i put func (for example: console.log() ) u need to know the sintaxis differents
 // onClick={console.log('prev')} <-- this gonna be called automaticly on render time
 // onClick={() => console.log('prev')} <-- this how it will be called ONLY FATER CLICK on it
+
   return (
   <MelenaMain>
     <ContentWrapper>
@@ -51,7 +54,12 @@ const Formation = ({ formationDataTitle, formationData }) => {
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
         {formationData.map(({text, icon, id}) => (
-          <Item key={id} onClick={() => rechecking(id)}> 
+          <Item key={id} onClick={() => {
+            rechecking(id)
+            setTemporalChoise([{
+              ...formationDataTitle[0], text, ...filterdContent[0]
+            }])
+          }}> 
           {/* remake it to radio button later */}
               <Checkbox 
                 type="checkbox" 
@@ -66,7 +74,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
           ))}
         </CheckBoxGroup>
       </FrameForTwo>
-      <Counter count={count} setCount={setCount} />
+      <Counter count={count} setCount={setCount} temporalChoise={temporalChoise} />
     </ContentWrapper>
       {filterdContent.map(({ src }) => (
         <ImageWrapperDesktop>
