@@ -27,13 +27,18 @@ export const AmountItem = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 16px 16px 16px 16px;
-  background-color: #2D2D2D;
+  /* background-color: #2D2D2D; */
+  background-color: ${({$bgc}) => $bgc ? 'white' : '#2D2D2D'};
+  border: ${({$bgc}) => $bgc ? '1.5px solid black' : '#2D2D2D'};
+
+  color: ${({$bgc}) => $bgc && 'black'};
   margin-right: 30px;
   width: 100px;
   height: 52px;
   
   &:hover{
     background-color: #252525;
+    background-color: ${({$bgc}) => $bgc ? 'grey' : '#2D2D2D'};
   }
 `
 
@@ -46,13 +51,6 @@ export const ArrowButtons = styled.button`
   background: none;
 `
 
-export const Prev = styled.img`
-   cursor:pointer;
-`
-
-export const Next = styled.img`
-   cursor:pointer;
-`
 export const Number = styled.h4`
   margin: 6px 18px 8px;
 `

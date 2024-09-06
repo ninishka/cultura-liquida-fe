@@ -62,15 +62,15 @@ const Modal = ({ showModal, setShowModal  }) => {
         <ContentWrapper  setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} >
           <ModalTitle>Tu carrito de la compra</ModalTitle>
              <CartItemsWrap>
-                {choosedGood.map(({src, title, description, text}) => (
+                {choosedGood.map(({src, iconSrc, title, description, text}) => (
                   <CartItem key={text}>
-                    <CartImg src={src}/>
+                    <CartImg src={iconSrc}/>
                     <TextWrapper>
                       <Title>{title.toUpperCase()}</Title>
                       <Description>{description}</Description>
                     </TextWrapper>
                     <p style={{color: 'red'}}>{text}</p>
-                    <Counter count={count} setCount={setCount} noBtn />
+                    <Counter count={count} setCount={setCount} isModal />
                   </CartItem>
                 ))}
             </CartItemsWrap>

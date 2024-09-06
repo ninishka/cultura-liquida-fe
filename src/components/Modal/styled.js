@@ -51,7 +51,6 @@ export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
   background-color: white;
-
   justify-content: space-between;
 `
 

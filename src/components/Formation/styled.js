@@ -97,7 +97,7 @@ export const CheckBoxGroup = styled.div`
     justify-content: center
   }
 `
-export const Item = styled.div`
+export const Item = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -144,7 +144,7 @@ export const TextDesc = styled.h6`
   }
 `
 
-export const Checkbox = styled.input`
+export const RadioButton = styled.input`
   appearance: none;
   display: inline-block;
   width: 1.3em;
@@ -157,9 +157,8 @@ export const Checkbox = styled.input`
   margin-left: 20px;
 
   @media (max-width: 850px) {
-    margin-left: 0
+    margin-left: 0;
   }
-
 
   &:checked::after {
     content: "";
@@ -174,4 +173,9 @@ export const Checkbox = styled.input`
     transform: translate(-50%, -50%);
     z-index: 1;
   }
+`
+
+export const LabelContent = styled.label`
+ display: flex;
+ flex-direction: row;
 `
