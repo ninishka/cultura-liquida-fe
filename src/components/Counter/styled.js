@@ -19,6 +19,8 @@ export const BuyWrap = styled.div`
 export const AmountWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+
 `
 
 export const AmountItem = styled.div`
@@ -30,7 +32,6 @@ export const AmountItem = styled.div`
   /* background-color: #2D2D2D; */
   background-color: ${({$bgc}) => $bgc ? 'white' : '#2D2D2D'};
   border: ${({$bgc}) => $bgc ? '1.5px solid black' : '#2D2D2D'};
-
   color: ${({$bgc}) => $bgc && 'black'};
   margin-right: 30px;
   width: 100px;

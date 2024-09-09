@@ -31,7 +31,7 @@ import imgC5 from './assets/icons/icon_LC4.svg'
 const melenaFormationDataTitle = [
   {
     title: 'MELENA DE LEON',
-    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
+    description: 'Cuerpo fructífero de.',
   }
 ]
 
