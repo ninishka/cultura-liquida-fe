@@ -5,6 +5,8 @@ export const ModalTitle = styled.h2`
   font-weight: 600;
   line-height: 57.6px;
   font-size: 48px;
+  color: black;
+  text-align: center;
    
 `
 
@@ -104,7 +106,12 @@ export const FormField = styled.div`
     display: block;
     width: 100%;
     margin-bottom: 5px;
-    font-weight: bold;
+    font-family: Mohave;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 17.6px;
+    text-align: left;
+    color: black;
   }
 
   & > input,
@@ -113,6 +120,22 @@ export const FormField = styled.div`
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    resize: none;
+    min-height: 50px;
+  }
+
+  & > select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    resize: none;
+    min-height: 50px;
   }
 `;
 
