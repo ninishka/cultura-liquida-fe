@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { DataContext } from '../../App.js'
 import Counter from '../Counter/Counter'
 import {
@@ -6,30 +6,37 @@ import {
   ContentWrapper,
   ModalTitle,
   FullModal,
-  CountAndAmountWrap,
   CartItem,
+  CartItemWrap,
   CartImg,
   TextWrapper,
   Title,
   Description,
   FormField,
   FormWrapper,
-  FormGrid
+  FormGrid,
+  ErrorMessage,
+  DeleteButtonWrap,
+  DeleteButtonItself,
+  DeleteButtonIcon
 } from './styled'
 
+import img6 from '../../assets/icons/delete_good_from_cart.png'
 
 
+// TODO: hover suggestion window is staying in one place when scrolling down 
 const ModalForm = () => {
   const departments = [
     { label: "departments 1", value: "option1" },
     { label: "departments 2", value: "option2" },
   ];
-  
+
   const municipalities = [
     { label: "municipalities 1", value: "option11" },
     { label: "municipalities 2", value: "option22" },
   ];
 
+  // TODO: need to use formData API ?
   const [formData, setFormData] = useState({
     name: '',
     surnames: '',
@@ -53,17 +60,64 @@ const ModalForm = () => {
     });
   };
 
+  const handleBlur = (e) => {
+    validateField(e.target.name, e.target.value);
+  };
+
+  const validateField = (name, value) => {
+    const newErrors = { ...errors };
+    const validators = {
+      name: /^[A-Za-z\s]+$/,
+      surnames: /^[A-Za-z\s]+$/,
+      telephone: /^\d+$/,
+      documentNumber: /^\d+$/,
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    };
+
+    if (!value.trim()) {
+      newErrors[name] = "This field is required.";
+    } else if (validators[name] && !validators[name].test(value)) {
+      newErrors[name] = {
+        name: "Name must contain only letters and spaces.",
+        surnames: "Surname must contain only letters and spaces.",
+        telephone: "Telephone must contain only numbers.",
+        documentNumber: "Document number must contain only numbers.",
+        email: "Invalid email address."
+      }[name];
+    } else {
+      delete newErrors[name];
+    }
+
+    setErrors(newErrors);
+  };
+
+  const dataSet = [
+    { label: 'Nombre', name: 'name', type: 'text' },
+    { label: 'Apellidos', name: 'surnames', type: 'text' },
+    { label: 'Tipo documento', name: 'documentType', type: 'select', options: [
+        { label: 'ID', value: 'ID' },
+        { label: 'Passport', value: 'Passport' },
+        { label: 'Driver\'s License', value: 'Driver\'s License' }
+      ]
+    },
+    { label: 'Número de documento', name: 'documentNumber', type: 'text' },
+    { label: 'Dirección de envío', name: 'shippingAddress', type: 'textarea' },
+    { label: 'Departamento', name: 'department', type: 'select', options: departments },
+    { label: 'Ciudad / Municipio', name: 'cityMunicipality', type: 'select', options: municipalities },
+    { label: 'Celular / Teléfono', name: 'telephone', type: 'tel' },
+    { label: 'Correo electrónico', name: 'email', type: 'email' },
+    { label: 'Notas (opcional)', name: 'notes', type: 'textarea' }
+  ];
+
   const validate = () => {
     const newErrors = {};
-    const nameRegex = /^[A-Za-z\s]+$/;
-    const phoneRegex = /^\d+$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!nameRegex.test(formData.name)) newErrors.name = "Name must contain only letters and spaces.";
-    if (!nameRegex.test(formData.surnames)) newErrors.surnames = "Surname must contain only letters and spaces.";
-    if (!phoneRegex.test(formData.telephone)) newErrors.telephone = "Telephone must contain only numbers.";
-    if (!phoneRegex.test(formData.documentNumber)) newErrors.documentNumber = "Document number must contain only numbers.";
-    if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email address.";
+    // TODO: reduce duplicate - we have same values in dataSet
+    const fields = ['name', 'surnames', 'documentNumber', 'telephone', 'email', 'department', 'cityMunicipality', 'shippingAddress'];
+
+    fields.forEach(field => {
+      if (!formData[field].trim()) newErrors[field] = "This field is required.";
+    });
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -72,131 +126,48 @@ const ModalForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Handle form submission
       console.log("Form data submitted:", formData);
     }
   };
+
+
+
 
   return (
     <FormWrapper>
       <form onSubmit={handleSubmit} noValidate>
         <FormGrid>
-          <FormField>
-            <label htmlFor="name">Nombre *</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-            {errors.name && <p style={{color: 'red'}}>{errors.name}</p>}
-          </FormField>
-          <FormField>
-            <label htmlFor="surnames">Apellidos *</label>
-            <input
-              type="text"
-              id="surnames"
-              name="surnames"
-              value={formData.surnames}
-              onChange={handleChange}
-              required
-            />
-            {errors.surnames && <p style={{color: 'red'}}>{errors.surnames}</p>}
-          </FormField>
-          <FormField>
-            <label htmlFor="documentType">Tipo documento *</label>
-            <select
-              id="documentType"
-              name="documentType"
-              value={formData.documentType}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select</option>
-              <option value="ID">ID</option>
-              <option value="Passport">Passport</option>
-              <option value="Driver's License">Driver's License</option>
-            </select>
-          </FormField>
-          <FormField>
-            <label htmlFor="documentNumber">Número de documento *</label>
-            <input
-              type="text"
-              id="documentNumber"
-              name="documentNumber"
-              value={formData.documentNumber}
-              onChange={handleChange}
-              required
-            />
-            {errors.documentNumber && <p style={{color: 'red'}}>{errors.documentNumber}</p>}
-          </FormField>
-          <FormField>
-            <label htmlFor="shippingAddress">Dirección de envío *</label>
-            <textarea
-              id="shippingAddress"
-              name="shippingAddress"
-              rows="3"
-              value={formData.shippingAddress}
-              onChange={handleChange}
-              required
-            />
-          </FormField>
-          <FormField>
-            <label htmlFor="department">Departamento *</label>
-            <select
-              id="department"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select</option>
-              {departments.map(({ label, value }) => (
-                <option key={value} value={value}>{label}</option>
-              ))}
-            </select>
-          </FormField>
-          <FormField>
-            <label htmlFor="cityMunicipality">Ciudad / Municipio *</label>
-            <select
-              id="cityMunicipality"
-              name="cityMunicipality"
-              value={formData.cityMunicipality}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select</option>
-              {municipalities.map(({ label, value }) => (
-                <option key={value} value={value}>{label}</option>
-              ))}
-            </select>
-          </FormField>
-          <FormField>
-            <label htmlFor="telephone">Celular / Teléfono *</label>
-            <input
-              type="tel"
-              id="telephone"
-              name="telephone"
-              value={formData.telephone}
-              onChange={handleChange}
-              required
-            />
-            {errors.telephone && <p style={{color: 'red'}}>{errors.telephone}</p>}
-          </FormField>
-          <FormField>
-            <label htmlFor="email">Correo electrónico *</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            {errors.email && <p style={{color: 'red'}}>{errors.email}</p>}
-          </FormField>
+          {dataSet.map(({ label, name, type, options = [] }) => (
+            <FormField key={name}>
+                <label htmlFor={name}>{label} *</label>
+                {type === 'select' ? (
+                  <select
+                    id={name}
+                    name={name}
+                    value={formData[name]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  >
+                    <option value="">Select</option>
+                    {options.map(({ label, value }) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type={type}
+                    id={name}
+                    name={name}
+                    value={formData[name]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+                )}
+                {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+            </FormField>
+          ))}
           <button type="submit">Submit</button>
         </FormGrid>
         <FormField>
@@ -214,6 +185,11 @@ const ModalForm = () => {
   );
 };
 
+// <> </> read about fragment
+// <Fragment> </Fragment> read about fragment
+// and know the differents
+
+
 const Modal = ({ showModal, setShowModal  }) => {
   const { count, setCount, choosedGood } = useContext(DataContext)
   const [displayingItem, setDisplayingItem] = useState('1')
@@ -224,19 +200,24 @@ const Modal = ({ showModal, setShowModal  }) => {
         <ContentWrapper  setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} >
           <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
                 {choosedGood.map(({src, iconSrc, title, description, text}) => (
-                  <CartItem key={text}>
-                    <CartImg src={iconSrc}/>
-                    <TextWrapper>
-                      <Title>{title.toUpperCase()}</Title>
-                      <Description>{description}</Description>
-                    </TextWrapper>
-                    <CountAndAmountWrap>
-                      <p style={{color: 'red'}}>{text}</p>
-                      <Counter count={count} setCount={setCount} isModal />
-                    </CountAndAmountWrap>
-                  </CartItem>
+                    <CartItemWrap key={text}>
+                      <CartItem>
+                        <CartImg src={iconSrc}/>
+                        <TextWrapper>
+                          <Title>{title.toUpperCase()}</Title>
+                          <Description>{description}</Description>
+                        </TextWrapper>
+                        <p style={{color: 'red'}}>{text}</p>
+                        <Counter count={999999} setCount={setCount} isModal />
+                      </CartItem>
+                      <DeleteButtonWrap>
+                        <DeleteButtonItself>
+                          <DeleteButtonIcon src={img6} />
+                        </DeleteButtonItself>
+                      </DeleteButtonWrap>
+                    </CartItemWrap>
                 ))}
-            <button onClick={() => setShowModal(false)}>Close</button>
+            {/* <button onClick={() => setShowModal(false)}>Close</button> */}
             <ModalTitle>
               {'Detalles de facturación'.toUpperCase()}
             </ModalTitle>

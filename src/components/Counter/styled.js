@@ -33,7 +33,6 @@ export const AmountItem = styled.div`
   background-color: ${({$bgc}) => $bgc ? 'white' : '#2D2D2D'};
   border: ${({$bgc}) => $bgc ? '1.5px solid black' : '#2D2D2D'};
   color: ${({$bgc}) => $bgc && 'black'};
-  margin-right: 30px;
   width: 100px;
   height: 52px;
   
@@ -80,6 +79,7 @@ export const Price = styled.p`
   font-size: 36px;
   font-weight: 500;
   margin: 0;
+  color: black;
 
   @media (max-width: 850px) {
     text-align: left;

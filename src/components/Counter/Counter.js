@@ -4,7 +4,6 @@ import ArrowNext from '../ArrowNext/ArrowNext'
 import ArrowPrev from '../ArrowPrev/ArrowPrev'
 import {
   BuyWrap,
-  AmountWrapper,
   AmountItem,
   Number,
   ArrowButtons,
@@ -17,7 +16,6 @@ const Counter = ({ count, setCount, isModal, temporalChoise }) => {
 
   return (                             
   <BuyWrap>
-    <AmountWrapper>
       <AmountItem $bgc={isModal}>
         <ArrowButtons onClick={() => {
             if(count > 1)  setCount(count - 1)
@@ -31,7 +29,8 @@ const Counter = ({ count, setCount, isModal, temporalChoise }) => {
           <ArrowNext color={isModal && 'black'} />
         </ArrowButtons>
       </AmountItem>  
-      {!isModal && <BuyButton onClick={() => {
+      {!isModal && 
+      <BuyButton onClick={() => {
         // setChoosedGood(temporalChoise)
 
         setChoosedGood(prevTemporalChoise => {
@@ -53,7 +52,6 @@ const Counter = ({ count, setCount, isModal, temporalChoise }) => {
       }}>
         Comprar
       </BuyButton>}
-    </AmountWrapper>
     <Price>90 000 COP</Price>
   </BuyWrap>
 )}
