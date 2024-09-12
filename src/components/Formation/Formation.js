@@ -1,11 +1,10 @@
-import React, { useState, Fragment, useContext } from 'react'
+import React, { useState, Fragment, useContext, useId } from 'react'
 import { DataContext } from '../../App.js'
 import melenaCapsulsSrc from '../../assets/icons/icon_caps_melena_cart.png'
 import melenaExtractSrc from'../../assets/icons/icon_melena_cart.png'
 import colaSrc from '../../assets/icons/icon_cola_cart.png'
 import reishiSrc from '../../assets/icons/icon_reishi_cart.png'
-
-
+import CartContext from '../../contexts/cartContext/cartContext'
 
 import Counter from '../Counter/Counter'
 import {
@@ -29,17 +28,18 @@ import {
 
 const Formation = ({ formationDataTitle, formationData }) => {
   const { count, setCount } = useContext(DataContext)
+  const { itemsCount } = useContext(CartContext)
+  const idCart = useId()
   const [ checkedState, setCheckedState ] = useState('1')
 
-  const defaultChoise = [{
+  const [ temporalChoise, setTemporalChoise ] = useState([{
     description: "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
     icon: "/cultura-liquida-fe/static/media/icon_caps.73274297e64c0cb4e0cc92cbe8e40966.svg",
-    id: "1",
+    id: idCart,
     src: "/cultura-liquida-fe/static/media/Frame_878.54c18a7c984b0f021ffa.png",
     text: "Cápsulas",
     title: "MELENA DE LEON"
-  }]
-  const [ temporalChoise, setTemporalChoise ] = useState(defaultChoise)
+  }])
   const filterdContent = formationData.filter(({ id }) => id === checkedState)
 
   const rechecking = id => {
@@ -47,11 +47,6 @@ const Formation = ({ formationDataTitle, formationData }) => {
       
       const { text } = formationData.find(item => item.id === id)
       if (text) {
-        // const isMelena = text === 'Cápsulas' ? melenaCapsulsSrc : melenaExtractSrc
-        // const colaOrReishi = title === 'REISHI, EXTRACTO' ? reishiSrc : colaSrc
-
-        // const temporalImageChoosing = formationDataTitle[0].title === 'MELENA DE LEON' ? isMelena : colaOrReishi
-
         const isReishi =  formationDataTitle[0].title === 'REISHI, EXTRACTO' && reishiSrc
         const isCola =  formationDataTitle[0].title === 'COLA DE PAVO, EXTRACTO' && colaSrc
 
@@ -62,7 +57,8 @@ const Formation = ({ formationDataTitle, formationData }) => {
 
         setTemporalChoise(() => ([
           {...formationDataTitle[0], ...filterdContent[0], text, 
-            iconSrc: condition
+            iconSrc: condition,
+            idCart
           }
         ]))
       }
