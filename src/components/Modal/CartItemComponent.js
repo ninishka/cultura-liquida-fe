@@ -1,7 +1,5 @@
 import React, { useState, useContext } from 'react'
-// import PropTypes from 'prop-types'
 import { DataContext } from '../../App.js'
-// import { Image, Button, Input } from 'antd'
 import Counter from '../Counter/Counter'
 import CartContext from '../../contexts/cartContext/cartContext'
 import img6 from '../../assets/icons/delete_good_from_cart.png'
@@ -19,10 +17,10 @@ import {
   
 const CartItemComponent = ({ item, 
   setShowModal,
-  src, iconSrc, title, description, text
+  src, iconSrc, title, description, text, amount: tAmount
  }) => {
-  const { setToCart, removeFromCart } = useContext(CartContext)
-  const [amount, setAmount] = useState(item.amount)
+  // const { setToCart, removeFromCart } = useContext(CartContext)
+  const [amount, setAmount] = useState(tAmount)
 
   // const onChangeInput = e => {
   //   let value = 0
@@ -69,32 +67,12 @@ const CartItemComponent = ({ item,
     </DeleteButtonWrap>
   </CartItemWrap>
 
-    // <div className="cart-item-wrap">
-    //   <div className='cart-item-image'>
-    //     <Image src={item.image} alt={item.title} />
-    //   </div>
-    //   <div className='cart-item-info'>
-    //     <div>
-    //       {item.title}
-    //     </div>
-    //     <div>
-    //       {item.size}
-    //     </div>
-    //     <div>
-    //       {item.price} COP
-    //     </div>
-    //   </div>
     //   <div className='cart-item-actions'>
     //     <Input type="number" value={amount} onChange={onChangeInput} />
     //     <Button variant="secondary" onClick={onRemoveBtn}>Remove all</Button>
     //     Total: {amount * item.price}
     //   </div>
-    // </div>
   )
 }
-
-// CartItemComponent.propTypes = {
-  // item: PropTypes.object.isRequired
-// }
 
 export default CartItemComponent

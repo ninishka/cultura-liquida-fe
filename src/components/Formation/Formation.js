@@ -38,7 +38,8 @@ const Formation = ({ formationDataTitle, formationData }) => {
     id: idCart,
     src: "/cultura-liquida-fe/static/media/Frame_878.54c18a7c984b0f021ffa.png",
     text: "Cápsulas",
-    title: "MELENA DE LEON"
+    title: "MELENA DE LEON",
+    iconSrc: "/cultura-liquida-fe/static/media/icon_caps_melena_cart.9978427fa3267478ce42.png"
   }])
   const filterdContent = formationData.filter(({ id }) => id === checkedState)
 

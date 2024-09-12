@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { DataContext } from '../../App.js'
+import CartContext from '../../contexts/cartContext/cartContext'
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
 import {
@@ -10,7 +10,7 @@ import {
 } from './styled'
 
 const Modal = ({ showModal, setShowModal  }) => {
-  const { choosedGood } = useContext(DataContext); // Assuming you have a way to update choosedGood
+  const { cartItems } = useContext(CartContext)
   const [displayingItem, setDisplayingItem] = useState('1');
 
   return (
@@ -18,7 +18,7 @@ const Modal = ({ showModal, setShowModal  }) => {
       <ModalWrapper>
         <ContentWrapper  setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} >
           <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
-            {choosedGood.map(props => <CartItemComponent key={props?.text} {...props} setShowModal={setShowModal} /> )}
+            {cartItems.map(props => <CartItemComponent key={props?.text} {...props} setShowModal={setShowModal} /> )}
             <button onClick={() => setShowModal(false)}>Close</button>
             <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
             <ModalForm />

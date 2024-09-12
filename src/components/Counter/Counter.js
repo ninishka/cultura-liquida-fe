@@ -13,7 +13,8 @@ import {
 } from'./styled'
 
 const Counter = ({ count, setCount, isModal, temporalChoise }) => {
-  const { addToCart } = useContext(CartContext)
+  const { cartItems, addToCart } = useContext(CartContext)
+  // const { count, setCount } = useContext(DataContext)
 
   return (                             
   <BuyWrap>

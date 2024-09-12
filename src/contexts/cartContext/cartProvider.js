@@ -18,12 +18,14 @@ const CartProvider = ({ children }) => {
       if (index >= 0) {
         v[index] = {
           id,
-          amount: v[index].amount + amount
+          amount: v[index].amount + amount,
+          ...item
         }
       } else {
         v.push({
           id,
-          amount
+          amount,
+          ...item
         })
       }
 
