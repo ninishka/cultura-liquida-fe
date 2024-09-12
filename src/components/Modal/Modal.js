@@ -3,6 +3,7 @@ import { DataContext } from '../../App.js'
 import Counter from '../Counter/Counter'
 import {
   ModalWrapper,
+  FormItself,
   ContentWrapper,
   ModalTitle,
   FullModal,
@@ -18,7 +19,8 @@ import {
   ErrorMessage,
   DeleteButtonWrap,
   DeleteButtonItself,
-  DeleteButtonIcon
+  DeleteButtonIcon,
+  WrapForErrorAndLabel
 } from './styled'
 
 import img6 from '../../assets/icons/delete_good_from_cart.png'
@@ -47,16 +49,17 @@ const ModalForm = () => {
     cityMunicipality: '',
     telephone: '',
     email: '',
-    notes: ''
+    notes: '',
+    agree: false
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
@@ -106,17 +109,21 @@ const ModalForm = () => {
     { label: 'Ciudad / Municipio', name: 'cityMunicipality', type: 'select', options: municipalities },
     { label: 'Celular / Teléfono', name: 'telephone', type: 'tel' },
     { label: 'Correo electrónico', name: 'email', type: 'email' },
-    { label: 'Notas (opcional)', name: 'notes', type: 'textarea' }
-  ];
+    { label: 'I agree to the terms and conditions', name: 'agree', type: 'checkbox' } 
+    ];
 
   const validate = () => {
     const newErrors = {};
 
     // TODO: reduce duplicate - we have same values in dataSet
-    const fields = ['name', 'surnames', 'documentNumber', 'telephone', 'email', 'department', 'cityMunicipality', 'shippingAddress'];
+    const fields = ['name', 'surnames', 'documentNumber', 'telephone', 'email', 'department', 'cityMunicipality', 'shippingAddress',  'agree'];
 
     fields.forEach(field => {
-      if (!formData[field].trim()) newErrors[field] = "This field is required.";
+      if (field === 'agree' && !formData[field]) {
+        newErrors[field] = "You must agree to the terms and conditions.";
+      } else if (!formData[field].trim()) {
+        newErrors[field] = "This field is required.";
+      }
     });
 
     setErrors(newErrors);
@@ -135,11 +142,16 @@ const ModalForm = () => {
 
   return (
     <FormWrapper>
-      <form onSubmit={handleSubmit} noValidate>
+      <FormItself onSubmit={handleSubmit} noValidate>
         <FormGrid>
-          {dataSet.map(({ label, name, type, options = [] }) => (
-            <FormField key={name}>
-                <label htmlFor={name}>{label} *</label>
+          {dataSet
+            .filter(({ type }) => type !== 'checkbox') 
+            .map(({ label, name, type, options = [] }) => (
+              <FormField key={name}>
+                <WrapForErrorAndLabel>
+                  <label htmlFor={name}>{label} *</label>
+                  {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+                </WrapForErrorAndLabel>
                 {type === 'select' ? (
                   <select
                     id={name}
@@ -165,24 +177,42 @@ const ModalForm = () => {
                     required
                   />
                 )}
-                {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
-            </FormField>
-          ))}
-          <button type="submit">Submit</button>
+              </FormField>
+            ))}
+          <FormField>
+            <label htmlFor="notes" style={{color:'black' }}>Notas (opcional)</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              value={formData.notes}
+              onChange={handleChange}
+            />
+          </FormField>
+          {dataSet
+            .filter(({ type }) => type === 'checkbox')
+            .map(({ label, name }) => (
+              <FormField key={name}>
+                <WrapForErrorAndLabel>
+                  <label htmlFor={name}>{label} *</label>
+                  {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+                </WrapForErrorAndLabel>
+                <input
+                  type="checkbox"
+                  id={name}
+                  name={name}
+                  checked={formData[name]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  required
+                />
+              </FormField>
+            ))}
         </FormGrid>
-        <FormField>
-          <label htmlFor="notes">Notas (opcional)</label>
-          <textarea
-            id="notes"
-            name="notes"
-            rows="4"
-            value={formData.notes}
-            onChange={handleChange}
-          />
-        </FormField>
-      </form>
+        <button type="submit">Submit</button>
+      </FormItself>
     </FormWrapper>
-  );
+  );  
 };
 
 // <> </> read about fragment
@@ -191,9 +221,23 @@ const ModalForm = () => {
 
 
 const Modal = ({ showModal, setShowModal  }) => {
-  const { count, setCount, choosedGood } = useContext(DataContext)
-  const [displayingItem, setDisplayingItem] = useState('1')
-    
+  const { count, setCount, choosedGood, setChoosedGood } = useContext(DataContext); // Assuming you have a way to update choosedGood
+  
+  const [displayingItem, setDisplayingItem] = useState('1');
+
+  const handleDelete = (itemText) => {
+    setChoosedGood((prevChoosedGood) => {
+      const updatedItems = prevChoosedGood.filter((item) => item.text !== itemText); // Replace `item.text` with a unique identifier if needed
+      
+      if (updatedItems.length === 0) {
+        setShowModal(false); // Close the modal if there are no items left
+      }
+      
+      return updatedItems;
+    });
+  };
+
+
   return (
     <FullModal showModal={showModal} displayingItem={displayingItem}>
       <ModalWrapper>
@@ -208,16 +252,16 @@ const Modal = ({ showModal, setShowModal  }) => {
                           <Description>{description}</Description>
                         </TextWrapper>
                         <p style={{color: 'red'}}>{text}</p>
-                        <Counter count={999999} setCount={setCount} isModal />
+                        <Counter count={count} setCount={setCount} isModal />
                       </CartItem>
                       <DeleteButtonWrap>
-                        <DeleteButtonItself>
+                        <DeleteButtonItself onClick={() => handleDelete(text)}>
                           <DeleteButtonIcon src={img6} />
                         </DeleteButtonItself>
                       </DeleteButtonWrap>
                     </CartItemWrap>
                 ))}
-            {/* <button onClick={() => setShowModal(false)}>Close</button> */}
+            <button onClick={() => setShowModal(false)}>Close</button>
             <ModalTitle>
               {'Detalles de facturación'.toUpperCase()}
             </ModalTitle>

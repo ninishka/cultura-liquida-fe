@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 
+export const FormItself = styled.form`
+
+`
+
 export const ModalTitle = styled.h2`
   font-weight: 600;
   line-height: 57.6px;
@@ -16,7 +20,7 @@ export const ModalWrapper = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(9, 9, 9, 0.9);
+  background-color: rgba(8, 8, 8, 0.8);
   height: 100%;
   width: 100%;
   z-index: 99999; 
@@ -28,14 +32,14 @@ export const ModalWrapper = styled.div`
 
  
 export const ContentWrapper = styled.div`
-  padding: 20px;
+  padding: 46px 110px;
   max-width: 900px;
   margin: 0 auto;
   overflow-x: auto;
   overflow-y: auto;
   background-color: #F2C94CCC;
   display: block;
-  margin-top: 37px;
+  margin-top: 104px;
   border-radius: 16px 16px;
   /* align-items: stretch */
 `
@@ -62,7 +66,16 @@ export const CountAndAmountWrap = styled.div`
  display: flex;
  flex-direction: row;
  align-items: center;
-
+`
+export const WrapForErrorAndLabel = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 14px;
+  align-items: center;
+  & > label {
+    color: black;
+  }
 `
 
 export const CartImg = styled.img`
@@ -97,20 +110,9 @@ export const FormGrid = styled.div`
 export const FormField = styled.div`
   margin-bottom: 15px;
   position: relative;
-  & > label {
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-    font-family: Mohave;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 17.6px;
-    text-align: left;
-    color: black;
-  }
-
   & > input,
-  & > textarea {
+  & > textarea,
+  & > select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
@@ -120,17 +122,7 @@ export const FormField = styled.div`
     box-sizing: border-box;
     resize: none;
     min-height: 50px;
-  }
-
-  & > select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    outline: none;
-    box-sizing: border-box;
-    resize: none;
-    min-height: 50px;
+    color: #9F9F9F;
   }
 `;
 
@@ -140,7 +132,6 @@ export const FormWrapper = styled.div`
 export const ErrorMessage = styled.p`
   color: red;
   font-size: 16px; 
-  margin-top: 0.25rem;
   font-weight: 400;
 `;
 
@@ -159,3 +150,23 @@ export const DeleteButtonItself = styled.button`
 `
 export const DeleteButtonIcon = styled.img`
 `
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+`;
+
+export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
+  width: 16px;
+  height: 16px;
+  background-color: black;
+  accent-color: black;
+  border: 1px solid #ccc;
+  cursor: pointer;
+`;
+
+export const CheckboxLabel = styled.label`
+  font-size: 14px;
+`;
