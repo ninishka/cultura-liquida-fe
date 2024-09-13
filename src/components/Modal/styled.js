@@ -41,7 +41,7 @@ export const ContentWrapper = styled.div`
   display: block;
   margin-top: 104px;
   border-radius: 16px 16px;
-  /* align-items: stretch */
+  background-image: url(${({src}) => src});
 `
 
 export const FullModal = styled.main`
@@ -51,7 +51,7 @@ export const FullModal = styled.main`
 export const CartItemWrap = styled.div`
  display: flex;
  flex-direction: row;
- justify-content: flex-end;
+ /* justify-content: flex-end; */
 `
 export const CartItem = styled.div`
   display: flex;
@@ -170,3 +170,28 @@ export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
 export const CheckboxLabel = styled.label`
   font-size: 14px;
 `;
+
+export const EmptyCartWrapper = styled.div`
+  
+`
+
+export const BuyButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px 16px 16px 16px;
+  background-color: #4FDB40;
+  padding:  17px 29px;
+  margin-right: 30px;
+  cursor: pointer;
+  width: 200px;
+  height: 52px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  font-size: 16px;
+  &:hover{
+    background-color: #F2C94C;
+  }
+`

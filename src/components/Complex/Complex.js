@@ -48,24 +48,24 @@ const Complex = ({something}) => {
             <DiscountText>¡Con la ayuda de un complejo de suplementos de hongos con un 20% de descuento!</DiscountText>
           </TitleWrap>
           <TwoCardwrap>
-          <ComplexItemsWrap>
-            <LeftSide>
-              <LeftTitle>El complejo consta de:</LeftTitle>
-              {complexData.map(({src, learnmmore, name }) => (
-                <ThreeItemsWrap>
-                  <InsideItemWrap>
-                    <Item123>{name}</Item123>
-                  </InsideItemWrap>
-                  <LearnMoreWrap>
-                    <LearnMoreText>{learnmmore}</LearnMoreText>
-                    <ArrowButtons><ArrowIcon src={src} /></ArrowButtons>
-                  </LearnMoreWrap>
-                </ThreeItemsWrap>
-              ))}
-            </LeftSide>
-          </ComplexItemsWrap>
+            <ComplexItemsWrap>
+              <LeftSide>
+                <LeftTitle>El complejo consta de:</LeftTitle>
+                {complexData.map(({src, learnmmore, name }) => (
+                  <ThreeItemsWrap>
+                    <InsideItemWrap>
+                      <Item123>{name}</Item123>
+                    </InsideItemWrap>
+                    <LearnMoreWrap>
+                      <LearnMoreText>{learnmmore}</LearnMoreText>
+                      <ArrowButtons><ArrowIcon src={src} /></ArrowButtons>
+                    </LearnMoreWrap>
+                  </ThreeItemsWrap>
+                ))}
+              </LeftSide>
+            </ComplexItemsWrap>
             <FormationWrap>
-                <CheckBoxGroup>
+              <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
                 {FormationData.map(({text, icon, id,}) => (
                   <Item key={id}> 
@@ -82,7 +82,7 @@ const Complex = ({something}) => {
                     </LabelContent>
                   </Item>
                   ))}
-                </CheckBoxGroup>
+              </CheckBoxGroup>
             </FormationWrap>
           </TwoCardwrap>
 

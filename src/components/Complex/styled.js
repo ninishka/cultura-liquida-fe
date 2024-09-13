@@ -4,6 +4,11 @@ export const AllWrap = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 30px;
+
+  @media (max-width: 1200px) {
+    flex-direction: column; 
+    align-items: center;
+  }
 `
 export const ImgSide = styled.div`
 
@@ -14,12 +19,19 @@ export const ImgItself = styled.img`
 export const RightContentWrap = styled.div`
  display: flex;
  flex-direction: column;
+
+ @media (max-width: 1200px) {
+    align-items: center;
+  }
 `
 export const TitleWrap = styled.div`
  display: flex;
  flex-direction: column;
  margin-left: 20px;
 
+ @media (max-width: 1200px) {
+    align-items: center;
+  }
 `
 export const Benefits = styled.h2`
   font-size: 48px;
@@ -40,22 +52,33 @@ export const DiscountText = styled.p`
 `
 
 export const ComplexItemsWrap = styled.div`
- display: flex;
- flex-direction: row;
- background-color: #2D2D2D;
- padding: 6px 25px;
- border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  background-color: #2D2D2D;
+  padding: 6px 25px;
+  border-radius: 16px;
   margin: 0px 21px;
-  width: fit-content;
+  width: 50%;
 
+  @media (max-width: 1200px) {
+    margin: 20px 0;
+    width: auto
+  }
 `
 
 export const TwoCardwrap = styled.div`
   display: flex;
-  flex-direction: row
+  flex-direction: row;
+
+  @media (max-width: 1200px) {
+    flex-direction: column; 
+  }
 `
 
 export const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
 `
 
 export const RightSide = styled.div`
@@ -71,7 +94,6 @@ export const ThreeItemsWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 261px;
 `
 export const InsideItemWrap = styled.div`
   display: flex;
@@ -117,8 +139,10 @@ export const CheckBoxGroup = styled.div`
  flex-direction: column;
  justify-content: flex-end;
  margin-bottom: 12px;
+ width: -webkit-fill-available;
  @media (max-width: 850px) {
-    justify-content: center
+    justify-content: center;
+    align-items: center;
   }
 `
 export const Item = styled.form`
@@ -128,7 +152,6 @@ export const Item = styled.form`
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
   cursor: pointer;
-  width: 400px;
   height: 54px;
   margin: 6px;
 
@@ -211,9 +234,14 @@ export const FormationWrap = styled.div`
   padding: 6px 25px;
   border-radius: 16px;
   margin: 0px 21px;
-  width: fit-content;
+  width: 50%;
   background-color: transparent;
   border: 2px solid #9F9F9F;
+
+  @media (max-width: 1200px) {
+    margin: 20px 0;
+    width: auto
+  }
 `
 
 export const Selecting = styled.p`
