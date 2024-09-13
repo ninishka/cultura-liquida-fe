@@ -17,7 +17,7 @@ const Counter = ({ amount, isModal, filterdContent }) => {
   const [ count, setCount ] = useState(amount || 1)
 
   // id probleb
-  const preObj = {...filterdContent[0], id: idCart}
+  const preObj = {...filterdContent?.[0], idCart}
 
   return (                             
   <BuyWrap>
