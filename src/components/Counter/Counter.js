@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-import { DataContext } from '../../App.js'
+import React, { useState, useContext } from 'react'
 import ArrowNext from '../ArrowNext/ArrowNext'
+import CartContext from '../../contexts/cartContext/cartContext'
 import ArrowPrev from '../ArrowPrev/ArrowPrev'
 import {
   BuyWrap,
@@ -11,8 +11,9 @@ import {
   Price,
 } from'./styled'
 
-const Counter = ({ count, setCount, isModal, temporalChoise }) => {
-  const { setChoosedGood } = useContext(DataContext)
+const Counter = ({ amount, isModal, temporalChoise }) => {
+  const { cartItems, addToCart } = useContext(CartContext)
+  const [ count, setCount ] = useState(amount || 1)
 
   return (                             
   <BuyWrap>
@@ -30,28 +31,29 @@ const Counter = ({ count, setCount, isModal, temporalChoise }) => {
         </ArrowButtons>
       </AmountItem>  
       {!isModal && 
-      <BuyButton onClick={() => {
+      // <BuyButton onClick={() => {
         // setChoosedGood(temporalChoise)
+        // setChoosedGood(prevTemporalChoise => {
+        //   // const hasDuplicate = prevTemporalChoise.some(({text}) => text === temporalChoise[0].text)
 
-        setChoosedGood(prevTemporalChoise => {
-          // const hasDuplicate = prevTemporalChoise.some(({text}) => text === temporalChoise[0].text)
-
-          const hasDuplicate = prevTemporalChoise.some(({text, title}) => {
-            const isHaveProductDuplicate = title === temporalChoise[0].title
-            const isHaveTypeDuplicate = text === temporalChoise[0].text
+        //   const hasDuplicate = prevTemporalChoise.some(({text, title}) => {
+        //     const isHaveProductDuplicate = title === temporalChoise[0].title
+        //     const isHaveTypeDuplicate = text === temporalChoise[0].text
             
-            return isHaveTypeDuplicate && isHaveProductDuplicate
-          })
+        //     return isHaveTypeDuplicate && isHaveProductDuplicate
+        //   })
         
-          if (!hasDuplicate) {
-            return [...prevTemporalChoise, ...temporalChoise]
-          } else {
-            return prevTemporalChoise
-          }
-        })
-      }}>
-        Comprar
-      </BuyButton>}
+        //   if (!hasDuplicate) {
+        //     return [...prevTemporalChoise, ...temporalChoise]
+        //   } else {
+        //     return prevTemporalChoise
+        //   }
+        // })
+      // }}>
+        <BuyButton onClick={() => addToCart(temporalChoise[0], count)}>
+          Comprar
+        </BuyButton>
+      }
     <Price>90 000 COP</Price>
   </BuyWrap>
 )}
