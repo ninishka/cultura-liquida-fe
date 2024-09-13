@@ -36,6 +36,11 @@ import imgC9 from './assets/icons/arrow_next.svg'
 import imgC10 from './assets/icons/icon_ex30.svg'
 import imgC11 from './assets/icons/icon_ex100.svg'
 
+import melenaCapsulsSrc from './assets/icons/icon_caps_melena_cart.png'
+import melenaExtractSrc from'./assets/icons/icon_melena_cart.png'
+import colaSrc from './assets/icons/icon_cola_cart.png'
+import reishiSrc from './assets/icons/icon_reishi_cart.png'
+
 
 const melenaFormationDataTitle = [
   {
@@ -50,18 +55,27 @@ const melenaFormationData = [
     icon: icon1,
     text: 'Cápsulas',
     src: melenacaps,
+
+    iconSrc: melenaCapsulsSrc,
+    ...melenaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon2,
     text: 'Extracto 100ml',
     src: melenaextract,
+    
+    iconSrc: melenaExtractSrc,
+    ...melenaFormationDataTitle[0]
   },
   {
     id: '3',
     icon: icon3,
     text: 'Extracto 30ml',
     src: melenaextract,
+
+    iconSrc: melenaExtractSrc,
+    ...melenaFormationDataTitle[0]
   },
 ]
 
@@ -123,12 +137,18 @@ const reishiFormationData = [
     icon: icon2,
     text: 'Extracto 100ml',
     src: reishiextract,
+
+    iconSrc: reishiSrc,
+    ...reishiFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
     text: 'Extracto 30ml',
     src: reishiextract,
+
+    iconSrc: reishiSrc,
+    ...reishiFormationDataTitle[0]
   },
 ]
 
@@ -182,12 +202,18 @@ const colaFormationData = [
     icon: icon2,
     text: 'Extracto 100ml',
     src: colaextract,
+
+    iconSrc: colaSrc,
+    ...colaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
     text: 'Extracto 30ml',
     src: colaextract,
+
+    iconSrc: colaSrc,
+    ...colaFormationDataTitle[0]
   },
 ]
 
