@@ -69,10 +69,15 @@ export const ComplexItemsWrap = styled.div`
 export const TwoCardwrap = styled.div`
   display: flex;
   flex-direction: row;
-
+  
   @media (max-width: 1200px) {
+    gap: 50px;
+
+  }
+  @media (max-width: 850px) {
     flex-direction: column; 
   }
+
 `
 
 export const LeftSide = styled.div`
@@ -156,10 +161,9 @@ export const Item = styled.form`
   margin: 6px;
 
   @media (max-width: 850px) {
-    width: 70px;
-    height: 125px;
-    flex-direction: column;
-    justify-content: space-evenly;
+    /* width: 70px;
+    height: 125px; */
+    /* flex-direction: column; */
     padding: 20px;
     text-align: center;
     margin-right: 15px;
@@ -185,7 +189,7 @@ export const TextDesc = styled.h6`
   padding-right: 10px;
 
   @media (max-width: 850px) {
-    margin: 0;
+    /* margin: 0; */
     padding-right: 0;
     font-size: 14px;
   }
