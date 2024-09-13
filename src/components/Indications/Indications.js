@@ -17,7 +17,7 @@ const Indications = ({ indicationsData, indicationsImg }) => (
     <ContentWrapper>
       <Title>INDICACIONES DE USO:</Title>
       {indicationsData.map(({indication1, indication2, caution}) => (
-        <>
+        <Fragment key={indication1}>
           <IndicationsWrapper>
             <IndicationsDescription>{indication1}</IndicationsDescription>
             <IndicationsDescription>{indication2}</IndicationsDescription>
@@ -25,7 +25,7 @@ const Indications = ({ indicationsData, indicationsImg }) => (
           <CautionWrapper>
             <p><Caution>Precaución:</Caution> {caution}</p>
           </CautionWrapper>
-        </>
+        </Fragment>
       ))}
     </ContentWrapper>
     <IconWrapper>

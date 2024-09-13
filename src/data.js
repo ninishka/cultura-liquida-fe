@@ -27,11 +27,25 @@ import imgC2 from './assets/icons/icon_LC2.svg'
 import imgC4 from './assets/icons/icon_LC5.svg'
 import imgC5 from './assets/icons/icon_LC4.svg'
 
+import HowTo from './assets/icons/icon_step1.svg'
+import imgC6 from './assets/icons/icon_step2.svg'
+import imgC7 from './assets/icons/icon_step3.svg'
+import imgC8 from './assets/icons/icon_step4.svg'
+import imgC9 from './assets/icons/arrow_next.svg'
+
+import imgC10 from './assets/icons/icon_ex30.svg'
+import imgC11 from './assets/icons/icon_ex100.svg'
+
+import melenaCapsulsSrc from './assets/icons/icon_caps_melena_cart.png'
+import melenaExtractSrc from'./assets/icons/icon_melena_cart.png'
+import colaSrc from './assets/icons/icon_cola_cart.png'
+import reishiSrc from './assets/icons/icon_reishi_cart.png'
+
 
 const melenaFormationDataTitle = [
   {
     title: 'MELENA DE LEON',
-    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
+    description: 'Cuerpo fructífero de.',
   }
 ]
 
@@ -41,18 +55,27 @@ const melenaFormationData = [
     icon: icon1,
     text: 'Cápsulas',
     src: melenacaps,
+
+    iconSrc: melenaCapsulsSrc,
+    ...melenaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon2,
     text: 'Extracto 100ml',
     src: melenaextract,
+    
+    iconSrc: melenaExtractSrc,
+    ...melenaFormationDataTitle[0]
   },
   {
     id: '3',
     icon: icon3,
     text: 'Extracto 30ml',
     src: melenaextract,
+
+    iconSrc: melenaExtractSrc,
+    ...melenaFormationDataTitle[0]
   },
 ]
 
@@ -114,12 +137,18 @@ const reishiFormationData = [
     icon: icon2,
     text: 'Extracto 100ml',
     src: reishiextract,
+
+    iconSrc: reishiSrc,
+    ...reishiFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
     text: 'Extracto 30ml',
     src: reishiextract,
+
+    iconSrc: reishiSrc,
+    ...reishiFormationDataTitle[0]
   },
 ]
 
@@ -173,12 +202,18 @@ const colaFormationData = [
     icon: icon2,
     text: 'Extracto 100ml',
     src: colaextract,
+
+    iconSrc: colaSrc,
+    ...colaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
     text: 'Extracto 30ml',
     src: colaextract,
+
+    iconSrc: colaSrc,
+    ...colaFormationDataTitle[0]
   },
 ]
 
@@ -245,3 +280,66 @@ export const productContentComponents = [
     indicationsImg: indicationsCola
   },
 ];
+
+//===========================//
+
+
+
+
+export const howToCardsData = [
+  {
+    src: HowTo,
+    description: 'Añade los productos que te gusten a tu carrito.',
+    arrow: imgC9
+  },
+  {
+    src: imgC6,
+    description: 'Seleccione el método de pago apropiado y pague su pedido.',
+    description2: 'Aceptamos pago vía Mercado Pago',
+    arrow: imgC9
+  },
+  {
+    src: imgC7,
+    description: 'En un plazo de 24 horas recogeremos tu pedido y te lo enviaremos.',
+    description2: 'Para pedidos superiores a 200.000 COP el envío es gratuito.',
+    arrow: imgC9
+  },
+  {
+    src: imgC8,
+    description: 'Recibe tu pedido y comienza a mejorar tu salud con Cultura Liquida!'
+  },
+];
+
+//==================//
+
+export const complexData = [
+  {
+    name:'Melena de leon',
+    learnmmore: 'Leer más',
+    src: imgC9
+  },
+  {
+    name:'Cola de pavo',
+    learnmmore: 'Leer más',
+    src: imgC9
+  },
+  {
+    name:'Reishi',
+    learnmmore: 'Leer más',
+    src: imgC9
+  }
+]
+
+
+export const FormationData = [
+  {
+    id: '1',
+    text: 'Extracto 100ml',
+    icon: imgC10,
+  },
+  {
+    id: '2',
+    text: 'Extracto 30ml',
+    icon: imgC11,
+  },
+]

@@ -8,14 +8,14 @@ const ProductContent = ({
 
   return (
     <div>
-      <Formation formationDataTitle={formationDataTitle} formationData={formationData} />
+      <Formation formationDataTitle={formationDataTitle} formationData={formationData}/>
       <Benefits 
         benefitsHeaderData={benefitsHeaderData} 
         benefitsCardsData={benefitsCardsData} 
       />
       <Indications indicationsData={indicationsData} indicationsImg={indicationsImg}  />
     </div>
-  );
+  )
 }
 
-export default ProductContent;
+export default ProductContent

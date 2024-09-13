@@ -36,6 +36,7 @@ export const CartWrap = styled.div`
   background-color: #2D2D2D;
   padding:  6px 9px 6px 9px;
   margin-right: 30px;
+  position: relative;
   /* box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); */
 
   &:hover{
@@ -63,5 +64,13 @@ export const StyledButton = styled.button`
   &:hover{
     background-color: #252525;
   }
-
+`
+export const CounterCartWrap = styled.div`
+ background-color: #F2C94C;
+ border-radius: 50%;
+ position: absolute;
+ width: 23px;
+ height: 23px;
+ margin: 0 31px;
+ margin-top: -13px;
 `
