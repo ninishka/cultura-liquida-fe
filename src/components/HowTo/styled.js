@@ -4,6 +4,7 @@ export const HowToWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 46px;
 `
 

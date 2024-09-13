@@ -43,7 +43,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
         <Title>{title.toUpperCase()}</Title>
         <Description>{description}</Description>
       </TextWrapper>
-      <p style={{color: 'red'}}>{text}</p>
+      <p style={{color: 'red', width: 120, textAlign: 'center' }}>{text}</p>
       <Counter amount={amount} isModal />
     </CartItem>
     <DeleteButtonWrap>
@@ -52,12 +52,6 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
       </DeleteButtonItself>
     </DeleteButtonWrap>
   </CartItemWrap>
-
-    //   <div className='cart-item-actions'>
-    //     <Input type="number" value={amount} onChange={onChangeInput} />
-    //     <Button variant="secondary" onClick={onRemoveBtn}>Remove all</Button>
-    //     Total: {amount * item.price}
-    //   </div>
   )
 }
 
