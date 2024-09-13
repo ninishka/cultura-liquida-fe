@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { DataContext } from '../../App.js'
+import React, { useState, useContext } from 'react'
 import ArrowNext from '../ArrowNext/ArrowNext'
 import CartContext from '../../contexts/cartContext/cartContext'
 import ArrowPrev from '../ArrowPrev/ArrowPrev'
@@ -12,9 +11,9 @@ import {
   Price,
 } from'./styled'
 
-const Counter = ({ count, setCount, isModal, temporalChoise }) => {
+const Counter = ({ amount, isModal, temporalChoise }) => {
   const { cartItems, addToCart } = useContext(CartContext)
-  // const { count, setCount } = useContext(DataContext)
+  const [ count, setCount ] = useState(amount || 1)
 
   return (                             
   <BuyWrap>
@@ -51,7 +50,7 @@ const Counter = ({ count, setCount, isModal, temporalChoise }) => {
         //   }
         // })
       // }}>
-        <BuyButton onClick={() => addToCart(temporalChoise[0], 1)}>
+        <BuyButton onClick={() => addToCart(temporalChoise[0], count)}>
           Comprar
         </BuyButton>
       }

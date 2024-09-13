@@ -1,5 +1,5 @@
 import React, {useContext } from 'react'
-import { DataContext } from '../../App.js'
+import CartContext from '../../contexts/cartContext/cartContext'
 
 import {
   LogoFull,
@@ -18,7 +18,7 @@ import CartIcon from '../../assets/icons/icon_cart.svg'
 import data from './../data'
 
 const HeaderComponent = ({ setDisplayingItem, setShowModal }) => {
-  const { count, choosedGood } = useContext(DataContext)
+  const { cartItems } = useContext(CartContext)
 
   const handleIconClick = () => {
     setShowModal(true);
@@ -45,7 +45,7 @@ const HeaderComponent = ({ setDisplayingItem, setShowModal }) => {
     </nav>
     <CartWrap onClick={handleIconClick}>
       <CounterCartWrap>
-        <p style={{color: 'black', margin: '0 7px' }}>{choosedGood?.length && choosedGood.length}</p>
+        <p style={{color: 'black', margin: '0 7px' }}>{cartItems?.length && cartItems.length}</p>
       </CounterCartWrap>
       <Cart src={CartIcon} alt="cart logo" />
     </CartWrap>

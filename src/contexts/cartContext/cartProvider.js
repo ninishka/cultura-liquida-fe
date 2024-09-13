@@ -7,7 +7,6 @@ const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
 
   const addToCart = async (item, amount = 1) => {
-    console.log('addToCart', item)
     if (!item || !item.id) return false // _id
     const id = item?.id // itemId
 
@@ -33,28 +32,29 @@ const CartProvider = ({ children }) => {
     })
   }
 
-  // const removeFromCart = (item, amount = 1, removeAll = false) => {
-  //   if (!item || !item._id) return false
-  //   const id = item?.itemId
+  const removeFromCart = (item, amount = 1, removeAll = false) => {
+    if (!item || !item.id) return false
+    const id = item?.id
 
-  //   setCartItems(value => {
-  //     const v = [...value]
-  //     const index = v.findIndex(i => i.id === id)
+    setCartItems(value => {
+      const v = [...value]
+      const index = v.findIndex(i => i.id === id)
 
-  //     if (index >= 0) {
-  //       if (removeAll || v[index].amount - amount <= 0){
-  //         v.splice(index, 1)
-  //       } else {
-  //         v[index] = {
-  //           id,
-  //           amount: v[index].amount - amount
-  //         }
-  //       }
-  //     }
+      if (index >= 0) {
+        if (removeAll || v[index].amount - amount <= 0){
+          v.splice(index, 1)
+        } else {
+          v[index] = {
+            id,
+            amount: v[index].amount - amount,
+            ...item
+          }
+        }
+      }
 
-  //     return v
-  //   })
-  // }
+      return v
+    })
+  }
 
   // const setToCart = (item, amount = 1) => {
   //   if (!item || !item._id) return false
@@ -96,7 +96,7 @@ const CartProvider = ({ children }) => {
     // getTotalPrice,
     addToCart,
     // setToCart,
-    // removeFromCart
+    removeFromCart
   }), [JSON.stringify(cartItems)])
 
   return (

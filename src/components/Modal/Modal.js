@@ -18,7 +18,7 @@ const Modal = ({ showModal, setShowModal  }) => {
       <ModalWrapper>
         <ContentWrapper  setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} >
           <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
-            {cartItems.map(props => <CartItemComponent key={props?.text} {...props} setShowModal={setShowModal} /> )}
+            {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
             <button onClick={() => setShowModal(false)}>Close</button>
             <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
             <ModalForm />

@@ -1,9 +1,6 @@
 import { complexData, FormationData } from '../../data'
 import { Fragment, useContext } from 'react';
 // import Counter from '../Counter/Counter'
-import { DataContext } from '../../App.js'
-
-
 
 import imgC9 from '../../assets/icons/CL-703.png'
 
@@ -37,8 +34,6 @@ import {
 } from './styled'
 
 const Complex = ({something}) => {
-  const { count, setCount, choosedGood, setChoosedGood } = useContext(DataContext); // Assuming you have a way to update choosedGood
-
   return (
     <section>
       <AllWrap>

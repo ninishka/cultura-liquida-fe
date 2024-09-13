@@ -1,5 +1,4 @@
 import React, { useState, Fragment, useContext, useId } from 'react'
-import { DataContext } from '../../App.js'
 import melenaCapsulsSrc from '../../assets/icons/icon_caps_melena_cart.png'
 import melenaExtractSrc from'../../assets/icons/icon_melena_cart.png'
 import colaSrc from '../../assets/icons/icon_cola_cart.png'
@@ -27,8 +26,12 @@ import {
 } from './styled'
 
 const Formation = ({ formationDataTitle, formationData }) => {
-  const { count, setCount } = useContext(DataContext)
-  const { itemsCount } = useContext(CartContext)
+  // const { title } = formationDataTitle?.[0]
+  // const firstWord = title.split(' ')?.[0]
+  const { itemsCount, cartItems } = useContext(CartContext)
+  // console.log('cartItems', cartItems)
+  cartItems.map(i => console.log('ID', i.id))
+
   const idCart = useId()
   const [ checkedState, setCheckedState ] = useState('1')
 
@@ -60,6 +63,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
           {...formationDataTitle[0], ...filterdContent[0], text, 
             iconSrc: condition,
             idCart
+            // id problem
           }
         ]))
       }
@@ -105,7 +109,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
           ))}
         </CheckBoxGroup>
       </FrameForTwo>
-      <Counter count={count} setCount={setCount} temporalChoise={temporalChoise} />
+      <Counter temporalChoise={temporalChoise} />
     </ContentWrapper>
       {filterdContent.map(({ src }) => (
         <ImageWrapperDesktop>

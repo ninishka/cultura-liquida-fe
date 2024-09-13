@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import { DataContext } from '../../App.js'
 import Counter from '../Counter/Counter'
 import CartContext from '../../contexts/cartContext/cartContext'
 import img6 from '../../assets/icons/delete_good_from_cart.png'
@@ -15,11 +14,8 @@ import {
     DeleteButtonIcon,
   } from './styled'
   
-const CartItemComponent = ({ item, 
-  setShowModal,
-  src, iconSrc, title, description, text, amount: tAmount
- }) => {
-  // const { setToCart, removeFromCart } = useContext(CartContext)
+const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount, id }) => {
+  const { setToCart, removeFromCart, cartItems } = useContext(CartContext)
   const [amount, setAmount] = useState(tAmount)
 
   // const onChangeInput = e => {
@@ -29,27 +25,17 @@ const CartItemComponent = ({ item,
   //   setToCart(item, value)
   //   setAmount(value)
   // }
-  // const onRemoveBtn = () => removeFromCart(item, 0, true)
-
-
   // k
+  const handleDelete = itemId => {
+    const item = cartItems.filter(item => item?.id === itemId)
+    removeFromCart(...item, 0, true)
 
-  const { count, setCount, choosedGood, setChoosedGood } = useContext(DataContext); // Assuming you have a way to update choosedGood
-
-  const handleDelete = (itemText) => {
-    setChoosedGood((prevChoosedGood) => {
-      const updatedItems = prevChoosedGood.filter((item) => item.text !== itemText); // Replace `item.text` with a unique identifier if needed
-      
-      if (updatedItems.length === 0) {
-        setShowModal(false); // Close the modal if there are no items left
-      }
-      
-      return updatedItems;
-    });
-  };
+    // not working anymore
+    // length shows 1 after emptying cart
+    // if (!cartItems?.length) setShowModal(false); // Close the modal if there are no items left
+  }
 
   return (
-
     <CartItemWrap key={text}>
     <CartItem>
       <CartImg src={iconSrc}/>
@@ -58,10 +44,10 @@ const CartItemComponent = ({ item,
         <Description>{description}</Description>
       </TextWrapper>
       <p style={{color: 'red'}}>{text}</p>
-      <Counter count={amount} setCount={setCount} isModal />
+      <Counter amount={amount} isModal />
     </CartItem>
     <DeleteButtonWrap>
-      <DeleteButtonItself onClick={() => handleDelete(text)}>
+      <DeleteButtonItself onClick={() => handleDelete(id)}>
         <DeleteButtonIcon src={img6} />
       </DeleteButtonItself>
     </DeleteButtonWrap>
