@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import CartContext from '../../contexts/cartContext/cartContext'
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
@@ -11,12 +11,11 @@ import {
 
 const Modal = ({ showModal, setShowModal  }) => {
   const { cartItems } = useContext(CartContext)
-  const [displayingItem, setDisplayingItem] = useState('1');
 
   return (
-    <FullModal showModal={showModal} displayingItem={displayingItem}>
+    <FullModal showModal={showModal}>
       <ModalWrapper>
-        <ContentWrapper  setDisplayingItem={setDisplayingItem} setShowModal={setShowModal} >
+        <ContentWrapper setShowModal={setShowModal} >
           <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
             {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
             <button onClick={() => setShowModal(false)}>Close</button>
