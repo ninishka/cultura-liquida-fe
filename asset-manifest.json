@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "/cultura-liquida-fe/static/css/main.8e980f4c.css",
-    "main.js": "/cultura-liquida-fe/static/js/main.1f3519d2.js",
+    "main.js": "/cultura-liquida-fe/static/js/main.b757a7c5.js",
     "static/js/453.a6495c49.chunk.js": "/cultura-liquida-fe/static/js/453.a6495c49.chunk.js",
+    "static/media/CL-703.png": "/cultura-liquida-fe/static/media/CL-703.6702f8aef0d887652cfb.png",
     "static/media/Frame_878.png": "/cultura-liquida-fe/static/media/Frame_878.54c18a7c984b0f021ffa.png",
     "static/media/icon_LC2.svg": "/cultura-liquida-fe/static/media/icon_LC2.2a0dd9b0bc657029938d62c69f210e09.svg",
     "static/media/icon_LR4.svg": "/cultura-liquida-fe/static/media/icon_LR4.cc77640486d982e075d47b35ce7580a7.svg",
@@ -11,28 +12,36 @@
     "static/media/Frame_87.png": "/cultura-liquida-fe/static/media/Frame_87.19876a8cb8413885333f.png",
     "static/media/icon_LR3.svg": "/cultura-liquida-fe/static/media/icon_LR3.cb294829194c2a4e3397c7897e8b654a.svg",
     "static/media/icon_LR2.svg": "/cultura-liquida-fe/static/media/icon_LR2.8eb19519346d327e316b52ee8a3ccf39.svg",
+    "static/media/bgModal.png": "/cultura-liquida-fe/static/media/bgModal.32bed9db60ad36fa7ca4.png",
     "static/media/icon_caps.svg": "/cultura-liquida-fe/static/media/icon_caps.73274297e64c0cb4e0cc92cbe8e40966.svg",
+    "static/media/icon_step4.svg": "/cultura-liquida-fe/static/media/icon_step4.68ce7b8b56fc9ece426e2c44ce368506.svg",
     "static/media/icon_ex30.svg": "/cultura-liquida-fe/static/media/icon_ex30.19df59c2e24171a724332bdf96d3c826.svg",
     "static/media/icon_LC1.svg": "/cultura-liquida-fe/static/media/icon_LC1.91bcced6a6c2b5aaa664506e8a8d5ab2.svg",
     "static/media/icon_LC5.svg": "/cultura-liquida-fe/static/media/icon_LC5.22dbb402122708558f0b8a136c18d78b.svg",
     "static/media/icon_LR1.svg": "/cultura-liquida-fe/static/media/icon_LR1.5daf8a5e99c65def3f9b749b29578f06.svg",
     "static/media/Mohave-VariableFont_wght.ttf": "/cultura-liquida-fe/static/media/Mohave-VariableFont_wght.98622cebd2ab05563425.ttf",
+    "static/media/icon_step2.svg": "/cultura-liquida-fe/static/media/icon_step2.246c10120e9f7af0b4785419fa3b8476.svg",
     "static/media/icon_ex100.svg": "/cultura-liquida-fe/static/media/icon_ex100.576b2ec31d712ad7a3e654e85b40d447.svg",
+    "static/media/icon_step1.svg": "/cultura-liquida-fe/static/media/icon_step1.500c3cc9d52e04069af5d7909b569930.svg",
     "static/media/icon_LC4.svg": "/cultura-liquida-fe/static/media/icon_LC4.8108d02c234d69ab5484f414f4c69df2.svg",
     "static/media/logo_full 1.svg": "/cultura-liquida-fe/static/media/logo_full 1.be0ec64f45de0f96febd087fac001324.svg",
+    "static/media/icon_step3.svg": "/cultura-liquida-fe/static/media/icon_step3.4ead83e512bd9e16cc32a65e41f31466.svg",
     "static/media/icon_indications_for_the_use.png": "/cultura-liquida-fe/static/media/icon_indications_for_the_use.c56dad9ab97265283edd.png",
     "static/media/icon_indications_for_the_use_C.png": "/cultura-liquida-fe/static/media/icon_indications_for_the_use_C.1cfe5dadc1ab91fc5cf6.png",
     "static/media/icon_indications_for_the_use_R.png": "/cultura-liquida-fe/static/media/icon_indications_for_the_use_R.01acc7a71c63cd3c232c.png",
+    "static/media/icon_caps_melena_cart.png": "/cultura-liquida-fe/static/media/icon_caps_melena_cart.9978427fa3267478ce42.png",
+    "static/media/icon_cola_cart.png": "/cultura-liquida-fe/static/media/icon_cola_cart.f061d9df87e50591fdb3.png",
+    "static/media/icon_reishi_cart.png": "/cultura-liquida-fe/static/media/icon_reishi_cart.556ef20816527014d117.png",
+    "static/media/icon_melena_cart.png": "/cultura-liquida-fe/static/media/icon_melena_cart.f49afa9ce22a16e81ef6.png",
     "index.html": "/cultura-liquida-fe/index.html",
-    "static/media/arrow_next.svg": "/cultura-liquida-fe/static/media/arrow_next.291450d2dada2b24595bb52e357854f0.svg",
-    "static/media/arrow_prev.svg": "/cultura-liquida-fe/static/media/arrow_prev.62fdd0f4f67e2a1cecef290aa2bd9bda.svg",
+    "static/media/arrow_next.svg": "/cultura-liquida-fe/static/media/arrow_next.619a0a58db087de1db971c1a00b77479.svg",
     "static/media/icon_cart.svg": "/cultura-liquida-fe/static/media/icon_cart.fae5117ab0ef73fa170e9c0fcae8d237.svg",
     "main.8e980f4c.css.map": "/cultura-liquida-fe/static/css/main.8e980f4c.css.map",
-    "main.1f3519d2.js.map": "/cultura-liquida-fe/static/js/main.1f3519d2.js.map",
+    "main.b757a7c5.js.map": "/cultura-liquida-fe/static/js/main.b757a7c5.js.map",
     "453.a6495c49.chunk.js.map": "/cultura-liquida-fe/static/js/453.a6495c49.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8e980f4c.css",
-    "static/js/main.1f3519d2.js"
+    "static/js/main.b757a7c5.js"
   ]
 }
