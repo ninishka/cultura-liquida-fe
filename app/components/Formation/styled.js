@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 
-export const MelenaMain = styled.section`
+export const FormationSection = styled.section`
   display: flex;
   flex-direction: row;
   margin: 10px 15px;
@@ -38,15 +38,10 @@ export const ImageWrapperMobile = styled.div`
   }
 `
 
-export const MelenaImage = styled(Image)`
- height: 560px;
-
-  @media (max-width: 1220px) {
-    height: 450px;
-  }
-
+export const ImageStyled = styled(Image)`
   @media (max-width: 850px) {
     height: 300px;
+    width: auto
   }
 `
 

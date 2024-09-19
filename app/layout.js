@@ -2,19 +2,8 @@ import localFont from "next/font/local";
 import HeaderComponent from './components/HeaderComponent/HeaderComponent'
 import FooterComponent from './components/FooterComponent/FooterComponent'
 import CartProvider from './contexts/cartContext/cartProvider'
-import "./globals.css";
 import StyledRegistry from './registry';
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+import { GlobalStyle } from './globalStyles';
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -30,14 +19,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${mohave.variable}` }>
-        <CartProvider>
+      <body className={`${mohave.variable}`}>
         <StyledRegistry>
-          <HeaderComponent />
-            {children}
-          <FooterComponent />
+          <GlobalStyle />
+          <CartProvider>
+            <HeaderComponent />
+              {children}
+            <FooterComponent />
+          </CartProvider>
         </StyledRegistry>
-        </CartProvider>
       </body>
     </html>
   );

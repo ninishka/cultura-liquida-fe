@@ -3,11 +3,10 @@
 import React, { useState, Fragment } from 'react'
 import Counter from '../Counter/Counter'
 import {
-  MelenaMain,
+  FormationSection,
   ContentWrapper,
-  ImageWrapperDesktop,
   ImageWrapperMobile,
-  MelenaImage,
+  ImageStyled,
   TitleFrame,
   TitleH1,
   Description,
@@ -33,7 +32,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
 // onClick={() => console.log('prev')} <-- this how it will be called ONLY FATER CLICK on it
 
   return (
-  <MelenaMain>
+  <FormationSection>
     <ContentWrapper>
       <TitleFrame>
         {formationDataTitle.map(({ title, description}) => (
@@ -45,7 +44,13 @@ const Formation = ({ formationDataTitle, formationData }) => {
       </TitleFrame>
       {filterdContent.map(({ src }) => (
         <ImageWrapperMobile key={src}>
-          <MelenaImage src={src}/>
+          <ImageStyled 
+            src={src} 
+            height={558} 
+            width={486} 
+            sizes='fill' 
+            alt='Product image'
+          />
         </ImageWrapperMobile>
       ))}
       <FrameForTwo>
@@ -70,12 +75,12 @@ const Formation = ({ formationDataTitle, formationData }) => {
       </FrameForTwo>
       <Counter filterdContent={filterdContent}/>
     </ContentWrapper>
-      {filterdContent.map(({ src }) => (
+      {/* {filterdContent.map(({ src }) => (
         <ImageWrapperDesktop key={src}>
-          <MelenaImage src={src}/>
+          <ImageStyled src={src}/>
         </ImageWrapperDesktop>
-      ))}
-  </MelenaMain>
+      ))} */}
+  </FormationSection>
   )
 }
 

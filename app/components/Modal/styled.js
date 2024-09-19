@@ -42,6 +42,14 @@ export const ContentWrapper = styled.div`
   margin-top: 104px;
   border-radius: 16px 16px;
   background-image: url(${({src}) => src});
+
+  @media (max-width: 1220px) {
+    padding: 46px 70px;
+  }
+
+  @media (max-width: 850px) {
+    padding: 46px;
+  }
 `
 
 export const FullModal = styled.main`
