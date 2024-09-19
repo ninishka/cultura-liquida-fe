@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && git add . && git commit -m 'Deploy' && git push origin main"
+    "deploy": "next build && git add . && git commit -m 'Deploy' && git push origin main"
   },
   "dependencies": {
     "gh-pages": "^6.1.1",

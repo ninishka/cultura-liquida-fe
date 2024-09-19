@@ -4,7 +4,6 @@ const nextConfig = {
         styledComponents: true,
     },
     output: "export",
-    reactStrictMode: true,
 };
 
 export default nextConfig;
