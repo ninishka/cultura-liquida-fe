@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
-export const BuyWrap = styled.div`
+export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin: 30px 0;
+  margin-right: 15px;
 
   @media (max-width: 1220px) {
     justify-content: center;
