@@ -288,24 +288,24 @@ export const productContentComponents = [
 
 export const howToCardsData = [
   {
-    src: HowTo,
+    img1: HowTo,
     description: 'Añade los productos que te gusten a tu carrito.',
     arrow: imgC9
   },
   {
-    src: imgC6,
+    img1: imgC6,
     description: 'Seleccione el método de pago apropiado y pague su pedido.',
     description2: 'Aceptamos pago vía Mercado Pago',
     arrow: imgC9
   },
   {
-    src: imgC7,
+    img1: imgC7,
     description: 'En un plazo de 24 horas recogeremos tu pedido y te lo enviaremos.',
     description2: 'Para pedidos superiores a 200.000 COP el envío es gratuito.',
     arrow: imgC9
   },
   {
-    src: imgC8,
+    img1: imgC8,
     description: 'Recibe tu pedido y comienza a mejorar tu salud con Cultura Liquida!'
   },
 ];

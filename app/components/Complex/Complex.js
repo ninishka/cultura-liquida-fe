@@ -38,7 +38,7 @@ const Complex = ({something}) => {
     <section>
       <AllWrap>
         <ImgSide> 
-          <ImgItself src={imgC9} />
+          <ImgItself src={imgC9} alt='Complex'/>
         </ImgSide>
        <RightContentWrap>
           <TitleWrap>
@@ -52,13 +52,13 @@ const Complex = ({something}) => {
               <LeftSide>
                 <LeftTitle>El complejo consta de:</LeftTitle>
                 {complexData.map(({src, learnmmore, name }) => (
-                  <ThreeItemsWrap key={src}>
+                  <ThreeItemsWrap key={name}>
                     <InsideItemWrap>
                       <Item123>{name}</Item123>
                     </InsideItemWrap>
                     <LearnMoreWrap>
                       <LearnMoreText>{learnmmore}</LearnMoreText>
-                      <ArrowButtons><ArrowIcon src={src} /></ArrowButtons>
+                      <ArrowButtons><ArrowIcon src={src} alt='arrow' /></ArrowButtons>
                     </LearnMoreWrap>
                   </ThreeItemsWrap>
                 ))}
@@ -76,7 +76,7 @@ const Complex = ({something}) => {
                         // checked={id === checkedState}
                         // onChange={() => rechecking(id)} 
                       />
-                    <LabelContent for="text">
+                    <LabelContent htmlFor="text">
                       <Icon src={icon} alt={text}/>
                       <TextDesc>{text}</TextDesc>
                     </LabelContent>

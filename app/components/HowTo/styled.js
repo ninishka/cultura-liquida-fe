@@ -8,6 +8,7 @@ export const HowToWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 46px;
+  align-items: center;
 `
 
 

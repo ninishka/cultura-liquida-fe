@@ -76,7 +76,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
       <Counter filterdContent={filterdContent}/>
     </ContentWrapper>
     <ImageWrapperDesktop key={source}>
-      <ImageStyled src={source}/>
+      <ImageStyled src={source} alt='formation'/>
     </ImageWrapperDesktop>
   </FormationSection>
   )

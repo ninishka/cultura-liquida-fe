@@ -40,7 +40,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
   return (
     <CartItemWrap key={text}>
     <CartItem>
-      <CartImg src={iconSrc}/>
+      <CartImg src={iconSrc} alt='cartitemcomponent'/>
       <CardInfoWrapper>
         <InfoContainer>
           <Title>{title.toUpperCase()}</Title>
@@ -55,7 +55,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
     </CartItem>
     <DeleteButtonWrap>
       <DeleteButtonItself onClick={() => handleDelete(id)}>
-        <DeleteButtonIcon src={img6} />
+        <DeleteButtonIcon src={img6} alt='cartitemcomponent'/>
       </DeleteButtonItself>
     </DeleteButtonWrap>
   </CartItemWrap>
