@@ -32,24 +32,30 @@ export const ModalWrapper = styled.div`
 
  
 export const ContentWrapper = styled.div`
-  padding: 46px 110px;
-  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: stretch;
+  
+  padding: 50px 40px;
+  width: 80%;
+  max-width: 960px;
   margin: 0 auto;
-  overflow-x: auto;
   overflow-y: auto;
   background-color: #F2C94CCC;
-  display: block;
   margin-top: 104px;
   border-radius: 16px 16px;
   background-image: url(${({src}) => src});
 
-  @media (max-width: 1220px) {
-    padding: 46px 70px;
-  }
-
   @media (max-width: 850px) {
-    padding: 46px;
-  }
+    padding: 20px 12px;
+ }
+`
+
+export const ListItemsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 `
 
 export const FullModal = styled.main`
@@ -57,17 +63,22 @@ export const FullModal = styled.main`
 `
 
 export const CartItemWrap = styled.div`
- display: flex;
- flex-direction: row;
- /* justify-content: flex-end; */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  /* justify-content: flex-end; */
+
 `
 export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
+  flex-wrap: wrap;
   align-items: center;
   border-radius: 16px 16px;
   margin: 22px 0px 22px;
+  width: inherit;
 `
 
 export const CountAndAmountWrap = styled.div`
@@ -88,12 +99,34 @@ export const WrapForErrorAndLabel = styled.div`
 
 export const CartImg = styled(Image)`
  margin: 15px;
+ @media (max-width: 850px) {
+  margin: 7px;
+ }
 `
 
-export const TextWrapper = styled.div`
+export const CardInfoWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 764px) {
+    flex-direction: column;
+  }  
 `
+
+export const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: auto;
+  @media (max-width: 1060px) {
+    flex-direction: column;
+    margin: auto 20px;
+
+  }
+  * {
+    margin: 0 2vw;
+  }
+` 
 
 export const Title = styled.h3`
   font-size: 25px;
@@ -107,7 +140,6 @@ export const Description = styled.p`
   font-size: 16px;
   font-style: italic;
   font-weight: 400;
-  margin-top: 0px;
 `
 export const FormGrid = styled.div`
   display: grid;
@@ -202,4 +234,17 @@ export const BuyButton = styled.button`
   &:hover{
     background-color: #F2C94C;
   }
+`
+
+export const Price = styled.p`
+  font-size: 36px;
+  font-weight: 500;
+  margin: 0;
+  color: black;
+
+  @media (max-width: 850px) {
+    text-align: left;
+    font-size: 24px;
+    /* margin-top: 20px; */
+  }  
 `

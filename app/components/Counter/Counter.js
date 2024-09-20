@@ -3,7 +3,7 @@ import ArrowNext from '../ArrowNext/ArrowNext'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 import ArrowPrev from '../ArrowPrev/ArrowPrev'
 import {
-  BuyWrap,
+  CounterWrapper,
   AmountItem,
   Number,
   ArrowButtons,
@@ -20,7 +20,7 @@ const Counter = ({ amount, isModal, filterdContent }) => {
   const preObj = {...filterdContent?.[0], idCart}
 
   return (                             
-  <BuyWrap>
+  <CounterWrapper>
       <AmountItem $bgc={isModal}>
         <ArrowButtons onClick={() => {
             if(count > 1)  setCount(count - 1)
@@ -59,8 +59,7 @@ const Counter = ({ amount, isModal, filterdContent }) => {
           Comprar
         </BuyButton>
       }
-    <Price>90 000 COP</Price>
-  </BuyWrap>
+  </CounterWrapper>
 )}
 
 export default Counter
