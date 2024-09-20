@@ -6,6 +6,7 @@ import {
   FormationSection,
   ContentWrapper,
   ImageWrapperMobile,
+  ImageWrapperDesktop,
   ImageStyled,
   TitleFrame,
   TitleH1,
@@ -27,6 +28,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
     if(checkedState !== id) setCheckedState(id)
   }
 
+  const source = filterdContent?.[0]?.src || ''
 // sometimes when i put func (for example: console.log() ) u need to know the sintaxis differents
 // onClick={console.log('prev')} <-- this gonna be called automaticly on render time
 // onClick={() => console.log('prev')} <-- this how it will be called ONLY FATER CLICK on it
@@ -42,17 +44,15 @@ const Formation = ({ formationDataTitle, formationData }) => {
           </Fragment>
         ))}
       </TitleFrame>
-      {filterdContent.map(({ src }) => (
-        <ImageWrapperMobile key={src}>
-          <ImageStyled 
-            src={src} 
-            height={558} 
-            width={486} 
-            sizes='fill' 
-            alt='Product image'
-          />
-        </ImageWrapperMobile>
-      ))}
+      <ImageWrapperMobile key={source}>
+        <ImageStyled 
+          src={source} 
+          height={558} 
+          width={486} 
+          sizes='fill' 
+          alt='Product image'
+        />
+      </ImageWrapperMobile>
       <FrameForTwo>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
@@ -75,11 +75,9 @@ const Formation = ({ formationDataTitle, formationData }) => {
       </FrameForTwo>
       <Counter filterdContent={filterdContent}/>
     </ContentWrapper>
-      {/* {filterdContent.map(({ src }) => (
-        <ImageWrapperDesktop key={src}>
-          <ImageStyled src={src}/>
-        </ImageWrapperDesktop>
-      ))} */}
+    <ImageWrapperDesktop key={source}>
+      <ImageStyled src={source}/>
+    </ImageWrapperDesktop>
   </FormationSection>
   )
 }

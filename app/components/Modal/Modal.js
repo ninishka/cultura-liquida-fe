@@ -8,6 +8,7 @@ import bgModal from '@/app/icons/bgModal.png'
 import {
   ModalWrapper,
   ContentWrapper,
+  ListItemsWrapper,
   ModalTitle,
   FullModal,
   BuyButton
@@ -20,7 +21,7 @@ const Modal = () => {
     <FullModal>
       {!cartItems?.length ? (
           <ModalWrapper>
-            <ContentWrapper setShowModal={setShowModal} src={bgModal}>
+            <ContentWrapper setShowModal={setShowModal} src={bgModal} style={{ alignItems: 'center' }}>
               <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
               <BuyButton onClick={() => setShowModal(false)}>
                 {'volver a comprar'.toUpperCase()}
@@ -31,7 +32,9 @@ const Modal = () => {
         <ModalWrapper>
           <ContentWrapper setShowModal={setShowModal} src={bgModal}>
             <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
-              {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
+              <ListItemsWrapper>
+                {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
+              </ListItemsWrapper>
               <button onClick={() => setShowModal(false)}>Close</button>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
             <ModalForm />

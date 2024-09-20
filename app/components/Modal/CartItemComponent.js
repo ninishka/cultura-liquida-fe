@@ -43,7 +43,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
         <Title>{title.toUpperCase()}</Title>
         <Description>{description}</Description>
       </TextWrapper>
-      <p style={{color: 'red', width: 120, textAlign: 'center' }}>{text}</p>
+      <p style={{color: 'red', minWidth: 120, textAlign: 'center' }}>{text}</p>
       <Counter amount={amount} isModal />
     </CartItem>
     <DeleteButtonWrap>

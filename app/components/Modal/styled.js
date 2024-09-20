@@ -32,24 +32,26 @@ export const ModalWrapper = styled.div`
 
  
 export const ContentWrapper = styled.div`
-  padding: 46px 110px;
-  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: stretch;
+  
+  padding: 50px 40px;
+  width: 80%;
+  max-width: 960px;
   margin: 0 auto;
-  overflow-x: auto;
   overflow-y: auto;
   background-color: #F2C94CCC;
-  display: block;
   margin-top: 104px;
   border-radius: 16px 16px;
   background-image: url(${({src}) => src});
+`
 
-  @media (max-width: 1220px) {
-    padding: 46px 70px;
-  }
-
-  @media (max-width: 850px) {
-    padding: 46px;
-  }
+export const ListItemsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 `
 
 export const FullModal = styled.main`
@@ -59,6 +61,7 @@ export const FullModal = styled.main`
 export const CartItemWrap = styled.div`
  display: flex;
  flex-direction: row;
+ width: 100%;
  /* justify-content: flex-end; */
 `
 export const CartItem = styled.div`
@@ -68,6 +71,7 @@ export const CartItem = styled.div`
   align-items: center;
   border-radius: 16px 16px;
   margin: 22px 0px 22px;
+  width: inherit;
 `
 
 export const CountAndAmountWrap = styled.div`
