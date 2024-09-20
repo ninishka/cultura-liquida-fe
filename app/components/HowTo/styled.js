@@ -7,6 +7,7 @@ export const HowToWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 46px;
+  align-items: center;
 `
 
 

@@ -19,16 +19,16 @@ const HowTo = ({soe}) => {
     <section style={{borderBottom: ' 2px solid #9F9F9F ', margin: '10px 15px'}}>
       <TextForHeader> {'cómo recibir un pedido'.toUpperCase()}</TextForHeader>
       <HowToWrapper>
-      {howToCardsData.map(({src, description, description2, arrow }) => (
-        <Fragment key={src}>
+      {howToCardsData.map(({img1, description, description2, arrow }, index) => (
+        <Fragment key={description}>
           <CardsWrapper>
-            <HowToImage src={src}/>
+            <HowToImage src={img1} alt={`step-${index + 1}`}/>
             <DescWrapper>
               <HowToDesc>{description}</HowToDesc>
               <SecondDesc>{description2}</SecondDesc>
             </DescWrapper>
           </CardsWrapper>
-          <ArrowIcon src={arrow}/>
+          {arrow && <ArrowIcon src={arrow} alt='arrow-icon'/>}
         </Fragment> 
       ))}
       </HowToWrapper>
