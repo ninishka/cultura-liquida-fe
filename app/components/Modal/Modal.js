@@ -19,28 +19,30 @@ const Modal = () => {
 
   return (
     <FullModal>
-      {!cartItems?.length ? (
-          <ModalWrapper>
-            <ContentWrapper setShowModal={setShowModal} src={bgModal} style={{ alignItems: 'center' }}>
-              <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
-              <BuyButton onClick={() => setShowModal(false)}>
-                {'volver a comprar'.toUpperCase()}
-              </BuyButton>
-            </ContentWrapper>
-          </ModalWrapper>
-      ) : (
-        <ModalWrapper>
+      <ModalWrapper>
+        {!cartItems?.length ? (
+          <ContentWrapper setShowModal={setShowModal} src={bgModal} style={{ alignItems: 'center' }}>
+            <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
+            <BuyButton onClick={() => setShowModal(false)}>
+              {'volver a comprar'.toUpperCase()}
+            </BuyButton>
+          </ContentWrapper>
+        ) : (
           <ContentWrapper setShowModal={setShowModal} src={bgModal}>
-            <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
+            <>
+              <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>
                 {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
               </ListItemsWrapper>
               <button onClick={() => setShowModal(false)}>Close</button>
+            </>
+            <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-            <ModalForm />
+              <ModalForm />
+            </>
           </ContentWrapper>
-        </ModalWrapper>
-      )}
+        )}
+      </ModalWrapper>
     </FullModal>
 )}
 

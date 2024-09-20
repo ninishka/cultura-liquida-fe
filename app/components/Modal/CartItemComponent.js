@@ -6,12 +6,14 @@ import {
     CartItem,
     CartItemWrap,
     CartImg,
-    TextWrapper,
+    CardInfoWrapper,
     Title,
     Description,
     DeleteButtonWrap,
     DeleteButtonItself,
     DeleteButtonIcon,
+    Price,
+    InfoContainer
   } from './styled'
   
 const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount, id }) => {
@@ -39,11 +41,16 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
     <CartItemWrap key={text}>
     <CartItem>
       <CartImg src={iconSrc}/>
-      <TextWrapper>
-        <Title>{title.toUpperCase()}</Title>
-        <Description>{description}</Description>
-      </TextWrapper>
-      <p style={{color: 'red', minWidth: 120, textAlign: 'center' }}>{text}</p>
+      <CardInfoWrapper>
+        <InfoContainer>
+          <Title>{title.toUpperCase()}</Title>
+          <Description>{description}</Description>
+        </InfoContainer>
+        <InfoContainer>
+          <p style={{color: 'red', textAlign: 'center' }}>{text}</p>
+          <Price>90 000 COP</Price>
+        </InfoContainer>
+      </CardInfoWrapper>
       <Counter amount={amount} isModal />
     </CartItem>
     <DeleteButtonWrap>
@@ -56,3 +63,19 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
 }
 
 export default CartItemComponent
+
+  //   <div style={{display: 'flex', alignItems: 'center'}}>
+  //   <CartImg src={iconSrc}/>
+  //   <CardInfoWrapper>
+  //     <Title>{title.toUpperCase()}</Title>
+  //     <Description>{description}</Description>
+  //   </CardInfoWrapper>
+  // </div>
+  
+  // <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
+  //   <div>
+  //     <p style={{color: 'red', textAlign: 'center' }}>{text}</p>
+  //     <Price>90 000 COP</Price>
+  //   </div>
+  //   <Counter amount={amount} isModal />
+  // </div>

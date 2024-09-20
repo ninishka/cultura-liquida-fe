@@ -54,12 +54,12 @@ export const StyledButton = styled.button`
   border-radius: 16px 16px 16px 16px;
   background-color: #333333;
   color: #FFFFFF;
-  margin: 0px 20px;
+  margin: 0 2vw;
   cursor: pointer;
   font-weight: 400;
   font-size: 16px;
 
-  @media (max-width: 726px) {
+  @media (max-width: 860px) {
     display: none;
   }
 
