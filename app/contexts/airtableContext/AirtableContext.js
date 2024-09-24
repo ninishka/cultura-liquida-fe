@@ -12,7 +12,7 @@ export const AirtableProvider = ({ children }) => {
   if (process.env.NODE_ENV === 'development') {
     base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_APP_ID);
   } else {
-    base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.APP_ID);
+    base = new Airtable({ apiKey: 'patqQKsXHAyxgh1dD.f6edbbe79d180bd162c8a0bedfc585c63a8451b8f5ed04322e993d02cf281711' }).base('appu0kOXTaJnjCwUx');
   }
 
   async function updateRecord(recordId, updatedFields) {
