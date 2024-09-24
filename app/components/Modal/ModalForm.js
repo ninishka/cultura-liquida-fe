@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import CartContext from '@/app/contexts/cartContext/cartContext'
+// import { useAirtable } from '@/app/contexts/airtableContext/AirtableContext'
 import {
     FormItself,
     FormField,
@@ -7,10 +9,11 @@ import {
     ErrorMessage,
     WrapForErrorAndLabel
   } from './styled'
-
   
 // TODO: hover suggestion window is staying in one place when scrolling down 
 const ModalForm = () => {
+  // const { handleUpdate } = useAirtable(); // WARNING // updating DB
+
     const departments = [
       { label: "departments 1", value: "option1" },
       { label: "departments 2", value: "option2" },
@@ -20,6 +23,7 @@ const ModalForm = () => {
       { label: "municipalities 1", value: "option11" },
       { label: "municipalities 2", value: "option22" },
     ];
+    const { cartItems, setShowModal } = useContext(CartContext)
   
     // TODO: need to use formData API ?
     const [formData, setFormData] = useState({
@@ -113,11 +117,14 @@ const ModalForm = () => {
       return Object.keys(newErrors).length === 0;
     };
   
+    
     const handleSubmit = (e) => {
       e.preventDefault();
       if (validate()) {
         console.log("Form data submitted:", formData);
       }
+
+      // handleUpdate() // WARNING // updating DB
     };
   
   

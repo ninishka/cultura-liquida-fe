@@ -9,7 +9,12 @@ export const HeaderFull = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #9F9F9F;
-  margin: 10px 10px;
+  margin: 0 10px 10px;
+
+  position: sticky;
+    top: 0;
+    background-color: #333;
+    z-index: 9999;
 `
 
 export const LogoFull = styled.div`
@@ -19,18 +24,9 @@ export const LogoItself = styled(Image)`
   width: 131px;
 `
 
-
-export const UlItself = styled.ul`
-  display: flex;
-  flex-direction: row;
-`
-
-export const LiItself = styled.li`
-  list-style-type: none;
-`
-
-export const Cart = styled((Image))`
+export const Cart = styled(Image)`
   width: 40px;
+  height: 40px;
 `
 
 export const CartWrap = styled.div`
@@ -46,27 +42,6 @@ export const CartWrap = styled.div`
   }
 `
 
-export const StyledButton = styled.button`
-  display: block;
-  transition: all 0.3s ease;
-  padding: 15px;
-  border: 2px solid transparent;
-  border-radius: 16px 16px 16px 16px;
-  background-color: #333333;
-  color: #FFFFFF;
-  margin: 0 2vw;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 16px;
-
-  @media (max-width: 860px) {
-    display: none;
-  }
-
-  &:hover{
-    background-color: #252525;
-  }
-`
 export const CounterCartWrap = styled.div`
  background-color: #F2C94C;
  border-radius: 50%;
@@ -75,4 +50,44 @@ export const CounterCartWrap = styled.div`
  height: 23px;
  margin: 0 31px;
  margin-top: -13px;
+`
+
+// export const BurgerWrap = styled.div`
+//   border-radius: 16px 16px 16px 16px;
+//   background-color: #2D2D2D;
+//   padding:  6px 9px 6px 9px;
+//   margin-right: 30px;
+//   position: relative;
+//   &:hover{
+//     background-color: #252525;
+//   }
+//   display: none;
+//   @media (max-width: 860px) {
+//     display: block;
+//   }
+
+// `
+// export const BurgerImage = styled(Image)`
+//   width: 40px;
+//   height: 40px;
+// `
+
+export const HamburgerButton = styled.button`
+background-color: transparent;
+border: none;
+display: none;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+gap: 0.5rem;
+ span{
+  width: 35px;
+  height: 1.5px;
+  background-color: #4FDB40;
+ }
+
+ @media (max-width: 860px) {
+    display: flex;
+  }
 `

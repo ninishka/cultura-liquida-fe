@@ -5,9 +5,8 @@ export const HowToWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 46px;
+  justify-content: center;
+  gap: 109px;
   align-items: center;
 `
 
@@ -32,10 +31,8 @@ export const CardsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 312px; */
-  height: auto;
+  height: 326px;
   width: 285px;
-  /* margin: 19px; */
   border-radius: 16px;
   background-color: #2D2D2D;
   text-align: center;
@@ -52,7 +49,7 @@ export const HowToImage = styled(Image)`
 
 `
 export const DescWrapper = styled.div`
-  margin: 13px 15px;
+  margin: 0px 15px;
 `
 
 export const HowToDesc = styled.p`

@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 
 import styled from 'styled-components'
 
@@ -82,6 +83,15 @@ export const Card = styled.div`
 
   @media (max-width: 850px) {
     height: 166px;
-    width: 140px;
+    width: 195px;
+  }
+`
+export const BenefitIcon = styled(Image)`
+  width: 100px;
+  height: 100px;
+  
+  @media (max-width: 850px) {
+    width: 76px;
+    height: 76px;
   }
 `

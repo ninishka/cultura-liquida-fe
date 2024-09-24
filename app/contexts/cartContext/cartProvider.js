@@ -7,9 +7,9 @@ import CartContext from './cartContext'
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
-
-  // const [displayingItem, setDisplayingItem] = useState('1')
-  const [showModal, setShowModal] = useState(false)
+  const [displayingItem, setDisplayingItem] = useState('1')
+  const [showCart, setShowCart] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
 
   const addToCart = async (item, amount = 1) => {
     if (!item || !item.id) return false // _id
@@ -105,7 +105,7 @@ const CartProvider = ({ children }) => {
 
   //   // temporal moved here them for testing
   //   // displayingItem, setDisplayingItem,
-  //   showModal, setShowModal
+  //   showCart, setShowCart
   // }), [JSON.stringify(cartItems)])
 
   return (
@@ -118,8 +118,9 @@ const CartProvider = ({ children }) => {
       removeFromCart,
   
       // temporal moved here them for testing
-      // displayingItem, setDisplayingItem,
-      showModal, setShowModal
+      displayingItem, setDisplayingItem,
+      showCart, setShowCart,
+      showMenu, setShowMenu
     }}>
       {children}
     </CartContext.Provider>

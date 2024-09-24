@@ -15,26 +15,26 @@ import {
 } from './styled'
 
 const Modal = () => {
-  const { cartItems, setShowModal } = useContext(CartContext)
+  const { cartItems, setShowCart } = useContext(CartContext)
 
   return (
     <FullModal>
       <ModalWrapper>
         {!cartItems?.length ? (
-          <ContentWrapper setShowModal={setShowModal} src={bgModal} style={{ alignItems: 'center' }}>
+          <ContentWrapper setShowCart={setShowCart} src={bgModal} style={{ alignItems: 'center' }}>
             <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
-            <BuyButton onClick={() => setShowModal(false)}>
+            <BuyButton onClick={() => setShowCart(false)}>
               {'volver a comprar'.toUpperCase()}
             </BuyButton>
           </ContentWrapper>
         ) : (
-          <ContentWrapper setShowModal={setShowModal} src={bgModal}>
+          <ContentWrapper setShowCart={setShowCart} src={bgModal}>
             <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>
                 {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
               </ListItemsWrapper>
-              <button onClick={() => setShowModal(false)}>Close</button>
+              <button onClick={() => setShowCart(false)}>Close</button>
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
