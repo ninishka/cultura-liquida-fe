@@ -1,6 +1,6 @@
-// "use client"
+"use client"
 
-// import { useContext } from 'react';
+import { useContext } from 'react';
 
 import {
   LogoFull,
@@ -18,7 +18,7 @@ import {
 
 import Logo from '@/app/icons/logo_full 1.svg'
 import data from '../data'
-// import CartContext from '@/app/contexts/cartContext/cartContext'
+import CartContext from '@/app/contexts/cartContext/cartContext'
 
 import telegram from '@/app/icons/telegram.png'
 import instagram from '@/app/icons/instagram_1.png'
@@ -26,7 +26,7 @@ import phone from '@/app/icons/phone_1.png'
 
 
 const FooterComponent = () => {
-  // const { setDisplayingItem } = useContext(CartContext)
+  const { setDisplayingItem } = useContext(CartContext)
 
   return (
     <FooterFull>
@@ -40,9 +40,7 @@ const FooterComponent = () => {
             const id = index + 1
             return (
               <LiItself key={title}>
-                <StyledButton 
-                // onClick={() => setDisplayingItem(id.toString())}
-                >
+                <StyledButton onClick={() => setDisplayingItem(id.toString())}>
                     {title}
                 </StyledButton>
               </LiItself>

@@ -7,8 +7,7 @@ import CartContext from './cartContext'
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
-
-  // const [displayingItem, setDisplayingItem] = useState('1')
+  const [displayingItem, setDisplayingItem] = useState('1')
   const [showModal, setShowModal] = useState(false)
 
   const addToCart = async (item, amount = 1) => {
@@ -118,7 +117,7 @@ const CartProvider = ({ children }) => {
       removeFromCart,
   
       // temporal moved here them for testing
-      // displayingItem, setDisplayingItem,
+      displayingItem, setDisplayingItem,
       showModal, setShowModal
     }}>
       {children}

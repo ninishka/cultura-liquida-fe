@@ -6,15 +6,29 @@ import CartContext from './contexts/cartContext/cartContext'
 import HowTo from './components/HowTo/HowTo'
 import Complex from './components/Complex/Complex'
 import Modal from './components/Modal/Modal'
-import { indicationsData, productContentComponents } from './data'
+import { productContentComponents } from './data'
+import Airtable from 'airtable'
+
+
+const base =  new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY}).base(process.env.NEXT_PUBLIC_APP_ID)
+
+;['MELENA', 'REISHI', 'COLA'].forEach(i => {
+  base(i).select({ view: "Grid view"}).all((err, records) => {
+    if (!records) return
+
+    records.forEach(record => {
+      record.get('Name') && console.log(i, record.get('Name'), record.get('Amount'))
+    })
+  })
+})
+
 
 const getActiveComponent = selectedItem => {
   return productContentComponents.find(({ itemNumber }) => itemNumber === selectedItem)
 }
 
 export default function Home() {
-  const { showModal } = useContext(CartContext)
-  const [displayingItem, setDisplayingItem] = useState('1')
+  const { showModal, displayingItem } = useContext(CartContext)
 
   return (
     <div>
@@ -22,12 +36,11 @@ export default function Home() {
         {showModal && <Modal />}
         <ProductContent
           key={displayingItem}
-          indicationsData={indicationsData}
           {...getActiveComponent(displayingItem)}
         />
         <HowTo soe='joi' />
         <Complex something='something'/>
       </main>
     </div>
-  );
+  )
 }

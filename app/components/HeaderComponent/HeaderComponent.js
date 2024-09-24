@@ -18,7 +18,7 @@ import {
 } from './styled'
 
 const HeaderComponent = () => {
-  const { cartItems, setShowModal } = useContext(CartContext)
+  const { cartItems, setShowModal, setDisplayingItem } = useContext(CartContext)
 
 
   return (
@@ -32,10 +32,8 @@ const HeaderComponent = () => {
           const id = index + 1
           return (
             <LiItself key={title}>
-              <StyledButton 
-              // onClick={() => setDisplayingItem(id.toString())}
-              >
-                  {title}
+              <StyledButton onClick={() => setDisplayingItem(id.toString())}>
+                {title}
               </StyledButton>
             </LiItself>
           )

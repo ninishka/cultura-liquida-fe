@@ -3,7 +3,7 @@ import Benefits from '../Benefits/Benefits'
 import Indications from '../Indications/Indications'
 
 const ProductContent = ({
-  formationDataTitle, formationData, benefitsHeaderData, benefitsCardsData, indicationsData, indicationsImg
+  formationDataTitle, formationData, benefitsHeaderData, benefitsCardsData, indicationsImg
 }) => {
 
   return (
@@ -13,7 +13,7 @@ const ProductContent = ({
         benefitsHeaderData={benefitsHeaderData} 
         benefitsCardsData={benefitsCardsData} 
       />
-      <Indications indicationsData={indicationsData} indicationsImg={indicationsImg}  />
+      <Indications indicationsImg={indicationsImg}  />
     </div>
   )
 }
