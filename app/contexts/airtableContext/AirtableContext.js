@@ -4,7 +4,12 @@ import Airtable from 'airtable';
 const AirtableContext = createContext();
 
 export const AirtableProvider = ({ children }) => {
-  const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_APP_ID);
+  let base
+  if (process.env.NODE_ENV === 'development') {
+    base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_APP_ID);
+  } else {
+    base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.APP_ID);
+  }
 
   async function updateRecord(recordId, updatedFields) {
     try {
