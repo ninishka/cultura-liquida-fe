@@ -7,7 +7,8 @@ import {
   Description,
   BenefitsCards,
   Card,
-  DescriptionCard
+  DescriptionCard,
+  BenefitIcon,
 } from './styled'
 
 const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
@@ -28,7 +29,7 @@ const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
     <BenefitsCards>
       {benefitsCardsData.map(({src, description}) => (
         <Card key={description}>
-          <Image src={src} alt={description} />
+          <BenefitIcon src={src} alt={description} />
           <DescriptionCard>{description}</DescriptionCard>
         </Card>
       ))}

@@ -4,7 +4,8 @@ export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin: 30px 0;
-  margin-right: 15px;
+  /* margin-right: 15px; */
+  gap: 10px;
 
   @media (max-width: 1220px) {
     justify-content: center;
@@ -13,7 +14,9 @@ export const CounterWrapper = styled.div`
   
   @media (max-width: 850px) {
     justify-content: center;
-    flex-direction: column;
+    flex-direction: ${({isHowTo}) => isHowTo ? 'column' : 'row'};
+    align-items: center;
+    gap: 14px;
   } 
 `
 
@@ -32,7 +35,7 @@ export const AmountItem = styled.div`
   border-radius: 16px 16px 16px 16px;
   /* background-color: #2D2D2D; */
   background-color: ${({$bgc}) => $bgc ? 'white' : '#2D2D2D'};
-  border: ${({$bgc}) => $bgc ? '1.5px solid black' : '#2D2D2D'};
+  border: ${({$bgc}) => $bgc ? '1.5px solid black' : '1.5px solid white'};
   color: ${({$bgc}) => $bgc && 'black'};
   width: 100px;
   height: 52px;
@@ -40,6 +43,10 @@ export const AmountItem = styled.div`
   &:hover{
     background-color: #252525;
     background-color: ${({$bgc}) => $bgc ? 'grey' : '#2D2D2D'};
+  }
+
+  @media (max-width: 850px) {
+    margin-right:25px;
   }
 `
 
@@ -63,9 +70,11 @@ export const BuyButton = styled.button`
   border-radius: 16px 16px 16px 16px;
   background-color: #4FDB40;
   padding:  17px 29px;
-  margin-right: 30px;
+  margin-right: ${({isHowTo}) => isHowTo ? '0px' : '30px'};
   cursor: pointer;
-  width: 200px;
+  /* width: 200px; */
+  width: ${({isHowTo}) => isHowTo ? 'auto' : '200px'};
+
   height: 52px;
   color: #fff;
   font-weight: 600;

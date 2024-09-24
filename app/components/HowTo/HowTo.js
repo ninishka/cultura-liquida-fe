@@ -1,5 +1,6 @@
 import { howToCardsData } from '@/app/data'
-import { Fragment } from 'react';
+import { Fragment } from 'react'
+import Counter from '../Counter/Counter'
 
 import {
   HowToWrapper,
@@ -15,6 +16,7 @@ import {
 } from './styled'
 
 const HowTo = ({soe}) => {
+
   return (
     <section style={{borderBottom: ' 2px solid #9F9F9F ', margin: '10px 15px'}}>
       <TextForHeader> {'cómo recibir un pedido'.toUpperCase()}</TextForHeader>
@@ -27,8 +29,9 @@ const HowTo = ({soe}) => {
               <HowToDesc>{description}</HowToDesc>
               <SecondDesc>{description2}</SecondDesc>
             </DescWrapper>
+            {index === 0 && <Counter isHowTo />}
           </CardsWrapper>
-          {arrow && <ArrowIcon src={arrow} alt='arrow-icon'/>}
+          {/* {arrow && <ArrowIcon src={arrow} alt='arrow-icon'/>} */}
         </Fragment> 
       ))}
       </HowToWrapper>

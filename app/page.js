@@ -13,13 +13,12 @@ const getActiveComponent = selectedItem => {
 }
 
 export default function Home() {
-  const { showModal } = useContext(CartContext)
-  const [displayingItem, setDisplayingItem] = useState('1')
+  const { displayingItem, showCart } = useContext(CartContext)
 
   return (
     <div>
       <main>
-        {showModal && <Modal />}
+        {showCart && <Modal />}
         <ProductContent
           key={displayingItem}
           indicationsData={indicationsData}

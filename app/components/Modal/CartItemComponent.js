@@ -34,7 +34,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
 
     // not working anymore
     // length shows 1 after emptying cart
-    // if (!cartItems?.length) setShowModal(false); // Close the modal if there are no items left
+    // if (!cartItems?.length) setShowCart(false); // Close the modal if there are no items left
   }
 
   return (

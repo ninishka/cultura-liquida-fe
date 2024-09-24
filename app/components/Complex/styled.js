@@ -63,6 +63,9 @@ export const ComplexItemsWrap = styled.div`
 
   @media (max-width: 1200px) {
     margin: 20px 0;
+    width: 543px;
+  }
+  @media (max-width: 700px) {
     width: auto
   }
 `
@@ -75,7 +78,7 @@ export const TwoCardwrap = styled.div`
     gap: 50px;
 
   }
-  @media (max-width: 850px) {
+  @media (max-width: 880px) {
     flex-direction: column; 
   }
 
