@@ -2,17 +2,17 @@ import { createContext, useContext } from 'react';
 import Airtable from 'airtable';
 
 const AirtableContext = createContext();
-
+console.log('process.env', process.env)
+console.log('process.env.NEXT_PUBLIC_APP_ID', process.env.NEXT_PUBLIC_APP_ID)
+console.log('process.env.NEXT_PUBLIC_AIRTABLE_API_KEY', process.env.NEXT_PUBLIC_AIRTABLE_API_KEY)
+console.log('process.env.APP_ID', process.env.APP_ID)
+console.log('process.env.AIRTABLE_API_KEY', process.env.AIRTABLE_API_KEY)
 export const AirtableProvider = ({ children }) => {
   let base
   if (process.env.NODE_ENV === 'development') {
     base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_APP_ID);
-    console.log('process.env.NEXT_PUBLIC_APP_ID', process.env.NEXT_PUBLIC_APP_ID)
-    console.log('process.env.NEXT_PUBLIC_AIRTABLE_API_KEY', process.env.NEXT_PUBLIC_AIRTABLE_API_KEY)
   } else {
     base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.APP_ID);
-    console.log('process.env.APP_ID', process.env.APP_ID)
-    console.log('process.env.AIRTABLE_API_KEY', process.env.AIRTABLE_API_KEY)
   }
 
   async function updateRecord(recordId, updatedFields) {
