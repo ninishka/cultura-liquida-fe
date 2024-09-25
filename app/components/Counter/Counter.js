@@ -38,11 +38,11 @@ const Counter = ({ amount, isModal, filterdContent, isHowTo }) => {
       // <BuyButton onClick={() => {
         // setChoosedGood(temporalChoise)
         // setChoosedGood(prevTemporalChoise => {
-        //   // const hasDuplicate = prevTemporalChoise.some(({text}) => text === temporalChoise[0].text)
+        //   // const hasDuplicate = prevTemporalChoise.some(({type}) => type === temporalChoise[0].type)
 
-        //   const hasDuplicate = prevTemporalChoise.some(({text, title}) => {
+        //   const hasDuplicate = prevTemporalChoise.some(({type, title}) => {
         //     const isHaveProductDuplicate = title === temporalChoise[0].title
-        //     const isHaveTypeDuplicate = text === temporalChoise[0].text
+        //     const isHaveTypeDuplicate = type === temporalChoise[0].type
             
         //     return isHaveTypeDuplicate && isHaveProductDuplicate
         //   })

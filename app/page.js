@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from 'react'
-import { AirtableProvider } from './contexts/airtableContext/AirtableContext'
+import { AirtableProvider } from './contexts/airtableContext/airtableProvider'
 import CartContext from './contexts/cartContext/cartContext'
 import ProductContent from './components/ProductContent/ProductContent'
 import HowTo from './components/HowTo/HowTo'

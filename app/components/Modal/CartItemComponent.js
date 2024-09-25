@@ -16,7 +16,7 @@ import {
     InfoContainer
   } from './styled'
   
-const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount, id }) => {
+const CartItemComponent = ({ iconSrc, title, description, type, amount: tAmount, id }) => {
   const { setToCart, removeFromCart, cartItems } = useContext(CartContext)
   const [amount, setAmount] = useState(tAmount)
 
@@ -38,7 +38,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
   }
 
   return (
-    <CartItemWrap key={text}>
+    <CartItemWrap key={type}>
     <CartItem>
       <CartImg src={iconSrc} alt='cartitemcomponent'/>
       <CardInfoWrapper>
@@ -47,7 +47,7 @@ const CartItemComponent = ({ iconSrc, title, description, text, amount: tAmount,
           <Description>{description}</Description>
         </InfoContainer>
         <InfoContainer>
-          <p style={{color: 'red', textAlign: 'center' }}>{text}</p>
+          <p style={{color: 'red', textAlign: 'center' }}>{type}</p>
           <Price>90 000 COP</Price>
         </InfoContainer>
       </CardInfoWrapper>
@@ -74,7 +74,7 @@ export default CartItemComponent
   
   // <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
   //   <div>
-  //     <p style={{color: 'red', textAlign: 'center' }}>{text}</p>
+  //     <p style={{color: 'red', textAlign: 'center' }}>{type}</p>
   //     <Price>90 000 COP</Price>
   //   </div>
   //   <Counter amount={amount} isModal />

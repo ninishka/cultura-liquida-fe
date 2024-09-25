@@ -67,7 +67,7 @@ const Complex = ({something}) => {
             <FormationWrap>
               <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
-                {FormationData.map(({text, icon, id,}) => (
+                {FormationData.map(({type, icon, id,}) => (
                   <Item key={id}> 
                       <RadioButton 
                         type="radio" 
@@ -77,8 +77,8 @@ const Complex = ({something}) => {
                         // onChange={() => rechecking(id)} 
                       />
                     <LabelContent htmlFor="text">
-                      <Icon src={icon} alt={text}/>
-                      <TextDesc>{text}</TextDesc>
+                      <Icon src={icon} alt={type}/>
+                      <TextDesc>{type}</TextDesc>
                     </LabelContent>
                   </Item>
                   ))}

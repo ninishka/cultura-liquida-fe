@@ -53,7 +53,7 @@ const melenaFormationData = [
   {
     id: '1',
     icon: icon1,
-    text: 'Cápsulas',
+    type: 'Cápsulas',
     src: melenacaps,
 
     iconSrc: melenaCapsulsSrc,
@@ -62,7 +62,7 @@ const melenaFormationData = [
   {
     id: '2',
     icon: icon2,
-    text: 'Extracto 100ml',
+    type: 'Extracto 100ml',
     src: melenaextract,
     
     iconSrc: melenaExtractSrc,
@@ -71,7 +71,7 @@ const melenaFormationData = [
   {
     id: '3',
     icon: icon3,
-    text: 'Extracto 30ml',
+    type: 'Extracto 30ml',
     src: melenaextract,
 
     iconSrc: melenaExtractSrc,
@@ -135,7 +135,7 @@ const reishiFormationData = [
   {
     id: '1',
     icon: icon2,
-    text: 'Extracto 100ml',
+    type: 'Extracto 100ml',
     src: reishiextract,
 
     iconSrc: reishiSrc,
@@ -144,7 +144,7 @@ const reishiFormationData = [
   {
     id: '2',
     icon: icon3,
-    text: 'Extracto 30ml',
+    type: 'Extracto 30ml',
     src: reishiextract,
 
     iconSrc: reishiSrc,
@@ -200,7 +200,7 @@ const colaFormationData = [
   {
     id: '1',
     icon: icon2,
-    text: 'Extracto 100ml',
+    type: 'Extracto 100ml',
     src: colaextract,
 
     iconSrc: colaSrc,
@@ -209,7 +209,7 @@ const colaFormationData = [
   {
     id: '2',
     icon: icon3,
-    text: 'Extracto 30ml',
+    type: 'Extracto 30ml',
     src: colaextract,
 
     iconSrc: colaSrc,
@@ -334,12 +334,43 @@ export const complexData = [
 export const FormationData = [
   {
     id: '1',
-    text: 'Extracto 100ml',
+    type: 'Extracto 100ml',
     icon: imgC10,
   },
   {
     id: '2',
-    text: 'Extracto 30ml',
+    type: 'Extracto 30ml',
     icon: imgC11,
   },
 ]
+
+
+
+// =============================== //
+// form
+
+export const formDataSet = [
+  { label: 'Nombre', name: 'name', type: 'text' },
+  { label: 'Apellidos', name: 'surnames', type: 'text' },
+  { label: 'Tipo documento', name: 'documentType', type: 'select', options: [
+      { label: 'ID', value: 'ID' },
+      { label: 'Passport', value: 'Passport' },
+      { label: 'Driver\'s License', value: 'Driver\'s License' }
+    ]
+  },
+  { label: 'Número de documento', name: 'documentNumber', type: 'text' },
+  { label: 'Dirección de envío', name: 'shippingAddress', type: 'textarea' },
+  { label: 'Departamento', name: 'department', type: 'select', options: [
+      { label: "departments 1", value: "option1" },
+      { label: "departments 2", value: "option2" },
+    ]
+  },
+  { label: 'Ciudad / Municipio', name: 'cityMunicipality', type: 'select', options: [
+      { label: "municipalities 1", value: "option11" },
+      { label: "municipalities 2", value: "option22" },
+    ]
+  },
+  { label: 'Celular / Teléfono', name: 'telephone', type: 'tel' },
+  { label: 'Correo electrónico', name: 'email', type: 'email' },
+  { label: 'I agree to the terms and conditions', name: 'agree', type: 'checkbox' } 
+];
