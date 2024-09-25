@@ -56,7 +56,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
       <FrameForTwo>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
-        {formationData.map(({text, icon, id}) => (
+        {formationData.map(({type, icon, id}) => (
           <Item key={id} onClick={() => rechecking(id)}> 
             <RadioButton 
               type="radio" 
@@ -66,8 +66,8 @@ const Formation = ({ formationDataTitle, formationData }) => {
               onChange={() => rechecking(id)}
             />
             <LabelContent htmlFor="text">
-              <Icon src={icon} alt={text}/>
-              <TextDesc>{text}</TextDesc>
+              <Icon src={icon} alt={type}/>
+              <TextDesc>{type}</TextDesc>
             </LabelContent>
           </Item>
           ))}

@@ -21,14 +21,14 @@ const Modal = () => {
     <FullModal>
       <ModalWrapper>
         {!cartItems?.length ? (
-          <ContentWrapper setShowCart={setShowCart} src={bgModal} style={{ alignItems: 'center' }}>
+          <ContentWrapper src={bgModal} style={{ alignItems: 'center' }}>
             <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
             <BuyButton onClick={() => setShowCart(false)}>
               {'volver a comprar'.toUpperCase()}
             </BuyButton>
           </ContentWrapper>
         ) : (
-          <ContentWrapper setShowCart={setShowCart} src={bgModal}>
+          <ContentWrapper src={bgModal}>
             <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>

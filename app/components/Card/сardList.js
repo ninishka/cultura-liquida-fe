@@ -5,11 +5,11 @@ import colaSrc from '@/app/icons/icon_cola_cart.png'
 import reishiSrc from '@/app/icons/icon_reishi_cart.png'
 
 
-
+// TODO
 
 const сardList = ({
   formationDataTitle: [{ title, description }],
-  filterdContent: [{ icon, id, src, text }],
+  filterdContent: [{ icon, id, src, type }],
 }) => {
   const [productCount, setProductCount] = useState(0)
 
@@ -18,7 +18,7 @@ const сardList = ({
     icon: "/cultura-liquida-fe/static/media/icon_caps.73274297e64c0cb4e0cc92cbe8e40966.svg",
     id: "1",
     src: "/cultura-liquida-fe/static/media/Frame_878.54c18a7c984b0f021ffa.png",
-    text: "Cápsulas",
+    type: "Cápsulas",
     title: "MELENA DE LEON",
 
     innerCounter: 1,
@@ -26,16 +26,16 @@ const сardList = ({
   }]
 
   // const { title, description } = formationDataTitle[0]
-  // const { icon, id, src, text } = filterdContent[0]
+  // const { icon, id, src, type } = filterdContent[0]
 
   // src - main img
   // icon - button icon
   // modalSrc - modalSrc
-  // text - kind of product
+  // type - kind of product
 
   const isReishi =  title === 'REISHI, EXTRACTO' && reishiSrc
   const isCola =  title === 'COLA DE PAVO, EXTRACTO' && colaSrc
-  const condMelena = text === 'Cápsulas' ?  melenaCapsulsSrc : melenaExtractSrc
+  const condMelena = type === 'Cápsulas' ?  melenaCapsulsSrc : melenaExtractSrc
   const isMelena =  title === 'MELENA DE LEON' && condMelena
 
   const condition = isReishi || isCola || isMelena 
@@ -47,7 +47,7 @@ const сardList = ({
     src,
     icon,
     modalSrc: condition,
-    text,
+    type,
     productCount,
   }
 }

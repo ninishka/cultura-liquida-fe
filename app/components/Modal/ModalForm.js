@@ -1,30 +1,21 @@
 import React, { useState, useContext } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
-// import { useAirtable } from '@/app/contexts/airtableContext/AirtableContext'
+import { AirtableContext } from '@/app/contexts/airtableContext/airtableContext'
+import { formDataSet } from '@/app/data'
 import {
-    FormItself,
-    FormField,
-    FormWrapper,
-    FormGrid,
-    ErrorMessage,
-    WrapForErrorAndLabel
-  } from './styled'
-  
+  FormItself,
+  FormField,
+  FormWrapper,
+  FormGrid,
+  ErrorMessage,
+  WrapForErrorAndLabel
+} from './styled'
+
 // TODO: hover suggestion window is staying in one place when scrolling down 
 const ModalForm = () => {
-  // const { handleUpdate } = useAirtable(); // WARNING // updating DB
-
-    const departments = [
-      { label: "departments 1", value: "option1" },
-      { label: "departments 2", value: "option2" },
-    ];
-  
-    const municipalities = [
-      { label: "municipalities 1", value: "option11" },
-      { label: "municipalities 2", value: "option22" },
-    ];
+  const { handleUpdate } = useContext(AirtableContext); // WARNING // updating DB
     const { cartItems, setShowModal } = useContext(CartContext)
-  
+    const [errors, setErrors] = useState({});
     // TODO: need to use formData API ?
     const [formData, setFormData] = useState({
       name: '',
@@ -39,20 +30,6 @@ const ModalForm = () => {
       notes: '',
       agree: false
     });
-  
-    const [errors, setErrors] = useState({});
-  
-    const handleChange = (e) => {
-      const { name, value, type, checked } = e.target;
-      setFormData({
-        ...formData,
-        [name]: type === 'checkbox' ? checked : value
-      });
-    };
-  
-    const handleBlur = (e) => {
-      validateField(e.target.name, e.target.value);
-    };
   
     const validateField = (name, value) => {
       const newErrors = { ...errors };
@@ -80,29 +57,11 @@ const ModalForm = () => {
   
       setErrors(newErrors);
     };
-  
-    const dataSet = [
-      { label: 'Nombre', name: 'name', type: 'text' },
-      { label: 'Apellidos', name: 'surnames', type: 'text' },
-      { label: 'Tipo documento', name: 'documentType', type: 'select', options: [
-          { label: 'ID', value: 'ID' },
-          { label: 'Passport', value: 'Passport' },
-          { label: 'Driver\'s License', value: 'Driver\'s License' }
-        ]
-      },
-      { label: 'Número de documento', name: 'documentNumber', type: 'text' },
-      { label: 'Dirección de envío', name: 'shippingAddress', type: 'textarea' },
-      { label: 'Departamento', name: 'department', type: 'select', options: departments },
-      { label: 'Ciudad / Municipio', name: 'cityMunicipality', type: 'select', options: municipalities },
-      { label: 'Celular / Teléfono', name: 'telephone', type: 'tel' },
-      { label: 'Correo electrónico', name: 'email', type: 'email' },
-      { label: 'I agree to the terms and conditions', name: 'agree', type: 'checkbox' } 
-      ];
-  
+
     const validate = () => {
       const newErrors = {};
   
-      // TODO: reduce duplicate - we have same values in dataSet
+      // TODO: reduce duplicate - we have same values in formDataSet
       const fields = ['name', 'surnames', 'documentNumber', 'telephone', 'email', 'department', 'cityMunicipality', 'shippingAddress',  'agree'];
   
       fields.forEach(field => {
@@ -117,24 +76,32 @@ const ModalForm = () => {
       return Object.keys(newErrors).length === 0;
     };
   
-    
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (validate()) {
-        console.log("Form data submitted:", formData);
-      }
+    const handleBlur = e => {
+      validateField(e.target.name, e.target.value);
+    };
 
-      // handleUpdate() // WARNING // updating DB
+    const handleChange = e => {
+      const { name, value, type, checked } = e.target;
+      setFormData({
+        ...formData,
+        [name]: type === 'checkbox' ? checked : value
+      });
     };
   
-  
-  
-  
+    const handleSubmit = e => {
+      e.preventDefault();
+      // if (validate()) {
+      //   console.log("Form data submitted:", formData);
+      // }
+
+      handleUpdate(cartItems) // WARNING // updating DB
+    };
+
     return (
       <FormWrapper>
         <FormItself onSubmit={handleSubmit} noValidate>
-          <FormGrid>
-            {dataSet
+          {/* <FormGrid>
+            {formDataSet
               .filter(({ type }) => type !== 'checkbox') 
               .map(({ label, name, type, options = [] }) => (
                 <FormField key={name}>
@@ -179,7 +146,7 @@ const ModalForm = () => {
                 onChange={handleChange}
               />
             </FormField>
-            {dataSet
+            {formDataSet
               .filter(({ type }) => type === 'checkbox')
               .map(({ label, name }) => (
                 <FormField key={name}>
@@ -198,7 +165,7 @@ const ModalForm = () => {
                   />
                 </FormField>
               ))}
-          </FormGrid>
+          </FormGrid> */}
           <button type="submit">Submit</button>
         </FormItself>
       </FormWrapper>
