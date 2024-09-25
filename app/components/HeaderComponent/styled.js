@@ -15,6 +15,10 @@ export const HeaderFull = styled.header`
     top: 0;
     background-color: #333;
     z-index: 9999;
+  @media (max-width: 850px) {
+    border-radius: 16px 16px;
+  }
+  
 `
 
 export const LogoFull = styled.div`

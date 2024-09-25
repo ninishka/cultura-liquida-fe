@@ -11,17 +11,23 @@ import {
 } from './styled'
 
 
-const NavigationComponent = ({shouldDisapeatr}) => {
-  const { setDisplayingItem } = useContext(CartContext)
+const NavigationComponent = ({isopen}) => {
+  const { setDisplayingItem, setShowMenu } = useContext(CartContext)
+
+  const navClick = (id) => {
+    setDisplayingItem(id.toString())
+    setShowMenu(false)
+  }
+
 
   return (
-    <Navigation shouldDisapeatr={shouldDisapeatr}>
-      <UlItself shouldDisapeatr={shouldDisapeatr}>
+    <Navigation isopen={isopen}>
+      <UlItself> 
         {data.map(({ title }, index) => {
           const id = index + 1
           return (
             <LiItself key={title}>
-              <StyledButton onClick={() => setDisplayingItem(id.toString())}>
+              <StyledButton onClick={() => navClick(id)}>
                   {title}
               </StyledButton>
             </LiItself>

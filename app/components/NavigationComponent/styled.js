@@ -1,5 +1,4 @@
 "use client"
-
 import styled from 'styled-components'
 
 
@@ -17,9 +16,8 @@ export const Navigation = styled.nav`
   display: flex;
   align-items: center;
   flex-direction: row;
-
   @media (max-width: 860px) {
-    display: ${({shouldDisapeatr}) => shouldDisapeatr ? 'block' : 'none'};
+    display: ${({isopen}) => isopen ? 'block' : 'none'};
     position: fixed;
     top: 86px;
     background-color: #333333;

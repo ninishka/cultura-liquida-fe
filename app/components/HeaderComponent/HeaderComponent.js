@@ -26,10 +26,9 @@ const HeaderComponent = () => {
   const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
   console.log('showMenu init', showMenu)
 
-  const handleNav = () => {
-    setShowMenu(!showMenu);
-    console.log('showMenu', showMenu)
-  }
+  // const handleNav = () => {
+  //   setShowMenu(!showMenu);
+  // }
 
   return (
   <HeaderFull>
@@ -37,10 +36,11 @@ const HeaderComponent = () => {
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     
-    <NavigationComponent shouldDisapeatr={showMenu? "Show":""} />
+    <NavigationComponent isopen={showMenu? "Show":""} />
 
 
-    <HamburgerButton onClick={handleNav}>
+{/* <HamburgerButton onClick={handleNav}> works same */} 
+    <HamburgerButton onClick={() => setShowMenu(!showMenu)}>
       <span></span>
       <span></span>
       <span></span>
