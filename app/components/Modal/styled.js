@@ -148,10 +148,15 @@ export const FormGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 `
+export const LabelErrorWrap = styled.div`
+display: flex;
+flex-direction: row;
+`
 
-export const FormField = styled.div`
+export const FormField = styled.form`
   margin-bottom: 15px;
   position: relative;
+
   & > input,
   & > textarea,
   & > select {
@@ -169,7 +174,7 @@ export const FormField = styled.div`
 `;
 
 export const FormWrapper = styled.div`
-
+  /* grid-column: 1 / -1; */
 `
 export const ErrorMessage = styled.p`
   color: red;
