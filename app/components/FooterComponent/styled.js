@@ -25,6 +25,7 @@ export const HeaderLikeFooter = styled.div`
 
 export const LogoFull = styled.div`
  margin-left: 30px;
+ 
 
  @media (max-width: 850px) {
     margin-left: 0;
@@ -32,6 +33,7 @@ export const LogoFull = styled.div`
 `
 export const LogoItself = styled(Image)`
   width: 131px;
+  height: auto;
 `
 
 export const UlItself = styled.ul`

@@ -87,6 +87,11 @@ export const Card = styled.div`
   }
 `
 export const BenefitIcon = styled(Image)`
+  width: 100%;
+  height: auto
+`
+
+export const BenefitIconWrapper = styled.div`
   width: 100px;
   height: 100px;
   

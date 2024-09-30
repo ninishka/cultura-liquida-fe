@@ -64,6 +64,8 @@ export const SecondDesc = styled.p`
   text-align: left;
 `
  export const ArrowIcon = styled(Image)`
+ width: auto;
+ height: auto;
  `
 export const LeaveReview = styled.div`
   border-radius: 16px;

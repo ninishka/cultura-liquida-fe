@@ -98,6 +98,8 @@ export const WrapForErrorAndLabel = styled.div`
 `
 
 export const CartImg = styled(Image)`
+  width: auto;
+  height: auto;
  margin: 15px;
  @media (max-width: 850px) {
   margin: 7px;
@@ -189,6 +191,8 @@ export const DeleteButtonItself = styled.button`
   margin: 18px -12px;
 `
 export const DeleteButtonIcon = styled(Image)`
+  width: auto;
+  height: auto;
 `
 
 export const CheckboxContainer = styled.div`
