@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, Fragment } from 'react'
+import React, { useState, useId, Fragment } from 'react'
 import Counter from '../Counter/Counter'
 import {
   FormationSection,
@@ -18,12 +18,16 @@ import {
   Icon,
   TextDesc,
   RadioButton,
-  LabelContent
+  LabelContent,
 } from './styled'
+import { Price } from '../Modal/styled'
 
 const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
   const filterdContent = formationData.filter(({ id }) => id === checkedState)
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
+  const preObj = {idCart , ...filterdContent?.[0]}
+
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
   }
@@ -56,7 +60,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
       <FrameForTwo>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
-        {formationData.map(({type, icon, id}) => (
+        {formationData.map(({type, icon, id, price}) => (
           <Item key={id} onClick={() => rechecking(id)}> 
             <RadioButton 
               type="radio" 
@@ -73,7 +77,11 @@ const Formation = ({ formationDataTitle, formationData }) => {
           ))}
         </CheckBoxGroup>
       </FrameForTwo>
-      <Counter filterdContent={filterdContent}/>
+      {/* <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+        
+        <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>
+      </div> */}
+      <Counter filterdContent={filterdContent} preObj={preObj} />
     </ContentWrapper>
     <ImageWrapperDesktop key={source}>
       <ImageStyled src={source} alt='formation'/>

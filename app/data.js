@@ -45,7 +45,8 @@ import reishiSrc from './icons/icon_reishi_cart.png'
 const melenaFormationDataTitle = [
   {
     title: 'MELENA DE LEON',
-    description: 'Cuerpo fructífero de.',
+    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
+    ingredient: 'Hericium erinaceus'
   }
 ]
 
@@ -56,6 +57,8 @@ const melenaFormationData = [
     type: 'Cápsulas',
     src: melenacaps,
 
+    price: 6000,
+
     iconSrc: melenaCapsulsSrc,
     ...melenaFormationDataTitle[0]
   },
@@ -64,6 +67,8 @@ const melenaFormationData = [
     icon: icon2,
     type: 'Extracto 100ml',
     src: melenaextract,
+
+    price: 4000,
     
     iconSrc: melenaExtractSrc,
     ...melenaFormationDataTitle[0]
@@ -73,6 +78,8 @@ const melenaFormationData = [
     icon: icon3,
     type: 'Extracto 30ml',
     src: melenaextract,
+
+    price: 8000,
 
     iconSrc: melenaExtractSrc,
     ...melenaFormationDataTitle[0]
@@ -128,6 +135,7 @@ const reishiFormationDataTitle = [
   {
     title: 'REISHI, EXTRACTO',
     description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
+    ingredient: 'Ganoderma lucidum'
   }
 ]
 
@@ -193,6 +201,7 @@ const colaFormationDataTitle = [
   {
     title: 'COLA DE PAVO, EXTRACTO',
     description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
+    ingredient: 'Trametes Versicolor'
   }
 ]
 
@@ -312,35 +321,19 @@ export const howToCardsData = [
 
 //==================//
 
-export const complexData = [
-  {
-    name:'Melena de leon',
-    learnmmore: 'Leer más',
-    src: imgC9
-  },
-  {
-    name:'Cola de pavo',
-    learnmmore: 'Leer más',
-    src: imgC9
-  },
-  {
-    name:'Reishi',
-    learnmmore: 'Leer más',
-    src: imgC9
-  }
-]
 
-
-export const FormationData = [
+export const complexData2 = [
   {
     id: '1',
     type: 'Extracto 100ml',
     icon: imgC10,
+    price: 230000
   },
   {
     id: '2',
     type: 'Extracto 30ml',
     icon: imgC11,
+    price: 150000
   },
 ]
 

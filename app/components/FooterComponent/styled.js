@@ -47,13 +47,7 @@ export const LiItself = styled.li`
 `
 
 export const Contacts = styled(Image)`
-  width: 40px;
-  height: 52;
   margin: 6px;
-
-  @media (max-width: 850px) {
-    width: 60px;
-  }
 `
 export const LastFooter = styled.div`
   display: flex;

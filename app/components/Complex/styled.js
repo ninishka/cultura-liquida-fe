@@ -15,8 +15,6 @@ export const ImgSide = styled.div`
 
 `
 export const ImgItself = styled(Image)`
- width: auto;
- height: auto;
 `
 export const RightContentWrap = styled.div`
  display: flex;
@@ -121,6 +119,7 @@ export const Item123 = styled.h5`
 export const LearnMoreWrap = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 20px;
 `
 export const LearnMoreText = styled.p`
   font-size: 16px;
@@ -136,14 +135,17 @@ export const LearnMoreText = styled.p`
  `
 
  export const ArrowButtons = styled.button`
-  padding: 0;
   border: none;
   outline: none;
   font: inherit;
   color: inherit;
   background: none;
   cursor: pointer;
-`
+  :hover{
+    background-color:#252525;
+    border-radius: 16px 16px;
+  }
+  `
 
 export const CheckBoxGroup = styled.div`
  display: flex;
@@ -262,4 +264,12 @@ export const Selecting = styled.p`
   text-align: left;
   color: #9F9F9F;
   margin: 13px 16px;
+`
+export const PriceCounterWrap = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+ @media (max-width: 700px) {
+    flex-direction: column;
+ }
 `

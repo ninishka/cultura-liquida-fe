@@ -11,13 +11,16 @@ import {
   Price,
 } from'./styled'
 
-const Counter = ({ amount, isModal, filterdContent, isHowTo }) => {
-  const idCart= useId()
+const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
+  // const idCart = useId()
   const { cartItems, addToCart } = useContext(CartContext)
   const [ count, setCount ] = useState(amount || 1)
 
   // id probleb
-  const preObj = {...filterdContent?.[0], idCart}
+
+  // const isFirst = !!filterdContent?.[0] ? {...filterdContent?.[0]} : {...filterdContent}
+  // const preObj = {...filterdContent?.[0], idCart}
+  // console.log('preObj', preObj)
 
   return (                             
   <CounterWrapper>
@@ -28,37 +31,18 @@ const Counter = ({ amount, isModal, filterdContent, isHowTo }) => {
         >
           <ArrowPrev color={isModal && 'black'} />
         </ArrowButtons>
-        {/* invisible button is still working around img, maybe fix later */}
         <Number>{count}</Number>
         <ArrowButtons  onClick={() => setCount(count + 1)}>
           <ArrowNext color={isModal && 'black'} />
         </ArrowButtons>
       </AmountItem>  
+      {/* condition rendering react */}
       {!isModal && 
-      // <BuyButton onClick={() => {
-        // setChoosedGood(temporalChoise)
-        // setChoosedGood(prevTemporalChoise => {
-        //   // const hasDuplicate = prevTemporalChoise.some(({type}) => type === temporalChoise[0].type)
-
-        //   const hasDuplicate = prevTemporalChoise.some(({type, title}) => {
-        //     const isHaveProductDuplicate = title === temporalChoise[0].title
-        //     const isHaveTypeDuplicate = type === temporalChoise[0].type
-            
-        //     return isHaveTypeDuplicate && isHaveProductDuplicate
-        //   })
-        
-        //   if (!hasDuplicate) {
-        //     return [...prevTemporalChoise, ...temporalChoise]
-        //   } else {
-        //     return prevTemporalChoise
-        //   }
-        // })
-      // }}>
-        // <BuyButton onClick={() => addToCart({}, count)}>
         <BuyButton onClick={() => addToCart(preObj, count)} isHowTo={isHowTo}>
           Comprar
         </BuyButton>
       }
+      {filterdContent?.[0]?.price && <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}
   </CounterWrapper>
 )}
 

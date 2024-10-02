@@ -1,9 +1,12 @@
-import { complexData, FormationData } from '@/app/data'
-import { Fragment, useContext } from 'react';
-// import Counter from '../Counter/Counter'
+import { complexData, complexData2 } from '@/app/data'
+import { useState, useContext } from 'react';
+import CartContext from '@/app/contexts/cartContext/cartContext'
+import Counter from '../Counter/Counter'
+import data from '../data'
+
 
 import imgC9 from '@/app/icons/CL-703.png'
-
+import imgC from '@/app/icons/arrow_next.svg'
 import {
   AllWrap,
   ImgSide,
@@ -30,15 +33,35 @@ import {
   LabelContent,
   TwoCardwrap,
   FormationWrap,
-  Selecting
+  Selecting,
+  PriceCounterWrap
 } from './styled'
 
-const Complex = ({something}) => {
+const Complex = ({something, formationData, tAmount}) => {
+  const [ checkedState, setCheckedState ] = useState('1')
+  const { setDisplayingItem } = useContext(CartContext)
+
+  const rechecking = id => {
+    if(checkedState !== id) setCheckedState(id)
+  }
+
+  const isBrowser = () => typeof window !== 'undefined';
+
+  const scrollToTop = () => {
+      if (!isBrowser()) return;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const handleClick = id => {
+    setDisplayingItem (id.toString())
+    scrollToTop()
+  }
+
   return (
     <section>
       <AllWrap>
         <ImgSide> 
-          <ImgItself src={imgC9} alt='Complex'/>
+          <ImgItself sizes='100vw' src={imgC9} alt='Complex'/>
         </ImgSide>
        <RightContentWrap>
           <TitleWrap>
@@ -51,30 +74,35 @@ const Complex = ({something}) => {
             <ComplexItemsWrap>
               <LeftSide>
                 <LeftTitle>El complejo consta de:</LeftTitle>
-                {complexData.map(({src, learnmmore, name }) => (
-                  <ThreeItemsWrap key={name}>
+                {data.map(({ title }, index) => {
+                  const id = index + 1
+                  return (
+                    <ThreeItemsWrap key={title}>
                     <InsideItemWrap>
-                      <Item123>{name}</Item123>
+                      <Item123>{title}</Item123>
                     </InsideItemWrap>
-                    <LearnMoreWrap>
-                      <LearnMoreText>{learnmmore}</LearnMoreText>
-                      <ArrowButtons><ArrowIcon src={src} alt='arrow' /></ArrowButtons>
-                    </LearnMoreWrap>
-                  </ThreeItemsWrap>
-                ))}
+                    <ArrowButtons onClick={() => handleClick(id)}>
+                      <LearnMoreWrap key={title + id}>
+                        <LearnMoreText>Leer más</LearnMoreText>
+                        <ArrowIcon src={imgC} alt='arrow' />
+                      </LearnMoreWrap>
+                    </ArrowButtons>
+                    </ThreeItemsWrap>
+                  )
+                })} 
               </LeftSide>
             </ComplexItemsWrap>
             <FormationWrap>
               <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
-                {FormationData.map(({type, icon, id,}) => (
-                  <Item key={id}> 
+                {complexData2.map(({type, icon, id,}) => (
+                  <Item key={id} onClick={() => rechecking(id)}> 
                       <RadioButton 
                         type="radio" 
                         id={id}
                         name="group1"
-                        // checked={id === checkedState}
-                        // onChange={() => rechecking(id)} 
+                        checked={id === checkedState}
+                        onChange={() => rechecking(id)} 
                       />
                     <LabelContent htmlFor="text">
                       <Icon src={icon} alt={type}/>
@@ -85,9 +113,11 @@ const Complex = ({something}) => {
               </CheckBoxGroup>
             </FormationWrap>
           </TwoCardwrap>
-
-          {/* <Counter count={count} setCount={setCount} isModal /> */}
-
+          <PriceCounterWrap>
+            <Counter />
+            {checkedState === '1' && '230000 COP'}
+            {checkedState === '2' && '150000 COP'}  
+          </PriceCounterWrap>
        </RightContentWrap>
       </AllWrap>
     </section>
@@ -97,13 +127,4 @@ const Complex = ({something}) => {
 
 export default Complex
 
-// <InsideItemWrap>
-// <Item123>Melena de leon</Item123>
-// <Item123>Cola de pavo</Item123>
-// <Item123>Reishi</Item123>
-// </InsideItemWrap>
-// <LearnMoreWrap>
-// <LearnMoreText>Leer más</LearnMoreText>
-// <LearnMoreText>Leer más</LearnMoreText>
-// <LearnMoreText>Leer más</LearnMoreText>
-// </LearnMoreWrap>
+

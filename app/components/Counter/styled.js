@@ -5,7 +5,7 @@ export const CounterWrapper = styled.div`
   flex-direction: row;
   margin: 30px 23px;
   /* margin-right: 15px; */
-  gap: 10px;
+  gap: 49px;
 
   @media (max-width: 1220px) {
     justify-content: center;

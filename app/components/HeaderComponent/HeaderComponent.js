@@ -19,17 +19,10 @@ import {
   CounterCartWrap,
   BurgerWrap,
   BurgerImage,
-  HamburgerButton
 } from './styled'
 
 const HeaderComponent = () => {
   const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
-  console.log('showMenu init', showMenu)
-
-  // const handleNav = () => {
-  //   setShowMenu(!showMenu);
-  // }
-
   return (
   <HeaderFull>
     <LogoFull>
@@ -37,17 +30,9 @@ const HeaderComponent = () => {
     </LogoFull>
     
     <NavigationComponent isopen={showMenu? "Show":""} />
-
-
-{/* <HamburgerButton onClick={handleNav}> works same */} 
-    <HamburgerButton onClick={() => setShowMenu(!showMenu)}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </HamburgerButton>
-    {/* <BurgerWrap onClick={() => {setShowMenu(!showMenu)}}>
-      <BurgerImage src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
-    </BurgerWrap> */}
+    <BurgerWrap onClick={() => {setShowMenu(!showMenu)}}>
+      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
+    </BurgerWrap>
 
     <CartWrap onClick={() => {setShowCart(true)}}>
       <CounterCartWrap>
