@@ -11,10 +11,31 @@ const CartProvider = ({ children }) => {
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
+  // const hasItOrNotSuka = (item) => {
+  //   const hasDuplicate = cartItems.some(({type, title}) => {
+  //   const isHaveProductDuplicate = title === cartItems.map(i => i.title === item.title) 
+  //   const isHaveTypeDuplicate = type === cartItems.map(i => i.type === item.type) 
+    
+  //   return isHaveTypeDuplicate && isHaveProductDuplicate
+  // })
+  
+  //   if (hasDuplicate) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
   const addToCart = async (item, amount = 1) => {
     if (!item || !item.id) return false // _id
-    const id = item?.id // itemId
+    if (cartItems.map(i => item.type === i.type))  return false // _id
 
+    // const check = hasItOrNotSuka(item)
+    // console.log('check', check)
+    // if (check) return false
+    
+    const id = item?.id // itemId
+   
     setCartItems(value => {
       const v = [...value]
       const index = v.findIndex(i => i.id === id)

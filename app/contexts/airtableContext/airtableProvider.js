@@ -1,13 +1,13 @@
 import AirtableContext from './airtableContext'
-import Airtable from 'airtable';
+import base from './base'
 
 export const AirtableProvider = ({ children }) => {
-  let base
-  if (process.env.NODE_ENV === 'development') {
-    base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_APP_ID);
-  } else {
-    base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.APP_ID);
-  }
+  // let base
+  // if (process.env.NODE_ENV === 'development') {
+  //   base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_APP_ID);
+  // } else {
+  //   base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.APP_ID);
+  // }
 
   async function getRecords() {
     try {
@@ -25,7 +25,7 @@ export const AirtableProvider = ({ children }) => {
         ex100: record.get('Extract100'),
       }));
 
-      // console.log('Received records:', processedRecords);
+      console.log('Received records:', processedRecords);
       return processedRecords;
     } catch (error) {
       // console.error('Receiving error:', error);
