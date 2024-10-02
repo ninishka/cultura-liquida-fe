@@ -20,7 +20,7 @@ export default function Home() {
   const { displayingItem, showCart } = useContext(CartContext)
 
   return (
-    <AirtableProvider>
+    // <AirtableProvider>
       <main>
         {/* <CartProvider> */}
           {showCart && <Modal />}
@@ -32,7 +32,7 @@ export default function Home() {
         <HowTo soe='joi' />
         <Complex something='something'/>
       </main>
-    </AirtableProvider>
+    // </AirtableProvider>
 
   )
 }

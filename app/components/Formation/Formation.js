@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, Fragment } from 'react'
+import React, { useState, useId, Fragment } from 'react'
 import Counter from '../Counter/Counter'
 import {
   FormationSection,
@@ -24,6 +24,9 @@ import {
 const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
   const filterdContent = formationData.filter(({ id }) => id === checkedState)
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
+  const preObj = {idCart , ...filterdContent?.[0]}
+
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
   }
@@ -73,7 +76,7 @@ const Formation = ({ formationDataTitle, formationData }) => {
           ))}
         </CheckBoxGroup>
       </FrameForTwo>
-      <Counter filterdContent={filterdContent}/>
+      <Counter filterdContent={filterdContent} preObj={preObj} />
     </ContentWrapper>
     <ImageWrapperDesktop key={source}>
       <ImageStyled src={source} alt='formation'/>
