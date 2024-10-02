@@ -1,72 +1,20 @@
-import React, { useState, useContext, values, setValues } from 'react'
+import React, { useState } from 'react'
 // import { formDataSet } from '@/app/data'
 import { Field, Form, Formik, FormikProps, useFormik} from 'formik';
 import CartContext from '@/app/contexts/cartContext/cartContext'
+import validationSchema from './validationSchema';
 import { AirtableContext } from '@/app/contexts/airtableContext/airtableContext'
-// import * as Yup from 'yup';
 import {
   FormItself,
   FormField,
-  FormWrapper,
   FormGrid,
   ErrorMessage,
-  WrapForErrorAndLabel
+  WrapForErrorAndLabel,
+  BelowSelectText
 } from './styled'
 
-    ///////// validation
 
-    const validate = values => {
-      const errors = {};
-
-      if (!values.name) {
-        errors.name = 'Required';
-      } else if (values.name.length > 15) {
-        errors.name = 'Must be 15 characters or less';
-      } else if (!/^[A-Za-z]+$/.test(values)) {
-        errors.name = 'Must contain only letters';
-      }
-    
-
-      if (!values.surnames) {
-        errors.surnames = 'Required';
-      } else if (values.surnames.length > 20) {
-        errors.surnames = 'Must be 20 characters or less';
-      } else if (!/^[A-Za-z\s]+$/.test(values.surnames)) {
-        errors.surnames = 'Must contain only letters and spaces';
-      }
-      
-
-      
-      if (!values.documentNumber) {
-        errors.documentNumber = 'Required';
-      } else if (!/^\d+$/.test(values)) {
-        return 'Please enter only numbers';
-      }
-
-      if (!values.email) {
-        errors.email = 'Required';
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
-      }
-    
-      return errors;
-    };
-
-
-
-
-
-// TODO: hover suggestion window is staying in one place when scrolling down 
-const ModalForm = () => {
-//    const [values, setValues] = React.useState({});
- 
-//  const handleChange = event => {
-//    setValues(prevValues => ({
-//      ...prevValues,
-//      // we use the name to tell Formik which key of `values` to update
-//      [event.target.name]: event.target.value
-//    }));
-//  }
+const ModalForm = () => { 
     const formik = useFormik({
       initialValues: {
         name: '',
@@ -81,146 +29,182 @@ const ModalForm = () => {
         notes: '',
         agree: false,
       },
-      validate,
+      validationSchema,
       onSubmit: values => {
         alert(JSON.stringify(values, null, 2));
       },
     });
+    const [selectedValue, setSelectedValue] = useState('');
+    const documentType = ['CC', 'Option 2', 'Option 3'];
+    const department = ['Elige una opción...', 'Option 2', 'Option 3','Option 4'];
+    const cityMunicipality = ['Elige una opción...', 'Option 2', 'Option 3','Option 4','Option 5'];
 
-
-    
+    const handleChange = (event) => {
+       if (validate()) {
+           console.log("Form data submitted:", formData);
+           }
+    };
     return (
-        <FormWrapper>
+        <section>
           <FormGrid onSubmit={formik.handleSubmit} noValidate>
+    {/* NAME */}        
             <FormField>
               <WrapForErrorAndLabel>
                 <label htmlFor="name">Nombre *</label>
-                {formik.errors.name ? <ErrorMessage>{formik.errors.name}</ErrorMessage> : null}
+                {formik.touched.name && formik.errors.name ? 
+                <ErrorMessage>{formik.errors.name}</ErrorMessage> : null}
               </WrapForErrorAndLabel>
-              
                   <input
                     id="name"
                     name="name"
                     type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
+                    {...formik.getFieldProps('name')}
                   />
             </FormField>
-            
+    {/* SURNAMES */}        
             <FormField>
               <WrapForErrorAndLabel>
                 <label htmlFor="surnames">Apellidos *</label>
-                {formik.errors.surnames ? <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
+                {formik.touched.surnames && formik.errors.surnames ? 
+                <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
               </WrapForErrorAndLabel>
                   <input
                     id="surnames"
                     name="surnames"
                     type="text"
+                    {...formik.getFieldProps('surnames')}
+                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.surnames}
                   />
             </FormField>
-              
-              {/* <div>
-                <label htmlFor="department"></label>
-                  <input
-                    id="department"
-                    name="department"
-                    type="department"
-                    onChange={formik.handleChange}
-                    value={formik.values.shippingAddress}
-                  />
-              </div> */}
-            
+    {/* SELECT documentType */}  
+           <FormField>
+              <WrapForErrorAndLabel>
+                <label htmlFor="documentType">Tipo documento *</label>
+                {formik.touched.documentType && formik.errors.documentType ? 
+                <ErrorMessage>{formik.errors.documentType}</ErrorMessage> : null}
+              </WrapForErrorAndLabel>
+                  <select 
+                    type="select"
+                    value={selectedValue.documentType} 
+                    onChange={handleChange}
+                    name="documentType"
+                  >
+                   {documentType.map((documentType, index) => (
+                     <option key={index} value={documentType}>{documentType}</option>
+                    ))} 
+                  </select>
+                  <div style={{marginLeft:'20px'}}>
+                    <BelowSelectText>djddnin *</BelowSelectText>
+                    <BelowSelectText>djddnin *</BelowSelectText>
+                  </div>
+            </FormField>           
+    {/* DOCUMENT NUMBER */}        
             <FormField>
               <WrapForErrorAndLabel>
                 <label htmlFor="documentNumber">Número de documento *</label>
-                {formik.errors.documentNumber ? <ErrorMessage>{formik.errors.documentNumber}</ErrorMessage> : null}
+                {formik.touched.documentNumber && formik.errors.documentNumber ? 
+                <ErrorMessage>{formik.errors.documentNumber}</ErrorMessage> : null}
               </WrapForErrorAndLabel>
                   <input
                     id="documentNumber"
                     name="documentNumber"
                     type={"number"}
-                    onChange={formik.handleChange}
-                    value={formik.values.documentNumber}
+                    {...formik.getFieldProps('documentNumber')}
                   />
             </FormField>
-
+    {/* ADDRESS */}
             <FormField >
               <WrapForErrorAndLabel>
                 <label htmlFor="shippingAddress">Dirección de envío *</label>
-                {formik.errors.surnames ? <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
+                {formik.touched.shippingAddress && formik.errors.shippingAddress ? 
+                <ErrorMessage>{formik.errors.shippingAddress}</ErrorMessage> : null}
               </WrapForErrorAndLabel>
                   <input
                     id="shippingAddress"
                     name="shippingAddress"
                     type="address"
-                    onChange={formik.handleChange}
-                    value={formik.values.shippingAddress}
+                    {...formik.getFieldProps('shippingAddress')}
                   />
             </FormField>
-          
-
-            {/* <label htmlFor="department"></label>
-                <input
-                  id="department"
-                  name="department"
-                  type="department"
-                  onChange={formik.handleChange}
-                  value={formik.values.shippingAddress}
-                /> */}
-
-            {/* <label htmlFor="shippingAddress">Dirección de envío *</label>
-                <input
-                  id="shippingAddress"
-                  name="shippingAddress"
-                  type="address"
-                  onChange={formik.handleChange}
-                  value={formik.values.shippingAddress}
-                /> */}
-
+    {/* SELECT DEPARTMENT */}
+            <FormField>
+              <WrapForErrorAndLabel>
+                <label htmlFor="department">Ciudad / Municipio *</label>
+                {formik.touched.department && formik.errors.department ? 
+                <ErrorMessage>{formik.errors.department}</ErrorMessage> : null}
+              </WrapForErrorAndLabel>
+                  <select 
+                    type="select"
+                    value={selectedValue.department} 
+                    onChange={handleChange}
+                    name="department"
+                  >
+                   {department.map((department, index) => (
+                     <option key={index} value={department}>{department}</option>
+                    ))} 
+                  </select>
+            </FormField>  
+   {/* SELECT cityMunicipality */}   
+             <FormField style={{marginTop:'0px'}}>
+              <WrapForErrorAndLabel>
+                <label htmlFor="cityMunicipality">Ciudad / Municipio *</label>
+                {formik.touched.cityMunicipality && formik.errors.cityMunicipality ? 
+                <ErrorMessage>{formik.errors.cityMunicipality}</ErrorMessage> : null}
+              </WrapForErrorAndLabel>
+                  <select 
+                    type="select"
+                    value={selectedValue.cityMunicipality} 
+                    onChange={handleChange}
+                    name="documentType"
+                  >
+                   {cityMunicipality.map((cityMunicipality, index) => (
+                     <option key={index} value={cityMunicipality}>{cityMunicipality}</option>
+                    ))} 
+                  </select>
+            </FormField>  
+    {/* TELEPHONE */}
             <FormField>
               <WrapForErrorAndLabel>
                 <label htmlFor="telephone">Dirección de envío *</label>
-                {formik.errors.surnames ? <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
+                {formik.touched.telephone && formik.errors.telephone ? 
+                <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
               </WrapForErrorAndLabel>
                   <input
                     id="telephone"
                     name="telephone"
                     type="number"
-                    placeholder="Enter phone number"
-                    onChange={formik.handleChange}
-                    value={formik.values.telephone}
+                    {...formik.getFieldProps('telephone')}
                   />
             </FormField>
-
+    {/* EMAIL */}
             <FormField>
               <WrapForErrorAndLabel>
                 <label htmlFor="email" >Correo electrónico *</label>
-                {formik.errors.email ? <ErrorMessage>{formik.errors.email}</ErrorMessage> : null}
+                {formik.touched.email && formik.errors.email ? 
+                <ErrorMessage>{formik.errors.email}</ErrorMessage> : null}
               </WrapForErrorAndLabel>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
+                    {...formik.getFieldProps('email')}
                   />
             </FormField>
-            
+          </FormGrid>
+      {/* NOTES */}
             <FormField>
               <label htmlFor="notes">Notas (opcional)</label>
                   <input
                     id="notes"
                     name="notes"
                     type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.notes}
+                    {...formik.getFieldProps('notes')}
                   />
             </FormField>
             <button type="submit">Submit</button>
-          </FormGrid>
-        </FormWrapper>
+        </section>
       
   );
   };

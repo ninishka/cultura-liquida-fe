@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 30px 0;
+  margin: 30px 23px;
   /* margin-right: 15px; */
   gap: 10px;
 
