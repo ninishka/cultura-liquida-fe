@@ -321,35 +321,19 @@ export const howToCardsData = [
 
 //==================//
 
-export const complexData = [
-  {
-    name:'Melena de leon',
-    learnmmore: 'Leer más',
-    src: imgC9
-  },
-  {
-    name:'Cola de pavo',
-    learnmmore: 'Leer más',
-    src: imgC9
-  },
-  {
-    name:'Reishi',
-    learnmmore: 'Leer más',
-    src: imgC9
-  }
-]
 
-
-export const FormationData = [
+export const complexData2 = [
   {
     id: '1',
     type: 'Extracto 100ml',
     icon: imgC10,
+    price: 230000
   },
   {
     id: '2',
     type: 'Extracto 30ml',
     icon: imgC11,
+    price: 150000
   },
 ]
 
