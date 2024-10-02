@@ -17,7 +17,7 @@ import {
     InfoContainer2
   } from './styled'
   
-const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, id }) => {
+const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, id, price }) => {
   const { setToCart, removeFromCart, cartItems } = useContext(CartContext)
   const [amount, setAmount] = useState(tAmount)
 
@@ -38,6 +38,7 @@ const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, 
     // if (!cartItems?.length) setShowCart(false); // Close the modal if there are no items left
   }
 
+  const hui = price * tAmount;
   return (
     <CartItemWrap key={type}>
     <CartItem>
@@ -50,8 +51,8 @@ const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, 
       </CardInfoWrapper>
         <InfoContainer>
           <p style={{color: 'red', textAlign: 'center', margin: '0 2vw' }}>{type}</p>
-          <Price>90 000 COP</Price>
-        </InfoContainer>
+          <Price>{hui} COP</Price>
+          </InfoContainer>
       <Counter amount={amount} isModal />
     </CartItem>
     <DeleteButtonWrap>

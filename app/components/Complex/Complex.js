@@ -36,11 +36,11 @@ import {
 } from './styled'
 
 const Complex = ({something, formationData}) => {
-  // const [ checkedState, setCheckedState ] = useState('1')
+  const [ checkedState, setCheckedState ] = useState('1')
   // const filterdContent = formationData.filter(({ id }) => id === checkedState)
-  // const rechecking = id => {
-  // if(checkedState !== id) setCheckedState(id)
-  // }
+  const rechecking = id => {
+    if(checkedState !== id) setCheckedState(id)
+  }
 
   //  const source = filterdContent?.[0]?.src || ''
    
@@ -78,13 +78,13 @@ const Complex = ({something, formationData}) => {
               <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
                 {FormationData.map(({type, icon, id,}) => (
-                  <Item key={id} > 
+                  <Item key={id} onClick={() => rechecking(id)}> 
                       <RadioButton 
                         type="radio" 
                         id={id}
                         name="group1"
-                        // checked={id === checkedState}
-                        // onChange={() => rechecking(id)} 
+                        checked={id === checkedState}
+                        onChange={() => rechecking(id)} 
                       />
                     <LabelContent htmlFor="text">
                       <Icon src={icon} alt={type}/>
@@ -96,7 +96,7 @@ const Complex = ({something, formationData}) => {
             </FormationWrap>
           </TwoCardwrap>
 
-          <Counter/>
+          <Counter />
 
        </RightContentWrap>
       </AllWrap>
@@ -108,5 +108,3 @@ const Complex = ({something, formationData}) => {
 export default Complex
 
 
-// onClick={() => rechecking(id)}
-// filterdContent={filterdContent} 

@@ -57,6 +57,8 @@ const melenaFormationData = [
     type: 'Cápsulas',
     src: melenacaps,
 
+    price: 6000,
+
     iconSrc: melenaCapsulsSrc,
     ...melenaFormationDataTitle[0]
   },
@@ -65,6 +67,8 @@ const melenaFormationData = [
     icon: icon2,
     type: 'Extracto 100ml',
     src: melenaextract,
+
+    price: 4000,
     
     iconSrc: melenaExtractSrc,
     ...melenaFormationDataTitle[0]
@@ -74,6 +78,8 @@ const melenaFormationData = [
     icon: icon3,
     type: 'Extracto 30ml',
     src: melenaextract,
+
+    price: 8000,
 
     iconSrc: melenaExtractSrc,
     ...melenaFormationDataTitle[0]
