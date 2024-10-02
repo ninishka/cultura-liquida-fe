@@ -1,6 +1,9 @@
 import { complexData, FormationData } from '@/app/data'
-import { Fragment, useContext } from 'react';
-// import Counter from '../Counter/Counter'
+import { useState, useContext } from 'react';
+import CartContext from '@/app/contexts/cartContext/cartContext'
+import Counter from '../Counter/Counter'
+import Formation from '../Formation/Formation'
+
 
 import imgC9 from '@/app/icons/CL-703.png'
 
@@ -33,7 +36,15 @@ import {
   Selecting
 } from './styled'
 
-const Complex = ({something}) => {
+const Complex = ({something, formationData}) => {
+  const [ checkedState, setCheckedState ] = useState('1')
+  const filterdContent = formationData.filter(({ id }) => id === checkedState)
+  const rechecking = id => {
+  if(checkedState !== id) setCheckedState(id)
+  }
+
+   const source = filterdContent?.[0]?.src || ''
+   
   return (
     <section>
       <AllWrap>
@@ -68,13 +79,13 @@ const Complex = ({something}) => {
               <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
                 {FormationData.map(({type, icon, id,}) => (
-                  <Item key={id}> 
+                  <Item key={id} onClick={() => rechecking(id)}> 
                       <RadioButton 
                         type="radio" 
                         id={id}
                         name="group1"
-                        // checked={id === checkedState}
-                        // onChange={() => rechecking(id)} 
+                        checked={id === checkedState}
+                        onChange={() => rechecking(id)} 
                       />
                     <LabelContent htmlFor="text">
                       <Icon src={icon} alt={type}/>
@@ -86,7 +97,7 @@ const Complex = ({something}) => {
             </FormationWrap>
           </TwoCardwrap>
 
-          {/* <Counter count={count} setCount={setCount} isModal /> */}
+          <Counter filterdContent={filterdContent} />
 
        </RightContentWrap>
       </AllWrap>
@@ -96,14 +107,3 @@ const Complex = ({something}) => {
 
 
 export default Complex
-
-// <InsideItemWrap>
-// <Item123>Melena de leon</Item123>
-// <Item123>Cola de pavo</Item123>
-// <Item123>Reishi</Item123>
-// </InsideItemWrap>
-// <LearnMoreWrap>
-// <LearnMoreText>Leer más</LearnMoreText>
-// <LearnMoreText>Leer más</LearnMoreText>
-// <LearnMoreText>Leer más</LearnMoreText>
-// </LearnMoreWrap>

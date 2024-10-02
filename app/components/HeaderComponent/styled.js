@@ -57,42 +57,22 @@ export const CounterCartWrap = styled.div`
  margin-top: -13px;
 `
 
-// export const BurgerWrap = styled.div`
-//   border-radius: 16px 16px 16px 16px;
-//   background-color: #2D2D2D;
-//   padding:  6px 9px 6px 9px;
-//   margin-right: 30px;
-//   position: relative;
-//   &:hover{
-//     background-color: #252525;
-//   }
-//   display: none;
-//   @media (max-width: 860px) {
-//     display: block;
-//   }
-
-// `
-// export const BurgerImage = styled(Image)`
-//   width: 40px;
-//   height: 40px;
-// `
-
-export const HamburgerButton = styled.button`
-background-color: transparent;
-border: none;
-display: none;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-gap: 0.5rem;
- span{
-  width: 35px;
-  height: 1.5px;
-  background-color: #4FDB40;
- }
-
- @media (max-width: 860px) {
-    display: flex;
+export const BurgerWrap = styled.div`
+  border-radius: 16px 16px 16px 16px;
+  background-color: #2D2D2D;
+  padding:  6px 9px 6px 9px;
+  margin-right: 30px;
+  position: relative;
+  &:hover{
+    background-color: #252525;
   }
+  display: none;
+  @media (max-width: 860px) {
+    display: block;
+  }
+
+`
+export const BurgerImage = styled(Image)`
+  width: 40px;
+  height: 40px;
 `
