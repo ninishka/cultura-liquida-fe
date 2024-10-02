@@ -8,6 +8,7 @@ import {
   BenefitsCards,
   Card,
   DescriptionCard,
+  BenefitIconWrapper,
   BenefitIcon,
 } from './styled'
 
@@ -29,7 +30,14 @@ const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
     <BenefitsCards>
       {benefitsCardsData.map(({src, description}) => (
         <Card key={description}>
-          <BenefitIcon src={src} alt={description} />
+          <BenefitIconWrapper>
+            <BenefitIcon 
+              src={src}
+              sizes="100vw"
+              alt={description}   
+              placeholder="blur" // just img hightlighting on loading time
+            />
+          </BenefitIconWrapper>
           <DescriptionCard>{description}</DescriptionCard>
         </Card>
       ))}

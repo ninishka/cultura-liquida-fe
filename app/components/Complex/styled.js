@@ -15,7 +15,8 @@ export const ImgSide = styled.div`
 
 `
 export const ImgItself = styled(Image)`
-
+ width: auto;
+ height: auto;
 `
 export const RightContentWrap = styled.div`
  display: flex;
@@ -131,6 +132,7 @@ export const LearnMoreText = styled.p`
 
  export const ArrowIcon = styled(Image)`
   width: 15px;
+  height: auto;
  `
 
  export const ArrowButtons = styled.button`
@@ -181,6 +183,7 @@ export const Item = styled.form`
 
 export const  Icon = styled(Image)`
   width: 50px;
+  height: auto;
   margin-left: 10px;
 
   @media (max-width: 850px) {

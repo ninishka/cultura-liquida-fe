@@ -39,6 +39,7 @@ export const ImageWrapperMobile = styled.div`
 `
 
 export const ImageStyled = styled(Image)`
+
   @media (max-width: 850px) {
     height: 300px;
     width: auto
@@ -122,6 +123,7 @@ export const Item = styled.form`
 
 export const  Icon = styled(Image)`
   width: 50px;
+  height: auto;
   margin-left: 10px;
 
   @media (max-width: 850px) {

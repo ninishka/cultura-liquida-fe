@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Image from 'next/image'
 
 export const FormItself = styled.form`
-
 `
 
 export const ModalTitle = styled.h2`
@@ -11,7 +10,6 @@ export const ModalTitle = styled.h2`
   font-size: 48px;
   color: black;
   text-align: center;
-   
 `
 
 export const ModalWrapper = styled.div`
@@ -36,7 +34,6 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   align-items: stretch;
-  
   padding: 50px 40px;
   width: 80%;
   max-width: 960px;
@@ -67,7 +64,6 @@ export const CartItemWrap = styled.div`
   flex-direction: row;
   width: 100%;
   /* justify-content: flex-end; */
-
 `
 export const CartItem = styled.div`
   display: flex;
@@ -98,6 +94,8 @@ export const WrapForErrorAndLabel = styled.div`
 `
 
 export const CartImg = styled(Image)`
+  width: auto;
+  height: auto;
  margin: 15px;
  @media (max-width: 850px) {
   margin: 7px;
@@ -146,10 +144,15 @@ export const FormGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 `
+export const LabelErrorWrap = styled.div`
+display: flex;
+flex-direction: row;
+`
 
-export const FormField = styled.div`
+export const FormField = styled.form`
   margin-bottom: 15px;
   position: relative;
+
   & > input,
   & > textarea,
   & > select {
@@ -166,9 +169,6 @@ export const FormField = styled.div`
   }
 `;
 
-export const FormWrapper = styled.div`
-
-`
 export const ErrorMessage = styled.p`
   color: red;
   font-size: 16px; 
@@ -189,6 +189,8 @@ export const DeleteButtonItself = styled.button`
   margin: 18px -12px;
 `
 export const DeleteButtonIcon = styled(Image)`
+  width: auto;
+  height: auto;
 `
 
 export const CheckboxContainer = styled.div`
@@ -247,4 +249,8 @@ export const Price = styled.p`
     font-size: 24px;
     /* margin-top: 20px; */
   }  
+`
+
+export const BelowSelectText = styled.p`
+ color: black;
 `

@@ -26,6 +26,7 @@ export const LogoFull = styled.div`
 `
 export const LogoItself = styled(Image)`
   width: 131px;
+  height: auto;
 `
 
 export const Cart = styled(Image)`
