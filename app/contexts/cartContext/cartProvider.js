@@ -7,17 +7,19 @@ import CartContext from './cartContext'
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
+  console.log('cartItems', cartItems)
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
   const addToCart = async (item, amount = 1) => {
+    console.log('item', item?.idCart)
     if (!item || !item.id) return false // _id
-    const id = item?.id // itemId
+    const id = item?.idCart // itemId
 
     setCartItems(value => {
       const v = [...value]
-      const index = v.findIndex(i => i.id === id)
+      const index = v.findIndex(i => i.idCart === id)
 
       if (index >= 0) {
         v[index] = {

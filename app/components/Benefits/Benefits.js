@@ -35,7 +35,7 @@ const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
               src={src}
               sizes="100vw"
               alt={description}   
-              placeholder="blur" // just img hightlighting on loading time
+              // placeholder="blur" // just img hightlighting on loading time
             />
           </BenefitIconWrapper>
           <DescriptionCard>{description}</DescriptionCard>

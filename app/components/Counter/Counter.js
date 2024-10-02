@@ -11,13 +11,16 @@ import {
   Price,
 } from'./styled'
 
-const Counter = ({ amount, isModal, filterdContent, isHowTo }) => {
-  const idCart= useId()
+const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
+  // const idCart = useId()
   const { cartItems, addToCart } = useContext(CartContext)
   const [ count, setCount ] = useState(amount || 1)
 
   // id probleb
-  const preObj = {...filterdContent?.[0], idCart}
+
+  // const isFirst = !!filterdContent?.[0] ? {...filterdContent?.[0]} : {...filterdContent}
+  // const preObj = {...filterdContent?.[0], idCart}
+  // console.log('preObj', preObj)
 
   return (                             
   <CounterWrapper>

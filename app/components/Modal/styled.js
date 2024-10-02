@@ -68,13 +68,20 @@ export const CartItemWrap = styled.div`
 export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   background-color: white;
-  flex-wrap: wrap;
   align-items: center;
   border-radius: 16px 16px;
   margin: 22px 0px 22px;
   width: inherit;
+  gap: 9px;
+
+  @media (max-width: 700px) {
+    gap: 0;
+  }
+
+  /* @media (max-width: 600px) {
+    flex-wrap: wrap;
+  } */
 `
 
 export const CountAndAmountWrap = styled.div`
@@ -95,10 +102,10 @@ export const WrapForErrorAndLabel = styled.div`
 
 export const CartImg = styled(Image)`
   width: auto;
-  height: auto;
- margin: 15px;
+  /* height: auto; */
+ margin: 20px;
  @media (max-width: 850px) {
-  margin: 7px;
+  margin: 10px;
  }
 `
 
@@ -114,23 +121,36 @@ export const CardInfoWrapper = styled.div`
 
 export const InfoContainer = styled.div`
   display: flex;
-  align-items: center;
   margin: auto;
+  align-items: center;
+  
+  @media (max-width: 1060px) {
+    display: block;
+    margin: auto;
+  }
+` 
+
+export const InfoContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+
   @media (max-width: 1060px) {
     flex-direction: column;
     margin: auto 20px;
-
-  }
-  * {
-    margin: 0 2vw;
   }
 ` 
 
 export const Title = styled.h3`
-  font-size: 25px;
+  font-size: 36px;
   font-weight: 500;
   color: #333333;
   margin: 0;
+
+  @media (max-width: 1060px) {
+    font-size: 20px;
+  }
 `
 
 export const Description = styled.p`
@@ -138,6 +158,8 @@ export const Description = styled.p`
   font-size: 16px;
   font-style: italic;
   font-weight: 400;
+  max-width: 300px;
+  margin: 0
 `
 export const FormGrid = styled.div`
   display: grid;

@@ -45,7 +45,8 @@ import reishiSrc from './icons/icon_reishi_cart.png'
 const melenaFormationDataTitle = [
   {
     title: 'MELENA DE LEON',
-    description: 'Cuerpo fructífero de.',
+    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
+    ingredient: 'Hericium erinaceus'
   }
 ]
 
@@ -128,6 +129,7 @@ const reishiFormationDataTitle = [
   {
     title: 'REISHI, EXTRACTO',
     description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
+    ingredient: 'Ganoderma lucidum'
   }
 ]
 
@@ -193,6 +195,7 @@ const colaFormationDataTitle = [
   {
     title: 'COLA DE PAVO, EXTRACTO',
     description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
+    ingredient: 'Trametes Versicolor'
   }
 ]
 
