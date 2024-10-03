@@ -57,6 +57,12 @@ const Complex = ({something, formationData, tAmount}) => {
     scrollToTop()
   }
 
+
+  const filterdContent = complexData2.filter(({ id }) => id === checkedState)
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
+  const preObj = {idCart , ...filterdContent?.[0]}
+  console.log('preObj COMP', preObj)
+
   return (
     <section>
       <AllWrap>
@@ -95,17 +101,19 @@ const Complex = ({something, formationData, tAmount}) => {
             <FormationWrap>
               <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
-                {complexData2.map(({type, icon, id,}) => (
+                {complexData2.map(({type, iconSrc, id,}) => (
                   <Item key={id} onClick={() => rechecking(id)}> 
+                    <label>
                       <RadioButton 
-                        type="radio" 
-                        id={id}
-                        name="group1"
-                        checked={id === checkedState}
-                        onChange={() => rechecking(id)} 
-                      />
+                          type="radio" 
+                          id={id}
+                          name="group1"
+                          checked={id === checkedState}
+                          onChange={() => rechecking(id)} 
+                        />
+                    </label>
                     <LabelContent htmlFor="text">
-                      <Icon src={icon} alt={type}/>
+                      <Icon src={iconSrc} alt={type}/>
                       <TextDesc>{type}</TextDesc>
                     </LabelContent>
                   </Item>
@@ -114,7 +122,7 @@ const Complex = ({something, formationData, tAmount}) => {
             </FormationWrap>
           </TwoCardwrap>
           <PriceCounterWrap>
-            <Counter />
+            <Counter filterdContent={filterdContent} preObj={preObj}/>
             {checkedState === '1' && '230000 COP'}
             {checkedState === '2' && '150000 COP'}  
           </PriceCounterWrap>

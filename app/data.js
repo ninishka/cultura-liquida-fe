@@ -324,15 +324,17 @@ export const howToCardsData = [
 
 export const complexData2 = [
   {
+    title:'complejo 100ml',
     id: '1',
     type: 'Extracto 100ml',
-    icon: imgC10,
+    iconSrc: imgC10,
     price: 230000
   },
   {
+    title:'complejo 30ml',
     id: '2',
     type: 'Extracto 30ml',
-    icon: imgC11,
+    iconSrc: imgC11,
     price: 150000
   },
 ]

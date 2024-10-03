@@ -59,7 +59,7 @@ export const TitleH1 = styled.h1`
     font-size: 40px;
   }
 `
-export const Description = styled.h5`
+export const Description = styled.h2`
   font-size: 24px;
   font-weight: 400;
   letter-spacing: 2%;
@@ -173,7 +173,7 @@ export const RadioButton = styled.input`
   }
 `
 
-export const LabelContent = styled.label`
+export const LabelContent = styled.div`
  display: flex;
  flex-direction: row;
  align-items: center;

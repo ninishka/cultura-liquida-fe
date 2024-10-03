@@ -12,6 +12,7 @@ import {
 } from'./styled'
 
 const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
+  console.log('preObj', preObj)
   // const idCart = useId()
   const { cartItems, addToCart } = useContext(CartContext)
   const [ count, setCount ] = useState(amount || 1)

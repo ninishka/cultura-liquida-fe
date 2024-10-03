@@ -59,8 +59,12 @@ export const ArrowButtons = styled.button`
   background: none;
 `
 
-export const Number = styled.h4`
+export const Number = styled.h1`
   margin: 6px 18px 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17.6px;
+  text-align: left;
 `
 export const BuyButton = styled.button`
   display: flex;
@@ -76,7 +80,7 @@ export const BuyButton = styled.button`
   width: ${({isHowTo}) => isHowTo ? 'auto' : '200px'};
 
   height: 52px;
-  color: #fff;
+  color: #2d2d2d;
   font-weight: 600;
   border: none;
   font-size: 16px;

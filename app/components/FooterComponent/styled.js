@@ -54,6 +54,7 @@ export const LastFooter = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 0px 25px;
+  color:#FFFFFF;
 `
 
 export const ContactWrapper = styled.div`
