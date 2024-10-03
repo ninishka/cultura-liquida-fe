@@ -11,6 +11,8 @@ import HowTo from './components/HowTo/HowTo'
 import Complex from './components/Complex/Complex'
 import Modal from './components/Modal/Modal'
 import { productContentComponents } from './data'
+import IfQuestions from './components/IfQuestions/IfQuestions'
+
 
 const getActiveComponent = selectedItem => {
   return productContentComponents.find(({ itemNumber }) => itemNumber === selectedItem)
@@ -31,6 +33,7 @@ export default function Home() {
         />
         <HowTo soe='joi' />
         <Complex something='something'/>
+        <IfQuestions something='something'/>
       </main>
     // </AirtableProvider>
 

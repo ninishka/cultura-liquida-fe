@@ -4,8 +4,8 @@ import Image from 'next/image'
 export const AllWrap = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
-
+  margin: 29px;
+  
   @media (max-width: 1200px) {
     flex-direction: column; 
     align-items: center;
@@ -107,7 +107,7 @@ export const InsideItemWrap = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const Item123 = styled.h5`
+export const Item123 = styled.h3`
   font-size: 24px;
   font-weight: 400;
   line-height: 28.8px;
@@ -235,7 +235,7 @@ export const RadioButton = styled.input`
   }
 `
 
-export const LabelContent = styled.label`
+export const LabelContent = styled.div`
  display: flex;
  flex-direction: row;
 `

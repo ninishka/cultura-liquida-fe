@@ -20,7 +20,6 @@ import {
   RadioButton,
   LabelContent,
 } from './styled'
-import { Price } from '../Modal/styled'
 
 const Formation = ({ formationDataTitle, formationData }) => {
   const [ checkedState, setCheckedState ] = useState('1')
@@ -62,13 +61,16 @@ const Formation = ({ formationDataTitle, formationData }) => {
         <CheckBoxGroup>
         {formationData.map(({type, icon, id, price}) => (
           <Item key={id} onClick={() => rechecking(id)}> 
-            <RadioButton 
+          <label>
+          <RadioButton 
               type="radio" 
               id={id}
               name="group1" 
               checked={id === checkedState}
               onChange={() => rechecking(id)}
             />
+          </label>
+           
             <LabelContent htmlFor="text">
               <Icon src={icon} alt={type}/>
               <TextDesc>{type}</TextDesc>
