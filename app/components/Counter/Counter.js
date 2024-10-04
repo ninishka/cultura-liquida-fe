@@ -26,20 +26,22 @@ const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
   return (                             
   <CounterWrapper>
       <AmountItem $bgc={isModal}>
-        <ArrowButtons onClick={() => {
+        <ArrowButtons aria-label={`Disminuir la cantidad de elementos, recuento actual: ${count}`}  onClick={() => {
             if(count > 1)  setCount(count - 1)
           }}
         >
-          <ArrowPrev color={isModal && 'black'} />
+          <ArrowPrev aria-label="Disminuir artículos" color={isModal && 'black'} />
         </ArrowButtons>
         <Number>{count}</Number>
-        <ArrowButtons  onClick={() => setCount(count + 1)}>
-          <ArrowNext color={isModal && 'black'} />
+        <ArrowButtons 
+          aria-label={`Obtenga más información sobre cómo aumentar la cantidad de artículos, recuento actual: ${count}`} 
+          onClick={() => setCount(count + 1)}>
+          <ArrowNext aria-label="Aumentar artículos" color={isModal && 'black'} />
         </ArrowButtons>
       </AmountItem>  
       {/* condition rendering react */}
       {!isModal && 
-        <BuyButton onClick={() => addToCart(preObj, count)} isHowTo={isHowTo}>
+        <BuyButton aria-label="botón añadir al carrito" onClick={() => addToCart(preObj, count)} isHowTo={isHowTo}>
           Comprar
         </BuyButton>
       }

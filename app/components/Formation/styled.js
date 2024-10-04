@@ -73,7 +73,7 @@ export const Description = styled.h2`
 export const FrameForTwo = styled.div`
 `
 
-export const Release = styled.h6`
+export const Release = styled.h3`
   color: lightgray;
   font-size: 24px;
   font-weight: 400;
@@ -130,7 +130,7 @@ export const  Icon = styled(Image)`
     margin-left: 0
   }
 `
-export const TextDesc = styled.h6`
+export const TextDesc = styled.h4`
   font-weight: 400;
   font-size: 16px;
   padding-right: 10px;

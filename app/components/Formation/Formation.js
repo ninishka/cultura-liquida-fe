@@ -48,30 +48,32 @@ const Formation = ({ formationDataTitle, formationData }) => {
         ))}
       </TitleFrame>
       <ImageWrapperMobile key={source}>
-        <ImageStyled 
+        <ImageStyled
           src={source} 
           height={558} 
           width={486} 
-          sizes='fill' 
+          // sizes='fill'
           alt='Product image'
+          loading="eager"
+          sizes='(max-width: 850px) 100vw, 50vw'
         />
       </ImageWrapperMobile>
       <FrameForTwo>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
         {formationData.map(({type, icon, id, price}) => (
-          <Item key={id} onClick={() => rechecking(id)}> 
-          <label>
-          <RadioButton 
-              type="radio" 
-              id={id}
-              name="group1" 
-              checked={id === checkedState}
-              onChange={() => rechecking(id)}
-            />
-          </label>
+          <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
+            <label htmlFor={id} aria-label={`Elección del tamaño del producto`} >
+              <RadioButton 
+                type="radio" 
+                id={id}
+                name="group1" 
+                checked={id === checkedState}
+                onChange={() => rechecking(id)}
+              />
+            </label>
            
-            <LabelContent htmlFor="text">
+            <LabelContent>
               <Icon src={icon} alt={type}/>
               <TextDesc>{type}</TextDesc>
             </LabelContent>
@@ -86,7 +88,12 @@ const Formation = ({ formationDataTitle, formationData }) => {
       <Counter filterdContent={filterdContent} preObj={preObj} />
     </ContentWrapper>
     <ImageWrapperDesktop key={source}>
-      <ImageStyled src={source} alt='formation'/>
+      <ImageStyled 
+        src={source} 
+        alt='formation'
+        loading="eager" 
+        sizes="(max-width: 1220px) 100vw, 50vw" 
+      />
     </ImageWrapperDesktop>
   </FormationSection>
   )
