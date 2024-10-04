@@ -5,6 +5,7 @@ import CartProvider from './contexts/cartContext/cartProvider'
 import StyledRegistry from './registry';
 import { GlobalStyle } from './globalStyles';
 import Head from 'next/head';
+import getFn from '@/app/api/get';
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -38,16 +39,18 @@ export const metadata = {
   // sitemap
 
 export default async function RootLayout({ children }) {
+  const data = await getFn({ url: 'getAllItems' });
+
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
         <StyledRegistry>
           <GlobalStyle />
-            <CartProvider>
-              <HeaderComponent />
-                {children}
-              <FooterComponent />
-            </CartProvider>
+              <CartProvider>
+                <HeaderComponent data={data} />
+                  {children}
+                <FooterComponent />
+              </CartProvider>
         </StyledRegistry>
       </body>
     </html>
