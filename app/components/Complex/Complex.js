@@ -87,7 +87,7 @@ const Complex = ({something, formationData, tAmount}) => {
                     <InsideItemWrap>
                       <Item123>{title}</Item123>
                     </InsideItemWrap>
-                    <ArrowButtons onClick={() => handleClick(id)}>
+                    <ArrowButtons aria-label={`Obtenga más información sobre ${title}`} onClick={() => handleClick(id)}>
                       <LearnMoreWrap key={title + id}>
                         <LearnMoreText>Leer más</LearnMoreText>
                         <ArrowIcon src={imgC} alt='arrow' />
@@ -102,15 +102,15 @@ const Complex = ({something, formationData, tAmount}) => {
               <CheckBoxGroup>
                 <Selecting>Seleccione el formulario de liberación:</Selecting>
                 {complexData2.map(({type, iconSrc, id,}) => (
-                  <Item key={id} onClick={() => rechecking(id)}> 
-                    <label>
+                  <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
+                    <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
                       <RadioButton 
-                          type="radio" 
-                          id={id}
-                          name="group1"
-                          checked={id === checkedState}
-                          onChange={() => rechecking(id)} 
-                        />
+                        type="radio" 
+                        id={id}
+                        name="group1" 
+                        checked={id === checkedState}
+                        onChange={() => rechecking(id)}
+                      />
                     </label>
                     <LabelContent htmlFor="text">
                       <Icon src={iconSrc} alt={type}/>

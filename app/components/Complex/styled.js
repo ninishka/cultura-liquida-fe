@@ -192,7 +192,7 @@ export const  Icon = styled(Image)`
     margin-left: 0
   }
 `
-export const TextDesc = styled.h6`
+export const TextDesc = styled.h4`
   font-weight: 400;
   font-size: 16px;
   padding-right: 10px;
