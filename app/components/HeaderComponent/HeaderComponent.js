@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
 import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
+import getFn from '@/app/api/get';
 
 
 
@@ -21,8 +22,29 @@ import {
   BurgerImage,
 } from './styled'
 
-const HeaderComponent = () => {
+const HeaderComponent = ({initialData}) => {
   const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
+
+  const [data, setData] = useState(initialData);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    if (!initialData) {
+      setIsLoading(true);
+      getFn({ url: 'getAllItems' })
+        .then(response => {
+          setData(response);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error(error);
+          setIsError(true);
+          setIsLoading(false);
+        });
+    }
+  }, [initialData]);
+  
   return (
   <HeaderFull>
     <LogoFull>
