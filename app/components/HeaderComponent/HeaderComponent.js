@@ -22,8 +22,8 @@ import {
   BurgerImage,
 } from './styled'
 
-const HeaderComponent = ({initialData}) => {
-  const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
+const HeaderComponent = () => {
+  const { cartItems, setShowCart, showMenu, setShowMenu } = useContext(CartContext)
 
   return (
   <HeaderFull>

@@ -1,25 +1,20 @@
 // 'use client'
 
-console.log('getFn')
 export const getFn = async params => {
-  console.log('params', params)
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  console.log('API URL:', apiUrl);
   
   try {
     if (typeof params.url === "string") {
-      const response = await fetch(
-        `${apiUrl}/api/${params.url}`
-      )
-    // console.log("response-", response);
+      const response = await fetch(`http://localhost:3000/api/${params.url}`)
 
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
-      const data = await response.json(); // Сохраняем результат в переменной
-      console.log('response.json()', data); // Используем переменную для логирования
 
-      return data; // Возвращаем данные
+      const data = await response.json()
+      console.log('data getFn', data)
+
+      return data
     }
     throw new Error("Invalid QueryKey")
   } catch (e) {

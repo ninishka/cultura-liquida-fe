@@ -5,14 +5,34 @@ import React, { useMemo, useState, useEffect } from 'react'
 import CartContext from './cartContext'
 
 
-const CartProvider = ({ children }) => {
+const CartProvider = ({ children, fetchData }) => {
+  const [data, setData] = useState(fetchData);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    if (!fetchData) {
+      setIsLoading(true);
+      getFn({ url: 'getAllItems' })
+        .then(response => {
+          setData(response);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error(error);
+          setIsError(true);
+          setIsLoading(false);
+        });
+    }
+  }, [fetchData]);
+  
+  
   const [cartItems, setCartItems] = useState([])
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
   const addToCart = async (item, amount = 1) => {
-    console.log('item', item?.idCart)
     if (!item || !item.id) return false // _id
     const id = item?.idCart // itemId
 
@@ -108,6 +128,26 @@ const CartProvider = ({ children }) => {
   //   // displayingItem, setDisplayingItem,
   //   showCart, setShowCart
   // }), [JSON.stringify(cartItems)])
+  console.log('cartItems', cartItems)
+
+  const adaptedDataForBe = cartItems.map(product => {
+    return {
+      id: product.id,
+      title: product.title,
+      image: product.iconSrc,
+      description: product.description,
+      categoryId: product.type === 'Extractos' ? 'extracts' : 'capsules',
+      // stock: 0,
+      price: product.price,
+      size: '',
+      // itemId: product.ingredient.toLowerCase().split(' ').join('-'),
+      // itemId: 'hericium-erinaceus',
+      
+      amount: product.amount
+    };
+  })
+
+  console.log('data', data)
 
   return (
     <CartContext.Provider value={{
@@ -121,7 +161,8 @@ const CartProvider = ({ children }) => {
       // temporal moved here them for testing
       displayingItem, setDisplayingItem,
       showCart, setShowCart,
-      showMenu, setShowMenu
+      showMenu, setShowMenu,
+      data, adaptedDataForBe
     }}>
       {children}
     </CartContext.Provider>

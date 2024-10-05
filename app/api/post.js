@@ -1,10 +1,10 @@
+console.log('postFn')
+
 export const postFn = async params => {
   try {
-    // console.log("params-", params);
+    console.log("params-", params);
     if (typeof params.url === "string") {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/${params.url}`,
-        {
+      const response = await fetch(`http://localhost:3000/api/${params.url}`, {
           method: 'POST',
           body: JSON.stringify(params.data),
           headers: {
@@ -12,10 +12,14 @@ export const postFn = async params => {
           },
         }
       )
-    // console.log("response-", response);
+    console.log("response-", response);
 
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok')
+      // }
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        const errorData = await response.json();
+        throw new Error(`HTTP error! status: ${response.status} data: ${JSON.stringify(errorData)}`);
       }
       return response.json()
     }
