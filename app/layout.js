@@ -39,15 +39,15 @@ export const metadata = {
   // sitemap
 
 export default async function RootLayout({ children }) {
-  const data = await getFn({ url: 'getAllItems' });
+  const fetchData = await getFn({ url: 'getAllItems' });
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
         <StyledRegistry>
           <GlobalStyle />
-              <CartProvider>
-                <HeaderComponent data={data} />
+              <CartProvider fetchData={fetchData}>
+                <HeaderComponent />
                   {children}
                 <FooterComponent />
               </CartProvider>

@@ -22,29 +22,9 @@ import {
   BurgerImage,
 } from './styled'
 
-const HeaderComponent = ({initialData}) => {
-  const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
+const HeaderComponent = () => {
+  const { cartItems, setShowCart, showMenu, setShowMenu } = useContext(CartContext)
 
-  const [data, setData] = useState(initialData);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    if (!initialData) {
-      setIsLoading(true);
-      getFn({ url: 'getAllItems' })
-        .then(response => {
-          setData(response);
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error(error);
-          setIsError(true);
-          setIsLoading(false);
-        });
-    }
-  }, [initialData]);
-  
   return (
   <HeaderFull>
     <LogoFull>
