@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: var(--font-mohave);
     background-color: #333;
+    margin-top: 0;
 
     /* overflow-x: hidden;
     .using-mouse:focus {

@@ -61,7 +61,6 @@ const Complex = ({something, formationData, tAmount}) => {
   const filterdContent = complexData2.filter(({ id }) => id === checkedState)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
   const preObj = {idCart , ...filterdContent?.[0]}
-  console.log('preObj COMP', preObj)
 
   return (
     <section>

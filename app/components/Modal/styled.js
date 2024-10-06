@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import Image from 'next/image'
-
-export const FormItself = styled.form`
-`
+import { Form, Input, Select } from 'antd'
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -21,7 +19,7 @@ export const ModalWrapper = styled.div`
   background-color: rgba(8, 8, 8, 0.8);
   height: 100%;
   width: 100%;
-  z-index: 99999; 
+  z-index: 25; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +32,7 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   align-items: stretch;
-  padding: 50px 40px;
+  padding: 50px 20px;
   width: 80%;
   max-width: 960px;
   margin: 0 auto;
@@ -89,16 +87,8 @@ export const CountAndAmountWrap = styled.div`
  flex-direction: row;
  align-items: center;
 `
-export const WrapForErrorAndLabel = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0px 14px;
-  align-items: center;
-  & > label {
-    color: black;
-  }
-`
+
+
 
 export const CartImg = styled(Image)`
   width: auto;
@@ -161,41 +151,50 @@ export const Description = styled.p`
   max-width: 300px;
   margin: 0
 `
-export const FormGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+export const StyledForm = styled(Form)`
+  display: flex;
+  flex-wrap: wrap;
+
+  .ant-row {
+    display: block;
+  }
+
+  .ant-form-item-label{
+    position: relative;
+    text-align: left;
+  }
 `
+
+export const StyledInput = styled(Input)`
+  height: 52px;
+  border-radius: 16px;
+`
+
+export const StyledSelect = styled(Select)`
+  height: 52px;
+
+
+  .ant-select-selector {
+    border-radius: 16px;
+  }
+`
+
+export const StyledFormItem = styled(Form.Item)`
+  margin-bottom: 0;
+  width: 50%;
+  padding: 7px 15px;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
+`
+
+
+
 export const LabelErrorWrap = styled.div`
 display: flex;
 flex-direction: row;
 `
-
-export const FormField = styled.form`
-  margin-bottom: 15px;
-  position: relative;
-
-  & > input,
-  & > textarea,
-  & > select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    resize: none;
-    min-height: 50px;
-    color: #9F9F9F;
-  }
-`;
-
-export const ErrorMessage = styled.p`
-  color: red;
-  font-size: 16px; 
-  font-weight: 400;
-`;
 
 export const DeleteButtonWrap = styled.div`
 `
@@ -273,6 +272,3 @@ export const Price = styled.p`
   }  
 `
 
-export const BelowSelectText = styled.p`
- color: black;
-`
