@@ -10,21 +10,21 @@ const CartProvider = ({ children, fetchData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    if (!fetchData) {
-      setIsLoading(true);
-      getFn({ url: 'getAllItems' })
-        .then(response => {
-          setData(response);
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error(error);
-          setIsError(true);
-          setIsLoading(false);
-        });
-    }
-  }, [fetchData]);
+  // useEffect(() => {
+  //   if (!fetchData) {
+  //     setIsLoading(true);
+  //     getFn({ url: 'getAllItems' })
+  //       .then(response => {
+  //         setData(response);
+  //         setIsLoading(false);
+  //       })
+  //       .catch(error => {
+  //         console.error(error);
+  //         setIsError(true);
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, [fetchData]);
   
   
   const [cartItems, setCartItems] = useState([])
