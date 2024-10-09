@@ -1,14 +1,12 @@
 "use client"
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
 import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
-
-
 
 import {
   LogoFull,
@@ -22,7 +20,7 @@ import {
 } from './styled'
 
 const HeaderComponent = () => {
-  const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
+  const { cartItems, setShowCart, showMenu, setShowMenu } = useContext(CartContext)
 
   return (
   <HeaderFull>

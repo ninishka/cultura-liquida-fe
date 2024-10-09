@@ -1,18 +1,42 @@
 "use client"
 
 import React, { useMemo, useState, useEffect } from 'react'
-// import PropTypes from 'prop-types'
 import CartContext from './cartContext'
 
 
-const CartProvider = ({ children }) => {
+const CartProvider = ({ children, fetchData }) => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+          const response = await fetch('/api/products');
+          if (!response.ok) {
+              throw new Error('Failed to fetch products');
+          }
+          const data = await response.json();
+          setData(data);
+      } catch (error) {
+          console.error('Error fetching products:', error);
+      } finally {
+        console.log('data', data)
+
+        setIsLoading(false);
+      }
+  };
+
+  useEffect(() => {
+      fetchProducts();
+  }, []);
+  
   const [cartItems, setCartItems] = useState([])
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
   const addToCart = async (item, amount = 1) => {
-    console.log('item', item?.idCart)
     if (!item || !item.id) return false // _id
     const id = item?.idCart // itemId
 
@@ -62,30 +86,6 @@ const CartProvider = ({ children }) => {
     })
   }
 
-  // const setToCart = (item, amount = 1) => {
-  //   if (!item || !item._id) return false
-  //   const id = item?.itemId
-
-  //   setCartItems(value => {
-  //     const v = [...value]
-  //     const index = v.findIndex(i => i.id === id)
-
-  //     if (index >= 0) {
-  //       v[index] = {
-  //         id,
-  //         amount
-  //       }
-  //     } else {
-  //       v.push({
-  //         id,
-  //         amount
-  //       })
-  //     }
-
-  //     return v
-  //   })
-  // }
-
   // const getItemsCount = () => {
   //   let count = 0
   //   for (let i = 0; i < cartItems.length; i++) {
@@ -109,6 +109,8 @@ const CartProvider = ({ children }) => {
   //   showCart, setShowCart
   // }), [JSON.stringify(cartItems)])
 
+
+
   return (
     <CartContext.Provider value={{
       cartItems,
@@ -121,7 +123,9 @@ const CartProvider = ({ children }) => {
       // temporal moved here them for testing
       displayingItem, setDisplayingItem,
       showCart, setShowCart,
-      showMenu, setShowMenu
+      showMenu, setShowMenu,
+      data, isLoading,
+      fetchProducts
     }}>
       {children}
     </CartContext.Provider>

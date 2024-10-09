@@ -66,6 +66,7 @@ const melenaFormationData = [
     id: '2',
     icon: icon2,
     type: 'Extracto 100ml',
+    size: '100ml',
     src: melenaextract,
 
     price: 4000,
@@ -77,6 +78,7 @@ const melenaFormationData = [
     id: '3',
     icon: icon3,
     type: 'Extracto 30ml',
+    size: '30ml',
     src: melenaextract,
 
     price: 8000,
