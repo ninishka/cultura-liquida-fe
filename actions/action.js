@@ -18,4 +18,12 @@ const getPosts = async () => {
     return Post.find()
 }
 
-export { addPost, getPosts }
+// const deletePost = async id => {
+//     return Post.findByIdAndDelete(id)
+// }
+
+const editPost = async (id, updatedData) => {
+    return Post.findByIdAndUpdate(id, updatedData, { new: true })
+}
+
+export { addPost, getPosts, editPost }

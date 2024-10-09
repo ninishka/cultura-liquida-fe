@@ -39,14 +39,14 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   // const fetchData = await getFn({ url: 'getAllItems' });
-  const posts = await getPosts()
+  const fetchData = await getPosts()
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
         <StyledRegistry>
           <GlobalStyle />
-              <CartProvider fetchData={{}}>
+              <CartProvider fetchData={fetchData}>
               {/* {posts.map(post => (
                 <div key={post._id}>
                     <h1>{post.title}</h1>

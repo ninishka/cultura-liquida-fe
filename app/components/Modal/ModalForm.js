@@ -13,46 +13,55 @@ import { Field, Form, Formik, FormikProps, useFormik} from 'formik';
 //   WrapForErrorAndLabel,
 //   BelowSelectText
 // } from './styled'
+import { editPost } from '@/actions/action'
+
 
 
 const ModalForm = () => { 
-  const { adaptedDataForBe, data } = useContext(CartContext)
+  const { data, cartItems } = useContext(CartContext)
   const [loading, setLoading] = useState(false);
-  const { _id, stock, ...restOfValues } = data[0]
+  const { _id , ...restOfValues } = data[0]
   const testPostObj = [{
     id: _id,
-    amount: adaptedDataForBe[0].amount, 
+    amount: cartItems[0].amount, 
     ...restOfValues, 
   }]
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
-  setLoading(true);
-
-  try {
-    const response = await fetch(`/api/update`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        url: 'update',
-        cartItems: testPostObj,
-      }),
-    });
-    
-    const result = await response.json();
-    console.log('Result:', result);
-    
-  } catch (error) {
-    console.error('Error:', error.message);
-  } finally {
-    setLoading(false);
+  const { id, stock, amount, ...restOfItem } = testPostObj[0]
+  const updatedData = {
+    stock: stock - amount,
+    ...restOfItem
   }
-};
+
+// const handleSubmit = async (event) => {
+//   event.preventDefault();
+//   setLoading(true);
+
+//   try {
+//     const response = await fetch(`/api/update`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         url: 'update',
+//         cartItems: testPostObj,
+//       }),
+//     });
+    
+//     const result = await response.json();
+//     console.log('Result:', result);
+    
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
 
   return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => editPost(id, updatedData)}>
         <button type='submit'>Submit</button>
       </form>
   );
