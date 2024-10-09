@@ -9,7 +9,7 @@ import ProductContent from './components/ProductContent/ProductContent'
 // import FormikContext from './components/FormikContext/FormikContext'
 import HowTo from './components/HowTo/HowTo'
 import Complex from './components/Complex/Complex'
-import Modal from './components/Modal/Modal'
+import ModalComponent from './components/ModalComponent/ModalComponent'
 import { productContentComponents } from './data'
 import IfQuestions from './components/IfQuestions/IfQuestions'
 
@@ -25,7 +25,7 @@ export default function Home() {
     // <AirtableProvider>
       <main>
         {/* <CartProvider> */}
-          {showCart && <Modal />}
+          {showCart && <ModalComponent />}
         {/* </CartProvider> */}
         <ProductContent
           key={displayingItem}

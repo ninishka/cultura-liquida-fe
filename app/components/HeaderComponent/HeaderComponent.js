@@ -23,6 +23,7 @@ import {
 
 const HeaderComponent = () => {
   const { cartItems, setShowCart, setDisplayingItem, showMenu, setShowMenu } = useContext(CartContext)
+
   return (
   <HeaderFull>
     <LogoFull>
@@ -34,7 +35,7 @@ const HeaderComponent = () => {
       <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
     </BurgerWrap>
 
-    <CartWrap onClick={() => {setShowCart(true)}}>
+    <CartWrap type="primary"  onClick={() => {setShowCart(true)}}>
       <CounterCartWrap>
         <p style={{color: 'black', margin: '0 7px' }}>
           {cartItems?.length}
