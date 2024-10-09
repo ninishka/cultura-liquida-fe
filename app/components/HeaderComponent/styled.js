@@ -34,8 +34,8 @@ const reusedStyles = css`
   width: 40px;
   height: 40px;
   @media (max-width: 860px) {
-    width: 25px;
-    height: 25px;
+    width: 33px;
+    height: 33px;
   }
 `
 
@@ -56,8 +56,8 @@ export const CartWrap = styled.div`
   }
 
   @media (max-width: 860px) {
-    width: 25px;
-    height: 25px;
+    width: 33px;
+    height: 33px;
   }
 `
 
@@ -83,8 +83,8 @@ export const BurgerWrap = styled.div`
   display: none;
   @media (max-width: 860px) {
     display: block;
-    width: 25px;
-    height: 25px;
+    width: 33px;
+    height: 33px;
   }
 
 `

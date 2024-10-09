@@ -10,12 +10,32 @@ export const AllWrap = styled.div`
     flex-direction: column; 
     align-items: center;
   }
+  @media (min-width: 2000px) {
+    justify-content: center;
+  }
 `
 export const ImgSide = styled.div`
+  /* position: relative; */
 
 `
-export const ImgItself = styled(Image)`
+export const ImgDesktop = styled(Image)`
+  /* width: 100%;
+  height: auto;  */
+  display: block; 
+
+  @media (max-width: 767px) {
+    display: none; 
+  }
 `
+export const ImgMobile = styled(Image)`
+
+  display: none; 
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+`
+
 export const RightContentWrap = styled.div`
  display: flex;
  flex-direction: column;
@@ -40,6 +60,10 @@ export const Benefits = styled.h2`
   letter-spacing: 0.02em;
   text-align: left;
   margin-bottom: 0;
+
+  @media (max-width: 850px) {
+    font-size: 30px;
+  }
 
 `
 export const DiscountText = styled.p`
@@ -74,7 +98,7 @@ export const TwoCardwrap = styled.div`
   flex-direction: row;
   
   @media (max-width: 1200px) {
-    gap: 50px;
+    gap: 10px;
 
   }
   @media (max-width: 880px) {

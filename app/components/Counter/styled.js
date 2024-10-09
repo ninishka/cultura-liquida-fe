@@ -5,7 +5,6 @@ export const CounterWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   margin: 30px 23px;
-  /* margin-right: 15px; */
   gap: 49px;
 
   @media (max-width: 1220px) {
@@ -46,7 +45,9 @@ export const AmountItem = styled.div`
   }
 
   @media (max-width: 850px) {
-    margin-right:25px;
+    width: 89px;
+    height: 39px;
+    margin: 20px;
   }
 `
 
@@ -98,5 +99,6 @@ export const Price = styled.p`
     text-align: left;
     font-size: 24px;
     margin-top: 20px;
+    margin: 25px;
   }  
 `

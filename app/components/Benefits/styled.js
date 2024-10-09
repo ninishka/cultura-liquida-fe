@@ -15,6 +15,9 @@ export const HeaderBenefitsWrapper = styled.div`
     align-items: start;
     margin: 0 1vh;
   }
+  @media (min-width: 2000px) {
+    justify-content: space-around;
+  }
 `
 export const TextForBenefits = styled.h2`
  font-size: 48px;

@@ -12,6 +12,10 @@ export const FormationSection = styled.section`
     align-items: center;
     text-align: center;
   }
+
+  @media (min-width: 2000px) {
+    justify-content: center;
+  }
 `
 
 export const ContentWrapper = styled.div`
@@ -106,8 +110,8 @@ export const Item = styled.form`
   height: 62px;
 
   @media (max-width: 850px) {
-    width: 70px;
-    height: 125px;
+    width: 50px;
+    height: 105px;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 20px;
@@ -177,4 +181,8 @@ export const LabelContent = styled.div`
  display: flex;
  flex-direction: row;
  align-items: center;
+
+ @media (max-width: 850px) {
+    flex-direction: column;
+  }
 `

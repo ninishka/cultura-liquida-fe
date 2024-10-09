@@ -14,6 +14,9 @@ export const IndicationsSection = styled.section`
     flex-direction: column;
     align-items: center;
   }
+  @media (min-width: 2000px) {
+    justify-content: center;
+  }
 `
 
 export const IconWrapper = styled.div`

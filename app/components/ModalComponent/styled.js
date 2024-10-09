@@ -10,27 +10,29 @@ export const ModalTitle = styled.h2`
   font-size: 48px;
   color: black;
   text-align: center;
+  @media (max-width: 850px) {
+    font-size: 30px;
+  }
+  font-family: '__mohave_5f7c1e';
+
 `
 
 export const ModalStyled = styled(Modal)`
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-   */
   z-index: 25; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: rgba(8, 8, 8, 0.8); */
-  /* background-color: #F2C94CCC */
 
   .ant-modal-content {
-    background-color: #F2C94CCC
+    background-color: #F2C94CCC;
+  }
+
+  .ant-modal-body {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
   }
 `
 
@@ -60,6 +62,8 @@ export const CartItem = styled.div`
   margin: 22px 0px 22px;
   width: inherit;
   gap: 9px;
+  font-family: '__mohave_5f7c1e';
+
 
   @media (max-width: 700px) {
     gap: 0;
@@ -216,10 +220,6 @@ export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
   accent-color: black;
   border: 1px solid #ccc;
   cursor: pointer;
-
-  .ant-checkbox+span {
-
-  }
 `;
 
 export const CheckboxLabel = styled.label`
@@ -264,25 +264,6 @@ export const Price = styled.p`
   }  
 `
 
-export const CloseButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px 16px 16px 16px;
-  background-color:#F2C94C;
-  padding:  17px 29px;
-  cursor: pointer;
-
-  height: 52px;
-  color: #2d2d2d;
-  font-weight: 600;
-  border: none;
-  font-size: 16px;
-  &:hover{
-    background-color: #FF605C ;
-  }
-`
 
 export const TotalBox = styled.div`
   width: 100%;
@@ -292,6 +273,8 @@ export const TotalBox = styled.div`
   border-radius: 16px;
   margin: 20px;
   padding: 5px;
+  font-family: '__mohave_5f7c1e';
+
 `
 export const TotalWrap = styled.div`
   display: flex;
@@ -314,4 +297,10 @@ export const Comprar = styled.button`
  border-radius: 16px 16px;
  font-weight: 600;
  cursor: pointer;
+ font-family: '__mohave_5f7c1e';
+ font-size: large;
+
+ &:hover{
+    background-color: #F2C94C;
+  }
 `

@@ -4,7 +4,10 @@ import React, { useContext, Fragment } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
-import { Form } from 'antd';
+import { Form } from 'antd'
+
+import img55 from '@/app/icons/modalbackgroung.png'
+
 
 import {
   ModalStyled,
@@ -27,20 +30,26 @@ const ModalComponent = () => {
     setShowCart(false);
   };
 
+  const isEmpty = !cartItems?.length
+
   return (
     <main style={{backgroundColor: '#F2C94CCC'}}>
       <ModalStyled 
-        width={1000} 
+        width={1000}  
         open={showCart} 
         onCancel={handleCancel}
         footer={null}
+        closable={isEmpty}
+        style={{ backgroundImage: `url(${img55.src})`, backgroundSize: 'cover' }}
       >
-        {!cartItems?.length ? (
+        {isEmpty ? (
           <Fragment style={{ alignItems: 'center' }}>
             <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
-            <BuyButton onClick={() => setShowCart(true)}>
-              {'volver a comprar'.toUpperCase()}
-            </BuyButton>
+            <div>
+              <BuyButton onClick={handleCancel}>
+                {'volver a comprar'.toUpperCase()}
+              </BuyButton>
+            </div>
           </Fragment>
         ) : (
           <>

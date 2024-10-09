@@ -6,11 +6,12 @@ import data from '../data'
 
 
 import imgC9 from '@/app/icons/CL-703.png'
+import imgC10 from '@/app/icons/CL-71.png'
 import imgC from '@/app/icons/arrow_next.svg'
 import {
   AllWrap,
   ImgSide,
-  ImgItself,
+  ImgDesktop,
   RightContentWrap,
   TitleWrap,
   Benefits,
@@ -34,7 +35,8 @@ import {
   TwoCardwrap,
   FormationWrap,
   Selecting,
-  PriceCounterWrap
+  PriceCounterWrap,
+  ImgMobile
 } from './styled'
 
 const Complex = ({something, formationData, tAmount}) => {
@@ -62,11 +64,25 @@ const Complex = ({something, formationData, tAmount}) => {
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
   const preObj = {idCart , ...filterdContent?.[0]}
 
+  const complexDataHui = [
+    {
+      id: '1',
+      price1: 200000,
+      price2: 160000,
+    },
+    {
+      id: '2',
+      price1: 111000,
+      price2: 100000,
+    }
+  ]
+
   return (
     <section>
       <AllWrap>
         <ImgSide> 
-          <ImgItself sizes='100vw' src={imgC9} alt='Complex'/>
+          <ImgDesktop sizes='100vw' src={imgC9} alt='Complex'/>
+          <ImgMobile sizes='100vw' src={imgC10} alt='Complex'/>
         </ImgSide>
        <RightContentWrap>
           <TitleWrap>
@@ -121,9 +137,7 @@ const Complex = ({something, formationData, tAmount}) => {
             </FormationWrap>
           </TwoCardwrap>
           <PriceCounterWrap>
-            <Counter filterdContent={filterdContent} preObj={preObj}/>
-            {checkedState === '1' && '230000 COP'}
-            {checkedState === '2' && '150000 COP'}  
+            <Counter filterdContent={filterdContent} preObj={preObj} isComplex/> 
           </PriceCounterWrap>
        </RightContentWrap>
       </AllWrap>
