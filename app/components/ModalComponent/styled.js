@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Form, Input, Select } from 'antd'
+import { Button, Modal } from 'antd';
+
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -10,51 +12,37 @@ export const ModalTitle = styled.h2`
   text-align: center;
 `
 
-export const ModalWrapper = styled.div`
-  position: fixed;
+export const ModalStyled = styled(Modal)`
+  /* position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(8, 8, 8, 0.8);
   height: 100%;
   width: 100%;
+   */
   z-index: 25; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* background-color: rgba(8, 8, 8, 0.8); */
+  /* background-color: #F2C94CCC */
+
+  .ant-modal-content {
+    background-color: #F2C94CCC
+  }
 `
 
  
 export const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: stretch;
-  padding: 50px 20px;
-  width: 80%;
-  max-width: 960px;
-  margin: 0 auto;
-  overflow-y: auto;
-  background-color: #F2C94CCC;
-  margin-top: 104px;
-  border-radius: 16px 16px;
-  background-image: url(${({src}) => src});
 
-  @media (max-width: 850px) {
-    padding: 20px 12px;
- }
 `
 
 export const ListItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-`
-
-export const FullModal = styled.main`
-  background-color: #F2C94CCC ;
 `
 
 export const CartItemWrap = styled.div`
@@ -276,6 +264,26 @@ export const Price = styled.p`
   }  
 `
 
+export const CloseButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px 16px 16px 16px;
+  background-color:#F2C94C;
+  padding:  17px 29px;
+  cursor: pointer;
+
+  height: 52px;
+  color: #2d2d2d;
+  font-weight: 600;
+  border: none;
+  font-size: 16px;
+  &:hover{
+    background-color: #FF605C ;
+  }
+`
+
 export const TotalBox = styled.div`
   width: 100%;
   display: flex;
@@ -305,4 +313,5 @@ export const Comprar = styled.button`
  padding: 10px;
  border-radius: 16px 16px;
  font-weight: 600;
+ cursor: pointer;
 `

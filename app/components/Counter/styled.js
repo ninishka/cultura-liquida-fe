@@ -15,7 +15,6 @@ export const CounterWrapper = styled.div`
   
   @media (max-width: 850px) {
     justify-content: center;
-    flex-direction: ${({$ishowto}) => $ishowto ? 'column' : 'row'};
     align-items: center;
     gap: 0px;
   } 
@@ -75,10 +74,9 @@ export const BuyButton = styled.button`
   border-radius: 16px 16px 16px 16px;
   background-color: #4FDB40;
   padding:  17px 29px;
-  margin-right: ${({$ishowto}) => $ishowto ? '0px' : '30px'};
+  margin-right: '30px';
   cursor: pointer;
-  /* width: 200px; */
-  width: ${({$ishowto}) => $ishowto ? 'auto' : '200px'};
+  width: 200px;
 
   height: 52px;
   color: #2d2d2d;

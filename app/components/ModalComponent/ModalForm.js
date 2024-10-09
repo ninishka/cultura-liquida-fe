@@ -36,26 +36,7 @@ const nameSurnameValidator = [
 ]
 
 
-const ModalForm = () => { 
-    const [validated, setValidated] = useState(false)
-    const [formValues, setFormValues] = useState({})
-
-    const onFinish = (values) => {
-      console.log('values', values)
-      setFormValues({
-        ...values,
-        names: `${values.name},
-                ${values.surname}, 
-                ${values.documentTipe},
-                ${values.DocumentNumber}, 
-                ${values.Department}, 
-                ${values.CityMunicipality},
-                ${values.MailingAddress},
-                ${values.phoneNumber}`
-      })
-      setValidated(true)
-    } 
-
+const ModalForm = ({ form, onFinish }) => { 
     const handleChange = (value) => {
       console.log(`Selected: ${value}`);
     };
@@ -307,23 +288,23 @@ const ModalForm = () => {
         </StyledFormItem>
 
         <TotalBox>
-        <TotalWrap>
-          <LeftSideWrap>
-            <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
-            <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>420.000 COP</p>
-          </LeftSideWrap>  
-          <StyledFormItem 
-            label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
-            // style={{ width: '33%'}}
-          >
-            <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
-              <Radio value="apple" style={{ color: 'white'}} > Mercado Pago </Radio>
-              <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio>
-              <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta Bancolombia </Radio>
-            </Radio.Group>
-          </StyledFormItem>
-        </TotalWrap>
-        <StyledFormItem style={{width: '100%'}}>
+          <TotalWrap>
+            <LeftSideWrap>
+              <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
+              <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>420.000 COP</p>
+            </LeftSideWrap>  
+            <StyledFormItem 
+              label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
+              // style={{ width: '33%'}}
+            >
+              <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
+                <Radio value="apple" style={{ color: 'white'}} > Mercado Pago </Radio>
+                <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio>
+                <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta Bancolombia </Radio>
+              </Radio.Group>
+            </StyledFormItem>
+          </TotalWrap>
+          <StyledFormItem style={{width: '100%'}}>
             <Comprar type="primary" htmlType="submit">
               {'Comprar'.toUpperCase()}
             </Comprar>
