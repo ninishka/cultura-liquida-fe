@@ -7,9 +7,6 @@ import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
 import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
-import getFn from '@/app/api/get';
-
-
 
 import {
   LogoFull,
