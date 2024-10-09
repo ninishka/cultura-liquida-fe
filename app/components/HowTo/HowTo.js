@@ -29,7 +29,7 @@ const HowTo = ({soe}) => {
               <HowToDesc>{description}</HowToDesc>
               <SecondDesc>{description2}</SecondDesc>
             </DescWrapper>
-            {index === 0 && <Counter isHowTo />}
+            {index === 0 && <Counter ishowto />}
           </CardsWrapper>
           {/* {arrow && <ArrowIcon src={arrow} alt='arrow-icon'/>} */}
         </Fragment> 

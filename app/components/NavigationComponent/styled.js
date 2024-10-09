@@ -17,7 +17,7 @@ export const Navigation = styled.nav`
   align-items: center;
   flex-direction: row;
   @media (max-width: 860px) {
-    display: ${({isopen}) => isopen ? 'block' : 'none'};
+    display: ${({$isopen}) => $isopen ? 'block' : 'none'};
     position: fixed;
     top: 86px;
     background-color: #333333;

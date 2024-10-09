@@ -64,7 +64,6 @@ export const AirtableProvider = ({ children }) => {
   }
   
   async function handleUpdate(cartItems) {
-    // console.log('cartItems', cartItems)
     records.then(items => {
       const filteredItems = items.filter(item => {
         return cartItems.some(cartItem => {
@@ -74,9 +73,7 @@ export const AirtableProvider = ({ children }) => {
           return itemName.includes(cartTitle) || cartTitle.includes(itemName);
         });
       });
-    
-      // console.log('Filtered Items:', filteredItems);
-    
+        
       if (filteredItems.length > 0) {
         function createUpdatedItem(originalItem, type, amount) {
           const newItem = { id: originalItem.id }

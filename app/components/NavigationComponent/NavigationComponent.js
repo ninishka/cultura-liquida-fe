@@ -21,7 +21,7 @@ const NavigationComponent = ({isopen}) => {
 
 
   return (
-    <Navigation isopen={isopen}>
+    <Navigation $isopen={isopen}>
       <UlItself> 
         {data.map(({ title }, index) => {
           const id = index + 1

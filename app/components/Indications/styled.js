@@ -48,6 +48,10 @@ export const ContentWrapper = styled.div`
 export const Title = styled.h2`
   font-size: 36px;
   font-weight: 500;
+  line-height: 45px;
+  /* @media (max-width:850px) {
+    font-size:30px
+  } */
 `
 
 

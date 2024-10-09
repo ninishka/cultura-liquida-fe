@@ -1,403 +1,336 @@
 import React, { useState } from 'react'
-// import { formDataSet } from '@/app/data'
-import { Field, Form, Formik, FormikProps, useFormik} from 'formik';
-import CartContext from '@/app/contexts/cartContext/cartContext'
-import validationSchema from './validationSchema';
-import { AirtableContext } from '@/app/contexts/airtableContext/airtableContext'
+import { Button, Checkbox, Radio} from 'antd'
+import { CaretDownOutlined } from '@ant-design/icons';
+
 import {
-  FormItself,
-  FormField,
-  FormGrid,
-  ErrorMessage,
-  WrapForErrorAndLabel,
-  BelowSelectText
+  StyledForm,
+  StyledInput,
+  StyledSelect,
+  StyledFormItem,
+  TotalBox,
+  TotalWrap,
+  LeftSideWrap,
+  Comprar
 } from './styled'
+
+const nameSurnameValidator = [
+  {
+    required: true,
+    message: 'Este campo es obligatorio',
+  },
+  {
+    // allows only letters and spaces
+    validator: (rule, value) => { 
+      const letterAndSpaceRegex = /^[a-zA-Z\s]+$/;
+      
+      if (!letterAndSpaceRegex.test(value)) {
+        return Promise.reject(
+          new Error('Solo se permiten letras y espacios.')
+        );
+      }
+      
+      
+      return Promise.resolve();
+    },
+  },
+]
 
 
 const ModalForm = () => { 
-    const formik = useFormik({
-      initialValues: {
-        name: '',
-        surnames: '',
-        documentType: '',
-        documentNumber: '',
-        shippingAddress: '',
-        department: '',
-        cityMunicipality: '',
-        telephone: '',
-        email: '',
-        notes: '',
-        agree: false,
-      },
-      validationSchema,
-      onSubmit: values => {
-        alert(JSON.stringify(values, null, 2));
-      },
-    });
-    const [selectedValue, setSelectedValue] = useState('');
-    const documentType = ['CC', 'Option 2', 'Option 3'];
-    const department = ['Elige una opción...', 'Option 2', 'Option 3','Option 4'];
-    const cityMunicipality = ['Elige una opción...', 'Option 2', 'Option 3','Option 4','Option 5'];
+    const [validated, setValidated] = useState(false)
+    const [formValues, setFormValues] = useState({})
 
-    const handleChange = (event) => {
-       if (validate()) {
-           console.log("Form data submitted:", formData);
-           }
+    const onFinish = (values) => {
+      console.log('values', values)
+      setFormValues({
+        ...values,
+        names: `${values.name},
+                ${values.surname}, 
+                ${values.documentTipe},
+                ${values.DocumentNumber}, 
+                ${values.Department}, 
+                ${values.CityMunicipality},
+                ${values.MailingAddress},
+                ${values.phoneNumber}`
+      })
+      setValidated(true)
+    } 
+
+    const handleChange = (value) => {
+      console.log(`Selected: ${value}`);
     };
+
     return (
-        <section>
-          <FormGrid onSubmit={formik.handleSubmit} noValidate>
-    {/* NAME */}        
-            <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="name">Nombre *</label>
-                {formik.touched.name && formik.errors.name ? 
-                <ErrorMessage>{formik.errors.name}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    {...formik.getFieldProps('name')}
-                  />
-            </FormField>
-    {/* SURNAMES */}        
-            <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="surnames">Apellidos *</label>
-                {formik.touched.surnames && formik.errors.surnames ? 
-                <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <input
-                    id="surnames"
-                    name="surnames"
-                    type="text"
-                    {...formik.getFieldProps('surnames')}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    value={formik.values.surnames}
-                  />
-            </FormField>
-    {/* SELECT documentType */}  
-           <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="documentType">Tipo documento *</label>
-                {formik.touched.documentType && formik.errors.documentType ? 
-                <ErrorMessage>{formik.errors.documentType}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <select 
-                    type="select"
-                    value={selectedValue.documentType} 
-                    onChange={handleChange}
-                    name="documentType"
-                  >
-                   {documentType.map((documentType, index) => (
-                     <option key={index} value={documentType}>{documentType}</option>
-                    ))} 
-                  </select>
-                  <div style={{marginLeft:'20px'}}>
-                    <BelowSelectText>djddnin *</BelowSelectText>
-                    <BelowSelectText>djddnin *</BelowSelectText>
-                  </div>
-            </FormField>           
-    {/* DOCUMENT NUMBER */}        
-            <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="documentNumber">Número de documento *</label>
-                {formik.touched.documentNumber && formik.errors.documentNumber ? 
-                <ErrorMessage>{formik.errors.documentNumber}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <input
-                    id="documentNumber"
-                    name="documentNumber"
-                    type={"number"}
-                    {...formik.getFieldProps('documentNumber')}
-                  />
-            </FormField>
-    {/* ADDRESS */}
-            <FormField >
-              <WrapForErrorAndLabel>
-                <label htmlFor="shippingAddress">Dirección de envío *</label>
-                {formik.touched.shippingAddress && formik.errors.shippingAddress ? 
-                <ErrorMessage>{formik.errors.shippingAddress}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <input
-                    id="shippingAddress"
-                    name="shippingAddress"
-                    type="address"
-                    {...formik.getFieldProps('shippingAddress')}
-                  />
-            </FormField>
-    {/* SELECT DEPARTMENT */}
-            <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="department">Ciudad / Municipio *</label>
-                {formik.touched.department && formik.errors.department ? 
-                <ErrorMessage>{formik.errors.department}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <select 
-                    type="select"
-                    value={selectedValue.department} 
-                    onChange={handleChange}
-                    name="department"
-                  >
-                   {department.map((department, index) => (
-                     <option key={index} value={department}>{department}</option>
-                    ))} 
-                  </select>
-            </FormField>  
-   {/* SELECT cityMunicipality */}   
-             <FormField style={{marginTop:'0px'}}>
-              <WrapForErrorAndLabel>
-                <label htmlFor="cityMunicipality">Ciudad / Municipio *</label>
-                {formik.touched.cityMunicipality && formik.errors.cityMunicipality ? 
-                <ErrorMessage>{formik.errors.cityMunicipality}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <select 
-                    type="select"
-                    value={selectedValue.cityMunicipality} 
-                    onChange={handleChange}
-                    name="documentType"
-                  >
-                   {cityMunicipality.map((cityMunicipality, index) => (
-                     <option key={index} value={cityMunicipality}>{cityMunicipality}</option>
-                    ))} 
-                  </select>
-            </FormField>  
-    {/* TELEPHONE */}
-            <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="telephone">Dirección de envío *</label>
-                {formik.touched.telephone && formik.errors.telephone ? 
-                <ErrorMessage>{formik.errors.surnames}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <input
-                    id="telephone"
-                    name="telephone"
-                    type="number"
-                    {...formik.getFieldProps('telephone')}
-                  />
-            </FormField>
-    {/* EMAIL */}
-            <FormField>
-              <WrapForErrorAndLabel>
-                <label htmlFor="email" >Correo electrónico *</label>
-                {formik.touched.email && formik.errors.email ? 
-                <ErrorMessage>{formik.errors.email}</ErrorMessage> : null}
-              </WrapForErrorAndLabel>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    {...formik.getFieldProps('email')}
-                  />
-            </FormField>
-          </FormGrid>
-      {/* NOTES */}
-            <FormField>
-              <label htmlFor="notes">Notas (opcional)</label>
-                  <input
-                    id="notes"
-                    name="notes"
-                    type="text"
-                    {...formik.getFieldProps('notes')}
-                  />
-            </FormField>
-            <button type="submit">Submit</button>
-        </section>
-      
-  );
+      <StyledForm 
+        onFinish={onFinish} 
+        onFinishFailed={(errorInfo) => console.log('Failed:', errorInfo)}
+      >
+        {/* Nombre*/}
+        <StyledFormItem
+          label="Nombre"
+          name="name"
+          rules={nameSurnameValidator}
+        >
+          <StyledInput />
+        </StyledFormItem>
+        {/* Apellidos*/}
+        <StyledFormItem
+          label="Apellidos"
+          name="surname"
+          rules={nameSurnameValidator}
+        >
+          <StyledInput />
+        </StyledFormItem>
+        {/* Tipo documento select*/}
+        <StyledFormItem
+          label="Tipo documento"
+          name="documentTipe"
+          rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
+        >
+          <StyledSelect
+            placeholder="Please select"
+            onChange={handleChange}
+            allowClear 
+            suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
+            options={[
+              {
+                value: 'jack',
+                label: 'Jack',
+              },
+              {
+                value: 'lucy',
+                label: 'Lucy',
+              },
+              {
+                value: 'Yiminghe',
+                label: 'yiminghe',
+              },
+              {
+                value: 'disabled',
+                label: 'Disabled',
+                disabled: true,
+              },
+            ]}
+          />
+        </StyledFormItem>
+        {/* Número de documento*/}
+        <StyledFormItem
+          label="Número de documento"
+          name="DocumentNumber"
+          rules={[
+            {
+              required: true,
+              message: 'Por favor, ingrese un número de identificación.',
+            },
+            {
+              validator: (rule, value) => {
+                const numberRegex = /^\d*$/;
+                
+                if (!numberRegex.test(value)) {
+                  return Promise.reject(
+                    new Error('Solo se permiten números enteros sin decimales.')
+                  );
+                }
+                
+                return Promise.resolve();
+              },
+            }
+          ]}
+        >
+          <StyledInput />
+        </StyledFormItem>
+        {/*text in between*/}
+        <StyledFormItem>
+          <div style={{marginLeft:'10px'}}>
+            <h4 style={{fontWeight:'400'}}>País *</h4>
+            <h4 style={{fontWeight:'400'}}>Colombia</h4>
+          </div>
+        </StyledFormItem>
+        {/* Departamento select*/}
+        <StyledFormItem
+          label="Departamento"
+          name="Department"
+          rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
+        >
+          <StyledSelect
+            placeholder="Please select"
+            onChange={handleChange}
+            allowClear 
+            style={{borderRadius: '16px'}}
+            suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}       
+            options={[
+              {
+                value: 'jack',
+                label: 'Jack',
+              },
+              {
+                value: 'lucy',
+                label: 'Lucy',
+              },
+              {
+                value: 'Yiminghe',
+                label: 'yiminghe',
+              },
+              {
+                value: 'disabled',
+                label: 'Disabled',
+                disabled: true,
+              },
+            ]}
+          />
+          
+        </StyledFormItem>
+        {/* Dirección de envío*/}
+        <StyledFormItem
+          label="Dirección de envío"
+          name="MailingAddress"
+          rules={[
+            {
+              required: true,
+              message: '¡Necesario!',
+            },
+          ]}
+        >
+          <StyledInput />
+        </StyledFormItem>
+        {/*Celular / Teléfono */}
+        <StyledFormItem
+          label="Celular / Teléfono *"
+          name="phoneNumber"
+          rules={[
+            {
+              required: true,
+              message: 'Por favor, ingrese un número de teléfono.',
+            },
+            {
+              validator: (rule, value) => {
+                const numberRegex = /^\d*$/;
+                
+                if (!numberRegex.test(value)) {
+                  return Promise.reject(
+                    new Error('Solo se permiten números enteros sin decimales.')
+                  );
+                }
+                
+                return Promise.resolve();
+              },
+            }
+          ]}
+        >
+          <StyledInput />
+        </StyledFormItem>
+        {/* Ciudad / Municipio * select*/}
+        <StyledFormItem
+          label="Ciudad / Municipio *"
+          name="CityMunicipality"
+          rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
+        >
+          <StyledSelect
+            placeholder="Elige una opción..."
+            onChange={handleChange}
+            allowClear 
+            style={{borderRadius: '16px'}}
+            suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
+            options={[
+              {
+                value: 'jack',
+                label: 'Jack',
+              },
+              {
+                value: 'lucy',
+                label: 'Lucy',
+              },
+              {
+                value: 'Yiminghe',
+                label: 'yiminghe',
+              },
+              {
+                value: 'disabled',
+                label: 'Disabled',
+                disabled: true,
+              },
+            ]}
+          />
+          
+        </StyledFormItem>
+        {/* EMAIL */}
+        <StyledFormItem
+          label="Correo electrónico"
+          name="email"
+          rules={[
+            { 
+              required: true, 
+              message: 'Por favor, ingresa un correo electrónico válido.' 
+            },
+            {
+              type: 'email',
+              message: 'Por favor, introduce un formato de dirección de correo electrónico válida.'
+            }
+          ]}
+        >
+          <StyledInput />
+        </StyledFormItem>
+        {/* textarea */}
+        <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
+          label="Notas (opcional)"
+          name="notes">
+          <StyledInput.TextArea   
+            autoSize={{
+            minRows: 2,
+            maxRows: 6,
+            }} 
+          style={{ borderRadius: '16px'}} />
+        </StyledFormItem>
+        {/* checkbox */}
+        <StyledFormItem      
+          name="remember" 
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) => {
+                if (!value) {
+                  return Promise.reject('Debes aceptar los términos y condiciones');
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
+          wrapperCol={{
+            // offset: 8,
+            // span: 16,
+          }}
+          style={{ width: '100%'}}
+        >
+          <Checkbox >
+            Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
+          </Checkbox>
+        </StyledFormItem>
+
+        <TotalBox>
+        <TotalWrap>
+          <LeftSideWrap>
+            <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
+            <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>420.000 COP</p>
+          </LeftSideWrap>  
+          <StyledFormItem 
+            label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
+            // style={{ width: '33%'}}
+          >
+            <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
+              <Radio value="apple" style={{ color: 'white'}} > Mercado Pago </Radio>
+              <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio>
+              <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta Bancolombia </Radio>
+            </Radio.Group>
+          </StyledFormItem>
+        </TotalWrap>
+        <StyledFormItem style={{width: '100%'}}>
+            <Comprar type="primary" htmlType="submit">
+              {'Comprar'.toUpperCase()}
+            </Comprar>
+          </StyledFormItem>
+        </TotalBox>
+      </StyledForm>
+    );
   };
 
-  export default ModalForm
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // const { handleUpdate } = useContext(AirtableContext); // WARNING // updating DB
-    // const { cartItems, setShowModal } = useContext(CartContext)
-    // const [errors, setErrors] = useState({});
-    // TODO: need to use formData API ?
-
- 
-    // const handleChange = e => {
-    //   const { name, value, type, checked } = e.target;
-    //   setFormData({
-    //     ...formData,
-    //     [name]: type === 'checkbox' ? checked : value
-    //   });
-    // };
-  
-    // const handleSubmit = e => {
-    //   e.preventDefault();
-    //   // if (validate()) {
-    //   //   console.log("Form data submitted:", formData);
-    //   // }
-
-    //   handleUpdate(cartItems) // WARNING // updating DB
-    // };
-
-
-  //   const MyInput = ({ field, form, ...props }) => {
-  //     return <input {...field} {...props} />;
-  //   };
-    
-  //   const formik = useFormik({
-  //     initialValues: {
-  //       name: '',
-  //       surnames: '',
-  //       documentType: '',
-  //       documentNumber: '',
-  //       shippingAddress: '',
-  //       department: '',
-  //       cityMunicipality: '',
-  //       telephone: '',
-  //       email: '',
-  //       notes: '',
-  //       agree: false,
-  //      },
-  //     onSubmit: values => {
-  //       console.log('values', values)
-  //     },
-  //     onReset: values => {
-
-  //       console.log('onReset')
-  //     }
-  //   });
-
-
-  //   return (
-  //     <FormWrapper>
-  //       <Form  onSubmit={formik.handleSubmit}>
-  //         <label htmlFor="name">Nombre *</label>
-  //           <input
-  //            id="name"
-  //            name="name"
-  //            type="text"
-  //            onChange={formik.handleChange}
-  //            value={formik.values.name}
-  //           />
-  //         <label htmlFor="surnames">Apellidos *</label>
-  //           <input
-  //             id="surnames"
-  //             name="surnames"
-  //             type="text"
-  //             onChange={formik.handleChange}
-  //             value={formik.values.surnames}
-  //           />
-  //         <label htmlFor="documentType">Apellidos *</label>
-  //           <input
-  //             id="documentType"
-  //             name="documentType"
-  //             type="text"
-  //             onChange={formik.handleChange}
-  //             value={formik.values.surnames}
-  //           />
-  //         <label htmlFor="documentType">documentNumber *</label>
-  //           <input
-  //             id="documentNumber"
-  //             name="documentNumber"
-  //             type="number"
-  //             onChange={formik.handleChange}
-  //             value={formik.values.documentNumber}
-  //           />
-  //         {/* <FormGrid>
-  //           {formDataSet
-  //             .filter(({ type }) => type !== 'checkbox') 
-  //             .map(({ label, name, type, options = [] }) => (
-  //               <FormField key={name}>
-  //                 <WrapForErrorAndLabel>
-  //                   <label htmlFor={name}>{label} *</label>
-  //                   {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
-  //                 </WrapForErrorAndLabel>
-  //                 {type === 'select' ? (
-  //                   <select
-  //                     id={name}
-  //                     name={name}
-  //                     value={formData[name]}
-  //                     onChange={handleChange}
-  //                     onBlur={handleBlur}
-  //                     required
-  //                   >
-  //                     <option value="">Select</option>
-  //                     {options.map(({ label, value }) => (
-  //                       <option key={value} value={value}>{label}</option>
-  //                     ))}
-  //                   </select>
-  //                 ) : (
-  //                   <input
-  //                     type={type}
-  //                     id={name}
-  //                     name={name}
-  //                     value={formData[name]}
-  //                     onChange={handleChange}
-  //                     onBlur={handleBlur}
-  //                     required
-  //                   />
-  //                 )}
-  //               </FormField>
-  //             ))}
-  //           <FormField>
-  //             <label htmlFor="notes" style={{color:'black' }}>Notas (opcional)</label>
-  //             <textarea
-  //               id="notes"
-  //               name="notes"
-  //               rows="4"
-  //               value={formData.notes}
-  //               onChange={handleChange}
-  //             />
-  //           </FormField>
-  //           {formDataSet
-  //             .filter(({ type }) => type === 'checkbox')
-  //             .map(({ label, name }) => (
-  //               <FormField key={name}>
-  //                 <WrapForErrorAndLabel>
-  //                   <label htmlFor={name}>{label} *</label>
-  //                   {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
-  //                 </WrapForErrorAndLabel>
-  //                 <input
-  //                   type="checkbox"
-  //                   id={name}
-  //                   name={name}
-  //                   checked={formData[name]}
-  //                   onChange={handleChange}
-  //                   onBlur={handleBlur}
-  //                   required
-  //                 />
-  //               </FormField>
-  //             ))}
-  //         </FormGrid> */}
-  //         {/* <button type="submit">Submit</button> */}
-  //         <button type="reset">Reset</button>
-  //       </Form>
-  //     </FormWrapper>
-  //   );  
+export default ModalForm

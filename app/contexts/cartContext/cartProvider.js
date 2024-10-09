@@ -7,7 +7,6 @@ import CartContext from './cartContext'
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
-  console.log('cartItems', cartItems)
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
