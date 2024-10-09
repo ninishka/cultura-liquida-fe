@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, Radio} from 'antd'
+import { CaretDownOutlined } from '@ant-design/icons';
+
 import {
   StyledForm,
   StyledInput,
   StyledSelect,
-  StyledFormItem
+  StyledFormItem,
+  TotalBox,
+  TotalWrap,
+  LeftSideWrap,
+  Comprar
 } from './styled'
 
 const nameSurnameValidator = [
@@ -29,14 +35,23 @@ const nameSurnameValidator = [
   },
 ]
 
+
 const ModalForm = () => { 
     const [validated, setValidated] = useState(false)
     const [formValues, setFormValues] = useState({})
 
     const onFinish = (values) => {
+      console.log('values', values)
       setFormValues({
         ...values,
-        // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}, ${values.surname}, ${values.state}`
+        names: `${values.name},
+                ${values.surname}, 
+                ${values.documentTipe},
+                ${values.DocumentNumber}, 
+                ${values.Department}, 
+                ${values.CityMunicipality},
+                ${values.MailingAddress},
+                ${values.phoneNumber}`
       })
       setValidated(true)
     } 
@@ -66,16 +81,17 @@ const ModalForm = () => {
         >
           <StyledInput />
         </StyledFormItem>
-        {/* Tipo documento*/}
+        {/* Tipo documento select*/}
         <StyledFormItem
           label="Tipo documento"
-          name="select"
+          name="documentTipe"
           rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
         >
           <StyledSelect
             placeholder="Please select"
             onChange={handleChange}
             allowClear 
+            suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
             options={[
               {
                 value: 'jack',
@@ -100,10 +116,10 @@ const ModalForm = () => {
         {/* Número de documento*/}
         <StyledFormItem
           label="Número de documento"
-          name="id_number"
+          name="DocumentNumber"
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Por favor, ingrese un número de identificación.',
             },
             {
@@ -123,43 +139,25 @@ const ModalForm = () => {
         >
           <StyledInput />
         </StyledFormItem>
-        {/* Número de documento*/}
-        <StyledFormItem
-          label="Something"
-          name="id_number"
-          rules={[
-            {
-              required: false,
-              message: 'Por favor, ingrese un número de identificación.',
-            },
-            {
-              validator: (rule, value) => {
-                const numberRegex = /^\d*$/;
-                
-                if (!numberRegex.test(value)) {
-                  return Promise.reject(
-                    new Error('Solo se permiten números enteros sin decimales.')
-                  );
-                }
-                
-                return Promise.resolve();
-              },
-            }
-          ]}
-        >
-          <StyledInput />
+        {/*text in between*/}
+        <StyledFormItem>
+          <div style={{marginLeft:'10px'}}>
+            <h4 style={{fontWeight:'400'}}>País *</h4>
+            <h4 style={{fontWeight:'400'}}>Colombia</h4>
+          </div>
         </StyledFormItem>
         {/* Departamento select*/}
         <StyledFormItem
           label="Departamento"
-          name="select"
-          rules={[{ required: false, message: 'Please select an option!' }]}
+          name="Department"
+          rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
         >
           <StyledSelect
             placeholder="Please select"
             onChange={handleChange}
             allowClear 
             style={{borderRadius: '16px'}}
+            suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}       
             options={[
               {
                 value: 'jack',
@@ -185,22 +183,23 @@ const ModalForm = () => {
         {/* Dirección de envío*/}
         <StyledFormItem
           label="Dirección de envío"
-          name="street_name"
+          name="MailingAddress"
           rules={[
             {
-              required: false,
-              message: 'Required!',
+              required: true,
+              message: '¡Necesario!',
             },
           ]}
         >
           <StyledInput />
         </StyledFormItem>
+        {/*Celular / Teléfono */}
         <StyledFormItem
           label="Celular / Teléfono *"
-          name="phone_number"
+          name="phoneNumber"
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Por favor, ingrese un número de teléfono.',
             },
             {
@@ -220,18 +219,18 @@ const ModalForm = () => {
         >
           <StyledInput />
         </StyledFormItem>
-
         {/* Ciudad / Municipio * select*/}
         <StyledFormItem
           label="Ciudad / Municipio *"
-          name="select"
-          rules={[{ required: true, message: 'Please select an option!' }]}
+          name="CityMunicipality"
+          rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
         >
           <StyledSelect
             placeholder="Elige una opción..."
             onChange={handleChange}
             allowClear 
             style={{borderRadius: '16px'}}
+            suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
             options={[
               {
                 value: 'jack',
@@ -254,50 +253,48 @@ const ModalForm = () => {
           />
           
         </StyledFormItem>
-        {/* EMAIL */} 
-        {/* TODO: remake */}
-        <StyledFormItem 
-            label="Correo electrónico"
-            name="select"
-            rules={[{ required: true, message: 'Please select an option!' }]}
-          >
-            <StyledSelect
-              placeholder="Elige una opción..."
-              onChange={handleChange}
-              allowClear 
-              style={{borderRadius: '16px'}}
-              // for now just disapiering
-              // suffixIcon={<Image src={arrowBottom} alt="Elige una opción..." />} // think about naming alt
-              options={[
-                {
-                  value: 'jack',
-                  label: 'Jack',
-                },
-                {
-                  value: 'lucy',
-                  label: 'Lucy',
-                },
-                {
-                  value: 'Yiminghe',
-                  label: 'yiminghe',
-                },
-                {
-                  value: 'disabled',
-                  label: 'Disabled',
-                  disabled: true,
-                },
-              ]}
-            />
-
+        {/* EMAIL */}
+        <StyledFormItem
+          label="Correo electrónico"
+          name="email"
+          rules={[
+            { 
+              required: true, 
+              message: 'Por favor, ingresa un correo electrónico válido.' 
+            },
+            {
+              type: 'email',
+              message: 'Por favor, introduce un formato de dirección de correo electrónico válida.'
+            }
+          ]}
+        >
+          <StyledInput />
         </StyledFormItem>
-
-        <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}>
-          <StyledInput.TextArea rows={4} style={{ borderRadius: '16px'}} />
+        {/* textarea */}
+        <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
+          label="Notas (opcional)"
+          name="notes">
+          <StyledInput.TextArea   
+            autoSize={{
+            minRows: 2,
+            maxRows: 6,
+            }} 
+          style={{ borderRadius: '16px'}} />
         </StyledFormItem>
-
+        {/* checkbox */}
         <StyledFormItem      
-          name="remember" // need to change
+          name="remember" 
           valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) => {
+                if (!value) {
+                  return Promise.reject('Debes aceptar los términos y condiciones');
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
           wrapperCol={{
             // offset: 8,
             // span: 16,
@@ -309,13 +306,12 @@ const ModalForm = () => {
           </Checkbox>
         </StyledFormItem>
 
-        <div style={{width: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#252525', borderRadius: 16, margin: '20px', padding: 5}}>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 20px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column'}}>
+        <TotalBox>
+        <TotalWrap>
+          <LeftSideWrap>
             <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
             <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>420.000 COP</p>
-          </div>  
+          </LeftSideWrap>  
           <StyledFormItem 
             label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
             // style={{ width: '33%'}}
@@ -326,14 +322,13 @@ const ModalForm = () => {
               <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta Bancolombia </Radio>
             </Radio.Group>
           </StyledFormItem>
-        </div>
-
+        </TotalWrap>
         <StyledFormItem style={{width: '100%'}}>
-            <Button type="primary" htmlType="submit" style={{width: '100%', backgroundColor: '#4FDB40', borderRadius: 16, fontWeight: 600}}>
+            <Comprar type="primary" htmlType="submit">
               {'Comprar'.toUpperCase()}
-            </Button>
+            </Comprar>
           </StyledFormItem>
-        </div>
+        </TotalBox>
       </StyledForm>
     );
   };

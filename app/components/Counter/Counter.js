@@ -11,8 +11,7 @@ import {
   Price,
 } from'./styled'
 
-const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
-  console.log('preObj', preObj)
+const Counter = ({ amount, isModal, filterdContent, preObj, ishowto}) => {
   // const idCart = useId()
   const { cartItems, addToCart } = useContext(CartContext)
   const [ count, setCount ] = useState(amount || 1)
@@ -24,7 +23,7 @@ const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
   // console.log('preObj', preObj)
 
   return (                             
-  <CounterWrapper>
+  <CounterWrapper $ishowto={ishowto}>
       <AmountItem $bgc={isModal}>
         <ArrowButtons aria-label={`Disminuir la cantidad de elementos, recuento actual: ${count}`}  onClick={() => {
             if(count > 1)  setCount(count - 1)
@@ -41,7 +40,10 @@ const Counter = ({ amount, isModal, filterdContent, isHowTo, preObj }) => {
       </AmountItem>  
       {/* condition rendering react */}
       {!isModal && 
-        <BuyButton aria-label="botón añadir al carrito" onClick={() => addToCart(preObj, count)} isHowTo={isHowTo}>
+        <BuyButton aria-label="botón añadir al carrito" 
+          onClick={() => addToCart(preObj, count)} 
+          $ishowto={ishowto && ishowto.toString()}
+        >
           Comprar
         </BuyButton>
       }

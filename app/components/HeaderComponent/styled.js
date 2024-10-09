@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import Image from 'next/image'
+import css from 'styled-jsx/css'
 
 export const HeaderFull = styled.header`
   display: flex;
@@ -29,9 +30,17 @@ export const LogoItself = styled(Image)`
   height: auto;
 `
 
-export const Cart = styled(Image)`
+const reusedStyles = css`
   width: 40px;
   height: 40px;
+  @media (max-width: 860px) {
+    width: 25px;
+    height: 25px;
+  }
+`
+
+export const Cart = styled(Image)`
+   ${reusedStyles}
 `
 
 export const CartWrap = styled.div`
@@ -44,6 +53,11 @@ export const CartWrap = styled.div`
 
   &:hover{
     background-color: #252525;
+  }
+
+  @media (max-width: 860px) {
+    width: 25px;
+    height: 25px;
   }
 `
 
@@ -69,10 +83,11 @@ export const BurgerWrap = styled.div`
   display: none;
   @media (max-width: 860px) {
     display: block;
+    width: 25px;
+    height: 25px;
   }
 
 `
 export const BurgerImage = styled(Image)`
-  width: 40px;
-  height: 40px;
+   ${reusedStyles}
 `

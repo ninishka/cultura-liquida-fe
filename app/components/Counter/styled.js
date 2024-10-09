@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 30px 23px;
   /* margin-right: 15px; */
   gap: 49px;
@@ -14,9 +15,9 @@ export const CounterWrapper = styled.div`
   
   @media (max-width: 850px) {
     justify-content: center;
-    flex-direction: ${({isHowTo}) => isHowTo ? 'column' : 'row'};
+    flex-direction: ${({$ishowto}) => $ishowto ? 'column' : 'row'};
     align-items: center;
-    gap: 14px;
+    gap: 0px;
   } 
 `
 
@@ -74,10 +75,10 @@ export const BuyButton = styled.button`
   border-radius: 16px 16px 16px 16px;
   background-color: #4FDB40;
   padding:  17px 29px;
-  margin-right: ${({isHowTo}) => isHowTo ? '0px' : '30px'};
+  margin-right: ${({$ishowto}) => $ishowto ? '0px' : '30px'};
   cursor: pointer;
   /* width: 200px; */
-  width: ${({isHowTo}) => isHowTo ? 'auto' : '200px'};
+  width: ${({$ishowto}) => $ishowto ? 'auto' : '200px'};
 
   height: 52px;
   color: #2d2d2d;

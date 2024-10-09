@@ -77,9 +77,9 @@ export const CartItem = styled.div`
     gap: 0;
   }
 
-  /* @media (max-width: 600px) {
+  @media (max-width: 600px) {
     flex-wrap: wrap;
-  } */
+  }
 `
 
 export const CountAndAmountWrap = styled.div`
@@ -162,6 +162,7 @@ export const StyledForm = styled(Form)`
   .ant-form-item-label{
     position: relative;
     text-align: left;
+    font-weight: 500;
   }
 `
 
@@ -183,7 +184,6 @@ export const StyledFormItem = styled(Form.Item)`
   margin-bottom: 0;
   width: 50%;
   padding: 7px 15px;
-
   @media (max-width: 850px) {
     width: 100%;
   }
@@ -228,6 +228,10 @@ export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
   accent-color: black;
   border: 1px solid #ccc;
   cursor: pointer;
+
+  .ant-checkbox+span {
+
+  }
 `;
 
 export const CheckboxLabel = styled.label`
@@ -272,3 +276,33 @@ export const Price = styled.p`
   }  
 `
 
+export const TotalBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #252525;
+  border-radius: 16px;
+  margin: 20px;
+  padding: 5px;
+`
+export const TotalWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+
+  @media (max-width: 850px) {
+    flex-direction: column-reverse;
+  }
+`
+export const LeftSideWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+export const Comprar = styled.button`
+ width: 100%;
+ background-color: #4FDB40;
+ border: none;
+ padding: 10px;
+ border-radius: 16px 16px;
+ font-weight: 600;
+`
