@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useContext, Fragment } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 import CartItemComponent from './CartItemComponent'
@@ -16,13 +14,61 @@ import {
 } from './styled'
 
 const ModalComponent = () => {
-  const { cartItems, showCart, setShowCart } = useContext(CartContext)
   const [form] = Form.useForm();
+  const { cartItems, showCart, setShowCart, data, fetchProducts, isLoading } = useContext(CartContext)
+  console.log('datadatadata', data)
 
-  const handleSubmit = (values) => {
-    console.log('Form Submitted:', values);
-    setShowCart(false);
+const postsToUpdate = cartItems.map(cartItem => {
+  const { size, ingredient, amount } = cartItem;
+
+  const matchingItem = data.find(dataItem => 
+      dataItem.size === size && 
+      dataItem.ingredient === ingredient
+  );
+
+  if (matchingItem) {
+      const { _id, ...restOfValues } = matchingItem; 
+      return {
+          id: _id,         // id from data
+          amount: amount,  // amount from cartItems
+          ...restOfValues,
+      };
+  }
+
+  return null
+});
+
+// Удаляем элементы с null
+const validPostsToUpdate = postsToUpdate.filter(item => item !== null);
+
+  const updatedPostsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
+    const updatedData = {
+        stock: stock - amount,
+        ...restOfItem,
+    };
+
+    return { id, updatedData };
+});
+
+  const handleSubmit = async (values) => {
+    const updatePromises = updatedPostsData.map(async ({ id, updatedData }) => {
+        const response = await fetch('/api/products', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, updatedData }),
+        });
+
+        if (!response.ok) {
+            console.error('Error updating post with id:', id);
+        }
+    });
+
+    await Promise.all(updatePromises);
+    fetchProducts(); 
   };
+
   const handleCancel = () => {
     setShowCart(false);
   };

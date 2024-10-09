@@ -1,31 +1,35 @@
 "use client"
 
 import React, { useMemo, useState, useEffect } from 'react'
-// import PropTypes from 'prop-types'
 import CartContext from './cartContext'
 
 
 const CartProvider = ({ children, fetchData }) => {
-  const [data, setData] = useState(fetchData);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  // useEffect(() => {
-  //   if (!fetchData) {
-  //     setIsLoading(true);
-  //     getFn({ url: 'getAllItems' })
-  //       .then(response => {
-  //         setData(response);
-  //         setIsLoading(false);
-  //       })
-  //       .catch(error => {
-  //         console.error(error);
-  //         setIsError(true);
-  //         setIsLoading(false);
-  //       });
-  //   }
-  // }, [fetchData]);
-  
+  const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+          const response = await fetch('/api/products');
+          if (!response.ok) {
+              throw new Error('Failed to fetch products');
+          }
+          const data = await response.json();
+          setData(data);
+      } catch (error) {
+          console.error('Error fetching products:', error);
+      } finally {
+        console.log('data', data)
+
+        setIsLoading(false);
+      }
+  };
+
+  useEffect(() => {
+      fetchProducts();
+  }, []);
   
   const [cartItems, setCartItems] = useState([])
   const [displayingItem, setDisplayingItem] = useState('1')
@@ -82,30 +86,6 @@ const CartProvider = ({ children, fetchData }) => {
     })
   }
 
-  // const setToCart = (item, amount = 1) => {
-  //   if (!item || !item._id) return false
-  //   const id = item?.itemId
-
-  //   setCartItems(value => {
-  //     const v = [...value]
-  //     const index = v.findIndex(i => i.id === id)
-
-  //     if (index >= 0) {
-  //       v[index] = {
-  //         id,
-  //         amount
-  //       }
-  //     } else {
-  //       v.push({
-  //         id,
-  //         amount
-  //       })
-  //     }
-
-  //     return v
-  //   })
-  // }
-
   // const getItemsCount = () => {
   //   let count = 0
   //   for (let i = 0; i < cartItems.length; i++) {
@@ -128,26 +108,8 @@ const CartProvider = ({ children, fetchData }) => {
   //   // displayingItem, setDisplayingItem,
   //   showCart, setShowCart
   // }), [JSON.stringify(cartItems)])
-  console.log('cartItems', cartItems)
 
-  const adaptedDataForBe = cartItems.map(product => {
-    return {
-      id: product.id,
-      title: product.title,
-      image: product.iconSrc,
-      description: product.description,
-      categoryId: product.type === 'Extractos' ? 'extracts' : 'capsules',
-      // stock: 0,
-      price: product.price,
-      size: '',
-      // itemId: product.ingredient.toLowerCase().split(' ').join('-'),
-      // itemId: 'hericium-erinaceus',
-      
-      amount: product.amount
-    };
-  })
 
-  console.log('data', data)
 
   return (
     <CartContext.Provider value={{
@@ -162,7 +124,8 @@ const CartProvider = ({ children, fetchData }) => {
       displayingItem, setDisplayingItem,
       showCart, setShowCart,
       showMenu, setShowMenu,
-      data, adaptedDataForBe
+      data, isLoading,
+      fetchProducts
     }}>
       {children}
     </CartContext.Provider>

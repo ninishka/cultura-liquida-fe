@@ -4,7 +4,7 @@ import FooterComponent from './components/FooterComponent/FooterComponent'
 import CartProvider from './contexts/cartContext/cartProvider'
 import StyledRegistry from './registry';
 import { GlobalStyle } from './globalStyles';
-import { addPost, getPosts } from '@/actions/action'
+import { addProduct, getPosts } from '@/actions/action'
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -39,14 +39,14 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   // const fetchData = await getFn({ url: 'getAllItems' });
-  const fetchData = await getPosts()
+  // const fetchData = await getPosts()
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
         <StyledRegistry>
           <GlobalStyle />
-              <CartProvider fetchData={fetchData}>
+              <CartProvider fetchData={{}}>
               {/* {posts.map(post => (
                 <div key={post._id}>
                     <h1>{post.title}</h1>
@@ -54,7 +54,7 @@ export default async function RootLayout({ children }) {
                 </div>))
                 } */}
 
-                {/* <form action={addPost}>
+                {/* <form action={addProduct}>
                   <div>
                       <label>Title</label>
                       <input name='title' type='text' />
@@ -64,7 +64,15 @@ export default async function RootLayout({ children }) {
                       <textarea name='description' />
                   </div>
                   <div>
+                      <label>ingredient</label>
+                      <input name='ingredient' type='text' />
+                  </div>
+                  <div>
                       <label>Type</label>
+                      <input name='type' type='text' />
+                  </div>
+                  <div>
+                      <label>Size</label>
                       <input name='type' type='text' />
                   </div>
                   <div>
