@@ -24,6 +24,9 @@ export const TextForHeader = styled.h2`
     font-size: 40px;
     line-height: 45px;   
   }
+  @media (min-width: 2000px) {
+    text-align: center;
+  }
 `
 
 export const CardsWrapper = styled.div`

@@ -11,7 +11,7 @@ import {
   Price,
 } from'./styled'
 
-const Counter = ({ amount, isModal, filterdContent, preObj }) => {
+const Counter = ({ amount, isModal, filterdContent, preObj, isComplex }) => {
   // const idCart = useId()
   const { cartItems, addToCart } = useContext(CartContext)
   const [ count, setCount ] = useState(amount || 1)
@@ -45,6 +45,7 @@ const Counter = ({ amount, isModal, filterdContent, preObj }) => {
         </BuyButton>
       }
       {filterdContent?.[0]?.price && <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}
+      {isComplex && <Price style={{ textDecoration: 'line-through', fontSize: 24, color: '#9F9F9F'}}>{filterdContent?.[0]?.price} COP</Price>}
   </CounterWrapper>
 )}
 
