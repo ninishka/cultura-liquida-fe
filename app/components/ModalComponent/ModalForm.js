@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import CartContext from '@/app/contexts/cartContext/cartContext'
 import { Button, Checkbox, Radio} from 'antd'
 import { CaretDownOutlined } from '@ant-design/icons';
-
+import { editPost } from '@/actions/action'
 import {
   StyledForm,
   StyledInput,
@@ -37,8 +38,24 @@ const nameSurnameValidator = [
 
 
 const ModalForm = ({ form, onFinish }) => { 
+  const { data, cartItems } = useContext(CartContext)
+  const [loading, setLoading] = useState(false);
+  const { _id , ...restOfValues } = data[0]
+  const testPostObj = [{
+    id: _id,
+    amount: cartItems[0].amount, 
+    ...restOfValues, 
+  }]
+
+  const { id, stock, amount, ...restOfItem } = testPostObj[0]
+  const updatedData = {
+    stock: stock - amount,
+    ...restOfItem
+  }
+
     const handleChange = (value) => {
       console.log(`Selected: ${value}`);
+      editPost(id, updatedData)
     };
 
     return (
@@ -305,7 +322,7 @@ const ModalForm = ({ form, onFinish }) => {
             </StyledFormItem>
           </TotalWrap>
           <StyledFormItem style={{width: '100%'}}>
-            <Comprar type="primary" htmlType="submit">
+            <Comprar type="primary" htmltype="submit">
               {'Comprar'.toUpperCase()}
             </Comprar>
           </StyledFormItem>
