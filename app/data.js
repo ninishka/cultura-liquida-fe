@@ -42,6 +42,91 @@ import colaSrc from './icons/icon_cola_cart.png'
 import reishiSrc from './icons/icon_reishi_cart.png'
 
 
+// [
+//   {
+//       "_id": "67061ea1dea30f1fed0e5cc9",
+//       "title": "MELENA DE LEON",
+//       "description": "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
+//       "type": "capsules",
+//       "price": 12000,
+//       "stock": 20,
+//       "__v": 0,
+//       "ingredient": "Hericium erinaceus"
+//   },
+//   {
+//       "_id": "67066324b61982c75ddce096",
+//       "title": "MELENA DE LEON",
+//       "description": "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
+//       "ingredient": "Hericium erinaceus",
+//       "type": "extracts",
+//       "price": 10000,
+//       "stock": 39,
+//       "__v": 0,
+//       "size": "100ml" @
+//   },
+//   {
+//       "_id": "67066324b61982c75ddce096",
+//       "title": "MELENA DE LEON",
+//       "description": "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
+//       "ingredient": "Hericium erinaceus",
+//       "type": "extracts",
+//       "price": 8000,
+//       "stock": 88,
+//       "__v": 0,
+//       "size": "30ml" @
+//   }
+// ]
+
+// [
+//   {
+//       "_id": "67066324b61982c75ddce096",
+//       "title": "REISHI",
+//       "description": "Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.", @@
+//       "ingredient": "Ganoderma lucidum", @@
+//       "type": "extracts",
+//       "price": 11000,
+//       "stock": 77,
+//       "__v": 0,
+//       "size": "100ml" @
+//   },
+//   {
+//       "_id": "67066324b61982c75ddce096",
+//       "title": "REISHI",
+//       "description": "Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.", @@
+//       "ingredient": "Ganoderma lucidum", @@
+//       "type": "extracts",
+//       "price": 7000,
+//       "stock": 66,
+//       "__v": 0,
+//       "size": "30ml" @
+//   }
+// ]
+
+// [
+//   {
+//       "_id": "67066324b61982c75ddce096",
+//       "title": "COLA",
+//       "description": "Cuerpo fructífero de hongos y micelio de Trametes Versicolor.", @@
+//       "ingredient": "Trametes Versicolor", @@
+//       "type": "extracts",
+//       "price": 9000,
+//       "stock": 55,
+//       "__v": 0,
+//       "size": "100ml" @
+//   },
+//   {
+//       "_id": "67066324b61982c75ddce096",
+//       "title": "COLA",
+//       "description": "Cuerpo fructífero de hongos y micelio de Trametes Versicolor.", @@
+//       "ingredient": "Trametes Versicolor", @@
+//       "type": "extracts",
+//       "price": 6000, @@@
+//       "stock": 44, @@@
+//       "__v": 0,
+//       "size": "30ml" @
+//   }
+// ]
+
 const melenaFormationDataTitle = [
   {
     title: 'MELENA DE LEON',
@@ -54,36 +139,34 @@ const melenaFormationData = [
   {
     id: '1',
     icon: icon1,
-    type: 'Cápsulas',
     src: melenacaps,
+    iconSrc: melenaCapsulsSrc,
 
     price: 6000,
-
-    iconSrc: melenaCapsulsSrc,
+    type: 'Cápsulas',
     ...melenaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon2,
-    type: 'Extracto 100ml',
-    size: '100ml',
     src: melenaextract,
-
-    price: 4000,
-    
     iconSrc: melenaExtractSrc,
+
+    size: '100ml',
+    price: 4000,    
+    type: 'Extracto 100ml',
     ...melenaFormationDataTitle[0]
   },
   {
     id: '3',
     icon: icon3,
+    src: melenaextract,
+    iconSrc: melenaExtractSrc,
+
+
     type: 'Extracto 30ml',
     size: '30ml',
-    src: melenaextract,
-
     price: 8000,
-
-    iconSrc: melenaExtractSrc,
     ...melenaFormationDataTitle[0]
   },
 ]
@@ -268,7 +351,6 @@ const colaBenefitsCardsData = [
 export const productContentComponents = [
   {
     itemNumber: '1',
-    formationDataTitle: melenaFormationDataTitle,
     formationData: melenaFormationData,
     benefitsHeaderData: melenaBenefitsHeaderData,
     benefitsCardsData: melenaBenefitsCardsData,
@@ -276,7 +358,6 @@ export const productContentComponents = [
   },
   {
     itemNumber: '2',
-    formationDataTitle: reishiFormationDataTitle,
     formationData: reishiFormationData,
     benefitsHeaderData: reishiBenefitsHeaderData,
     benefitsCardsData: reishiBenefitsCardsData,
@@ -284,7 +365,6 @@ export const productContentComponents = [
   },
   {
     itemNumber: '3',
-    formationDataTitle: colaFormationDataTitle,
     formationData: colaFormationData,
     benefitsHeaderData: colaBenefitsHeaderData,
     benefitsCardsData: colaBenefitsCardsData,

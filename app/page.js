@@ -13,20 +13,39 @@ import ModalComponent from './components/ModalComponent/ModalComponent'
 import { productContentComponents } from './data'
 import IfQuestions from './components/IfQuestions/IfQuestions'
 
+import Error from './error'
 
-const getActiveComponent = selectedItem => {
-  return productContentComponents.find(({ itemNumber }) => itemNumber === selectedItem)
+function groupObjectsByTitle(arr) {
+  // Группируем объекты по title
+  const grouped = arr.reduce((acc, obj) => {
+    if (!acc[obj.title]) {
+      acc[obj.title] = [];
+    }
+    acc[obj.title].push(obj);
+    return acc;
+  }, {});
+
+  return Object.keys(grouped).map(title => ({
+    // title,
+    bdData: grouped[title]
+  }));
 }
 
+
 export default function Home() {
-  const { displayingItem, showCart } = useContext(CartContext)
+  const { displayingItem, showCart, data } = useContext(CartContext)
+  const grouping = groupObjectsByTitle(data);
+
+  const getActiveComponent = selectedItem => {
+    const staticData = productContentComponents.find(({ itemNumber }) => itemNumber === selectedItem)
+    const dynamicData = grouping.find((item, index) => `${index + 1}` === selectedItem)
+    const combinedData = { ...dynamicData, ...staticData }
+    return combinedData
+  }
 
   return (
-    // <AirtableProvider>
       <main>
-        {/* <CartProvider> */}
-          {showCart && <ModalComponent />}
-        {/* </CartProvider> */}
+        {showCart && <ModalComponent />}
         <ProductContent
           key={displayingItem}
           {...getActiveComponent(displayingItem)}
@@ -35,7 +54,5 @@ export default function Home() {
         <Complex something='something'/>
         <IfQuestions something='something'/>
       </main>
-    // </AirtableProvider>
-
   )
 }

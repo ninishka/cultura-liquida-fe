@@ -11,11 +11,11 @@ const addProduct = async post => {
     const price = post.get('price')
     const stock = post.get('stock')
 
-    const newPost = new Post({ title, description, ingredient, type, size, price, stock })
-    return newPost.save()
+    const newProduct = new Post({ title, description, ingredient, type, size, price, stock })
+    return newProduct.save()
 }
 
-const getPosts = async () => {
+const getProduct = async () => {
     return Post.find()
 }
 
@@ -23,8 +23,8 @@ const getPosts = async () => {
 //     return Post.findByIdAndDelete(id)
 // }
 
-const editPost = async (id, updatedData) => {
+const editProduct = async (id, updatedData) => {
     return Post.findByIdAndUpdate(id, updatedData, { new: true })
 }
 
-export { addProduct, getPosts, editPost }
+export { addProduct, getProduct, editProduct }

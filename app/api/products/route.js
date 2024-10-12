@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { addProduct, getPosts, editPost } from '@/actions/action';
+import { addProduct, getProduct, editProduct } from '@/actions/action';
 
 export async function GET(request) {
     try {
-        const product = await getPosts();
+        const product = await getProduct();
         return NextResponse.json(product, { status: 200 });
     } catch (error) {
         console.error('Error fetching product:', error);
@@ -31,7 +31,7 @@ export async function GET(request) {
 export async function PUT(request) {
     const { id, updatedData } = await request.json();
     console.log('id', id)
-    const updatedProduct = await editPost(id, updatedData);
+    const updatedProduct = await editProduct(id, updatedData);
     return NextResponse.json(updatedProduct);
 }
 
@@ -39,7 +39,7 @@ export async function PUT(request) {
 // export async function PUT(request) {
 //     try {
 //         const { id, updatedData } = await request.json();
-//         const updatedPost = await editPost(id, updatedData);
+//         const updatedPost = await editProduct(id, updatedData);
 //         return NextResponse.json(updatedPost, { status: 200 });
 //     } catch (error) {
 //         console.error('Error updating post:', error);

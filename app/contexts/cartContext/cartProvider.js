@@ -17,15 +17,39 @@ const CartProvider = ({ children, fetchData }) => {
               throw new Error('Failed to fetch products');
           }
           const data = await response.json();
+          console.log('data', data)
           setData(data);
       } catch (error) {
           console.error('Error fetching products:', error);
       } finally {
-        console.log('data', data)
-
         setIsLoading(false);
       }
   };
+
+  // const fetchProducts = async () => {
+  //   setIsLoading(true);
+  //   console.log('true')
+  //   try {
+  //     const response = await fetch('/api/products');
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch products');
+  //     }
+  //     const newData = await response.json();
+  //     console.log('newData', newData)
+      
+  //     React.startTransition(() => {
+  //       setData(newData);
+  //     });
+  //   } catch (error) {
+  //     console.error('Error fetching products:', error);
+  //     setIsError(true);
+  //   } finally {
+  //     console.log('false')
+
+  //     setIsLoading(false);
+  //   }
+  // };
+
 
   useEffect(() => {
       fetchProducts();
