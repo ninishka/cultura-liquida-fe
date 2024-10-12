@@ -1,4 +1,4 @@
 export default function Loading() {
     // return <LoadingSkeleton />
-    return 'SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss...'
+    return 'Formation is loading...'
   }

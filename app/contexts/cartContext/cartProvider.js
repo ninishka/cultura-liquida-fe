@@ -10,20 +10,21 @@ const CartProvider = ({ children, fetchData }) => {
   const [isError, setIsError] = useState(false);
 
   const fetchProducts = async () => {
-      setIsLoading(true);
-      try {
-          const response = await fetch('/api/products');
-          if (!response.ok) {
-              throw new Error('Failed to fetch products');
-          }
-          const data = await response.json();
-          console.log('data', data)
-          setData(data);
-      } catch (error) {
-          console.error('Error fetching products:', error);
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    setIsError(false); // Сбрасываем состояние ошибки
+    try {
+      const response = await fetch('/api/products');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
       }
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setIsError(true); // Устанавливаем состояние ошибки
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // const fetchProducts = async () => {
@@ -148,7 +149,7 @@ const CartProvider = ({ children, fetchData }) => {
       displayingItem, setDisplayingItem,
       showCart, setShowCart,
       showMenu, setShowMenu,
-      data, isLoading,
+      data, isLoading, isError,
       fetchProducts
     }}>
       {children}

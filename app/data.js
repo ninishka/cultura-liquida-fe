@@ -143,7 +143,7 @@ const melenaFormationData = [
     iconSrc: melenaCapsulsSrc,
 
     price: 6000,
-    type: 'Cápsulas',
+    type: 'capsules',
     ...melenaFormationDataTitle[0]
   },
   {
@@ -152,9 +152,9 @@ const melenaFormationData = [
     src: melenaextract,
     iconSrc: melenaExtractSrc,
 
-    size: '100ml',
     price: 4000,    
-    type: 'Extracto 100ml',
+    type: 'extracts',
+    size: '100ml',
     ...melenaFormationDataTitle[0]
   },
   {
@@ -163,10 +163,9 @@ const melenaFormationData = [
     src: melenaextract,
     iconSrc: melenaExtractSrc,
 
-
-    type: 'Extracto 30ml',
-    size: '30ml',
     price: 8000,
+    type: 'extracts',
+    size: '30ml',
     ...melenaFormationDataTitle[0]
   },
 ]

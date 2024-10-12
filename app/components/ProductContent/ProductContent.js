@@ -7,7 +7,7 @@ import Loading from './loading'
 // import { AirtableContext } from '@/app/contexts/airtableContext/airtableContext'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 
-const ProductContent = ({ bdData,
+const ProductContent = ({ 
   formationData, benefitsHeaderData, benefitsCardsData, indicationsImg
   
 }) => {
@@ -17,7 +17,7 @@ const ProductContent = ({ bdData,
   // const { data, displayingItem } = useContext(CartContext)
   return (
     <div>
-      <Formation formationData={formationData} bdData={bdData}/>
+      <Formation formationData={formationData} />
       <Benefits 
         benefitsHeaderData={benefitsHeaderData} 
         benefitsCardsData={benefitsCardsData} 
