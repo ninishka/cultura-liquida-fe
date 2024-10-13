@@ -4,7 +4,7 @@ import FooterComponent from './components/FooterComponent/FooterComponent'
 import CartProvider from './contexts/cartContext/cartProvider'
 import StyledRegistry from './registry';
 import { GlobalStyle } from './globalStyles';
-import { addProduct, getPosts } from '@/actions/action'
+import { fetchProducts } from './fetching'
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -36,55 +36,16 @@ export const metadata = {
   // robots.txt FILE ???
   // Author and Copyright ?
   // sitemap
-
+  
 export default async function RootLayout({ children }) {
-  // const fetchData = await getFn({ url: 'getAllItems' });
-  // const fetchData = await getPosts()
+  const layoutData = await fetchProducts()
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
         <StyledRegistry>
           <GlobalStyle />
-              <CartProvider fetchData={{}}>
-              {/* {posts.map(post => (
-                <div key={post._id}>
-                    <h1>{post.title}</h1>
-                    <p>{post.description}</p>
-                </div>))
-                } */}
-
-                {/* <form action={addProduct}>
-                  <div>
-                      <label>Title</label>
-                      <input name='title' type='text' />
-                  </div>
-                  <div>
-                      <label>Description</label>
-                      <textarea name='description' />
-                  </div>
-                  <div>
-                      <label>ingredient</label>
-                      <input name='ingredient' type='text' />
-                  </div>
-                  <div>
-                      <label>Type</label>
-                      <input name='type' type='text' />
-                  </div>
-                  <div>
-                      <label>Size</label>
-                      <input name='type' type='text' />
-                  </div>
-                  <div>
-                      <label>Price</label>
-                      <input name='price' type='number' />
-                  </div>
-                  <div>
-                      <label>Stock</label>
-                      <input name='stock' type='number' />
-                  </div>
-                  <button>Submit</button>
-                </form> */}
+             <CartProvider layoutData={layoutData}>
                 <HeaderComponent />
                   {children}
                 <FooterComponent />

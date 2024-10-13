@@ -4,37 +4,66 @@ import React, { useMemo, useState, useEffect } from 'react'
 import CartContext from './cartContext'
 
 
-const CartProvider = ({ children, fetchData }) => {
+const CartProvider = ({ children, layoutData }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const fetchProducts = async () => {
-      setIsLoading(true);
-      try {
-          const response = await fetch('/api/products');
-          if (!response.ok) {
-              throw new Error('Failed to fetch products');
-          }
-          const data = await response.json();
-          setData(data);
-      } catch (error) {
-          console.error('Error fetching products:', error);
-      } finally {
-        console.log('data', data)
+  // const fetchProducts = async () => {
+  //   setIsLoading(true);
+  //   setIsError(false); // Сбрасываем состояние ошибки
+  //   try {
+  //     const response = await fetch('/api/products');
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch products');
+  //     }
+  //     const data = await response.json();
+  //     console.log('data CartProvider', data)
+  //     setData(data);
+  //   } catch (error) {
+  //     console.error('Error fetching products:', error);
+  //     setIsError(true); // Устанавливаем состояние ошибки
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
-        setIsLoading(false);
-      }
-  };
+  // const fetchProducts = async () => {
+  //   setIsLoading(true);
+  //   console.log('true')
+  //   try {
+  //     const response = await fetch('/api/products');
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch products');
+  //     }
+  //     const newData = await response.json();
+  //     console.log('newData', newData)
+      
+  //     React.startTransition(() => {
+  //       setData(newData);
+  //     });
+  //   } catch (error) {
+  //     console.error('Error fetching products:', error);
+  //     setIsError(true);
+  //   } finally {
+  //     console.log('false')
 
-  useEffect(() => {
-      fetchProducts();
-  }, []);
+  //     setIsLoading(false);
+  //   }
+  // };
+
+
+  // useEffect(() => {
+  //     fetchProducts();
+  // }, []);
   
   const [cartItems, setCartItems] = useState([])
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+
+
+  const [ checkedState, setCheckedState ] = useState('1')
 
   const addToCart = async (item, amount = 1) => {
     if (!item || !item.id) return false // _id
@@ -124,8 +153,10 @@ const CartProvider = ({ children, fetchData }) => {
       displayingItem, setDisplayingItem,
       showCart, setShowCart,
       showMenu, setShowMenu,
-      data, isLoading,
-      fetchProducts
+      data, isLoading, isError,
+      // fetchProducts,
+      checkedState, setCheckedState,
+      layoutData
     }}>
       {children}
     </CartContext.Provider>

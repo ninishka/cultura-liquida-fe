@@ -1,7 +1,9 @@
 "use client"
 
-import React, { useState, useId, Fragment } from 'react'
+import React, { useContext } from 'react'
 import Counter from '../Counter/Counter'
+import CartContext from '@/app/contexts/cartContext/cartContext'
+import Link from 'next/link'
 import {
   FormationSection,
   ContentWrapper,
@@ -11,7 +13,6 @@ import {
   TitleFrame,
   TitleH1,
   Description,
-  FrameForTwo,
   Release,
   CheckBoxGroup,
   Item,
@@ -21,32 +22,36 @@ import {
   LabelContent,
 } from './styled'
 
-const Formation = ({ formationDataTitle, formationData }) => {
-  const [ checkedState, setCheckedState ] = useState('1')
-  const filterdContent = formationData.filter(({ id }) => id === checkedState)
-  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
-  const preObj = {idCart , ...filterdContent?.[0]}
+
+const Formation = ({ formationData }) => {
+  const { checkedState, setCheckedState } = useContext(CartContext);
 
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
   }
 
+  const filterdContent = formationData.filter(({ id }) => id === checkedState)
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
+  const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
-// sometimes when i put func (for example: console.log() ) u need to know the sintaxis differents
-// onClick={console.log('prev')} <-- this gonna be called automaticly on render time
-// onClick={() => console.log('prev')} <-- this how it will be called ONLY FATER CLICK on it
+  console.log('source - reload the page if empty', source)
+
+  // if (!formationData?.[0]?.stock || isLoading) {
+  //   return <Loading />;
+  // }
+
+  // if (isError) {
+  //   return <Error />; 
+  // }
 
   return (
   <FormationSection>
     <ContentWrapper>
       <TitleFrame>
-        {formationDataTitle.map(({ title, description}) => (
-          <Fragment key={title}>
-            <TitleH1>{title}</TitleH1>
-            <Description>{description}</Description>  
-          </Fragment>
-        ))}
+        <TitleH1>{filterdContent?.[0]?.title || ''}</TitleH1>
+        <Description>{filterdContent?.[0]?.description || ''}</Description>
       </TitleFrame>
+
       <ImageWrapperMobile key={source}>
         <ImageStyled
           src={source} 
@@ -58,33 +63,36 @@ const Formation = ({ formationDataTitle, formationData }) => {
           sizes='(max-width: 850px) 100vw, 50vw'
         />
       </ImageWrapperMobile>
-      <FrameForTwo>
+      <div>
         <Release>Seleccione el formulario de liberación:</Release>
         <CheckBoxGroup>
-        {formationData.map(({type, icon, id, price}) => (
-          <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
-            <label htmlFor={id} aria-label={`Elección del tamaño del producto`} >
-              <RadioButton 
-                type="radio" 
-                id={id}
-                name="group1" 
-                checked={id === checkedState}
-                onChange={() => rechecking(id)}
-              />
-            </label>
-           
-            <LabelContent>
-              <Icon src={icon} alt={type}/>
-              <TextDesc>{type}</TextDesc>
-            </LabelContent>
-          </Item>
-          ))}
+          {formationData.map(({type, icon, id, url, size, price}) => {
+            const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
+            return (
+              <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff'}}>
+                <Item 
+                  onClick={() => rechecking(id)} 
+                  aria-label={`Elección del tamaño del producto`}
+                > 
+                  <label htmlFor={id} aria-label={`Elección del tamaño del producto`} >
+                    <RadioButton 
+                      id={id}
+                      type="radio" 
+                      name="group1" 
+                      checked={id === checkedState}
+                      // c={console.log('id', id, checkedState)}
+                      onChange={() => rechecking(id)} 
+                  />
+                  </label>  
+                  <LabelContent >
+                    <Icon src={icon} alt={type}/>
+                    <TextDesc>{type + size}</TextDesc>
+                  </LabelContent>
+                </Item>
+              </Link>
+            )})}
         </CheckBoxGroup>
-      </FrameForTwo>
-      {/* <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-        
-        <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>
-      </div> */}
+      </div>
       <Counter filterdContent={filterdContent} preObj={preObj} />
     </ContentWrapper>
     <ImageWrapperDesktop key={source}>

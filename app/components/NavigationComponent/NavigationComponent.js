@@ -1,41 +1,34 @@
-import data from '../data'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
-
-
+import data from '../data'
 import {
   Navigation,
   UlItself,
   LiItself,
-  StyledButton
+  StyledLink
 } from './styled'
 
-
-const NavigationComponent = ({isopen}) => {
-  const { setDisplayingItem, setShowMenu } = useContext(CartContext)
-
-  const navClick = (id) => {
-    setDisplayingItem(id.toString())
-    setShowMenu(false)
-  }
-
-
+const NavigationComponent = ({ isopen }) => {
+  const { setShowMenu, setDisplayingItem } = useContext(CartContext)
+  
   return (
     <Navigation $isopen={isopen}>
       <UlItself> 
-        {data.map(({ title }, index) => {
-          const id = index + 1
-          return (
-            <LiItself key={title}>
-              <StyledButton onClick={() => navClick(id)}>
-                  {title}
-              </StyledButton>
-            </LiItself>
-          )
-        })} 
+        {data.map(({ title, url, types }) => (
+          <LiItself key={title}>
+            <StyledLink 
+              href={`/product/${url}-${types[0]}`} 
+              onClick={() => {
+                setShowMenu(false)
+                setDisplayingItem(url?.includes('reishi') && '2' ||  url?.includes('cola') &&'3')
+              }}
+            >
+              {title}
+            </StyledLink>
+          </LiItself>
+        ))} 
       </UlItself>
     </Navigation>
-
   )
 }
 

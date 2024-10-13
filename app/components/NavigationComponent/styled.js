@@ -1,6 +1,7 @@
 "use client"
-import styled from 'styled-components'
 
+import styled from 'styled-components'
+import Link from 'next/link'
 
 export const UlItself = styled.ul`
   display: flex;
@@ -10,7 +11,6 @@ export const UlItself = styled.ul`
     flex-direction: column;
   }
 `
-
 
 export const Navigation = styled.nav`
   display: flex;
@@ -34,7 +34,7 @@ export const LiItself = styled.li`
   list-style-type: none;
 `
 
-export const StyledButton = styled.button`
+export const StyledLink = styled(Link)`
   display: block;
   transition: color 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
   background-color 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);  
@@ -47,7 +47,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   font-weight: 400;
   font-size: 16px;
-
+  text-decoration: none;
  
   @media (max-width:860px) {
     width: 268px;
