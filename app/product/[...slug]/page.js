@@ -9,20 +9,19 @@ import Indications from '@/app/components/Indications/Indications'
 import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 import { productContentComponents } from '@/app/data'
 
-const getActiveComponent = (selectedItem, data) => {
+const getActiveComponent = (selectedItem, dynamicData) => {
   const staticData = productContentComponents?.find(({ itemNumber }) => itemNumber === selectedItem)
-  const dynamicData = data?.find((item, index) => `${index + 1}` === selectedItem)
 
   const newFormationData = staticData?.formationData?.map(fItem => {
     let matchingBdItem;
   
     if (fItem?.type.includes('extracts')) {
-      matchingBdItem = dynamicData?.bdData?.find(bItem => 
+      matchingBdItem = dynamicData?.find(bItem => 
         bItem?.type === fItem.type && bItem.size === fItem.size
       );
     } 
     else if (fItem?.type.includes('capsules')) {
-      matchingBdItem = dynamicData?.bdData?.find(bItem => bItem?.type === fItem.type);
+      matchingBdItem = dynamicData?.find(bItem => bItem?.type === fItem.type);
     }  
     if (matchingBdItem) {
       return { ...fItem, ...matchingBdItem };
