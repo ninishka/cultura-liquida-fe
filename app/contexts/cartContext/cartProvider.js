@@ -4,28 +4,29 @@ import React, { useMemo, useState, useEffect } from 'react'
 import CartContext from './cartContext'
 
 
-const CartProvider = ({ children, fetchData }) => {
+const CartProvider = ({ children, layoutData }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const fetchProducts = async () => {
-    setIsLoading(true);
-    setIsError(false); // Сбрасываем состояние ошибки
-    try {
-      const response = await fetch('/api/products');
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
-      }
-      const data = await response.json();
-      setData(data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      setIsError(true); // Устанавливаем состояние ошибки
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const fetchProducts = async () => {
+  //   setIsLoading(true);
+  //   setIsError(false); // Сбрасываем состояние ошибки
+  //   try {
+  //     const response = await fetch('/api/products');
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch products');
+  //     }
+  //     const data = await response.json();
+  //     console.log('data CartProvider', data)
+  //     setData(data);
+  //   } catch (error) {
+  //     console.error('Error fetching products:', error);
+  //     setIsError(true); // Устанавливаем состояние ошибки
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   // const fetchProducts = async () => {
   //   setIsLoading(true);
@@ -52,14 +53,17 @@ const CartProvider = ({ children, fetchData }) => {
   // };
 
 
-  useEffect(() => {
-      fetchProducts();
-  }, []);
+  // useEffect(() => {
+  //     fetchProducts();
+  // }, []);
   
   const [cartItems, setCartItems] = useState([])
   const [displayingItem, setDisplayingItem] = useState('1')
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+
+
+  const [ checkedState, setCheckedState ] = useState('1')
 
   const addToCart = async (item, amount = 1) => {
     if (!item || !item.id) return false // _id
@@ -150,7 +154,9 @@ const CartProvider = ({ children, fetchData }) => {
       showCart, setShowCart,
       showMenu, setShowMenu,
       data, isLoading, isError,
-      fetchProducts
+      // fetchProducts,
+      checkedState, setCheckedState,
+      layoutData
     }}>
       {children}
     </CartContext.Provider>

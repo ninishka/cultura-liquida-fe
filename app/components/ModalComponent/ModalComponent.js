@@ -18,13 +18,13 @@ import {
 
 const ModalComponent = () => {
   const [form] = Form.useForm();
-  const { cartItems, showCart, setShowCart, data, fetchProducts, isLoading } = useContext(CartContext)
-  console.log('datadatadata', data)
+  const { cartItems, showCart, setShowCart, layoutData, fetchProducts, isLoading } = useContext(CartContext)
+  // console.log('layoutData', layoutData?.length)
 
 const postsToUpdate = cartItems.map(cartItem => {
   const { size, ingredient, amount } = cartItem;
 
-  const matchingItem = data.find(dataItem => 
+  const matchingItem = layoutData.find(dataItem => 
       dataItem.size === size && 
       dataItem.ingredient === ingredient
   );
@@ -69,7 +69,7 @@ const validPostsToUpdate = postsToUpdate.filter(item => item !== null);
     });
 
     await Promise.all(updatePromises);
-    fetchProducts(); 
+    // fetchProducts(); 
   };
 
   const handleCancel = () => {

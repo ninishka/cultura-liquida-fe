@@ -74,9 +74,6 @@ export const Description = styled.h2`
   }
 `
 
-export const FrameForTwo = styled.div`
-`
-
 export const Release = styled.h3`
   color: lightgray;
   font-size: 24px;

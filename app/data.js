@@ -141,8 +141,8 @@ const melenaFormationData = [
     icon: icon1,
     src: melenacaps,
     iconSrc: melenaCapsulsSrc,
+    url: 'melena-de-leon',
 
-    price: 6000,
     type: 'capsules',
     ...melenaFormationDataTitle[0]
   },
@@ -151,8 +151,9 @@ const melenaFormationData = [
     icon: icon2,
     src: melenaextract,
     iconSrc: melenaExtractSrc,
+    url: 'melena-de-leon',
 
-    price: 4000,    
+    // price: 4000,    
     type: 'extracts',
     size: '100ml',
     ...melenaFormationDataTitle[0]
@@ -162,8 +163,9 @@ const melenaFormationData = [
     icon: icon3,
     src: melenaextract,
     iconSrc: melenaExtractSrc,
+    url: 'melena-de-leon',
 
-    price: 8000,
+    // price: 8000,
     type: 'extracts',
     size: '30ml',
     ...melenaFormationDataTitle[0]
@@ -227,18 +229,24 @@ const reishiFormationData = [
   {
     id: '1',
     icon: icon2,
-    type: 'Extracto 100ml',
+    // type: 'extracts 100ml',
     src: reishiextract,
+    url: 'reishi',
 
+    type: 'extracts',
+    size: '100ml',
     iconSrc: reishiSrc,
     ...reishiFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
-    type: 'Extracto 30ml',
+    // type: 'extracts 30ml',
     src: reishiextract,
+    url: 'reishi',
 
+    type: 'extracts',
+    size: '30ml',
     iconSrc: reishiSrc,
     ...reishiFormationDataTitle[0]
   },
@@ -293,18 +301,26 @@ const colaFormationData = [
   {
     id: '1',
     icon: icon2,
-    type: 'Extracto 100ml',
+    // type: 'extracts 100ml',
     src: colaextract,
+    url: 'cola-de-pavo',
 
+
+    type: 'extracts',
+    size: '100ml',
     iconSrc: colaSrc,
     ...colaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
-    type: 'Extracto 30ml',
+    // type: 'extracts 30ml',
     src: colaextract,
+    url: 'cola-de-pavo',
 
+
+    type: 'extracts',
+    size: '30ml',
     iconSrc: colaSrc,
     ...colaFormationDataTitle[0]
   },
@@ -407,14 +423,14 @@ export const complexData2 = [
   {
     title:'complejo 100ml',
     id: '1',
-    type: 'Extracto 100ml',
+    type: 'extracts 100ml',
     iconSrc: imgC10,
     price: 230000
   },
   {
     title:'complejo 30ml',
     id: '2',
-    type: 'Extracto 30ml',
+    type: 'extracts 30ml',
     iconSrc: imgC11,
     price: 150000
   },
