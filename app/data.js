@@ -127,14 +127,6 @@ import reishiSrc from './icons/icon_reishi_cart.png'
 //   }
 // ]
 
-const melenaFormationDataTitle = [
-  {
-    title: 'MELENA DE LEON',
-    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
-    ingredient: 'Hericium erinaceus'
-  }
-]
-
 const melenaFormationData = [
   {
     id: '1',
@@ -144,7 +136,6 @@ const melenaFormationData = [
     url: 'melena-de-leon',
 
     type: 'capsules',
-    ...melenaFormationDataTitle[0]
   },
   {
     id: '2',
@@ -153,10 +144,8 @@ const melenaFormationData = [
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
 
-    // price: 4000,    
     type: 'extracts',
     size: '100ml',
-    ...melenaFormationDataTitle[0]
   },
   {
     id: '3',
@@ -165,10 +154,8 @@ const melenaFormationData = [
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
 
-    // price: 8000,
     type: 'extracts',
     size: '30ml',
-    ...melenaFormationDataTitle[0]
   },
 ]
 
@@ -217,38 +204,26 @@ export const indicationsData = [
 
 // ===================== //
 
-const reishiFormationDataTitle = [
-  {
-    title: 'REISHI, EXTRACTO',
-    description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
-    ingredient: 'Ganoderma lucidum'
-  }
-]
-
 const reishiFormationData = [
   {
     id: '1',
     icon: icon2,
-    // type: 'extracts 100ml',
     src: reishiextract,
     url: 'reishi',
 
     type: 'extracts',
     size: '100ml',
     iconSrc: reishiSrc,
-    ...reishiFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
-    // type: 'extracts 30ml',
     src: reishiextract,
     url: 'reishi',
 
     type: 'extracts',
     size: '30ml',
     iconSrc: reishiSrc,
-    ...reishiFormationDataTitle[0]
   },
 ]
 
@@ -289,19 +264,10 @@ const reishiBenefitsCardsData = [
 
 // ======================= //
 
-const colaFormationDataTitle = [
-  {
-    title: 'COLA DE PAVO, EXTRACTO',
-    description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
-    ingredient: 'Trametes Versicolor'
-  }
-]
-
 const colaFormationData = [
   {
     id: '1',
     icon: icon2,
-    // type: 'extracts 100ml',
     src: colaextract,
     url: 'cola-de-pavo',
 
@@ -309,12 +275,10 @@ const colaFormationData = [
     type: 'extracts',
     size: '100ml',
     iconSrc: colaSrc,
-    ...colaFormationDataTitle[0]
   },
   {
     id: '2',
     icon: icon3,
-    // type: 'extracts 30ml',
     src: colaextract,
     url: 'cola-de-pavo',
 
@@ -322,7 +286,6 @@ const colaFormationData = [
     type: 'extracts',
     size: '30ml',
     iconSrc: colaSrc,
-    ...colaFormationDataTitle[0]
   },
 ]
 

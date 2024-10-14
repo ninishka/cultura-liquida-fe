@@ -23,8 +23,9 @@ import {
 } from './styled'
 
 
-const init = (slug) => slug[0].includes("melena") ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
-: (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
+const init = (slug) => slug[0].includes("melena") 
+  ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
+  : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
 
 
 const Formation = ({ formationData }) => {
@@ -77,6 +78,7 @@ const Formation = ({ formationData }) => {
                       type="radio" 
                       name="group1" 
                       checked={id === rInit}
+                      readOnly
                   />
                   </label>  
                   <LabelContent >
