@@ -45,11 +45,11 @@ export default async function RootLayout({ children }) {
       <body className={`${mohave.variable}`}>
         <StyledRegistry>
           <GlobalStyle />
-             <CartProvider layoutData={layoutData}>
-                <HeaderComponent />
-                  {children}
-                <FooterComponent />
-              </CartProvider>
+            <CartProvider layoutData={layoutData}>
+              <HeaderComponent />
+                {children}
+              <FooterComponent />
+            </CartProvider>
         </StyledRegistry>
       </body>
     </html>
