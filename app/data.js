@@ -365,6 +365,7 @@ const colaBenefitsCardsData = [
 
 export const productContentComponents = [
   {
+    itemUrl: 'melena',
     itemNumber: '1',
     formationData: melenaFormationData,
     benefitsHeaderData: melenaBenefitsHeaderData,
@@ -372,6 +373,7 @@ export const productContentComponents = [
     indicationsImg: indicationsMelena
   },
   {
+    itemUrl: 'reishi',
     itemNumber: '2',
     formationData: reishiFormationData,
     benefitsHeaderData: reishiBenefitsHeaderData,
@@ -379,6 +381,7 @@ export const productContentComponents = [
     indicationsImg: indicationsReishi
   },
   {
+    itemUrl: 'cola',
     itemNumber: '3',
     formationData: colaFormationData,
     benefitsHeaderData: colaBenefitsHeaderData,

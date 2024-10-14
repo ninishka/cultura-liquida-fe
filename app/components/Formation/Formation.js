@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useContext } from 'react'
+import React from 'react'
+import { useParams } from 'next/navigation';
 import Counter from '../Counter/Counter'
-import CartContext from '@/app/contexts/cartContext/cartContext'
 import Link from 'next/link'
 import {
   FormationSection,
@@ -23,18 +23,18 @@ import {
 } from './styled'
 
 
+const init = (slug) => slug[0].includes("melena") ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
+: (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
+
+
 const Formation = ({ formationData }) => {
-  const { checkedState, setCheckedState } = useContext(CartContext);
+  const { slug } = useParams();
+  const rInit = init(slug)
 
-  const rechecking = id => {
-    if(checkedState !== id) setCheckedState(id)
-  }
-
-  const filterdContent = formationData.filter(({ id }) => id === checkedState)
-  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
+  const filterdContent = formationData.filter(({ id }) => id === rInit)
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
-  console.log('source - reload the page if empty', source)
 
   // if (!formationData?.[0]?.stock || isLoading) {
   //   return <Loading />;
@@ -70,23 +70,18 @@ const Formation = ({ formationData }) => {
             const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
             return (
               <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff'}}>
-                <Item 
-                  onClick={() => rechecking(id)} 
-                  aria-label={`Elección del tamaño del producto`}
-                > 
+                <Item aria-label={`Elección del tamaño del producto`}> 
                   <label htmlFor={id} aria-label={`Elección del tamaño del producto`} >
                     <RadioButton 
                       id={id}
                       type="radio" 
                       name="group1" 
-                      checked={id === checkedState}
-                      // c={console.log('id', id, checkedState)}
-                      onChange={() => rechecking(id)} 
+                      checked={id === rInit}
                   />
                   </label>  
                   <LabelContent >
                     <Icon src={icon} alt={type}/>
-                    <TextDesc>{type + size}</TextDesc>
+                    <TextDesc>{type === 'extracts' ? "Extracto " + size : "Cápsulas"}</TextDesc>
                   </LabelContent>
                 </Item>
               </Link>
