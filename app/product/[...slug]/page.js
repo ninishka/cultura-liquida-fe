@@ -37,9 +37,6 @@ const getActiveComponent = (dynamicData, slug) => {
 const ProductSections = () => {
   const { slug } = useParams();
   const { layoutData, showCart } = useContext(CartContext)
-
-  // const productProtoLogic = (slug[0].includes('melena') && "1") || (slug[0].includes('reishi') && '2') || (slug[0].includes('cola') && '3')
-  // const productProtoLogic = (slug[0].includes('melena') && "melena") || (slug[0].includes('reishi') && 'reishi') || (slug[0].includes('cola') && 'cola')
   const f = {...getActiveComponent(layoutData, slug)}
 
   return (

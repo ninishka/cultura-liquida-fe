@@ -24,16 +24,16 @@ const ModalComponent = () => {
 const postsToUpdate = cartItems.map(cartItem => {
   const { size, ingredient, amount } = cartItem;
 
-  const matchingItem = layoutData.find(dataItem => 
-      dataItem.size === size && 
-      dataItem.ingredient === ingredient
+  const matchingItem = layoutData?.length && layoutData.find(dataItem => 
+      dataItem?.size === size && 
+      dataItem?.ingredient === ingredient
   );
 
   if (matchingItem) {
       const { _id, ...restOfValues } = matchingItem; 
       return {
-          id: _id,         // id from data
-          amount: amount,  // amount from cartItems
+          id: _id,          // id from data
+          amount,  // amount from cartItems
           ...restOfValues,
       };
   }
