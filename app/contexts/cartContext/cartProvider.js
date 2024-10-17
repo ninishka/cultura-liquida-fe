@@ -61,6 +61,8 @@ const CartProvider = ({ children, layoutData }) => {
     })
   }
 
+  console.log('layoutData context', layoutData)
+
   return (
     <CartContext.Provider value={{
       cartItems,

@@ -71,6 +71,7 @@ const fetchProducts = async () => {
   
 export default async function RootLayout({ children }) {
   const layoutData = await fetchProducts()
+  console.log('layoutData rootL', layoutData)
 
   return (
     <html lang="es">
