@@ -1,6 +1,5 @@
 import { complexData, complexData2 } from '@/app/data'
-import { useState, useContext } from 'react';
-import CartContext from '@/app/contexts/cartContext/cartContext'
+import { useState } from 'react';
 import Counter from '../Counter/Counter'
 import data from '../data'
 
@@ -39,9 +38,8 @@ import {
   ImgMobile
 } from './styled'
 
-const Complex = ({something, formationData, tAmount}) => {
+const Complex = () => {
   const [ checkedState, setCheckedState ] = useState('1')
-  const { setDisplayingItem } = useContext(CartContext)
 
   const rechecking = id => {
     if(checkedState !== id) setCheckedState(id)
@@ -55,7 +53,7 @@ const Complex = ({something, formationData, tAmount}) => {
   }
 
   const handleClick = id => {
-    setDisplayingItem (id.toString())
+    // make new routing
     scrollToTop()
   }
 

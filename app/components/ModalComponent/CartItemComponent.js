@@ -45,7 +45,7 @@ const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, 
       <CartImg sizes='100vh' src={iconSrc} alt='cartitemcomponent'/>
       <CardInfoWrapper>
         <InfoContainer2>
-          <Title>{title.toUpperCase()}</Title>
+          <Title>{title?.toUpperCase()}</Title>
           <Description>{ingredient}</Description>
         </InfoContainer2>
       </CardInfoWrapper>
