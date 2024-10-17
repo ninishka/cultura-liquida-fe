@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import CartContext from '@/app/contexts/cartContext/cartContext'
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
@@ -33,7 +33,7 @@ const HeaderComponent = () => {
       <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
     </BurgerWrap>
 
-    <CartWrap type="primary"  onClick={() => {setShowCart(true)}}>
+    <CartWrap type="primary" onClick={() => setShowCart(true)}>
       <CounterCartWrap>
         <p style={{color: 'black', margin: '0 7px' }}>
           {cartItems?.length}

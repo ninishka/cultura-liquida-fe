@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 export const FooterFull = styled.footer`
   display: flex;
@@ -73,8 +74,8 @@ export const ContactWrapper = styled.div`
   }
 `
 
-export const StyledButton = styled.button`
-  display: block;
+export const StyledLink = styled(Link)`
+   display: block;
   transition: all 0.3s ease;
   padding: 15px;
   border: 2px solid transparent;

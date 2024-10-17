@@ -28,11 +28,11 @@ const init = (slug) => slug[0].includes("melena")
   : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
 
 
-const Formation = ({ formationData }) => {
+const Formation = ({ formationData, formationDataStatic }) => {
   const { slug } = useParams();
   const rInit = init(slug)
 
-  const filterdContent = formationData.filter(({ id }) => id === rInit)
+  const filterdContent = formationData?.filter(({ id }) => id === rInit)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
@@ -87,7 +87,8 @@ const Formation = ({ formationData }) => {
                   </LabelContent>
                 </Item>
               </Link>
-            )})}
+            )})
+          }
         </CheckBoxGroup>
       </div>
       <Counter filterdContent={filterdContent} preObj={preObj} />

@@ -9,7 +9,7 @@ import {
 } from './styled'
 
 const NavigationComponent = ({ isopen }) => {
-  const { setShowMenu, setDisplayingItem } = useContext(CartContext)
+  const { setShowMenu } = useContext(CartContext)
   
   return (
     <Navigation $isopen={isopen}>
@@ -18,10 +18,7 @@ const NavigationComponent = ({ isopen }) => {
           <LiItself key={title}>
             <StyledLink 
               href={`/product/${url}-${types[0]}`} 
-              onClick={() => {
-                setShowMenu(false)
-                setDisplayingItem(url?.includes('reishi') && '2' ||  url?.includes('cola') &&'3')
-              }}
+              onClick={() => setShowMenu(false)}
             >
               {title}
             </StyledLink>

@@ -12,7 +12,7 @@ import {
   BenefitIcon,
 } from './styled'
 
-const Benefits = ({ benefitsHeaderData, benefitsCardsData }) => (
+const Benefits = ({ benefitsHeaderData, benefitsCardsData, benefitsData }) => (
   <section>
     <HeaderBenefitsWrapper>
       {benefitsHeaderData.map(({ title, description1 ,description2 }) => (

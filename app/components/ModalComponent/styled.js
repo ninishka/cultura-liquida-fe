@@ -62,8 +62,7 @@ export const CartItem = styled.div`
   margin: 22px 0px 22px;
   width: inherit;
   gap: 9px;
-  font-family: '__mohave_5f7c1e';
-
+  font-family: var(--font-mohave);
 
   @media (max-width: 700px) {
     gap: 0;

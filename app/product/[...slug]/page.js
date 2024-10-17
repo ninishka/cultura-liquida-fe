@@ -37,17 +37,18 @@ const getActiveComponent = (dynamicData, slug) => {
 const ProductSections = () => {
   const { slug } = useParams();
   const { layoutData, showCart } = useContext(CartContext)
+  const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
   const f = {...getActiveComponent(layoutData, slug)}
 
   return (
     <div style={{ color: '#fff'}}>
       {showCart && <ModalComponent />}
-      <Formation formationData={f?.formationData} />
+      <Formation formationData={f?.formationData} formationDataStatic={staticData?.[0]} />
       <Benefits 
-        benefitsHeaderData={f?.benefitsHeaderData} 
-        benefitsCardsData={f?.benefitsCardsData} 
+        benefitsHeaderData={staticData?.[0]?.benefitsHeaderData} 
+        benefitsCardsData={staticData?.[0]?.benefitsCardsData} 
       />
-      <Indications indicationsImg={f?.indicationsImg}  />
+      <Indications indicationsImg={staticData?.[0]?.indicationsImg}  />
     </div>
   );
 };
