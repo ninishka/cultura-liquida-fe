@@ -18,7 +18,7 @@ let url
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:3000';
 } else {
-  url = process.env.VERCEL_URL
+  url = `https://${process.env.VERCEL_URL}`
 }
 
 console.log('url', url)
