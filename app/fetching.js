@@ -22,12 +22,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 console.log('url', url)
-console.log('process.env.VERCEL_URL', process.env.VERCEL_URL)
-
-console.log('process.env.MONGODB_URI fff', process.env.MONGODB_URI)
-console.log('process.env fetching', process.env)
 
 export const fetchProducts = async () => {
+  console.log('`{url}/api/products`', `${url}/api/products`)
+
   try {
     const response = await fetch(`${url}/api/products`
       // , { next: { revalidate: 30 } }
