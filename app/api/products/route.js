@@ -21,9 +21,11 @@ export async function GET(request) {
     // вызов подключения к базе данных должен быть в каждом месте, где оно требуется.   
     
     await connectToDatabase();
-    
+    console.log('Database connected successfully in GET');
+
     const products = await Post.find();
-    
+    console.log('Products fetched:', products);
+
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
     console.error('Error fetching products:', error);
