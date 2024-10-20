@@ -23,7 +23,8 @@ export async function GET(request) {
     await connectToDatabase();
     console.log('Database connected successfully in GET');
 
-    const products = await Post.find();
+    // const products = await Post.find();
+    const products = await getProduct();
     console.log('Products fetched:', products);
 
     return NextResponse.json(products, { status: 200 });

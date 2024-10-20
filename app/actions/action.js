@@ -16,8 +16,15 @@ const addProduct = async post => {
 }
 
 const getProduct = async () => {
-    return Post.find()
-}
+    try {
+      const products = await Post.find();
+      console.log('Fetched products:', products);
+      return products;
+    } catch (error) {
+      console.error('Error fetching products from MongoDB:', error);
+      throw new Error('Failed to fetch products from MongoDB');
+    }
+  };
 
 // const deletePost = async id => {
 //     return Post.findByIdAndDelete(id)
