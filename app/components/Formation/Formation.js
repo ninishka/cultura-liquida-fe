@@ -32,8 +32,10 @@ const Formation = ({ formationData, formationDataStatic }) => {
   const { slug } = useParams();
   console.log('slug', slug)
   const rInit = init(slug)
+  console.log('rInit', rInit)
 
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
+  console.log('filterdContent', filterdContent)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
