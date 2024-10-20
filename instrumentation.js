@@ -5,8 +5,7 @@
 // }
 
 
-// import connectToDatabase from '@/lib/db';
-const connectToDatabase = require('@/lib/db');
+import connectToDatabase from '@/lib/db';
 
 export async function register() {
   try {
