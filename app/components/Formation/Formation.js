@@ -30,6 +30,7 @@ const init = (slug) => slug[0].includes("melena")
 
 const Formation = ({ formationData, formationDataStatic }) => {
   const { slug } = useParams();
+  console.log('slug', slug)
   const rInit = init(slug)
 
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
