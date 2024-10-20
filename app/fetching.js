@@ -36,7 +36,7 @@ export const fetchProducts = async () => {
     console.log('data RootLayout', data?.length)
     return data;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Fetch Error fetching products:', error);
   } finally {
   }
 };
