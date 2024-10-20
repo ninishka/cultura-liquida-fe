@@ -1,7 +1,8 @@
-import connectToDatabase from '@/lib/db';
+// import connectToDatabase from '@/lib/db';
 import Post from '@/models/Post';
 import { NextResponse } from 'next/server';
 import { addProduct, getProduct, editProduct } from '@/app/actions/action';
+const connectToDatabase = require('@/lib/db');
 
 // export async function GET(request) {
 //     try {
