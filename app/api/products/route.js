@@ -1,14 +1,34 @@
+import connectToDatabase from '@/lib/db';
+import Post from '@/models/Post';
 import { NextResponse } from 'next/server';
 import { addProduct, getProduct, editProduct } from '@/app/actions/action';
 
+// export async function GET(request) {
+//     try {
+//         const product = await getProduct();
+//         return NextResponse.json(product, { status: 200 });
+//     } catch (error) {
+//         console.error('Error fetching product:', error);
+//         return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });
+//     }
+// }
+
 export async function GET(request) {
-    try {
-        const product = await getProduct();
-        return NextResponse.json(product, { status: 200 });
-    } catch (error) {
-        console.error('Error fetching product:', error);
-        return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });
-    }
+  try {
+    // Даже если подключение к базе данных выполнено в instrumentation.js, 
+    // каждый API роут или серверный компонент в Next.js может быть изолирован, и они могут выполняться в разных потоках. 
+    // Поэтому для надежности и во избежание проблем с запросами (например, с буферизацией), 
+    // вызов подключения к базе данных должен быть в каждом месте, где оно требуется.   
+    
+    await connectToDatabase();
+    
+    const products = await Post.find();
+    
+    return NextResponse.json(products, { status: 200 });
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+  }
 }
 
 // export async function POST(request) {
