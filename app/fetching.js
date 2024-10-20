@@ -24,6 +24,9 @@ if (process.env.NODE_ENV === 'development') {
 console.log('url', url)
 console.log('process.env.VERCEL_URL', process.env.VERCEL_URL)
 
+console.log('process.env.MONGODB_URI', process.env.MONGODB_URI)
+console.log('process.env', process.env)
+
 export const fetchProducts = async () => {
   try {
     const response = await fetch(`${url}/api/products`
@@ -34,10 +37,6 @@ export const fetchProducts = async () => {
       throw new Error('Failed to fetch products');
     }
     const data = await response.json()
-    // .then(r => {
-    //     const g = groupObjectsByTitle(r);
-    //     return g
-    // })
     console.log('data RootLayout', data?.length)
     return data;
   } catch (error) {
