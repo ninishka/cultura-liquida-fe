@@ -17,15 +17,15 @@
 let url
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:3000';
-} 
-// else {
-//   url = `https://${process.env.VERCEL_URL}`
-// }
+} else {
+  url = `https://${process.env.VERCEL_URL}`
+}
 
 export const fetchProducts = async () => {
-  const h = url ? `${url}/api/products` : '/api/products' 
+  console.log('`{url}/api/products`', `${url}/api/products`)
+
   try {
-    const response = await fetch(h
+    const response = await fetch(`${url}/api/products`
       // , { next: { revalidate: 30 } }
     );
     if (!response.ok) {
