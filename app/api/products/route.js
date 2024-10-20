@@ -13,24 +13,23 @@ import { addProduct, getProduct, editProduct } from '@/app/actions/action';
 //     }
 // }
 
+// Даже если подключение к базе данных выполнено в instrumentation.js, 
+// каждый API роут или серверный компонент в Next.js может быть изолирован, и они могут выполняться в разных потоках. 
+// Поэтому для надежности и во избежание проблем с запросами (например, с буферизацией), 
+// вызов подключения к базе данных должен быть в каждом месте, где оно требуется.   
 export async function GET(request) {
+    const headers = new Headers();
+    headers.set('Access-Control-Allow-Origin', '*'); // Разрешить запросы с любых доменов
+  
   try {
-    // Даже если подключение к базе данных выполнено в instrumentation.js, 
-    // каждый API роут или серверный компонент в Next.js может быть изолирован, и они могут выполняться в разных потоках. 
-    // Поэтому для надежности и во избежание проблем с запросами (например, с буферизацией), 
-    // вызов подключения к базе данных должен быть в каждом месте, где оно требуется.   
-    
     await connectToDatabase();
-    console.log('Database connected successfully in GET');
-
-    // const products = await Post.find();
     const products = await getProduct();
     console.log('Products fetched:', products);
 
-    return NextResponse.json(products, { status: 200 });
+    return NextResponse.json(products, { headers, status: 200 });
   } catch (error) {
     console.error('GET Error fetching products:', error);
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch products' }, { headers, status: 500 });
   }
 }
 
