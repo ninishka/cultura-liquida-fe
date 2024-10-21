@@ -5,6 +5,7 @@ import CartProvider from './contexts/cartContext/cartProvider'
 import StyledRegistry from './registry';
 import { GlobalStyle } from './globalStyles';
 import { fetchProducts } from './fetching'
+import { getProduct } from '@/app/actions/action';
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -41,7 +42,8 @@ export default async function RootLayout({ children }) {
   // const layoutData = await fetchProducts()
   let layoutData = [];
   try {
-    layoutData = await fetchProducts();
+    layoutData = await getProduct(); 
+    console.log('Fetched products in RootLayout:', layoutData);
   } catch (error) {
     console.error('Error in RootLayout fetching products:', error);
   }
