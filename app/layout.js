@@ -38,7 +38,13 @@ export const metadata = {
   // sitemap
   
 export default async function RootLayout({ children }) {
-  const layoutData = await fetchProducts()
+  // const layoutData = await fetchProducts()
+  let layoutData = [];
+  try {
+    layoutData = await fetchProducts();
+  } catch (error) {
+    console.error('Error in RootLayout fetching products:', error);
+  }
 
   return (
     <html lang="es">

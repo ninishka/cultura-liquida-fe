@@ -1,42 +1,29 @@
-// const groupObjectsByTitle = arr => {
-//     const grouped = arr?.reduce((acc, obj) => {
-//       if (!acc[obj.title]) {
-//         acc[obj.title] = [];
-//       }
-//       acc[obj.title].push(obj);
-//       return acc;
-//     }, {});
-  
-//     return Object.keys(grouped).map(title => ({
-//       // title,
-//       bdData: grouped[title]
-//     }));
-//   }
-  
-
 let url
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:3000';
-} 
-// else {
-//   url = `https://${process.env.VERCEL_URL}`
-// }
+} else {
+  url = `https://${process.env.VERCEL_URL}`
+}
 
 export const fetchProducts = async () => {
-  const h = url ? `${url}/api/products` : '/api/products' 
+  // console.log('`{url}/api/products`', `${url}/api/products`)
+
+  const apiUrl = `${url}/api/products`;
+  console.log('API URL:', apiUrl);
+
   try {
-    const response = await fetch(h
+    const response = await fetch(apiUrl
       // , { next: { revalidate: 30 } }
     );
     if (!response.ok) {
-      console.log('!response.ok', !response.ok)
-      throw new Error('Failed to fetch products');
+      console.log('Response not OK, status:', response.status)
+      throw new Error(`Failed to fetch products, status: ${response.status}`);
     }
     const data = await response.json()
     console.log('data RootLayout', data?.length)
     return data;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Fetch Error fetching products:', error); 
   } finally {
   }
 };

@@ -3,11 +3,12 @@
 import React, { useState } from 'react'
 import CartContext from './cartContext'
 
-const CartProvider = ({ children, layoutData }) => {
-  console.log('layoutData', layoutData)
+const CartProvider = ({ children, layoutData: ld }) => {
+  // console.log('layoutData', layoutData)
   const [cartItems, setCartItems] = useState([])
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [layoutData, setLayoutData] = useState(ld)
 
 
 
