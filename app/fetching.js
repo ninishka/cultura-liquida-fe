@@ -6,10 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const fetchProducts = async () => {
-  // console.log('`{url}/api/products`', `${url}/api/products`)
-
   const apiUrl = `${url}/api/products`;
-  console.log('API URL:', apiUrl);
 
   try {
     const response = await fetch(apiUrl
