@@ -1,19 +1,3 @@
-// const groupObjectsByTitle = arr => {
-//     const grouped = arr?.reduce((acc, obj) => {
-//       if (!acc[obj.title]) {
-//         acc[obj.title] = [];
-//       }
-//       acc[obj.title].push(obj);
-//       return acc;
-//     }, {});
-  
-//     return Object.keys(grouped).map(title => ({
-//       // title,
-//       bdData: grouped[title]
-//     }));
-//   }
-  
-
 let url
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:3000';
@@ -33,7 +17,7 @@ export const fetchProducts = async () => {
     );
     if (!response.ok) {
       console.log('Response not OK, status:', response.status)
-      throw new Error('Failed to fetch products, status: ${response.status}');
+      throw new Error(`Failed to fetch products, status: ${response.status}`);
     }
     const data = await response.json()
     console.log('data RootLayout', data?.length)
