@@ -235,7 +235,7 @@ const reishiFormationData = [
 const reishiBenefitsHeaderData = [
   {
     title: 'DE LA REISHI',
-    description1: `El extracto de Reishi se ha utilizado durante mucho tiempo como tratamiento para muchas enfermedades. El extracto de Reishi contiene muchas sustancias beneficiosas, minerales y vitaminas. Y una característica importante de este remedio es la ausencia de efectos secundarios por su recepción.`,
+    description1: `El Reishi ha sido utilizado durante siglos por sus potentes beneficios para la salud. Rico en polisacáridos, triterpenoides y antioxidantes, el Reishi fortalece el sistema inmunológico, apoya la salud cardiovascular y mejora el bienestar general. A diferencia de otros remedios, el Reishi se destaca por su falta de efectos secundarios y su amplia gama de compuestos naturales que favorecen la salud.`,
     description2: `El extracto de hongo Reishi es un producto natural único. Tiene una amplia gama de efectos en el cuerpo humano debido a su rica composición química. Vitaminas, polisacáridos, micro y macroelementos, proteínas, grasas, ácidos: todas estas sustancias están contenidas en el extracto.`,
   }
 ]
@@ -243,7 +243,7 @@ const reishiBenefitsHeaderData = [
 const reishiBenefitsCardsData = [
   {
     src: imgR1,
-    description: 'Promueve la pérdida de peso'
+    description: 'Apoya el metabolismo y el control del peso'
   },
   {
     src: img2,
@@ -251,19 +251,19 @@ const reishiBenefitsCardsData = [
   },
   {
     src: imgR3,
-    description: 'Mejora el funcionamiento del sistema cardiovascular'
+    description: 'Apoya la salud cardiovascular'
   },
   {
     src: img5,
-    description: 'Prevención de enfermedades del tracto gastrointestinal'
+    description: 'Apoya la salud gastrointestinal y reduce la inflamación'
   },
   {
     src: imgR4,
-    description: 'Elimina dolores de cabeza'
+    description: 'Reduce la fatiga y mejora el bienestar general'
   },
   {
     src: imgR6,
-    description: 'Fuente de minerales y vitaminas'
+    description: 'Rico en compuestos bioactivos y antioxidantes'
   },
 ]
 
