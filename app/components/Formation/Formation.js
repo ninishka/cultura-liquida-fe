@@ -71,7 +71,7 @@ const Formation = ({ formationData, formationDataStatic }) => {
         />
       </ImageWrapperMobile>
       <div>
-        <Release>Seleccione el formulario de liberación:</Release>
+        <Release>Seleccione la presentación del producto:</Release>
         <CheckBoxGroup>
           {formationData.map(({type, icon, id, url, size, price}) => {
             const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
