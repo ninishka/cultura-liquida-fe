@@ -2,11 +2,12 @@ let url
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:3000';
 } else {
-  url = `https://${process.env.VERCEL_URL}`
+  url = 'https://cultura-liquida.com'
 }
 
 export const fetchProducts = async () => {
   const apiUrl = `${url}/api/products`;
+  console.log('apiUrl', apiUrl)
 
   try {
     const response = await fetch(apiUrl
