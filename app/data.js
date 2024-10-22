@@ -134,6 +134,7 @@ const melenaFormationData = [
     src: melenacaps,
     iconSrc: melenaCapsulsSrc,
     url: 'melena-de-leon',
+    title: 'MELENA DE LEON',
 
     type: 'capsules',
   },
@@ -143,6 +144,7 @@ const melenaFormationData = [
     src: melenaextract,
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
+    title: 'MELENA DE LEON',
 
     type: 'extracts',
     size: '100ml',
@@ -153,6 +155,7 @@ const melenaFormationData = [
     src: melenaextract,
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
+    title: 'MELENA DE LEON',
 
     type: 'extracts',
     size: '30ml',
@@ -210,6 +213,7 @@ const reishiFormationData = [
     icon: icon2,
     src: reishiextract,
     url: 'reishi',
+    title: 'REISHI, EXTRACTO',
 
     type: 'extracts',
     size: '100ml',
@@ -220,6 +224,7 @@ const reishiFormationData = [
     icon: icon3,
     src: reishiextract,
     url: 'reishi',
+    title: 'REISHI, EXTRACTO',
 
     type: 'extracts',
     size: '30ml',
@@ -270,7 +275,7 @@ const colaFormationData = [
     icon: icon2,
     src: colaextract,
     url: 'cola-de-pavo',
-
+    title: 'COLA DE PAVO, EXTRACTO',
 
     type: 'extracts',
     size: '100ml',
@@ -281,7 +286,7 @@ const colaFormationData = [
     icon: icon3,
     src: colaextract,
     url: 'cola-de-pavo',
-
+    title: 'COLA DE PAVO, EXTRACTO',
 
     type: 'extracts',
     size: '30ml',

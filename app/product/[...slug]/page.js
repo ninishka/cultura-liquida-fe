@@ -10,30 +10,22 @@ import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 import { productContentComponents } from '@/app/data'
 
 const getActiveComponent = (dynamicData, slug) => {
-  console.log('dynamicData s', dynamicData)
   const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
 
   const newFormationData = staticData?.formationData?.map(fItem => {
-    console.log('fItem', fItem)
     let matchingBdItem;
   
     if (fItem?.type.includes('extracts')) {
-      console.log('inc extracts')
-      matchingBdItem = dynamicData?.find(bItem => 
-        bItem?.type === fItem.type && bItem.size === fItem.size
+      matchingBdItem = dynamicData?.find(({title, type, size}) => 
+        title === fItem?.title && type === fItem.type && size === fItem.size
       );
     } 
     else if (fItem?.type.includes('capsules')) {
-      console.log('inc capsules')
       matchingBdItem = dynamicData?.find(bItem => bItem?.type === fItem.type);
     }  
     if (matchingBdItem) {
-      console.log('matchingBdItem', matchingBdItem)
       return { ...fItem, ...matchingBdItem };
     }
-
-    console.log('dynamicData e', dynamicData)
-
   
     return fItem;
   });
