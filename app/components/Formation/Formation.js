@@ -30,15 +30,11 @@ const init = (slug) => slug[0].includes("melena")
 
 const Formation = ({ formationData, formationDataStatic }) => {
   const { slug } = useParams();
-  console.log('slug', slug)
   const rInit = init(slug)
   console.log('rInit', rInit)
 
-  console.log('formationData', formationData)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
-  const filterdContent2 = formationData?.find(({ id }) => id === rInit)
-  console.log('filterdContent', filterdContent)
-  console.log('filterdContent2', filterdContent2)
+  // const filterdContent2 = formationData?.find(({ id }) => id === rInit)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
