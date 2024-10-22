@@ -8,11 +8,7 @@ const nextConfig = {
   },
 
   env: {
-    AIRTABLE_API_KEY: process.env.AIRTABLE_API_KEY,
-    APP_ID: process.env.APP_ID,
-    API_URL: process.env.API_URL,
     MONGODB_URI: process.env.MONGODB_URI,
-    VERCEL_URL: process.env.VERCEL_URL
   },
 
   async redirects() {
