@@ -85,9 +85,11 @@ const Complex = () => {
        <RightContentWrap>
           <TitleWrap>
             <Benefits>
-             {'mejorar significativamente memoria, sistema nervioso, metabolismo '.toUpperCase()}4
+              MEJORAR SIGNIFICATIVAMENTE MEMORIA, SISTEMA NERVIOSO, METABOLISMO
             </Benefits>
-            <DiscountText>¡Con la ayuda de un complejo de suplementos de hongos con un 20% de descuento!</DiscountText>
+            <DiscountText>
+              ¡Con la ayuda de un complejo de suplementos de hongos con un 20% de descuento!
+            </DiscountText>
           </TitleWrap>
           <TwoCardwrap>
             <ComplexItemsWrap>
@@ -113,7 +115,7 @@ const Complex = () => {
             </ComplexItemsWrap>
             <FormationWrap>
               <CheckBoxGroup>
-                <Selecting>Seleccione el formulario de liberación:</Selecting>
+                <Selecting>Seleccione la presentación del producto:</Selecting>
                 {complexData2.map(({type, iconSrc, id,}) => (
                   <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
                     <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
@@ -135,7 +137,7 @@ const Complex = () => {
             </FormationWrap>
           </TwoCardwrap>
           <PriceCounterWrap>
-            <Counter filterdContent={filterdContent} preObj={preObj} isComplex/> 
+            <Counter filterdContent={filterdContent} preObj={preObj} isComplex /> 
           </PriceCounterWrap>
        </RightContentWrap>
       </AllWrap>

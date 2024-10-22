@@ -18,7 +18,7 @@ const Benefits = ({ benefitsHeaderData, benefitsCardsData, benefitsData }) => (
       {benefitsHeaderData.map(({ title, description1 ,description2 }) => (
         <Fragment key={title}>
           <TextForBenefits>
-            BENEFICIOSAS <br /> {title}
+            BENEFICIOS <br /> {title}
           </TextForBenefits>
           <DescrWrapper>
             <Description>{description1}</Description>

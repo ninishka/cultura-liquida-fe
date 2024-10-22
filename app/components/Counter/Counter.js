@@ -45,7 +45,7 @@ const Counter = ({ amount, isModal, filterdContent, preObj, isComplex }) => {
         </BuyButton>
       }
       {filterdContent?.[0]?.price && <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}
-      {isComplex && <Price style={{ textDecoration: 'line-through', fontSize: 24, color: '#9F9F9F'}}>{filterdContent?.[0]?.price} COP</Price>}
+      {isComplex && <Price style={{ textDecoration: 'line-through', fontSize: 24, color: '#9F9F9F'}}>{filterdContent?.[0]?.originalPrice} COP</Price>}
   </CounterWrapper>
 )}
 

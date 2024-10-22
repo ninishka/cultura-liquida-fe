@@ -162,7 +162,7 @@ const melenaFormationData = [
 const melenaBenefitsHeaderData = [
   {
     title: 'DE LA MELENA DE LEÓN',
-    description1: `Conocida como "La seta inteligente", Lion's Mane es una opción ideal para cualquiera que busque apoyo cognitivo, memoria y estado de ánimo.`,
+    description1: `Conocida como 'La seta inteligente', la Melena de León es ideal para quienes buscan mejorar su rendimiento cognitivo, memoria y estado de ánimo.`,
     description2: `Reconocida desde hace mucho tiempo por apoyar el sistema nervioso, los estudios han demostrado que la melena de león puede aumentar el factor de crecimiento nervioso.`,
   }
 ]
@@ -170,15 +170,15 @@ const melenaBenefitsHeaderData = [
 const melenaBenefitsCardsData = [
   {
     src: img1,
-    description: 'Elimina la ansiedad y la irritabilidad'
+    description: 'Ayuda a reducir la ansiedad y la irritabilidad'
   },
   {
     src: img2,
-    description: 'Mejora de la inmunidad'
+    description: 'Fortalece el sistema inmunológico'
   },
   {
     src: img3,
-    description: 'Induce sueños vívidos e intensos'
+    description: 'Apoya la salud cognitiva y neuronal'
   },
   {
     src: img4,
@@ -197,8 +197,8 @@ const melenaBenefitsCardsData = [
 export const indicationsData = [
   {
     indication1: '20 ml dos veces al día 30 minutos antes de las comidas.',
-    indication2: 'Este polvo biodisponible tiene un perfil de sabor suave y se puede mezclar con su bebida o receta de comida favorita.',
-    caution: ' si tiene una condición médica, está tomando medicamentos o está embarazada o amamantando, consulte a un profesional de la salud antes de usar este producto. Mantener fuera del alcance de los niños.'
+    indication2: 'Este extracto es de fácil absorción y puede mezclarse con agua o su bebida favorita.',
+    caution: ' Si está tomando medicamentos o tiene una condición médica, consulte a su médico antes de usar este producto.'
   }
 ]
 
@@ -242,7 +242,7 @@ const reishiBenefitsCardsData = [
   },
   {
     src: img2,
-    description: 'Mejora de la inmunidad'
+    description: 'Fortalece el sistema inmunológico'
   },
   {
     src: imgR3,
@@ -292,7 +292,7 @@ const colaFormationData = [
 const colaBenefitsHeaderData = [
   {
     title: 'DE LA COLA DE PAVO',
-    description1: `Trametes es un hongo que activa el sistema inmunológico estimulando las células inmunitarias. Se mejoran las funciones del organismo en la lucha contra infecciones, resfriados, patógenos, virus, bacterias e infecciones. Esto se debe al alto contenido de polisacáridos.`,
+    description1: `El Trametes versicolor, conocido comúnmente como "Cola de Pavo", es un hongo reconocido por su capacidad para activar el sistema inmunológico. Estimula las células inmunitarias y ayuda al organismo en la lucha contra infecciones y virus gracias a su contenido en polisacáridos. También ha demostrado eficacia en la prevención de ciertos tipos de cáncer y otras enfermedades inflamatorias.`,
     description2: `Destruye infecciones, toxinas y patógenos que ingresan a la sangre, previene la formación de células cancerosas y ayuda a los glóbulos blancos a destruirlas en las primeras etapas. Trametes ha demostrado ser eficaz en la prevención del VPH, la psoriasis y las enfermedades renales.`,
   }
 ]
@@ -300,15 +300,15 @@ const colaBenefitsHeaderData = [
 const colaBenefitsCardsData = [
   {
     src: imgC1,
-    description: 'Elimina la ansiedad y la irritabilidad'
+    description: 'Ayuda a reducir la ansiedad y la irritabilidad'
   },
   {
     src: imgC2,
-    description: 'Prevención contra bacterias y virus'
+    description: 'Ayuda en la prevención de infecciones bacterianas y virales'
   },
   {
     src: img5,
-    description: 'Limpia los intestinos de toxinas y desechos el funcionamiento del sistema cardiovascular'
+    description: 'Ayuda a limpiar el organismo de toxinas y mejorar el funcionamiento cardiovascular'
   },
   {
     src: imgC4,
@@ -316,11 +316,11 @@ const colaBenefitsCardsData = [
   },
   {
     src: imgC5,
-    description: 'Restaura la piel'
+    description: 'Favorece la regeneración de la piel'
   },
   {
     src: img2,
-    description: 'Mejora de la inmunidad'
+    description: 'Fortalece el sistema inmunológico'
   },
 ]
 
@@ -366,7 +366,7 @@ export const howToCardsData = [
   },
   {
     img1: imgC6,
-    description: 'Seleccione el método de pago apropiado y pague su pedido.',
+    description: 'Elige tu método de pago preferido y completa tu compra',
     description2: 'Aceptamos pago vía Mercado Pago',
     arrow: imgC9
   },
@@ -391,14 +391,16 @@ export const complexData2 = [
     id: '1',
     type: 'extracts 100ml',
     iconSrc: imgC10,
-    price: 230000
+    price: 240000,
+    originalPrice: 300000
   },
   {
     title:'complejo 30ml',
     id: '2',
     type: 'extracts 30ml',
     iconSrc: imgC11,
-    price: 150000
+    price: 105000,
+    originalPrice: 84000
   },
 ]
 

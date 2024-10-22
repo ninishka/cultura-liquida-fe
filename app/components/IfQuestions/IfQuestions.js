@@ -17,8 +17,9 @@ const IfQuestions = ({something}) => {
     <section >
       <Wrapper>
         <TextWrapper>
-          <ContactText>¿Aún tienes preguntas?</ContactText>
-          <Text>¡Escríbenos por Telegram o Instagram!</Text>
+          <ContactText>¿Tienes preguntas?</ContactText>
+          <Text>Contáctanos en Telegram o Whatsapp y te responderemos rápidamente.</Text>
+          {/* TODO add whatsapp link and icon */}
         </TextWrapper>
         <ContactWrapper>
           <a href="https://t.me/nameless_berk" target="_blank"><Contacts sizes='100vw' src={telegram} alt="telegram"/></a>
