@@ -20,7 +20,10 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/node": "^22.8.5",
+    "@types/react": "^18.3.12",
     "eslint": "^8",
-    "eslint-config-next": "14.2.11"
+    "eslint-config-next": "14.2.11",
+    "typescript": "^5.6.3"
   }
 }

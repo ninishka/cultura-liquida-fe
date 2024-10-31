@@ -2,37 +2,19 @@
 
 import React, { useState, useEffect } from 'react'
 import CartContext from './cartContext'
-// import { fetchProducts } from '@/fetching' '@/lib/db
-// import { fetchProducts } from './../../fetching'
 
 const CartProvider = ({ children, layoutData: ld }) => {
-  // console.log('layoutData', layoutData)
   const [cartItems, setCartItems] = useState([])
   const [showCart, setShowCart] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const [layoutData, setLayoutData] = useState(ld)
-
-  // const [data, setData] = useState([]);
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetchProducts();
-  //     setData(response);
-  //   } catch (error) {
-  //     console.error('CartProvider autofetch error:', error);
-  //   }
-  // }
-  // useEffect(() => {
-  //   fetchData();
-
-  //   // REV 8
-  //   const interval = setInterval(fetchData, 30000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
+  console.log('layoutData', layoutData)
 
   const addToCart = async (item, amount = 1) => {
     if (!item || !item.id) return false // _id
     const id = item?.idCart // itemId
+
+    console.log('item', item)
 
     setCartItems(value => {
       const v = [...value]
@@ -80,7 +62,6 @@ const CartProvider = ({ children, layoutData: ld }) => {
     })
   }
 
-  // console.log('layoutData context', layoutData?.[1]?.stock)
   console.log('layoutData context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
 
   return (

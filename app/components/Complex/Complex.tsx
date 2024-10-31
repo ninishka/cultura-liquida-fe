@@ -1,8 +1,8 @@
+import React, { FC } from 'react'
 import { complexData, complexData2 } from '@/app/data'
 import { useState } from 'react';
 import Counter from '../Counter/Counter'
 import data from '../data'
-
 
 import imgC9 from '@/app/icons/CL-703.png'
 import imgC10 from '@/app/icons/CL-71.png'
@@ -38,42 +38,28 @@ import {
   ImgMobile
 } from './styled'
 
-const Complex = () => {
-  const [ checkedState, setCheckedState ] = useState('1')
+const Complex: FC = () => {
+  const [ checkedState, setCheckedState ] = useState<string>('1')
 
-  const rechecking = id => {
+  const rechecking = (id: string) => {
     if(checkedState !== id) setCheckedState(id)
   }
 
-  const isBrowser = () => typeof window !== 'undefined';
+  const isBrowser = (): boolean  => typeof window !== 'undefined';
 
-  const scrollToTop = () => {
-      if (!isBrowser()) return;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToTop = (): void => {
+    if (!isBrowser()) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  const handleClick = id => {
+  const handleClick = (id: string): void => {
     // make new routing
     scrollToTop()
   }
 
-
   const filterdContent = complexData2.filter(({ id }) => id === checkedState)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
   const preObj = {idCart , ...filterdContent?.[0]}
-
-  const complexDataHui = [
-    {
-      id: '1',
-      price1: 200000,
-      price2: 160000,
-    },
-    {
-      id: '2',
-      price1: 111000,
-      price2: 100000,
-    }
-  ]
 
   return (
     <section>

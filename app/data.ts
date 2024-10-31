@@ -389,8 +389,16 @@ export const howToCardsData = [
 
 //==================//
 
+interface ComplexData {
+  id: string;
+  title: string;
+  type: string;
+  iconSrc: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
+  price: number;
+  originalPrice: number;
+}
 
-export const complexData2 = [
+export const complexData2: ComplexData[] = [
   {
     title:'complejo 100ml',
     id: '1',
