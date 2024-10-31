@@ -1,13 +1,13 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useContext } from 'react';
-import CartContext from '@/app/contexts/cartContext/cartContext'
+import { RootState } from '@/app/store'
 import Formation from '@/app/components/Formation/Formation'
 import Benefits from '@/app/components/Benefits/Benefits'
 import Indications from '@/app/components/Indications/Indications'
 import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 import { productContentComponents } from '@/app/data'
+import { useSelector } from 'react-redux'
 
 const getActiveComponent = (dynamicData, slug) => {
   const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
@@ -36,7 +36,8 @@ const getActiveComponent = (dynamicData, slug) => {
 
 const ProductSections = () => {
   const { slug } = useParams();
-  const { layoutData, showCart } = useContext(CartContext)
+  const { showCart, layoutData } = useSelector((state: RootState) => state.cart);
+ 
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
   const f = {...getActiveComponent(layoutData, slug)}
 

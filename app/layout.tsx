@@ -1,12 +1,16 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import localFont from "next/font/local";
 import HeaderComponent from './components/HeaderComponent/HeaderComponent'
 import FooterComponent from './components/FooterComponent/FooterComponent'
-import CartProvider from './contexts/cartContext/cartProvider'
 import StyledRegistry from './registry';
+import DataFetcher from './DataFetcher';
 import { GlobalStyle } from './globalStyles';
 import { fetchProducts } from './fetching'
 import { getProduct } from '@/app/actions/action';
+
+import { store } from '@/app/store'
+import ReduxProvider from "@/app/providers/ReduxProvider";
+import { setLayoutData } from '@/app/store/slices/cartSlice'; // Adjust the import path accordingly
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -39,14 +43,8 @@ export const metadata = {
   //  Author and Copyright ?
   //  sitemap
 
-
-// interface RootLayoutProps {
-//   children: ReactNode;
-// }
-
   
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-
   //  const layoutData = await fetchProducts()
   let layoutData = [];
   try {
@@ -54,19 +52,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   } catch (error) {
     console.error('Error in RootLayout fetching products:', error);
   }
-  
-   console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
+     console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
          <StyledRegistry>
            <GlobalStyle />
-             <CartProvider layoutData={layoutData}>
-               <HeaderComponent />
-                 {children}
-               <FooterComponent />
-             </CartProvider>
+             <ReduxProvider>
+                <DataFetcher />
+                <HeaderComponent />
+                  {children}
+                <FooterComponent />
+             </ReduxProvider>
          </StyledRegistry>
       </body>
     </html>

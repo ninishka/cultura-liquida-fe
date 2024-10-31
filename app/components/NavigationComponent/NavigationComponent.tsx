@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
-import CartContext from '@/app/contexts/cartContext/cartContext'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleShowMenu } from '@/app/store/slices/cartSlice'
 import data from '../data'
 import {
   Navigation,
@@ -9,7 +10,7 @@ import {
 } from './styled'
 
 const NavigationComponent = ({ isopen }) => {
-  const { setShowMenu } = useContext(CartContext)
+  const dispatch = useDispatch()
   
   return (
     <Navigation $isopen={isopen}>
@@ -18,7 +19,7 @@ const NavigationComponent = ({ isopen }) => {
           <LiItself key={title}>
             <StyledLink 
               href={`/product/${url}-${types[0]}`} 
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(toggleShowMenu())}
             >
               {title}
             </StyledLink>
