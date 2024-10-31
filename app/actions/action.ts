@@ -14,6 +14,9 @@ interface Product extends Document {
 }
 
 // type PlainProduct = Omit<Product, '_id'> & { _id?: string };
+interface PlainProduct extends Product {
+  _id: string
+}
 
 const getProduct = async (): Promise<Product[]> => {
   try {
@@ -24,7 +27,7 @@ const getProduct = async (): Promise<Product[]> => {
 
       // return products;
 
-      const plainProducts: Product[] = products.map(product => ({
+      const plainProducts: PlainProduct[] = products.map(product => ({
         ...product,
         _id: product._id.toString(),
       }));
