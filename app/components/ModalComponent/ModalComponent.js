@@ -61,6 +61,8 @@ const validPostsToUpdate = postsToUpdate.filter(item => item !== null);
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ id, updatedData }),
+            // REV 7
+            // next: { revalidate: 30 },
         });
 
         if (!response.ok) {
