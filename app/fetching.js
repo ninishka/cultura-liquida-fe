@@ -2,15 +2,17 @@ let url
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:3000';
 } else {
-  url = `https://${process.env.VERCEL_URL}`
+  url = 'https://www.cultura-liquida.com'
 }
 
 export const fetchProducts = async () => {
+  console.log('fetchProducts')
   const apiUrl = `${url}/api/products`;
 
   try {
     const response = await fetch(apiUrl
-      // , { next: { revalidate: 30 } }
+      // TODO REV 1
+      , { next: { revalidate: 1 } }
     );
     if (!response.ok) {
       console.log('Response not OK, status:', response.status)

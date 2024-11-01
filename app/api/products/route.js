@@ -1,5 +1,4 @@
-import connectToDatabase from '@/lib/db';
-import Post from '@/models/Post';
+// import connectToDatabase from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { addProduct, getProduct, editProduct } from '@/app/actions/action';
 
@@ -12,11 +11,17 @@ export async function GET(request) {
     // headers.set('Access-Control-Allow-Origin', '*'); // Разрешить запросы с любых доменов
   
   try {
-    await connectToDatabase();
+    // await connectToDatabase(); 
     const products = await getProduct();
-    console.log('Products fetched:', products);
+    // console.log('Products fetched:', products);
 
-    return NextResponse.json(products, { status: 200 });
+    console.log('NextResponse', products)
+    // return NextResponse.json(products, { status: 200 });
+    return NextResponse.json(products, {
+      status: 200,
+      // REV 4
+      // headers: { 'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=20' }, 
+    });
   } catch (error) {
     console.error('GET Error fetching products:', error);
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
@@ -25,10 +30,34 @@ export async function GET(request) {
 
 export async function PUT(request) {
     const { id, updatedData } = await request.json();
-    console.log('id', id)
+    //console.log('updatedData', updatedData)
+    //console.log('id PUT', id)
     const updatedProduct = await editProduct(id, updatedData);
+
+    // REV 10 working, but what for
+    // try {
+    //   await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/revalidate`, {
+    //     method: 'POST'
+    //   });
+    // } catch (error) {
+    //   console.error('Error reval:', error);
+    // }
+
+    // need to create app/api/revalidate.js
+    // export default async function handler(req, res) {
+    //   try {
+    //     await res.revalidate('/');
+    //     return res.json({ revalidated: true });
+    //   } catch (err) {
+    //     return res.status(500).send('Error revalidating');
+    //   }
+    // }
+
     return NextResponse.json(updatedProduct);
 }
+
+// REV 5
+// export const dynamic = 'force-dynamic';
 
 
 // export async function PUT(request) {
@@ -69,3 +98,4 @@ export async function PUT(request) {
 //         return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
 //     }
 // }
+

@@ -17,7 +17,7 @@ import {
     InfoContainer2
   } from './styled'
   
-const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, id, price }) => {
+const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, id, price, size }) => {
   const { setToCart, removeFromCart, cartItems } = useContext(CartContext)
   const [amount, setAmount] = useState(tAmount)
 
@@ -50,7 +50,7 @@ const CartItemComponent = ({ iconSrc, title, ingredient, type, amount: tAmount, 
         </InfoContainer2>
       </CardInfoWrapper>
         <InfoContainer>
-          <p style={{color: 'red', textAlign: 'center', margin: '0 2vw' }}>{type}</p>
+          <p style={{color: 'red', textAlign: 'center', margin: '0 2vw' }}>{type === 'capsules' ? 'capsules': type + size}</p>
           <Price>{hui} COP</Price>
           </InfoContainer>
       <Counter amount={amount} isModal />

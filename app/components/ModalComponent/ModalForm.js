@@ -301,7 +301,7 @@ const ModalForm = ({ onFinish }) => {
           </StyledFormItem>
         </TotalWrap>
         <StyledFormItem style={{width: '100%'}}>
-            <Comprar type="primary" htmlType="submit">
+            <Comprar type="primary" htmltype="submit">
               {'Comprar'.toUpperCase()}
             </Comprar>
         </StyledFormItem>

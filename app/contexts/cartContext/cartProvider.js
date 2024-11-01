@@ -1,7 +1,9 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CartContext from './cartContext'
+// import { fetchProducts } from '@/fetching' '@/lib/db
+// import { fetchProducts } from './../../fetching'
 
 const CartProvider = ({ children, layoutData: ld }) => {
   // console.log('layoutData', layoutData)
@@ -10,6 +12,22 @@ const CartProvider = ({ children, layoutData: ld }) => {
   const [showMenu, setShowMenu] = useState(false)
   const [layoutData, setLayoutData] = useState(ld)
 
+  // const [data, setData] = useState([]);
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetchProducts();
+  //     setData(response);
+  //   } catch (error) {
+  //     console.error('CartProvider autofetch error:', error);
+  //   }
+  // }
+  // useEffect(() => {
+  //   fetchData();
+
+  //   // REV 8
+  //   const interval = setInterval(fetchData, 30000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
 
   const addToCart = async (item, amount = 1) => {
@@ -62,7 +80,8 @@ const CartProvider = ({ children, layoutData: ld }) => {
     })
   }
 
-  console.log('layoutData context', layoutData)
+  // console.log('layoutData context', layoutData?.[1]?.stock)
+  console.log('layoutData context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
 
   return (
     <CartContext.Provider value={{

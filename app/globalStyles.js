@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: var(--font-mohave);
     background-color: #333;
     margin-top: 0;
-    max-width: 2400px;
+    max-width: 1920px;
     margin: 0 auto;
 
     /* overflow-x: hidden;

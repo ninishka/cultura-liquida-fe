@@ -43,10 +43,13 @@ export default async function RootLayout({ children }) {
   let layoutData = [];
   try {
     layoutData = await getProduct(); 
-    console.log('Fetched products in RootLayout:', layoutData);
+    // console.log('Fetched products in RootLayout:', layoutData);
+
   } catch (error) {
     console.error('Error in RootLayout fetching products:', error);
   }
+  
+  console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
 
   return (
     <html lang="es">
@@ -63,3 +66,7 @@ export default async function RootLayout({ children }) {
     </html>
   );
 }
+
+// REV 2
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 5;
