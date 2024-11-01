@@ -18,40 +18,18 @@ export interface CartItemType {
     amount?: number;
 }
 
-interface LayoutData {
-    description: string;
-    ingredient: string;
-    price: number;
-    stock: number;
-    title: string;
-    type: string;
-    url: string;
-    __v: number;
-    size?: string;
-
-}
-
 interface CartState {
   cartItems: CartItemType[]
-  showCart: boolean
-  showMenu: boolean
-  layoutData: LayoutData[] 
 }
 
 const initialState: CartState = {
   cartItems: [],
-  showCart: false,
-  showMenu: false,
-  layoutData: [],
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    setLayoutData(state, action: PayloadAction<any[]>) {
-      state.layoutData = action.payload
-    },
     addToCart(state, action: PayloadAction<{ item: CartItemType; amount?: number }>) {
       console.log('REDUX')
       console.log('action', action)
@@ -75,15 +53,8 @@ const cartSlice = createSlice({
         }
       }
     },
-    toggleShowCart: (state, action) => {
-        console.log('action', action)
-        state.showCart = action.payload;
-      },
-    toggleShowMenu(state) {
-      state.showMenu = !state.showMenu
-    },
   },
 })
 
-export const { addToCart, removeFromCart, toggleShowCart, toggleShowMenu, setLayoutData } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
 export default cartSlice.reducer

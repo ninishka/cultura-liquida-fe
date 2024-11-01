@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import { RootState } from '@/app/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleShowCart } from '@/app/store/slices/cartSlice'
+import { toggleShowCart } from '@/app/store/slices/toggleSlice'
 
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
@@ -18,11 +18,13 @@ import {
 const ModalComponent = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
-  const { showCart, layoutData, cartItems } = useSelector((state: RootState) => state.cart);
 
-  const postsToUpdate = cartItems.map(cartItem => {
-    const { size, ingredient, amount } = cartItem;
+  const { layoutData } = useSelector((state: RootState) => state.product);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const { showCart } = useSelector((state: RootState) => state.toggling);
 
+  // TODO: separate from here maybe?
+  const postsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
     const matchingItem = layoutData?.length && layoutData.find(dataItem => 
       dataItem?.size === size && 
       dataItem?.ingredient === ingredient
@@ -46,6 +48,8 @@ const ModalComponent = () => {
   const updatedPostsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
     const updatedData = {
       stock: stock - amount,
+      // stockSoftHold: stock - amount, // <- prepayment holding
+      // stockHardHold: stock - amount, // <- postpayment holding
       ...restOfItem,
     };
 

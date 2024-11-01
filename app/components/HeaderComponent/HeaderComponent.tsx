@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
-import { toggleShowCart, toggleShowMenu } from '@/app/store/slices/cartSlice'
+import { toggleShowCart, toggleShowMenu } from '@/app/store/slices/toggleSlice'
 
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
@@ -25,7 +25,8 @@ import {
 
 const HeaderComponent: FC = () => {
   const dispatch = useDispatch()
-  const { showMenu, cartItems } = useSelector((state: RootState) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const { showMenu } = useSelector((state: RootState) => state.toggling);
 
   return (
   <HeaderFull>

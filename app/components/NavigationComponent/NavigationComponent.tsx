@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { toggleShowMenu } from '@/app/store/slices/cartSlice'
+import { toggleShowMenu } from '@/app/store/slices/toggleSlice'
 import data from '../data'
 import {
   Navigation,

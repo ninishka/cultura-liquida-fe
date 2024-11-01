@@ -10,7 +10,6 @@ import { getProduct } from '@/app/actions/action';
 
 import { store } from '@/app/store'
 import ReduxProvider from "@/app/providers/ReduxProvider";
-import { setLayoutData } from '@/app/store/slices/cartSlice'; // Adjust the import path accordingly
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
