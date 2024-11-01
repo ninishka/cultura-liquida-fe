@@ -2,9 +2,10 @@
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setLayoutData } from '@/app/store/slices/cartSlice';
+import { setLayoutData } from '@/app/store/slices/productSlice';
 import { getProduct } from '@/app/actions/action';
 
+// why do we need client-side fetching?
 const LayoutDataFetcher = () => {
   const dispatch = useDispatch();
 
