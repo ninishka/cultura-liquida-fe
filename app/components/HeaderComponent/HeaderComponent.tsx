@@ -1,10 +1,10 @@
 "use client"
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
-import { toggleShowCart, toggleShowMenu } from '@/app/store/slices/toggleSlice'
+import { toggleShowCart } from '@/app/store/slices/cartSlice'
 
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
@@ -26,7 +26,7 @@ import {
 const HeaderComponent: FC = () => {
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state: RootState) => state.cart);
-  const { showMenu } = useSelector((state: RootState) => state.toggling);
+  const [ showMenu, setShowMenu ] = useState(false)
 
   return (
   <HeaderFull>
@@ -35,7 +35,7 @@ const HeaderComponent: FC = () => {
     </LogoFull>
     
     <NavigationComponent isopen={showMenu ? "Show":""} />
-    <BurgerWrap onClick={() => dispatch(toggleShowMenu())}>
+    <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
       <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
     </BurgerWrap>
 

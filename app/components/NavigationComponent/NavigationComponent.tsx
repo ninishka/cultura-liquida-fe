@@ -1,6 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { toggleShowMenu } from '@/app/store/slices/toggleSlice'
 import data from '../data'
 import {
   Navigation,
@@ -9,25 +7,18 @@ import {
   StyledLink
 } from './styled'
 
-const NavigationComponent = ({ isopen }) => {
-  const dispatch = useDispatch()
-  
-  return (
-    <Navigation $isopen={isopen}>
-      <UlItself> 
-        {data.map(({ title, url, types }) => (
-          <LiItself key={title}>
-            <StyledLink 
-              href={`/product/${url}-${types[0]}`} 
-              onClick={() => dispatch(toggleShowMenu())}
-            >
-              {title}
-            </StyledLink>
-          </LiItself>
-        ))} 
-      </UlItself>
-    </Navigation>
-  )
-}
+const NavigationComponent = ({ isopen }: { isopen: boolean }) => (
+  <Navigation $isopen={isopen}>
+    <UlItself> 
+      {data.map(({ title, url, types }) => (
+        <LiItself key={title}>
+          <StyledLink href={`/product/${url}-${types[0]}`}>
+            {title}
+          </StyledLink>
+        </LiItself>
+      ))} 
+    </UlItself>
+  </Navigation>
+)
 
 export default NavigationComponent

@@ -13,7 +13,7 @@ import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 
 const ProductSections = () => {
   const { slug } = useParams();
-  const { showCart } = useSelector((state: RootState) => state.toggling);
+  const { showCart } = useSelector((state: RootState) => state.cart);
   const { layoutData } = useSelector((state: RootState) => state.product);
  
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
