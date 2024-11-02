@@ -12,7 +12,11 @@ export const UlItself = styled.ul`
   }
 `
 
-export const Navigation = styled.nav`
+interface NavigationProps {
+  $isopen: boolean;
+}
+
+export const Navigation = styled.nav<NavigationProps>`
   display: flex;
   align-items: center;
   flex-direction: row;

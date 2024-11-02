@@ -23,7 +23,12 @@ import {
   BurgerImage,
 } from './styled'
 
-const HeaderComponent: FC = () => {
+
+interface HeaderComponentProps {
+  isopen?: boolean;
+}
+
+const HeaderComponent: FC<HeaderComponentProps> = () => {
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const [ showMenu, setShowMenu ] = useState(false)
@@ -34,12 +39,12 @@ const HeaderComponent: FC = () => {
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     
-    <NavigationComponent isopen={showMenu ? "Show":""} />
+    <NavigationComponent isopen={showMenu ? true : false} />
     <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
       <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
     </BurgerWrap>
 
-    <CartWrap type="primary" onClick={() => dispatch(toggleShowCart(true))}>
+    <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
       <CounterCartWrap>
         <p style={{color: 'black', margin: '0 7px' }}>
           {cartItems?.length}

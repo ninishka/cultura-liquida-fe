@@ -1,5 +1,7 @@
+import React, { FC } from 'react';
 import { Checkbox, Radio } from 'antd'
 import { CaretDownOutlined } from '@ant-design/icons';
+import { FormInstance } from 'antd'
 import {
   StyledForm,
   StyledInput,
@@ -33,7 +35,12 @@ const nameSurnameValidator = [
   },
 ]
 
-const ModalForm = ({ onFinish }) => { 
+interface ModalFormProps {
+  form: FormInstance<any>;
+  onFinish: (values: any) => Promise<void>;
+}
+
+const ModalForm: FC<ModalFormProps> = ({ onFinish }) => { 
   const handleChange = (value) => {
     console.log(`Selected: ${value}`);
   };
@@ -301,7 +308,7 @@ const ModalForm = ({ onFinish }) => {
           </StyledFormItem>
         </TotalWrap>
         <StyledFormItem style={{width: '100%'}}>
-            <Comprar type="primary" htmltype="submit">
+            <Comprar htmlType="submit">
               {'Comprar'.toUpperCase()}
             </Comprar>
         </StyledFormItem>

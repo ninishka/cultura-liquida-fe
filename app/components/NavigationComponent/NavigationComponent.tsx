@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import data from '../data'
 import {
   Navigation,
@@ -7,7 +7,11 @@ import {
   StyledLink
 } from './styled'
 
-const NavigationComponent = ({ isopen }: { isopen: boolean }) => (
+interface NavigationComponentProps {
+  isopen: boolean;
+}
+
+const NavigationComponent: FC<NavigationComponentProps> = ({ isopen }) => (
   <Navigation $isopen={isopen}>
     <UlItself> 
       {data.map(({ title, url, types }) => (

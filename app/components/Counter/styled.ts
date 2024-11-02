@@ -26,7 +26,12 @@ export const AmountWrapper = styled.div`
 
 `
 
-export const AmountItem = styled.div`
+
+interface AmountItemProps {
+  $bgc: boolean;
+}
+
+export const AmountItem = styled.div<AmountItemProps>`
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface CartItemType {
   description: string;
-  icon: object;
-  iconSrc: object;
-  src: object;
+  icon: any;
+  iconSrc: any;
+  src: any;
   id: string;
   _id: string;
   ingredient: string;
@@ -15,7 +15,7 @@ export interface CartItemType {
   type: string;
   url: string;
   __v: number;
-  
+
   amount?: number;
   idCart?: string;
 }
@@ -35,6 +35,12 @@ const initialState: CartState = {
   count: 1,
   showCart: false,
 }
+
+type ExtendedPayload2 = CartItemType & {
+  isModal?: boolean;
+  // idCart
+  removeAll?: boolean;
+};
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -56,7 +62,7 @@ const cartSlice = createSlice({
         state.cartItems.push({ ...action.payload, amount })
       }
     },
-    removeFromCart(state, action: PayloadAction<{ idCart: string; amount?: number; removeAll?: boolean }>) {
+    removeFromCart(state, action: PayloadAction<ExtendedPayload2>) {
       const { idCart, amount = 1, removeAll = false } = action.payload
       const itemIndex = state.cartItems.findIndex(i => i.idCart === idCart)
       if (itemIndex >= 0) {
