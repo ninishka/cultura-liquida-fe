@@ -21,17 +21,22 @@ export interface CartItemType {
 interface CartState {
   cartItems: CartItemType[]
   count: number
+  showCart: boolean
 }
 
 const initialState: CartState = {
   cartItems: [],
-  count: 1
+  count: 1,
+  showCart: false,
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    toggleShowCart: (state, action) => {
+      state.showCart = action.payload;
+    },
     addToCart(state, action: PayloadAction<{ item: CartItemType; amount?: number, isModal?: boolean }>) {
       const amount =  action?.payload?.amount || 1
       const existingItem = state.cartItems.find(i => i.idCart === action.payload.idCart)
@@ -59,5 +64,5 @@ const cartSlice = createSlice({
   },
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, toggleShowCart } = cartSlice.actions
 export default cartSlice.reducer

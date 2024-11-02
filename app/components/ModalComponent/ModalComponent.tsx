@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import { RootState } from '@/app/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleShowCart } from '@/app/store/slices/toggleSlice'
+import { toggleShowCart } from '@/app/store/slices/cartSlice'
 
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
@@ -20,8 +20,7 @@ const ModalComponent = () => {
   const dispatch = useDispatch()
 
   const { layoutData } = useSelector((state: RootState) => state.product);
-  const { cartItems } = useSelector((state: RootState) => state.cart);
-  const { showCart } = useSelector((state: RootState) => state.toggling);
+  const { showCart, cartItems } = useSelector((state: RootState) => state.cart);
 
   // TODO: separate from here maybe?
   const productsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
@@ -77,9 +76,6 @@ const ModalComponent = () => {
     // fetchProducts(); 
   };
 
-  const handleCancel = () => {
-    dispatch(toggleShowCart(false)); 
-  };
 
   const isEmpty = !cartItems?.length
 
@@ -88,20 +84,25 @@ const ModalComponent = () => {
       <ModalStyled 
         width={1000}  
         open={showCart} 
-        onCancel={handleCancel}
+        onCancel={() => dispatch(toggleShowCart(false))}
         footer={null}
         closable={isEmpty}
         style={{ backgroundImage: `url(${img55.src})`, backgroundSize: 'cover' }}
       >
         {isEmpty ? (
-          <Fragment style={{ alignItems: 'center' }}>
+          <>
             <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
-            <div>
-              <BuyButton onClick={handleCancel}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexDirection: 'column'
+            }}>
+              <BuyButton onClick={() => dispatch(toggleShowCart(false))}>
                 {'volver a comprar'.toUpperCase()}
               </BuyButton>
             </div>
-          </Fragment>
+          </>
         ) : (
           <>
             <>
