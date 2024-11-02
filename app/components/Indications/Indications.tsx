@@ -14,7 +14,7 @@ import {
 } from './styled'
 
 
-const Indications: FC = ({ indicationsImg }: { indicationsImg: object }) => (
+const Indications: FC = ({ indicationsImg }: { indicationsImg: any }) => (
   <IndicationsSection>
     <ContentWrapper>
       <Title>INDICACIONES DE USO:</Title>

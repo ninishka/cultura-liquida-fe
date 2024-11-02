@@ -1,44 +1,49 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface CartItemType {
-    description: string;
-    icon: object;
-    iconSrc: object;
-    src: object;
-    id: string;
-    _id: string;
-    idCart: string;
-    ingredient: string;
-    price: number;
-    stock: number;
-    title: string;
-    type: string;
-    url: string;
-    __v: number;
-    amount?: number;
+  description: string;
+  icon: object;
+  iconSrc: object;
+  src: object;
+  id: string;
+  _id: string;
+  idCart: string;
+  ingredient: string;
+  price: number;
+  stock: number;
+  title: string;
+  type: string;
+  url: string;
+  __v: number;
+  amount?: number;
 }
 
 interface CartState {
   cartItems: CartItemType[]
+  count: number
 }
 
 const initialState: CartState = {
   cartItems: [],
+  count: 1
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    // setCount: (state, action) => {
+    //   console.log('setCount')
+    //   state.count = action.payload;
+    // },
     addToCart(state, action: PayloadAction<{ item: CartItemType; amount?: number }>) {
-      console.log('REDUX')
-      console.log('action', action)
       const amount =  action?.payload?.amount || 1
-
       const existingItem = state.cartItems.find(i => i.idCart === action.payload.idCart)
       if (existingItem) {
+        console.log('already exist')
         existingItem.amount += amount
       } else {
+        console.log('new item')
         state.cartItems.push({ ...action.payload, amount })
       }
     },

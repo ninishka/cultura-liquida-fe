@@ -17,12 +17,12 @@ const ProductSections = () => {
   const { layoutData } = useSelector((state: RootState) => state.product);
  
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
-  const dynamicData = {...getActiveComponent(layoutData, slug)}
+  const f = {...getActiveComponent(layoutData, slug)}
 
   return (
     <div style={{ color: '#fff'}}>
       {showCart && <ModalComponent />}
-      <Formation formationData={dynamicData?.formationData} formationDataStatic={staticData?.[0]} />
+      <Formation formationData={f?.formationData} formationDataStatic={staticData?.[0]} />
       <Benefits 
         benefitsHeaderData={staticData?.[0]?.benefitsHeaderData} 
         benefitsCardsData={staticData?.[0]?.benefitsCardsData} 
