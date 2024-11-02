@@ -1,82 +1,81 @@
-import React, { useContext, Fragment } from 'react'
-import CartContext from '@/app/contexts/cartContext/cartContext'
+import React, { Fragment } from 'react'
+
+import { RootState } from '@/app/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleShowCart } from '@/app/store/slices/cartSlice'
+
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
 import { Form } from 'antd'
-
 import img55 from '@/app/icons/modalbackgroung.png'
-
-
 import {
   ModalStyled,
-  ContentWrapper,
   ListItemsWrapper,
   ModalTitle,
   BuyButton,
-  CloseButton
 } from './styled'
 
 const ModalComponent = () => {
   const [form] = Form.useForm();
-  const { cartItems, showCart, setShowCart, layoutData, fetchProducts, isLoading } = useContext(CartContext)
-  // console.log('layoutData', layoutData?.length)
+  const dispatch = useDispatch()
 
-const postsToUpdate = cartItems.map(cartItem => {
-  const { size, ingredient, amount } = cartItem;
+  const { layoutData } = useSelector((state: RootState) => state.product);
+  const { showCart, cartItems } = useSelector((state: RootState) => state.cart);
 
-  const matchingItem = layoutData?.length && layoutData.find(dataItem => 
+  // TODO: separate from here maybe?
+  const productsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
+    const matchingItem = layoutData?.length && layoutData.find(dataItem => 
       dataItem?.size === size && 
       dataItem?.ingredient === ingredient
-  );
+    );
 
-  if (matchingItem) {
+    if (matchingItem) {
       const { _id, ...restOfValues } = matchingItem; 
       return {
           id: _id,          // id from data
           amount,  // amount from cartItems
           ...restOfValues,
       };
-  }
+    }
 
-  return null
-});
+    return null
+  });
 
 // Удаляем элементы с null
-const validPostsToUpdate = postsToUpdate.filter(item => item !== null);
+  const validPostsToUpdate = productsToUpdate.filter(item => item !== null);
 
-  const updatedPostsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
+  const updatedProductsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
     const updatedData = {
-        stock: stock - amount,
-        ...restOfItem,
+      stock: stock - amount,
+      // stockSoftHold: stock - amount, // <- prepayment holding
+      // stockHardHold: stock - amount, // <- postpayment holding
+      ...restOfItem,
     };
 
     return { id, updatedData };
-});
+  });
 
   const handleSubmit = async (values) => {
-    const updatePromises = updatedPostsData.map(async ({ id, updatedData }) => {
-        const response = await fetch('/api/products', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id, updatedData }),
-            // REV 7
-            // next: { revalidate: 30 },
-        });
+    const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
+      const response = await fetch('/api/products', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, updatedData }),
+        // REV 7
+        // next: { revalidate: 30 },
+      });
 
-        if (!response.ok) {
-            console.error('Error updating post with id:', id);
-        }
+      if (!response.ok) {
+        console.error('Error updating products with id:', id);
+      }
     });
 
     await Promise.all(updatePromises);
     // fetchProducts(); 
   };
 
-  const handleCancel = () => {
-    setShowCart(false);
-  };
 
   const isEmpty = !cartItems?.length
 
@@ -85,20 +84,25 @@ const validPostsToUpdate = postsToUpdate.filter(item => item !== null);
       <ModalStyled 
         width={1000}  
         open={showCart} 
-        onCancel={handleCancel}
+        onCancel={() => dispatch(toggleShowCart(false))}
         footer={null}
         closable={isEmpty}
         style={{ backgroundImage: `url(${img55.src})`, backgroundSize: 'cover' }}
       >
         {isEmpty ? (
-          <Fragment style={{ alignItems: 'center' }}>
+          <>
             <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
-            <div>
-              <BuyButton onClick={handleCancel}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexDirection: 'column'
+            }}>
+              <BuyButton onClick={() => dispatch(toggleShowCart(false))}>
                 {'volver a comprar'.toUpperCase()}
               </BuyButton>
             </div>
-          </Fragment>
+          </>
         ) : (
           <>
             <>

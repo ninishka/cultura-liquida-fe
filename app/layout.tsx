@@ -1,11 +1,15 @@
+import React from 'react';
 import localFont from "next/font/local";
 import HeaderComponent from './components/HeaderComponent/HeaderComponent'
 import FooterComponent from './components/FooterComponent/FooterComponent'
-import CartProvider from './contexts/cartContext/cartProvider'
 import StyledRegistry from './registry';
+import DataFetcher from './DataFetcher';
 import { GlobalStyle } from './globalStyles';
 import { fetchProducts } from './fetching'
 import { getProduct } from '@/app/actions/action';
+
+import { store } from '@/app/store'
+import ReduxProvider from "@/app/providers/ReduxProvider";
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -22,10 +26,10 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { // do we need it?
-      index: true,
-      follow: true,
-    },  
+    // googleBot: {  do we need it?
+    //   index: true,
+    //   follow: true,
+    // },  
   },
   link:{
     rel:"icon",
@@ -34,39 +38,38 @@ export const metadata = {
   }
 
 };
-  // robots.txt FILE ???
-  // Author and Copyright ?
-  // sitemap
+  //  robots.txt FILE ???
+  //  Author and Copyright ?
+  //  sitemap
+
   
-export default async function RootLayout({ children }) {
-  // const layoutData = await fetchProducts()
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  //  const layoutData = await fetchProducts()
   let layoutData = [];
   try {
     layoutData = await getProduct(); 
-    // console.log('Fetched products in RootLayout:', layoutData);
-
   } catch (error) {
     console.error('Error in RootLayout fetching products:', error);
   }
-  
-  console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
+     console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
-        <StyledRegistry>
-          <GlobalStyle />
-            <CartProvider layoutData={layoutData}>
-              <HeaderComponent />
-                {children}
-              <FooterComponent />
-            </CartProvider>
-        </StyledRegistry>
+         <StyledRegistry>
+           <GlobalStyle />
+             <ReduxProvider>
+                <DataFetcher />
+                <HeaderComponent />
+                  {children}
+                <FooterComponent />
+             </ReduxProvider>
+         </StyledRegistry>
       </body>
     </html>
   );
 }
 
-// REV 2
-// export const dynamic = 'force-dynamic';
-// export const revalidate = 5;
+//  REV 2
+//  export const dynamic = 'force-dynamic';
+//  export const revalidate = 5;

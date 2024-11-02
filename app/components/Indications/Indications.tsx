@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import { indicationsData } from '@/app/data'
 
 import {
@@ -13,7 +13,8 @@ import {
   Caution
 } from './styled'
 
-const Indications = ({ indicationsImg }) => (
+
+const Indications: FC = ({ indicationsImg }: { indicationsImg: any }) => (
   <IndicationsSection>
     <ContentWrapper>
       <Title>INDICACIONES DE USO:</Title>

@@ -1,8 +1,13 @@
 'use client'
  
-import { useEffect } from 'react'
+import React, { useEffect, FC } from 'react'
+
+interface ErrorProps {
+  error: Error;
+  reset: () => void;
+}
  
-export default function Error({ error, reset }) {
+const Error: FC<ErrorProps> = ({ error, reset }) => {
   useEffect(() => {
     console.error(error)
   }, [error])
@@ -16,3 +21,5 @@ export default function Error({ error, reset }) {
     </div>
   )
 }
+
+export default Error

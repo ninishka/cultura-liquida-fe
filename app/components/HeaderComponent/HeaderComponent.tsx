@@ -1,7 +1,11 @@
 "use client"
 
-import React, { useContext } from 'react'
-import CartContext from '@/app/contexts/cartContext/cartContext'
+import React, { FC, useState } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/app/store'
+import { toggleShowCart } from '@/app/store/slices/cartSlice'
+
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
@@ -19,8 +23,10 @@ import {
   BurgerImage,
 } from './styled'
 
-const HeaderComponent = () => {
-  const { cartItems, setShowCart, showMenu, setShowMenu } = useContext(CartContext)
+const HeaderComponent: FC = () => {
+  const dispatch = useDispatch()
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const [ showMenu, setShowMenu ] = useState(false)
 
   return (
   <HeaderFull>
@@ -28,12 +34,12 @@ const HeaderComponent = () => {
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     
-    <NavigationComponent isopen={showMenu? "Show":""} />
-    <BurgerWrap onClick={() => {setShowMenu(!showMenu)}}>
+    <NavigationComponent isopen={showMenu ? "Show":""} />
+    <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
       <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
     </BurgerWrap>
 
-    <CartWrap type="primary" onClick={() => setShowCart(true)}>
+    <CartWrap type="primary" onClick={() => dispatch(toggleShowCart(true))}>
       <CounterCartWrap>
         <p style={{color: 'black', margin: '0 7px' }}>
           {cartItems?.length}
