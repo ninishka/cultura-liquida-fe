@@ -31,11 +31,10 @@ const init = (slug) => slug[0].includes("melena")
 const Formation = ({ formationData, formationDataStatic }) => {
   const { slug } = useParams();
   const rInit = init(slug)
-  console.log('rInit', rInit)
-
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
   // const filterdContent2 = formationData?.find(({ id }) => id === rInit)
-  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type
+  // TODO need to do something better with ids
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type + (filterdContent?.[0]?.type === "extracts" ? filterdContent?.[0]?.size : '')
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
 
@@ -76,7 +75,7 @@ const Formation = ({ formationData, formationDataStatic }) => {
               <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff'}}>
                 <Item aria-label={`Elección del tamaño del producto`}> 
                   <label htmlFor={id} aria-label={`Elección del tamaño del producto`} >
-                    <RadioButton 
+                    <RadioButton
                       id={id}
                       type="radio" 
                       name="group1" 

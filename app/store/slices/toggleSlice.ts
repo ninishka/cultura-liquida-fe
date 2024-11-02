@@ -15,11 +15,9 @@ const toggleSlice = createSlice({
   initialState,
   reducers: {
     toggleShowCart: (state, action) => {
-        console.log('toggleShowCart')
-        state.showCart = action.payload;
-      },
+      state.showCart = action.payload;
+    },
     toggleShowMenu(state) {
-        console.log('toggleShowMenu')
       state.showMenu = !state.showMenu
     },
   },

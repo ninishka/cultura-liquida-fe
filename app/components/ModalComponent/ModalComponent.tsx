@@ -24,7 +24,7 @@ const ModalComponent = () => {
   const { showCart } = useSelector((state: RootState) => state.toggling);
 
   // TODO: separate from here maybe?
-  const postsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
+  const productsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
     const matchingItem = layoutData?.length && layoutData.find(dataItem => 
       dataItem?.size === size && 
       dataItem?.ingredient === ingredient
@@ -43,9 +43,9 @@ const ModalComponent = () => {
   });
 
 // Удаляем элементы с null
-  const validPostsToUpdate = postsToUpdate.filter(item => item !== null);
+  const validPostsToUpdate = productsToUpdate.filter(item => item !== null);
 
-  const updatedPostsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
+  const updatedProductsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
     const updatedData = {
       stock: stock - amount,
       // stockSoftHold: stock - amount, // <- prepayment holding
@@ -57,7 +57,7 @@ const ModalComponent = () => {
   });
 
   const handleSubmit = async (values) => {
-    const updatePromises = updatedPostsData.map(async ({ id, updatedData }) => {
+    const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
       const response = await fetch('/api/products', {
         method: 'PUT',
         headers: {
@@ -69,7 +69,7 @@ const ModalComponent = () => {
       });
 
       if (!response.ok) {
-        console.error('Error updating post with id:', id);
+        console.error('Error updating products with id:', id);
       }
     });
 
