@@ -7,16 +7,22 @@ export interface CartItemType {
   src: object;
   id: string;
   _id: string;
-  idCart: string;
   ingredient: string;
   price: number;
   stock: number;
+  size?: string;
   title: string;
   type: string;
   url: string;
   __v: number;
+  
   amount?: number;
+  idCart?: string;
 }
+
+type ExtendedPayload = CartItemType & {
+  isModal?: boolean;
+};
 
 interface CartState {
   cartItems: CartItemType[]
@@ -37,7 +43,7 @@ const cartSlice = createSlice({
     toggleShowCart: (state, action) => {
       state.showCart = action.payload;
     },
-    addToCart(state, action: PayloadAction<{ item: CartItemType; amount?: number, isModal?: boolean }>) {
+    addToCart(state, action: PayloadAction<ExtendedPayload>) {
       const amount =  action?.payload?.amount || 1
       const existingItem = state.cartItems.find(i => i.idCart === action.payload.idCart)
 

@@ -10,7 +10,7 @@ interface LayoutData {
     url: string;
     __v: number;
     size?: string;
-
+    _id?: string;
 }
 
 interface ProductState {

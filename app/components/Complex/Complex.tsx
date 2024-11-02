@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { complexData, complexData2 } from '@/app/data'
+import { complexData2 } from '@/app/data'
 import { useState } from 'react';
 import Counter from '../Counter/Counter'
 import data from '../data'

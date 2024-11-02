@@ -13,7 +13,11 @@ import {
 import { useDispatch } from 'react-redux'
 import { addToCart } from '@/app/store/slices/cartSlice'
 
-const Counter = ({ amount, isModal, filterdContent, preObj, isComplex, item }) => {
+
+const Counter = ({ 
+  amount = undefined, isModal = false, filterdContent = [], 
+  preObj = undefined, isComplex = false, item = undefined 
+}) => {
   const dispatch = useDispatch()
   const [ count, setCount ] = useState(amount || 1)
 

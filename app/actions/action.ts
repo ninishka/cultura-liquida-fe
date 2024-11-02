@@ -4,6 +4,7 @@ import Post from '@/models/Post'
 import { revalidateTag } from 'next/cache'
 
 interface Product extends Document {
+  _id?: string;
   title: string;
   description: string;
   ingredient: string;
@@ -13,21 +14,16 @@ interface Product extends Document {
   stock: number;
 }
 
-// type PlainProduct = Omit<Product, '_id'> & { _id?: string };
-interface PlainProduct extends Product {
-  _id: string
-}
+// type UpdateProductData = Partial<Product>;                   // not working
+// type PlainProduct = Omit<Product, '_id'> & { _id?: string }; // not working
+// interface PlainProduct extends Product {                     // not working
+//   _id?: string
+// }
 
-const getProduct = async (): Promise<Product[]> => {
+const getProduct = async () => {
   try {
       const products = await Post.find().lean();
-      // console.log('Fetched products:', products);
-      console.log('getProduct')
-      console.log('getProduct', products?.[0]?.stock, products?.[2]?.stock )
-
-      // return products;
-
-      const plainProducts: PlainProduct[] = products.map(product => ({
+      const plainProducts = products.map(product => ({
         ...product,
         _id: product._id.toString(),
       }));
