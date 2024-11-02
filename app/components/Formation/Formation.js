@@ -50,7 +50,7 @@ const Formation = ({ formationData, formationDataStatic }) => {
   <FormationSection>
     <ContentWrapper>
       <TitleFrame>
-        <p>{filterdContent?.[0]?.stock}</p>
+        {/* <p>{filterdContent?.[0]?.stock}</p> */}
         <TitleH1>{filterdContent?.[0]?.title || ''}</TitleH1>
         <Description>{filterdContent?.[0]?.description || ''}</Description>
       </TitleFrame>
