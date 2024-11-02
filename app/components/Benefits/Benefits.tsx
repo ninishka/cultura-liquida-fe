@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import {
   HeaderBenefitsWrapper,
   TextForBenefits,
@@ -11,10 +11,16 @@ import {
   BenefitIcon,
 } from './styled'
 
-const Benefits = ({ benefitsHeaderData, benefitsCardsData, benefitsData }) => (
+interface BenefitsProps {
+  benefitsHeaderData?: { title: string; description1: string; description2: string; }[];
+  benefitsCardsData?: { src: any; description: string; }[];
+  benefitsData?: [];
+}
+
+const Benefits: FC<BenefitsProps> = ({ benefitsHeaderData, benefitsCardsData, benefitsData }) => (
   <section>
     <HeaderBenefitsWrapper>
-      {benefitsHeaderData.map(({ title, description1 ,description2 }) => (
+      {benefitsHeaderData?.length && benefitsHeaderData.map(({ title, description1 ,description2 }) => (
         <Fragment key={title}>
           <TextForBenefits>
             BENEFICIOS <br /> {title}

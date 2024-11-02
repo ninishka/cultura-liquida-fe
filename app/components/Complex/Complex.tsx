@@ -82,7 +82,7 @@ const Complex: FC = () => {
               <LeftSide>
                 <LeftTitle>El complejo consta de:</LeftTitle>
                 {data.map(({ title }, index) => {
-                  const id = index + 1
+                  const id = `${index + 1}`.toString()
                   return (
                     <ThreeItemsWrap key={title}>
                     <InsideItemWrap>
@@ -113,7 +113,7 @@ const Complex: FC = () => {
                         onChange={() => rechecking(id)}
                       />
                     </label>
-                    <LabelContent htmlFor="text">
+                    <LabelContent>
                       <Icon src={iconSrc} alt={type}/>
                       <TextDesc>{type}</TextDesc>
                     </LabelContent>

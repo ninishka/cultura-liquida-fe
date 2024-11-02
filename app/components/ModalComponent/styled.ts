@@ -288,7 +288,12 @@ export const LeftSideWrap = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const Comprar = styled.button`
+
+interface StyledButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  htmlType?: "button" | "submit" | "reset";
+}
+
+export const Comprar = styled.button<StyledButtonProps>`
  width: 100%;
  background-color: #4FDB40;
  border: none;
