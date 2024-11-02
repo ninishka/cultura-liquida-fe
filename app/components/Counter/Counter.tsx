@@ -10,14 +10,11 @@ import {
   Price,
 } from'./styled'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/app/store'
-import { addToCart, setCount } from '@/app/store/slices/cartSlice'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '@/app/store/slices/cartSlice'
 
-const Counter = ({ amount, isModal, filterdContent, preObj, isComplex }) => {
+const Counter = ({ amount, isModal, filterdContent, preObj, isComplex, item }) => {
   const dispatch = useDispatch()
-  // const { count } = useSelector((state: RootState) => state.cart);
-  // console.log('count', count)
   const [ count, setCount ] = useState(amount || 1)
 
   return (                             
@@ -26,8 +23,7 @@ const Counter = ({ amount, isModal, filterdContent, preObj, isComplex }) => {
       <ArrowButtons
       aria-label={`Disminuir la cantidad de elementos, recuento actual: ${count}`}
       onClick={() => {
-          // if(count > 1)  dispatch(setCount(count - 1))
-          if(count > 1)  setCount(count - 1)
+          if(count > 1) setCount(count - 1)
         }}
       >
         <ArrowPrev aria-label="Disminuir artículos" color={isModal && 'black'} />
@@ -35,8 +31,8 @@ const Counter = ({ amount, isModal, filterdContent, preObj, isComplex }) => {
       <Number>{count}</Number>
       <ArrowButtons 
         aria-label={`Obtenga más información sobre cómo aumentar la cantidad de artículos, recuento actual: ${count}`} 
-        // onClick={() => dispatch(setCount(count + 1))}>
-        onClick={() => setCount(count + 1)}>
+        onClick={() => setCount(count + 1)}        
+      >
         <ArrowNext aria-label="Aumentar artículos" color={isModal && 'black'} />
       </ArrowButtons>
     </AmountItem>  
@@ -47,6 +43,17 @@ const Counter = ({ amount, isModal, filterdContent, preObj, isComplex }) => {
         onClick={() => dispatch(addToCart({...preObj, amount: count}))}
       >
         Comprar
+      </BuyButton>
+    }
+
+    {/* here only amount + */}
+    {isModal && 
+      <BuyButton 
+        aria-label="botón añadir al carrito" 
+        style={{ width: '50px' }}
+        onClick={() => dispatch(addToCart({...item, amount: count, isModal: true}))}
+      >
+        Edit
       </BuyButton>
     }
     {filterdContent?.[0]?.price && <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}

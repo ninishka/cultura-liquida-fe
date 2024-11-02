@@ -32,16 +32,14 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // setCount: (state, action) => {
-    //   console.log('setCount')
-    //   state.count = action.payload;
-    // },
-    addToCart(state, action: PayloadAction<{ item: CartItemType; amount?: number }>) {
+    addToCart(state, action: PayloadAction<{ item: CartItemType; amount?: number, isModal?: boolean }>) {
       const amount =  action?.payload?.amount || 1
       const existingItem = state.cartItems.find(i => i.idCart === action.payload.idCart)
+
       if (existingItem) {
-        console.log('already exist')
-        existingItem.amount += amount
+        if (action?.payload?.isModal) existingItem.amount = amount // edit existing item from modal
+        else existingItem.amount += amount // edit existing item from Formation -> Couneter
+      
       } else {
         console.log('new item')
         state.cartItems.push({ ...action.payload, amount })
