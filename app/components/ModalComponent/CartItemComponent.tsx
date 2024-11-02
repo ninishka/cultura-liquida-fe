@@ -21,7 +21,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeFromCart } from '@/app/store/slices/cartSlice'
 import type { CartItemType } from '@/app/store/slices/cartSlice'
 
-const CartItemComponent: FC<CartItemType> = ({ iconSrc, title, ingredient, type, amount: tAmount, id, price, size }) => {
+const CartItemComponent: FC<CartItemType> = item => {
+  const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item
   // const [amount, setAmount] = useState(tAmount)
   const dispatch = useDispatch()
   const cartItems = useSelector((state: RootState) => state.cart.cartItems)
@@ -45,7 +46,7 @@ const CartItemComponent: FC<CartItemType> = ({ iconSrc, title, ingredient, type,
         <p style={{color: 'red', textAlign: 'center', margin: '0 2vw' }}>{type === 'capsules' ? 'capsules': type + size}</p>
         <Price>{price * tAmount} COP</Price>
       </InfoContainer>
-      <Counter amount={tAmount} isModal />
+      <Counter amount={tAmount} item={item} isModal />
     </CartItem>
     <DeleteButtonWrap>
       <DeleteButtonItself onClick={() => handleDelete(id)}>
