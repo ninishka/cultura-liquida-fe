@@ -16,10 +16,10 @@ import {
     InfoContainer2
   } from './styled'
  
-import { RootState } from '@/app/store'
+import { RootState } from '@/lib/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeFromCart } from '@/app/store/slices/cartSlice'
-import type { CartItemType } from '@/app/store/slices/cartSlice'
+import { removeFromCart } from '@/lib/store/slices/cartSlice'
+import type { CartItemType } from '@/lib/store/slices/cartSlice'
 
 const CartItemComponent: FC<CartItemType> = item => {
   const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item

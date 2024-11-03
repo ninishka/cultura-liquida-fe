@@ -12,6 +12,9 @@ export const fetchProducts = async () => {
   try {
     const response = await fetch(apiUrl
       // TODO REV 1
+      // working but need reload
+      // without it layoutData will not be updated 
+      // even after reload
       , { next: { revalidate: 1 } }
     );
     if (!response.ok) {

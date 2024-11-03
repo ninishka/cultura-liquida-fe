@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 
-import { RootState } from '@/app/store'
+import { RootState } from '@/lib/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleShowCart } from '@/app/store/slices/cartSlice'
+import { toggleShowCart } from '@/lib/store/slices/cartSlice'
 
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
