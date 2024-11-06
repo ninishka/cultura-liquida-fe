@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 export const IndicationsSection = styled.section`
   display: flex;
+  justify-content: center;
   flex-direction: row-reverse;
   border-radius: 16px;
   border: 1px solid #9F9F9F;
@@ -14,9 +15,9 @@ export const IndicationsSection = styled.section`
     flex-direction: column;
     align-items: center;
   }
-  @media (min-width: 2000px) {
+  /* @media (min-width: 2000px) {
     justify-content: center;
-  }
+  } */
 `
 
 export const IconWrapper = styled.div`

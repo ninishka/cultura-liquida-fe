@@ -107,3 +107,13 @@ export const Price = styled.p`
     margin: 25px;
   }  
 `
+
+export const PriceWithoutDiscount = styled(Price)`
+  text-decoration: line-through;
+  font-size: 24px;
+  color: #9F9F9F;
+
+  @media (max-width: 850px) {
+    font-size: 18px;
+  }  
+`

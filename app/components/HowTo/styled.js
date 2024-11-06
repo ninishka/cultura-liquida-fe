@@ -4,10 +4,15 @@ import Image from 'next/image'
 export const HowToWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 109px;
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  /* gap: 20px; */
+  justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 1150px) {
+    flex-wrap: wrap;
+  }
 `
 
 
@@ -17,15 +22,12 @@ export const TextForHeader = styled.h2`
  font-weight: 600;
  line-height: 57.6px;
  letter-spacing: 2%;
- /* margin: 35px 2vh; */
-
+ margin: 35px 2vh;
+ text-align: center;
 
  @media (max-width: 850px) {
     font-size: 40px;
     line-height: 45px;   
-  }
-  @media (min-width: 2000px) {
-    text-align: center;
   }
 `
 
@@ -40,6 +42,8 @@ export const CardsWrapper = styled.div`
   background-color: #2D2D2D;
   text-align: center;
   position: relative;
+
+  margin: 20px;
 
   @media (max-width: 850px) {
 

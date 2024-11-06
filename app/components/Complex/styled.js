@@ -88,7 +88,7 @@ export const ComplexItemsWrap = styled.div`
     margin: 20px 0;
     width: 543px;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 650px) {
     width: auto
   }
 `
@@ -177,7 +177,7 @@ export const CheckBoxGroup = styled.div`
  justify-content: flex-end;
  margin-bottom: 12px;
  width: -webkit-fill-available;
- @media (max-width: 850px) {
+ @media (max-width: 650px) {
     justify-content: center;
     align-items: center;
   }
@@ -192,7 +192,7 @@ export const Item = styled.form`
   height: 54px;
   margin: 6px;
 
-  @media (max-width: 850px) {
+  @media (max-width: 650px) {
     /* width: 70px;
     height: 125px; */
     /* flex-direction: column; */
@@ -212,7 +212,7 @@ export const  Icon = styled(Image)`
   height: auto;
   margin-left: 10px;
 
-  @media (max-width: 850px) {
+  @media (max-width: 650px) {
     margin-left: 0
   }
 `
@@ -240,7 +240,7 @@ export const RadioButton = styled.input`
   position: relative;
   margin-left: 20px;
 
-  @media (max-width: 850px) {
+  @media (max-width: 650px) {
     margin-left: 0;
   }
 

@@ -23,7 +23,7 @@ export const Navigation = styled.nav<NavigationProps>`
   @media (max-width: 860px) {
     display: ${({$isopen}) => $isopen ? 'block' : 'none'};
     position: fixed;
-    top: 86px;
+    top: 67px;
     background-color: #333333;
     width: 100%;
     right: 0;
