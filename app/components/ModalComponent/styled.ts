@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Form, Input, Select } from 'antd'
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 
 
 export const ModalTitle = styled.h2`
@@ -16,23 +16,27 @@ export const ModalTitle = styled.h2`
   font-family: '__mohave_5f7c1e';
 
 `
+interface ModalStyledProps {
+  $isEmpty: boolean;
+}
 
-export const ModalStyled = styled(Modal)`
+export const ModalStyled = styled(Modal)<ModalStyledProps>`
   z-index: 25; 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: ${({$isEmpty}) => $isEmpty ? 'normal' : 'center'};
 
   .ant-modal-content {
     background-color: #F2C94CCC;
+    border-radius: 16px;
+    ${({$isEmpty}) => $isEmpty ? 'padding: 50px' : ''}
   }
 
   .ant-modal-body {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
+    align-items: ${({$isEmpty}) => $isEmpty ? 'normal' : 'center'};
   }
 `
 
