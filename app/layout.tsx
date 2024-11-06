@@ -73,5 +73,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 //  REV 2
- export const dynamic = 'force-dynamic';
 //  export const revalidate = 5;
+
+//  export const dynamic = 'force-dynamic';
+// this param removing ○  (Static) from /
+// with this param fetching.js recieve new data in reloading time
+// without this param fetching.js file do not revalidate EVEN after reload - has same data
