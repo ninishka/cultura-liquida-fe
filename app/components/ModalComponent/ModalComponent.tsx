@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
-
-import { RootState } from '@/app/store'
+import React from 'react'
+import Image from 'next/image'
+import { RootState } from '@/lib/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleShowCart } from '@/app/store/slices/cartSlice'
+import { toggleShowCart } from '@/lib/store/slices/cartSlice'
 
 import CartItemComponent from './CartItemComponent'
 import ModalForm from './ModalForm'
@@ -12,7 +12,9 @@ import {
   ModalStyled,
   ListItemsWrapper,
   ModalTitle,
-  BuyButton,
+
+  TotalBox,
+  Comprar
 } from './styled'
 
 const ModalComponent = () => {
@@ -80,31 +82,49 @@ const ModalComponent = () => {
   const isEmpty = !cartItems?.length
 
   return (
-    <main style={{backgroundColor: '#F2C94CCC'}}>
+    <main style={{ backgroundColor: '#F2C94CCC' }}>
       <ModalStyled 
+        $isEmpty={isEmpty}
         width={1000}  
         open={showCart} 
         onCancel={() => dispatch(toggleShowCart(false))}
         footer={null}
         closable={isEmpty}
-        style={{ backgroundImage: `url(${img55.src})`, backgroundSize: 'cover' }}
+        style={{ 
+          // backgroundImage: `url(${img55.src})`, 
+          // backgroundSize: 'cover', 
+          marginTop: isEmpty ? '160px' : '' 
+        }}
       >
         {isEmpty ? (
           <>
-            <ModalTitle>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
             <div style={{
               display: 'flex',
               alignItems: 'center', 
               justifyContent: 'center',
-              flexDirection: 'column'
+              flexDirection: 'column',
             }}>
-              <BuyButton onClick={() => dispatch(toggleShowCart(false))}>
-                {'volver a comprar'.toUpperCase()}
-              </BuyButton>
+              <Image src={img55} fill={true} alt='the modal background image' style={{
+                objectFit: "cover",
+                zIndex: -5
+              }} />
+              <TotalBox>
+                <ModalTitle style={{color: 'white'}}>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
+                <div style={{marginBottom: 0, padding: 10}}>
+                  <Comprar onClick={() => dispatch(toggleShowCart(false))} style={{color: 'white'}}>
+                    {'volver a comprar'.toUpperCase()}
+                  </Comprar>
+                </div>
+              </TotalBox>
             </div>
           </>
         ) : (
           <>
+              <Image src={img55} fill={true} alt='the modal background image' style={{
+                objectFit: "cover",
+                zIndex: -5,
+                // marginLeft: 95
+              }} />
             <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>

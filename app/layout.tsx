@@ -8,8 +8,8 @@ import { GlobalStyle } from './globalStyles';
 import { fetchProducts } from './fetching'
 import { getProduct } from '@/app/actions/action';
 
-import { store } from '@/app/store'
-import ReduxProvider from "@/app/providers/ReduxProvider";
+// import { store } from '@/lib/store/store'
+import StoreProvider from "@/app/providers/StoreProvider";
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",
@@ -45,25 +45,27 @@ export const metadata = {
   
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   //  const layoutData = await fetchProducts()
-  let layoutData = [];
-  try {
-    layoutData = await getProduct(); 
-  } catch (error) {
-    console.error('Error in RootLayout fetching products:', error);
-  }
-     console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
+  // let layoutData = [];
+  // try {
+  //   layoutData = await getProduct(); 
+  // } catch (error) {
+  //   console.error('Error in RootLayout fetching products:', error);
+  // }
+    //  console.log('ROOT context', layoutData?.[0]?.stock, layoutData?.[2]?.stock)
+    //  console.log('layoutData', layoutData)
 
   return (
     <html lang="es">
       <body className={`${mohave.variable}`}>
          <StyledRegistry>
            <GlobalStyle />
-             <ReduxProvider>
+             <StoreProvider>
                 <DataFetcher />
                 <HeaderComponent />
+                {/* <p>{layoutData?.[0]?.stock}</p> */}
                   {children}
                 <FooterComponent />
-             </ReduxProvider>
+             </StoreProvider>
          </StyledRegistry>
       </body>
     </html>
@@ -71,5 +73,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 //  REV 2
-//  export const dynamic = 'force-dynamic';
 //  export const revalidate = 5;
+
+//  export const dynamic = 'force-dynamic';
+// this param removing ○  (Static) from /
+// with this param fetching.js recieve new data in reloading time
+// without this param fetching.js file do not revalidate EVEN after reload - has same data

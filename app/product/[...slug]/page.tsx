@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useSelector } from 'react-redux'
-import { RootState } from '@/app/store'
+import { RootState } from '@/lib/store/store'
 import { productContentComponents } from '@/app/data'
 import { getActiveComponent } from '@/app/components/helpers'
 
@@ -33,3 +33,4 @@ const ProductSections = () => {
 };
 
 export default ProductSections;
+// export const dynamic = 'force-dynamic'

@@ -1,6 +1,7 @@
 // import connectToDatabase from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { addProduct, getProduct, editProduct } from '@/app/actions/action';
+import { revalidateTag, revalidatePath } from 'next/cache'
 
 // Даже если подключение к базе данных выполнено в instrumentation.js, 
 // каждый API роут или серверный компонент в Next.js может быть изолирован, и они могут выполняться в разных потоках. 
@@ -33,6 +34,8 @@ export async function PUT(request) {
     //console.log('updatedData', updatedData)
     //console.log('id PUT', id)
     const updatedProduct = await editProduct(id, updatedData);
+    
+    // revalidatePath('/', 'layout')
 
     // REV 10 working, but what for
     // try {

@@ -1,7 +1,7 @@
 'use server'
 
 import Post from '@/models/Post'
-import { revalidateTag } from 'next/cache'
+import { revalidateTag, revalidatePath } from 'next/cache'
 
 interface Product extends Document {
   _id?: string;
@@ -44,10 +44,16 @@ const editProduct = async (id: string, updatedData: UpdateProductData): Promise<
       new: true, // Возвращает обновленный документ
       runValidators: true // Проверяет данные по схеме
     });
+  
+    
     return updatedProduct;
   } catch (error) {
     console.error('Error updating product:', error);
     throw new Error('Failed to update product');
+  } finally {
+    // console.log('finally')
+    // revalidatePath('/product/[slug]', 'page')
+    // revalidateTag('/product/[slug]')
   }
 }
 
