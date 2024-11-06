@@ -13,9 +13,9 @@ export const FormationSection = styled.section`
     text-align: center;
   }
 
-  @media (min-width: 2000px) {
+  /* @media (min-width: 2000px) {
     justify-content: center;
-  }
+  } */
 `
 
 export const ContentWrapper = styled.div`

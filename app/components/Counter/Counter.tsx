@@ -8,6 +8,7 @@ import {
   ArrowButtons,
   BuyButton,
   Price,
+  PriceWithoutDiscount
 } from'./styled'
 
 import { useDispatch } from 'react-redux'
@@ -61,7 +62,11 @@ const Counter = ({
       </BuyButton>
     }
     {filterdContent?.[0]?.price && <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}
-    {isComplex && <Price style={{ textDecoration: 'line-through', fontSize: 24, color: '#9F9F9F'}}>{filterdContent?.[0]?.originalPrice} COP</Price>}
+    {isComplex && (
+      <PriceWithoutDiscount>
+          {filterdContent?.[0]?.originalPrice} COP
+      </PriceWithoutDiscount>
+    )}
   </CounterWrapper>
 )}
 

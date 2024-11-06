@@ -15,9 +15,9 @@ export const HeaderBenefitsWrapper = styled.div`
     align-items: start;
     margin: 0 1vh;
   }
-  @media (min-width: 2000px) {
+  /* @media (min-width: 2000px) {
     justify-content: space-around;
-  }
+  } */
 `
 export const TextForBenefits = styled.h2`
  font-size: 48px;
@@ -62,9 +62,15 @@ export const DescriptionCard = styled.p`
 export const BenefitsCards = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
   margin: 0 5px;
+
+  
+  @media (max-width: 945px) {
+    flex-wrap: wrap;
+  }
+
 
   @media (max-width: 850px) {
     justify-content: space-evenly;

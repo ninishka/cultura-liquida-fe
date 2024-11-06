@@ -1,10 +1,13 @@
 "use client"
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image from 'next/image'
-import css from 'styled-jsx/css'
 
-export const HeaderFull = styled.header`
+interface HeaderFullProps {
+  $isopen: boolean;
+}
+
+export const HeaderFull = styled.header<HeaderFullProps>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,11 +16,16 @@ export const HeaderFull = styled.header`
   margin: 0 10px 10px;
 
   position: sticky;
-    top: 0;
-    background-color: #333;
-    z-index: 9999;
+  top: 0;
+  background-color: #333;
+  z-index: 9999;
+  
   @media (max-width: 850px) {
-    border-radius: 16px 16px;
+    border-radius: 0 16px 16px;
+    ${({$isopen}) => $isopen ? css`
+      border-bottom: none;
+      border-radius: unset;
+    ` : ''};
   }
   
 `

@@ -34,7 +34,7 @@ const HeaderComponent: FC<HeaderComponentProps> = () => {
   const [ showMenu, setShowMenu ] = useState(false)
 
   return (
-  <HeaderFull>
+  <HeaderFull $isopen={showMenu ? true : false}>
     <LogoFull>
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
