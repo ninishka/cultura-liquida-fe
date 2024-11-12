@@ -1,11 +1,11 @@
-// import connect from '@/lib/db'
+// import connect from '@/lib/mongodb/db'
 
 // export async function register() {
 //     await connect()
 // }
 
 
-import connectToDatabase from '@/lib/db';
+import connectToDatabase from '@/lib/mongodb/db';
 
 export async function register() {
   try {

@@ -46,38 +46,3 @@ export const nameSurnameValidator = [
     },
   },
 ]
-
-
-
-  // TODO: temp desigion to make funcion from them for checkout page test
-  const productsToUpdate = (cartItems, layoutData) => cartItems.map(({ size, ingredient, amount }) => {
-    const matchingItem = layoutData?.length && layoutData.find(dataItem => 
-      dataItem?.size === size && 
-      dataItem?.ingredient === ingredient
-    );
-
-    if (matchingItem) {
-      const { _id, ...restOfValues } = matchingItem; 
-      return {
-          id: _id,          // id from data
-          amount,  // amount from cartItems
-          ...restOfValues,
-      };
-    }
-
-    return null
-  });
-
-// Удаляем элементы с null
-  const validPostsToUpdate = (cartItems, layoutData) => productsToUpdate(cartItems, layoutData).filter(item => item !== null);
-
-  export const updatedProductsData = (cartItems, layoutData) => validPostsToUpdate(cartItems, layoutData).map(({ id, stock, amount, ...restOfItem }) => {
-    const updatedData = {
-      stock: stock - amount,
-      // stockSoftHold: stock - amount, // <- prepayment holding
-      // stockHardHold: stock - amount, // <- postpayment holding
-      ...restOfItem,
-    };
-
-    return { id, updatedData };
-  });

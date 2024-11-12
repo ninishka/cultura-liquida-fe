@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FormationSection, ContentWrapper, TitleFrame, ImageWrapperDesktop, ImageWrapperMobile } from './styled'
+import { FormationSection, ContentWrapper, TitleFrame, ImageWrapperDesktop, ImageWrapperMobile } from '@/app/components/Formation/styled'
 
 const SkeletonBox = styled.div`
   background-color: #e0e0e0;

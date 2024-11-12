@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { RootState } from '@/lib/store/store'
+import { RootState } from '@/lib/redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleShowCart } from '@/lib/store/slices/cartSlice'
+import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 import CartItemComponent from './CartItemComponent'
@@ -67,52 +67,58 @@ useEffect(() => {
 }, [])
 
   const onFinish = async (values) => {
-    // const updatePromises = updatedProductsData(cartItems, layoutData).map(async ({ id, updatedData }) => {
-    //   const response = await fetch('/api/products', {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ id, updatedData }),
-    //     // REV 7
-    //     // next: { revalidate: 30 },
-    //   });
-
-    //   if (!response.ok) {
-    //     console.error('Error updating products with id:', id);
-    //   }
-    // });
-
-    // await Promise.all(updatePromises);
-
-    await setFormValues({
-      ...values,
-      // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
-      street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-    })
-
-    setValid(true)
-    // router.push('/check-out')
-  };
-
-  if (valid) {
-    const gettingPreference = updatedProductsData.map(async () => {
-      const response = await fetch('/api/preference', {
-        method: 'POST',
+    const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
+      const response = await fetch('/api/products', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cartItems, formValues }),
+        body: JSON.stringify({ id, updatedData }),
         // REV 7
         // next: { revalidate: 30 },
       });
-    
+
       if (!response.ok) {
-        console.error('Error preference');
+        console.error('Error updating products with id:', id);
       }
     });
-    Promise.all([gettingPreference]);
-  }
+
+    await Promise.all(updatePromises);
+
+
+
+    /////////////
+
+    // await setFormValues({
+    //   ...values,
+    //   // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
+    //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+    // })
+
+    // setValid(true)
+    // router.push('/check-out')
+  };
+
+  // if (valid) {
+  //   const gettingPreference = updatedProductsData.map(async () => {
+  //     const response = await fetch('/api/preference', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ cartItems, formValues }),
+  //       // REV 7
+  //       // next: { revalidate: 30 },
+  //     });
+    
+  //     if (!response.ok) {
+  //       console.error('Error preference');
+  //     }
+  //   });
+  //   Promise.all([gettingPreference]);
+  // }
+
+  ///////////////
 
   const isEmpty = !cartItems?.length
 

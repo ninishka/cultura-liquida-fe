@@ -3,8 +3,8 @@
 import React, { FC, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/lib/store/store'
-import { toggleShowCart } from '@/lib/store/slices/cartSlice'
+import { RootState } from '@/lib/redux/store/store'
+import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
