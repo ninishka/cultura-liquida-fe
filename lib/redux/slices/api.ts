@@ -11,6 +11,5 @@ export const productsAPI = createApi({
     }),
   }),
 });
-console.log('productsAPI', productsAPI)
 
 export const { useGetProductByNameQuery } = productsAPI;

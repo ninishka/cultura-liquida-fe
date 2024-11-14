@@ -1,10 +1,8 @@
 "use client"
 
-import React, { useState, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { useParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import Counter from '../Counter/Counter'
-import Link from 'next/link'
 import {
   FormationSection,
   ContentWrapper,
@@ -13,14 +11,7 @@ import {
   ImageStyled,
   TitleFrame,
   TitleH1,
-  Description,
-  Release,
-  CheckBoxGroup,
-  Item,
-  Icon,
-  TextDesc,
-  RadioButton,
-  LabelContent,
+  Description
 } from './styled'
 import Checkboxes from './Checkboxes'
 import Loading from '@/app/components/Loading/Loading'
@@ -33,6 +24,15 @@ const init = (slug) => slug[0].includes("melena")
 
 
 const Formation = ({ formationData, formationDataStatic }) => {
+  // fetch logic
+  const {data} = useGetProductByNameQuery("");
+  const dispatch = useDispatch();
+  dispatch(setLayoutData(data));
+  const { layoutData } = useSelector((state) => state.product);
+  console.log('layoutData FORMATION', layoutData)
+
+  ///// Formation logic
+
   const { slug } = useParams();
   const rInit = init(slug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
@@ -42,27 +42,6 @@ const Formation = ({ formationData, formationDataStatic }) => {
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
 
-  // if (!formationData?.[0]?.stock || isLoading) {
-  //   return <Loading />;
-  // }
-
-  // if (isError) {
-  //   return <Error />; 
-  // }
-  const dispatch = useDispatch();
-  const { layoutData } = useSelector((state) => state.product);
-
-  const {data} = useGetProductByNameQuery("");
-  dispatch(setLayoutData(data));
-
-  console.log('layoutData FORMATION', layoutData)
-
-
-  // console.log('data', data)
-  // if (data) setTimeout(() => console.log('data', data), 4000)
-  // await new Promise(resolve => {
-  //   if (data) setTimeout(resolve, 0)
-  // }) // its how Suspense  for all Formation can be controled
 
   if (!data) return <Loading />
 

@@ -29,6 +29,7 @@ const getProduct = async () => {
         ...product,
         _id: product._id.toString(),
       }));
+      console.log('getProduct')
   
     return plainProducts;
   } catch (error) {

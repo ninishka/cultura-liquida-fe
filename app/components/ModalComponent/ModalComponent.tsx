@@ -84,20 +84,20 @@ useEffect(() => {
     });
 
     await Promise.all(updatePromises);
+  }
 
 
+  //   ///////////// was inside onFinish
 
-    /////////////
+  //   // await setFormValues({
+  //   //   ...values,
+  //   //   // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
+  //   //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+  //   // })
 
-    // await setFormValues({
-    //   ...values,
-    //   // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
-    //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-    // })
-
-    // setValid(true)
-    // router.push('/check-out')
-  };
+  //   // setValid(true)
+  //   // router.push('/check-out')
+  // };
 
   // if (valid) {
   //   const gettingPreference = updatedProductsData.map(async () => {

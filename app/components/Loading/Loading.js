@@ -4,7 +4,7 @@ import { FormationSection, ContentWrapper, TitleFrame, ImageWrapperDesktop, Imag
 const SkeletonBox = styled.div`
   background-color: #e0e0e0;
   border-radius: 8px;
-  animation: skeleton-loading 1s linear infinite alternate;
+  animation: skeleton-loading 3s linear infinite alternate;
 
   @keyframes skeleton-loading {
     0% {
@@ -25,7 +25,7 @@ export default function Loading() {
       <FormationSection style={{marginTop: 89}}>
         <ContentWrapper>
           <TitleFrame>
-            <SkeletonBox style={{ width: '80%', height: '60px', marginBottom: '20px' }} />
+            <SkeletonBox style={{ width: '40%', height: '60px', marginBottom: '20px' }} />
             <SkeletonBox style={{ width: '70%', height: '30px' }} />
           </TitleFrame>
   
@@ -48,19 +48,19 @@ export default function Loading() {
                     alignItems: 'center'
                   }}
                 >
-                  <SkeletonBox style={{ width: '50px', height: '50px', marginRight: '20px' }} />
+                  <SkeletonBox style={{ width: '300px', height: '50px', marginRight: '20px' }} />
                   <SkeletonBox style={{ width: '120px', height: '20px' }} />
                 </SkeletonBox>
               ))}
             </div>
           </div>
   
-          <SkeletonBox style={{ width: '150px', height: '50px', marginTop: '20px' }} />
+          <SkeletonBox style={{ width: '150px', height: '50px', marginTop: '0' }} />
   
         </ContentWrapper>
   
         <ImageWrapperDesktop>
-          <SkeletonBox style={{ width: 'calc(50vw)', height: 'calc(50vw * 0.75)' }} />
+          <SkeletonBox style={{ width: 'calc(20vw)', height: 'calc(30vw * 0.75)', margin: 30 }} />
         </ImageWrapperDesktop>
       </FormationSection>
     )
