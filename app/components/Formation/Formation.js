@@ -2,7 +2,6 @@
 
 import React, { Suspense } from 'react'
 import { useParams } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   FormationSection,
   ContentWrapper,
@@ -15,24 +14,13 @@ import {
 } from './styled'
 import Checkboxes from './Checkboxes'
 import Loading from '@/app/components/Loading/Loading'
-import {useGetProductByNameQuery} from "@/lib/redux/slices/api";
-import { setLayoutData } from '@/lib/redux/slices/productSlice';
 
 const init = (slug) => slug[0].includes("melena") 
   ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
   : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
 
 
-const Formation = ({ formationData, formationDataStatic }) => {
-  // fetch logic
-  const {data} = useGetProductByNameQuery("");
-  const dispatch = useDispatch();
-  dispatch(setLayoutData(data));
-  const { layoutData } = useSelector((state) => state.product);
-  console.log('layoutData FORMATION', layoutData)
-
-  ///// Formation logic
-
+const Formation = ({ formationData, formationDataStatic, isLoading, error }) => {
   const { slug } = useParams();
   const rInit = init(slug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
@@ -43,7 +31,8 @@ const Formation = ({ formationData, formationDataStatic }) => {
   const source = filterdContent?.[0]?.src || ''
 
 
-  if (!data) return <Loading />
+  if (isLoading) return <Loading />
+  if (error) return <div>Error: {error?.message}</div>;
 
   return (
     <FormationSection>
@@ -67,7 +56,7 @@ const Formation = ({ formationData, formationDataStatic }) => {
             />
           </ImageWrapperMobile>
           {/* <Suspense fallback={<Loading />}> */}
-            <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={data}/>
+            <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData}/>
           {/* </Suspense> */}
         </ContentWrapper>
         <ImageWrapperDesktop key={source}>

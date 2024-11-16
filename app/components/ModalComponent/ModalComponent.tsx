@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { Form } from 'antd'
 import { RootState } from '@/lib/redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 import CartItemComponent from './CartItemComponent'
-import ModalForm from './ModalForm'
-import { Form } from 'antd'
 import img55 from '@/app/icons/modalbackgroung.png'
+import ModalForm from './ModalForm'
 import {
   ModalStyled,
   ListItemsWrapper,
   ModalTitle,
-
   TotalBox,
   Comprar
 } from './styled'
 
-const ModalComponent = () => {
+const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
-  const { layoutData } = useSelector((state: RootState) => state.product);
   const { showCart, cartItems } = useSelector((state: RootState) => state.cart);
 
   // TODO: separate from here maybe?
   const productsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
-    const matchingItem = layoutData?.length && layoutData.find(dataItem => 
+    const matchingItem = data?.length && data.find(dataItem => 
       dataItem?.size === size && 
       dataItem?.ingredient === ingredient
     );

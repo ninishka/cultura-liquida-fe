@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from "@reduxjs/toolkit/query";
 import cartReducer from '@/lib/redux/slices/cartSlice'
-import productReducer from '@/lib/redux/slices/productSlice'
 import { productsAPI } from "@/lib/redux/slices/api";
 
 // before MIDDLEWARE vesion
@@ -17,7 +16,6 @@ export const makeStore = () => {
   const store = configureStore({
     reducer: {
       cart: cartReducer,
-      product: productReducer,
       [productsAPI.reducerPath]: productsAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>
