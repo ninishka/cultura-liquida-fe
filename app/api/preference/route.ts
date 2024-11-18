@@ -5,9 +5,8 @@ export async function POST(request) {
   try {
     const { cartItems, formValues } = await request.json();
     const preferenceResult = await createPreference(cartItems, formValues);
-    console.log('preferenceResult', preferenceResult)
 
-    return NextResponse.json({ preference: preferenceResult });
+    return NextResponse.json({ preferenceId: preferenceResult.id });
   } catch (error) {
     console.error("Error creating preference:", error);
     return NextResponse.json({ message: error.message }, { status: 500 });

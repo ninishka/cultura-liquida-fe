@@ -16,6 +16,8 @@ interface Product extends Document {
   stock: number;
 }
 
+type UpdateProductData = Partial<Product>;
+
 // type UpdateProductData = Partial<Product>;                   // not working
 // type PlainProduct = Omit<Product, '_id'> & { _id?: string }; // not working
 // interface PlainProduct extends Product {                     // not working
@@ -38,9 +40,6 @@ const getProduct = async () => {
   }
 };
 
-
-type UpdateProductData = Partial<Product>;
-
 const editProduct = async (id: string, updatedData: UpdateProductData): Promise<Product | null> => {
     try {
     const updatedProduct = await Post.findByIdAndUpdate(id, updatedData, {
@@ -60,15 +59,6 @@ const editProduct = async (id: string, updatedData: UpdateProductData): Promise<
     // revalidateTag('/product/[slug]')
   }
 }
-
-// const editProduct = async (id, updatedData) => {
-//   // REV 3  
-//   // revalidateTag('products')
-//     // revalidateTag('product')
-//     return Post.findByIdAndUpdate(id, updatedData
-//       // , { new: true }
-//     )
-// }
 
 const addProduct = async post => {
   const title = post.get('title')
@@ -118,6 +108,7 @@ const createPreference = async (cartItems, formValues) => {
   const client = new MercadoPagoConfig({
         accessToken: process.env.ACCESSTOKEN_TEST,
     // accessToken: process.env.ACCESSTOKEN',
+    // TODO idempotencyKey
     options: { timeout: 5000, idempotencyKey: 'abc' }
   });
   const preference = new Preference(client);
@@ -161,12 +152,22 @@ const createPreference = async (cartItems, formValues) => {
   return await preference.create({ body: preferenceBody });
 };
 
+export { addProduct, getProduct, editProduct, createPreference }
+
 
 // const deletePost = async id => {
 //     return Post.findByIdAndDelete(id)
 // }
 
-export { addProduct, getProduct, editProduct, createPreference }
+// const editProduct = async (id, updatedData) => {
+//   // REV 3  
+//   // revalidateTag('products')
+//     // revalidateTag('product')
+//     return Post.findByIdAndUpdate(id, updatedData
+//       // , { new: true }
+//     )
+// }
+
 
 
 // ==========
