@@ -16,7 +16,9 @@ export default function StyledRegistry({ children }) {
   if (typeof window !== 'undefined') return <>{children}</>
  
   return (
-    <StyleSheetManager sheet={styledSheet.instance}>
+    <StyleSheetManager
+     shouldForwardProp={['htmltype']} 
+     sheet={styledSheet.instance}>
       {children}
     </StyleSheetManager>
   )
