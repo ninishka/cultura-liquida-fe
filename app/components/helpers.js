@@ -23,4 +23,26 @@ export const getActiveComponent = (layoutData, slug) => {
     
     const combinedData2 = { ...staticData, formationData: newFormationData }
     return combinedData2
-  }
+}
+
+export const nameSurnameValidator = [
+  {
+    required: true,
+    message: 'Este campo es obligatorio',
+  },
+  {
+    // allows only letters and spaces
+    validator: (rule, value) => { 
+      const letterAndSpaceRegex = /^[a-zA-Z\s]+$/;
+      
+      if (!letterAndSpaceRegex.test(value)) {
+        return Promise.reject(
+          new Error('Solo se permiten letras y espacios.')
+        );
+      }
+      
+      
+      return Promise.resolve();
+    },
+  },
+]

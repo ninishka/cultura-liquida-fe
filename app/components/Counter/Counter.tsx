@@ -12,7 +12,7 @@ import {
 } from'./styled'
 
 import { useDispatch } from 'react-redux'
-import { addToCart } from '@/lib/store/slices/cartSlice'
+import { addToCart } from '@/lib/redux/slices/cartSlice'
 
 
 const Counter = ({ 

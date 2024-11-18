@@ -1,32 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { RootState } from '@/lib/store/store'
+import { Form } from 'antd'
+import { RootState } from '@/lib/redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleShowCart } from '@/lib/store/slices/cartSlice'
+import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { useRouter } from 'next/navigation';
 
 import CartItemComponent from './CartItemComponent'
-import ModalForm from './ModalForm'
-import { Form } from 'antd'
 import img55 from '@/app/icons/modalbackgroung.png'
+import ModalForm from './ModalForm'
 import {
   ModalStyled,
   ListItemsWrapper,
   ModalTitle,
-
   TotalBox,
   Comprar
 } from './styled'
 
-const ModalComponent = () => {
+const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
+  const router = useRouter();
   const dispatch = useDispatch()
-
-  const { layoutData } = useSelector((state: RootState) => state.product);
   const { showCart, cartItems } = useSelector((state: RootState) => state.cart);
 
   // TODO: separate from here maybe?
   const productsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
-    const matchingItem = layoutData?.length && layoutData.find(dataItem => 
+    const matchingItem = data?.length && data.find(dataItem => 
       dataItem?.size === size && 
       dataItem?.ingredient === ingredient
     );
@@ -57,27 +57,74 @@ const ModalComponent = () => {
     return { id, updatedData };
   });
 
-  const handleSubmit = async (values) => {
-    const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
-      const response = await fetch('/api/products', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, updatedData }),
-        // REV 7
-        // next: { revalidate: 30 },
+const [formValues, setFormValues] = useState({})
+const [preferenceId, setPreferenceId] = useState('')
+
+useEffect(() => {
+  console.log('initMercadoPago')
+  initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
+  // initMercadoPago(PUBLIC_KEY) // Public key
+}, [])
+
+  // UPDATE DATABASE
+  // const onFinish = async (values) => {
+  //   const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
+  //     const response = await fetch('/api/products', {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ id, updatedData }),
+  //       // REV 7
+  //       // next: { revalidate: 30 },
+  //     });
+
+  //     if (!response.ok) {
+  //       console.error('Error updating products with id:', id);
+  //     }
+  //   });
+
+  //   await Promise.all(updatePromises);
+  // }
+  // usePathname was on dif poject instead of router to define url of page
+
+
+  // PEYMENT SYSTEM
+  const onFinish = async (values) => {
+    await setFormValues({
+      ...values,
+      // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
+      street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+    })
+  
+    try {
+      const response = await fetch('/api/preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartItems, formValues }),
       });
-
+  
       if (!response.ok) {
-        console.error('Error updating products with id:', id);
+        console.error('Error creating preference');
+        return;
       }
-    });
-
-    await Promise.all(updatePromises);
-    // fetchProducts(); 
+    // or sandbox_init_point? anyway sandbox_init_point is openning instead
+      const { preferenceId } = await response.json()
+      if (preferenceId) {
+        setPreferenceId(preferenceId)
+      } else {
+        console.error('id as preferenceId is missing in response');
+      }
+    } catch (e) {
+      console.error('Error processing preference:', e);
+    }
   };
+  
 
+
+
+
+  ///////////////
 
   const isEmpty = !cartItems?.length
 
@@ -134,8 +181,14 @@ const ModalComponent = () => {
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm form={form} onFinish={handleSubmit} />
+              <ModalForm form={form} onFinish={onFinish} />
             </>
+              {/* Public key */}
+              {preferenceId && <Wallet
+                key={process.env.PUBLIC_KEY_BTN}
+                initialization={{ preferenceId }}
+                customization={{ texts:{ valueProp: 'smart_option'}}} 
+              />}
           </>
         )}
       </ModalStyled>
