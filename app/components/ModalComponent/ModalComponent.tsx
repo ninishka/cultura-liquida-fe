@@ -5,6 +5,7 @@ import { RootState } from '@/lib/redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { useRouter } from 'next/navigation';
 
 import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
@@ -19,6 +20,7 @@ import {
 
 const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
+  const router = useRouter();
   const dispatch = useDispatch()
   const { showCart, cartItems } = useSelector((state: RootState) => state.cart);
 
@@ -55,66 +57,72 @@ const ModalComponent = ({data}) => {
     return { id, updatedData };
   });
 
-const [valid, setValid] = useState(false)
 const [formValues, setFormValues] = useState({})
+const [preferenceId, setPreferenceId] = useState('')
 
 useEffect(() => {
   console.log('initMercadoPago')
-  initMercadoPago('TEST-51c28369-54e5-494d-bfb7-352336e0dc58') // Public key
+  initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
   // initMercadoPago(PUBLIC_KEY) // Public key
 }, [])
 
-  const onFinish = async (values) => {
-    const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
-      const response = await fetch('/api/products', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, updatedData }),
-        // REV 7
-        // next: { revalidate: 30 },
-      });
-
-      if (!response.ok) {
-        console.error('Error updating products with id:', id);
-      }
-    });
-
-    await Promise.all(updatePromises);
-  }
-
-
-  //   ///////////// was inside onFinish
-
-  //   // await setFormValues({
-  //   //   ...values,
-  //   //   // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
-  //   //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-  //   // })
-
-  //   // setValid(true)
-  //   // router.push('/check-out')
-  // };
-
-  // if (valid) {
-  //   const gettingPreference = updatedProductsData.map(async () => {
-  //     const response = await fetch('/api/preference', {
-  //       method: 'POST',
+  // UPDATE DATABASE
+  // const onFinish = async (values) => {
+  //   const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
+  //     const response = await fetch('/api/products', {
+  //       method: 'PUT',
   //       headers: {
   //         'Content-Type': 'application/json',
   //       },
-  //       body: JSON.stringify({ cartItems, formValues }),
+  //       body: JSON.stringify({ id, updatedData }),
   //       // REV 7
   //       // next: { revalidate: 30 },
   //     });
-    
+
   //     if (!response.ok) {
-  //       console.error('Error preference');
+  //       console.error('Error updating products with id:', id);
   //     }
   //   });
-  //   Promise.all([gettingPreference]);
+
+  //   await Promise.all(updatePromises);
   // }
+  // usePathname was on dif poject instead of router to define url of page
+
+
+  // PEYMENT SYSTEM
+  const onFinish = async (values) => {
+    await setFormValues({
+      ...values,
+      // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
+      street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+    })
+  
+    try {
+      const response = await fetch('/api/preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartItems, formValues }),
+      });
+  
+      if (!response.ok) {
+        console.error('Error creating preference');
+        return;
+      }
+    // or sandbox_init_point? anyway sandbox_init_point is openning instead
+      const { preferenceId } = await response.json()
+      if (preferenceId) {
+        setPreferenceId(preferenceId)
+      } else {
+        console.error('id as preferenceId is missing in response');
+      }
+    } catch (e) {
+      console.error('Error processing preference:', e);
+    }
+  };
+  
+
+
+
 
   ///////////////
 
@@ -175,6 +183,12 @@ useEffect(() => {
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
               <ModalForm form={form} onFinish={onFinish} />
             </>
+              {/* Public key */}
+              {preferenceId && <Wallet
+                key={process.env.PUBLIC_KEY_BTN}
+                initialization={{ preferenceId }}
+                customization={{ texts:{ valueProp: 'smart_option'}}} 
+              />}
           </>
         )}
       </ModalStyled>
