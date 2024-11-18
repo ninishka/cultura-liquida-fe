@@ -18,6 +18,7 @@ const nextConfig = {
     ACCESSTOKEN_TEST: process.env.ACCESSTOKEN_TEST,
     ACCESSTOKEN: process.env.ACCESSTOKEN,
     PUBLIC_KEY_BTN: process.env.PUBLIC_KEY_BTN,
+    PATH_TO_API: process.env.PATH_TO_API
   },
 
   async redirects() {
