@@ -294,7 +294,7 @@ export const LeftSideWrap = styled.div`
 `
 
 interface StyledButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  htmlType?: "button" | "submit" | "reset";
+  htmltype?: "button" | "submit" | "reset";
 }
 
 export const Comprar = styled.button<StyledButtonProps>`
