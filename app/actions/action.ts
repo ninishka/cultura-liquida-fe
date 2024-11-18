@@ -26,7 +26,7 @@ type UpdateProductData = Partial<Product>;
 
 const getProduct = async () => {
   try {
-      const products = await Post.find().lean();
+      const products = await Post?.find()?.lean();
       const plainProducts = products.map(product => ({
         ...product,
         _id: product._id.toString(),
