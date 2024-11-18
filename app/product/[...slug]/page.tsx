@@ -15,7 +15,7 @@ import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 const ProductSections = () => {
   const { slug } = useParams();
   const { showCart } = useSelector((state: RootState) => state.cart);
-  const { data, isLoading, error } = useGetProductQuery();
+  const { data, isLoading, error } = useGetProductQuery('');
  
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
   const f = {...getActiveComponent(data, slug)}
