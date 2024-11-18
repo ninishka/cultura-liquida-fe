@@ -5,7 +5,7 @@ import { RootState } from '@/lib/redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
@@ -20,7 +20,7 @@ import {
 
 const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
-  const router = useRouter();
+  // const router = useRouter();
   const dispatch = useDispatch()
   const { showCart, cartItems } = useSelector((state: RootState) => state.cart);
 
@@ -108,7 +108,6 @@ useEffect(() => {
         console.error('Error creating preference');
         return;
       }
-    // or sandbox_init_point? anyway sandbox_init_point is openning instead
       const { preferenceId } = await response.json()
       if (preferenceId) {
         setPreferenceId(preferenceId)

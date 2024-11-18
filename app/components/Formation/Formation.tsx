@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense } from 'react'
+import React, { Suspense, FC } from 'react'
 import { useParams } from 'next/navigation';
 import {
   FormationSection,
@@ -19,10 +19,16 @@ const init = (slug) => slug[0].includes("melena")
   ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
   : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
 
+  interface FormationProps {
+    isMain?: Boolean;
+    [propName: string]: any // TODO
+  }
+   
 
-const Formation = ({ formationData, formationDataStatic, isLoading, error }) => {
+const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isLoading, error, slogMain, isMain }) => {
   const { slug } = useParams();
-  const rInit = init(slug)
+  const conditionSlug = isMain ? slogMain : slug 
+  const rInit = init(conditionSlug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
   // const filterdContent2 = formationData?.find(({ id }) => id === rInit)
   // TODO need to do something better with ids
