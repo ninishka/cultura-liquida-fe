@@ -25,13 +25,14 @@ type UpdateProductData = Partial<Product>;
 // }
 
 const getProduct = async () => {
+  console.log('getProduct starts')
   try {
       const products = await Post?.find()?.lean();
+      console.log('products', products)
       const plainProducts = products.map(product => ({
         ...product,
         _id: product._id.toString(),
       }));
-      console.log('getProduct')
   
     return plainProducts;
   } catch (error) {
@@ -133,9 +134,9 @@ const createPreference = async (cartItems, formValues) => {
     }],
     back_urls: {
       // success: "https://cultura-liquida.com/check-out/success",
-      success: "http://localhost:3001/success",
-      failure: "http://localhost:3001/failure",
-      pending: "http://localhost:3001/pending",
+      success: `${process.env.PATH_TO_API}/check-out`,
+      failure: `${process.env.PATH_TO_API}/check-out`,
+      pending: `${process.env.PATH_TO_API}/check-out`,
       // failure: "https://cultura-liquida.com/check-out/failure",
       // pending: "https://cultura-liquida.com/check-out/pending"
     },
