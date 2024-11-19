@@ -1,17 +1,13 @@
 // app/checkout/[status]/page.js was
-'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { FC } from 'react'
 
-
-
-export default function CheckoutPage() {
+const CheckoutPage: FC = () => {
   return (
     <div>
       CheckoutPage
-      {/* {status === 'success' && <h1>Payment is successful!</h1>}
-      {status === 'failure' && <h1>Payment is  failure. Try again.</h1>}
-      {status === 'pending' && <h1>Payment is pending. Please wait.</h1>} */}
     </div>
   );
 }
+
+export default CheckoutPage
