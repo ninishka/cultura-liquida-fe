@@ -1,7 +1,5 @@
 "use client"
 
-// import { useContext } from 'react'
-// import CartContext from './contexts/cartContext/cartContext'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/redux/store/store'
 import { productContentComponents } from '@/app/data'
@@ -14,8 +12,8 @@ import Indications from '@/app/components/Indications/Indications'
 import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 
 const slogMain = ['melena-de-leon-capsules']
+
 export default function Home() {
-  // const { displayingItem, showCart, layoutData } = useContext(CartContext)
   const { showCart } = useSelector((state: RootState) => state.cart);
   const { data, isLoading, error } = useGetProductQuery('');
  
@@ -25,7 +23,14 @@ export default function Home() {
   return (
     <main style={{ color: '#fff'}}>
       {showCart && <ModalComponent data={data} />}
-      <Formation formationData={f?.formationData} isLoading={isLoading} error={error} formationDataStatic={staticData?.[0]} isMain slogMain={slogMain} />
+      <Formation 
+        formationData={f?.formationData} 
+        isLoading={isLoading} 
+        error={error} 
+        formationDataStatic={staticData?.[0]} 
+        isMain 
+        slogMain={slogMain} 
+      />
       <Benefits 
         benefitsHeaderData={staticData?.[0]?.benefitsHeaderData} 
         benefitsCardsData={staticData?.[0]?.benefitsCardsData} 
