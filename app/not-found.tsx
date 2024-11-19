@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Link from 'next/link'
 import { headers } from 'next/headers'
 
-export default async function NotFound() {
+const NotFound: FC = async () => {
   const headersList = await headers()
   const domain = headersList.get('host')
 
@@ -16,3 +16,5 @@ export default async function NotFound() {
     </div>
   )
 }
+
+export default NotFound

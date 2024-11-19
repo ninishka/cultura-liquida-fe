@@ -1,5 +1,6 @@
 "use client"
 
+import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/redux/store/store'
 import { productContentComponents } from '@/app/data'
@@ -13,7 +14,7 @@ import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 
 const slogMain = ['melena-de-leon-capsules']
 
-export default function Home() {
+const Home: FC = () =>  {
   const { showCart } = useSelector((state: RootState) => state.cart);
   const { data, isLoading, error } = useGetProductQuery('');
  
@@ -39,3 +40,5 @@ export default function Home() {
     </main>
   )
 }
+
+export default Home
