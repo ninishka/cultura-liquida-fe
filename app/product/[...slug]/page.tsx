@@ -1,8 +1,8 @@
 'use client';
 
+import React, { FC } from 'react'
 import { useParams } from 'next/navigation';
-import { useSelector } from 'react-redux'
-import { RootState } from '@/lib/redux/store/store'
+import { useAppSelector } from '@/lib/redux/store/hooks'
 import { productContentComponents } from '@/app/data'
 import { getActiveComponent } from '@/app/components/helpers'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
@@ -12,9 +12,9 @@ import Benefits from '@/app/components/Benefits/Benefits'
 import Indications from '@/app/components/Indications/Indications'
 import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
 
-const ProductSections = () => {
+const ProductSections: FC = () => {
   const { slug } = useParams();
-  const { showCart } = useSelector((state: RootState) => state.cart);
+  const { showCart } = useAppSelector(state => state.cart);
   const { data, isLoading, error } = useGetProductQuery('');
  
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))

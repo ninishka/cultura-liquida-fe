@@ -11,15 +11,14 @@ import {
   PriceWithoutDiscount
 } from'./styled'
 
-import { useDispatch } from 'react-redux'
 import { addToCart } from '@/lib/redux/slices/cartSlice'
-
+import { useAppDispatch } from '@/lib/redux/store/hooks'
 
 const Counter = ({ 
   amount = undefined, isModal = false, filterdContent = [], 
   preObj = undefined, isComplex = false, item = undefined 
 }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [ count, setCount ] = useState(amount || 1)
 
   return (                             

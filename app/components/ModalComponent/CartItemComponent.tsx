@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { FC } from 'react'
 import Counter from '../Counter/Counter'
 import img6 from '@/app/icons/delete_good_from_cart.png'
 import {
@@ -16,16 +16,15 @@ import {
     InfoContainer2
   } from './styled'
  
-import { RootState } from '@/lib/redux/store/store'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { removeFromCart } from '@/lib/redux/slices/cartSlice'
 import type { CartItemType } from '@/types/types'
 
 const CartItemComponent: FC<CartItemType> = item => {
   const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item
-  // const [amount, setAmount] = useState(tAmount)
-  const dispatch = useDispatch()
-  const cartItems = useSelector((state: RootState) => state.cart.cartItems)
+  
+  const dispatch = useAppDispatch()
+  const cartItems = useAppSelector(state => state.cart.cartItems)
 
   const handleDelete = itemId => {
     const item = cartItems.filter(item => item?.id === itemId)
