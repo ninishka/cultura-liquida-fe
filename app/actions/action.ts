@@ -28,7 +28,7 @@ const getProduct = async () => {
   console.log('getProduct starts')
   try {
       const products = await Post?.find()?.lean();
-      console.log('products', products)
+      // console.log('products', products)
       const plainProducts = products.map(product => ({
         ...product,
         _id: product._id.toString(),

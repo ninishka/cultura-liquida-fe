@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react'
+import React, { useState, Suspense, Fragment } from 'react'
 import Link from 'next/link'
 import {
     Release,
@@ -9,7 +9,7 @@ import {
     RadioButton,
     LabelContent,
   } from './styled'
-  import Counter from '../Counter/Counter'
+  import Counter from '@/app/components/Counter/Counter'
 
 const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
   // await new Promise(resolve => {
@@ -28,7 +28,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
 
             const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
             return (
-              <>
+              <Fragment key={hrefLogic}>
                 {/* {!!stock && ( */}
                   <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff', zIndex: !stock && -99 }}>
                   <Item aria-label={`Elección del tamaño del producto`}> 
@@ -64,8 +64,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
                   </Item>
                   </Link>
                 {/* )} */}
-              </>
-
+              </Fragment>
             )})
           }
         </CheckBoxGroup>

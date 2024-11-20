@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useServerInsertedHTML } from 'next/navigation'
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
- 
+
 export default function StyledRegistry({ children }) {
   const [styledSheet] = useState(() => new ServerStyleSheet())
  
@@ -16,9 +16,7 @@ export default function StyledRegistry({ children }) {
   if (typeof window !== 'undefined') return <>{children}</>
  
   return (
-    <StyleSheetManager
-     shouldForwardProp={['htmltype']} 
-     sheet={styledSheet.instance}>
+    <StyleSheetManager sheet={styledSheet.instance}>
       {children}
     </StyleSheetManager>
   )

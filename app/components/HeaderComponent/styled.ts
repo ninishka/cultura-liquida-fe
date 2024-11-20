@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface HeaderFullProps {
   $isopen: boolean;
@@ -30,7 +31,7 @@ export const HeaderFull = styled.header<HeaderFullProps>`
   
 `
 
-export const LogoFull = styled.div`
+export const LogoFull = styled(Link)`
  margin-left: 30px;
 `
 export const LogoItself = styled(Image)`

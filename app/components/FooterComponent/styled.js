@@ -24,7 +24,7 @@ export const HeaderLikeFooter = styled.div`
   }
 `
 
-export const LogoFull = styled.div`
+export const LogoFull = styled(Link)`
  margin-left: 30px;
  
 
