@@ -1,10 +1,10 @@
 import React from 'react';
 import localFont from "next/font/local";
-import HeaderComponent from './components/HeaderComponent/HeaderComponent'
-import FooterComponent from './components/FooterComponent/FooterComponent'
-import StyledRegistry from './registry';
-import { GlobalStyle } from './globalStyles';
-import {ReduxProvider} from "@/lib/redux/providers/ReduxProvider";
+import { GlobalStyle } from '@/app/globalStyles';
+import StyledRegistry from '@/lib/registry';
+import { ReduxProvider } from "@/lib/redux/providers/ReduxProvider";
+import HeaderComponent from '@/app/components/HeaderComponent/HeaderComponent'
+import FooterComponent from '@/app/components/FooterComponent/FooterComponent'
 
 const mohave = localFont({
   src: "./fonts/Mohave-VariableFont_wght.ttf",

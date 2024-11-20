@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import data from '../data'
+import data from '@/app/components/data'
 import {
   Navigation,
   UlItself,
