@@ -1,5 +1,22 @@
 import { FormInstance } from 'antd'
 
+export interface ProductG {
+  title: string;
+  description: string;
+  ingredient: string;
+  type: string;
+  size?: string;
+  price: number;
+  stock: number;
+  [key: string]: any; // TODO
+}
+
+export interface UpdateProductRequest {
+  id: string;
+  updatedData: Partial<ProductG>;
+}
+
+
 export interface CartItemType {
   title: string;
   description: string;

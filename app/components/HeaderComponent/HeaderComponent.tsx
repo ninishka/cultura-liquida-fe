@@ -1,17 +1,15 @@
 "use client"
 
 import React, { FC, useState } from 'react'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/lib/redux/store/store'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
+import type { NavigationProps } from '@/types/types'
 
 import NavigationComponent from '@/app/components/NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
 import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
-import type { NavigationProps } from '@/types/types'
 
 import {
   LogoFull,
@@ -26,8 +24,8 @@ import {
 
 
 const HeaderComponent: FC<NavigationProps> = () => {
-  const dispatch = useDispatch()
-  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const dispatch = useAppDispatch()
+  const { cartItems } = useAppSelector(state => state.cart);
   const [ showMenu, setShowMenu ] = useState(false)
 
   return (
