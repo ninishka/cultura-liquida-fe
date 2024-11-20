@@ -57,15 +57,6 @@ const ModalComponent = ({data}) => {
     return { id, updatedData };
   });
 
-const [formValues, setFormValues] = useState({})
-const [preferenceId, setPreferenceId] = useState('')
-
-useEffect(() => {
-  console.log('initMercadoPago')
-  initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
-  // initMercadoPago(PUBLIC_KEY) // Public key
-}, [])
-
   // UPDATE DATABASE
   // const onFinish = async (values) => {
   //   const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
@@ -88,6 +79,17 @@ useEffect(() => {
   // }
   // usePathname was on dif poject instead of router to define url of page
 
+// ===========================================
+// MERCADO PAGO LOGIC
+const [formValues, setFormValues] = useState({})
+const [preferenceId, setPreferenceId] = useState('')
+const [loading, setLoading] = useState(false)
+
+useEffect(() => {
+  console.log('initMercadoPago')
+  initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
+  // initMercadoPago(PUBLIC_KEY) // Public key
+}, [])
 
   // PEYMENT SYSTEM
   const onFinish = async (values) => {
@@ -96,7 +98,7 @@ useEffect(() => {
       // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
       street_name: `${values.state}, ${values.city}, ${values.mail_address}`
     })
-  
+    setLoading(true)
     try {
       const response = await fetch('/api/preference', {
         method: 'POST',
@@ -116,14 +118,10 @@ useEffect(() => {
       }
     } catch (e) {
       console.error('Error processing preference:', e);
+    } finally {
+      setLoading(false)
     }
   };
-  
-
-
-
-
-  ///////////////
 
   const isEmpty = !cartItems?.length
 
@@ -150,10 +148,16 @@ useEffect(() => {
               justifyContent: 'center',
               flexDirection: 'column',
             }}>
-              <Image src={img55} fill={true} alt='the modal background image' style={{
-                objectFit: "cover",
-                zIndex: -5
-              }} />
+              <Image 
+                src={img55} 
+                fill={true} 
+                alt='the modal background image' 
+                priority // hight loading priority
+                style={{
+                  objectFit: "cover",
+                  zIndex: -5
+                }} 
+              />
               <TotalBox>
                 <ModalTitle style={{color: 'white'}}>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
                 <div style={{marginBottom: 0, padding: 10}}>
@@ -166,11 +170,17 @@ useEffect(() => {
           </>
         ) : (
           <>
-              <Image src={img55} fill={true} alt='the modal background image' style={{
-                objectFit: "cover",
-                zIndex: -5,
-                // marginLeft: 95
-              }} />
+              <Image 
+                src={img55} 
+                fill={true} 
+                alt='the modal background image' 
+                style={{
+                  objectFit: "cover",
+                  zIndex: -5,
+                  // marginLeft: 95
+                }} 
+                priority // hight loading priority
+              />
             <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>
@@ -180,7 +190,7 @@ useEffect(() => {
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm form={form} onFinish={onFinish} />
+              <ModalForm form={form} onFinish={onFinish} loading={loading} />
             </>
               {/* Public key */}
               {preferenceId && <Wallet
