@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { Form, Input, Select } from 'antd'
 import { Modal } from 'antd';
-
+import { Button } from 'antd';
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -13,7 +13,7 @@ export const ModalTitle = styled.h2`
   @media (max-width: 850px) {
     font-size: 30px;
   }
-  font-family: '__mohave_5f7c1e';
+  font-family: var(--font-mohave);
 
 `
 interface ModalStyledProps {
@@ -276,7 +276,7 @@ export const TotalBox = styled.div`
   border-radius: 16px;
   margin: 20px;
   padding: 5px;
-  font-family: '__mohave_5f7c1e';
+  font-family: var(--font-mohave);
 
 `
 export const TotalWrap = styled.div`
@@ -293,22 +293,38 @@ export const LeftSideWrap = styled.div`
   flex-direction: column;
 `
 
-interface StyledButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  htmltype?: "button" | "submit" | "reset";
-}
 
-export const Comprar = styled.button<StyledButtonProps>`
- width: 100%;
+export const Comprar = styled(Button)`
+  width: 100%;
  background-color: #4FDB40;
  border: none;
- padding: 10px;
+ padding: 30px;
  border-radius: 16px 16px;
  font-weight: 600;
  cursor: pointer;
- font-family: '__mohave_5f7c1e';
+ font-family: var(--font-mohave);
  font-size: large;
 
+ 
+  
+/* TODO - so we need to change color btns, but Accessability dont let us */ 
+/* Possible solution - border for white text or different color */
+ // ========= here we can make border for text
+ /* position: relative;
+  color: transparent;
+ -webkit-text-stroke: 1px black;
+ text-stroke: 1px black;
+ transition: all 0.3s ease; */
+
+ // ====== here how hover for example
+ /* color: black; 
+ -webkit-text-stroke: 0;
+ text-stroke: 0; */
+
+
+
  &:hover{
-    background-color: #F2C94C;
+    background-color: #F2C94C !important;
+    color: white !important;
   }
 `

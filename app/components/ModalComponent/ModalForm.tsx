@@ -10,12 +10,15 @@ import {
   LeftSideWrap,
   Comprar
 } from './styled'
+
 interface ModalFormProps {
   form: FormInstance<any>;
+  loading: boolean;
   onFinish: (values: any) => Promise<void>;
 }
 
-const ModalForm: FC<ModalFormProps> = ({ onFinish }) => { 
+const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => { 
+
   return (
     <StyledForm 
       onFinish={onFinish} 
@@ -40,7 +43,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish }) => {
           </StyledFormItem>
         </TotalWrap>
         <StyledFormItem style={{width: '100%'}}>
-            <Comprar htmltype="submit">
+            <Comprar htmlType="submit" loading={loading}>
               {'Comprar'.toUpperCase()}
             </Comprar>
         </StyledFormItem>
