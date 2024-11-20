@@ -2,12 +2,8 @@
 
 import React, {FC} from 'react'
 import { useEffect } from 'react'
+import type { ErrorProps } from '@/types/types'
 
-interface ErrorProps {
-  error: Error;
-  reset: () => void 
-}
- 
 const Error: FC<ErrorProps> = ({ error, reset }) => {
   useEffect(() => {
     console.error(error)

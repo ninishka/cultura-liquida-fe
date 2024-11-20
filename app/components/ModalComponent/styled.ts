@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Form, Input, Select, Dropdown} from 'antd'
 import { Modal } from 'antd';
 import { Button } from 'antd';
+import type { ModalStyledProps } from '@/types/types'
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -16,9 +17,6 @@ export const ModalTitle = styled.h2`
   font-family: var(--font-mohave);
 
 `
-interface ModalStyledProps {
-  $isEmpty: boolean;
-}
 
 export const ModalStyled = styled(Modal)<ModalStyledProps>`
   z-index: 25; 
