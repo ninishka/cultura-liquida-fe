@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/redux/store/store'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 
-import NavigationComponent from '../NavigationComponent/NavigationComponent'
+import NavigationComponent from '@/app/components/NavigationComponent/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
@@ -35,13 +35,13 @@ const HeaderComponent: FC<HeaderComponentProps> = () => {
 
   return (
   <HeaderFull $isopen={showMenu ? true : false}>
-    <LogoFull>
+    <LogoFull href='/'>
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     
     <NavigationComponent isopen={showMenu ? true : false} />
     <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
-      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="burger-icon"/>
+      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="Menu icon"/>
     </BurgerWrap>
 
     <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
@@ -50,7 +50,7 @@ const HeaderComponent: FC<HeaderComponentProps> = () => {
           {cartItems?.length}
         </p>
       </CounterCartWrap>
-      <Cart src={CartIcon} alt="cart logo" />
+      <Cart src={CartIcon} alt="Cart logo" />
     </CartWrap>
   </HeaderFull>
 )}

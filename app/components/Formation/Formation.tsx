@@ -69,8 +69,9 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isL
           <ImageStyled 
             src={source} 
             alt='formation'
-            loading="eager" 
+            loading="eager"
             sizes="(max-width: 1220px) 100vw, 50vw" 
+            priority // hight loading priority
           />
         </ImageWrapperDesktop>
       </Suspense>
