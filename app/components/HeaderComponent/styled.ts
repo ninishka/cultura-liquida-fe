@@ -3,12 +3,9 @@
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { NavigationProps } from '@/types/types'
 
-interface HeaderFullProps {
-  $isopen: boolean;
-}
-
-export const HeaderFull = styled.header<HeaderFullProps>`
+export const HeaderFull = styled.header<NavigationProps>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

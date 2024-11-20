@@ -11,6 +11,7 @@ import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
 import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
+import type { NavigationProps } from '@/types/types'
 
 import {
   LogoFull,
@@ -24,11 +25,7 @@ import {
 } from './styled'
 
 
-interface HeaderComponentProps {
-  isopen?: boolean;
-}
-
-const HeaderComponent: FC<HeaderComponentProps> = () => {
+const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const [ showMenu, setShowMenu ] = useState(false)

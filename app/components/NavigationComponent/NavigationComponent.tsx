@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import data from '@/app/components/data'
+import type { NavigationProps } from '@/types/types'
 import {
   Navigation,
   UlItself,
@@ -7,11 +8,7 @@ import {
   StyledLink
 } from './styled'
 
-interface NavigationComponentProps {
-  isopen: boolean;
-}
-
-const NavigationComponent: FC<NavigationComponentProps> = ({ isopen }) => (
+const NavigationComponent: FC<NavigationProps> = ({ isopen }) => (
   <Navigation $isopen={isopen}>
     <UlItself> 
       {data.map(({ title, url, types }) => (

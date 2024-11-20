@@ -1,11 +1,7 @@
 'use client'
  
 import React, { useEffect, FC } from 'react'
-
-interface ErrorProps {
-  error: Error;
-  reset: () => void;
-}
+import type { ErrorProps } from '@/types/types'
  
 const Error: FC<ErrorProps> = ({ error, reset }) => {
   useEffect(() => {

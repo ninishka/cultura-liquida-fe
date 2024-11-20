@@ -1,52 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-export interface CartItemType {
-  description: string;
-  icon: any;
-  iconSrc: any;
-  src: any;
-  id: string;
-  _id: string;
-  ingredient: string;
-  price: number;
-  stock: number;
-  size?: string;
-  title: string;
-  type: string;
-  url: string;
-  __v: number;
-
-  amount?: number;
-  idCart?: string;
-}
-
-type ExtendedPayload = CartItemType & {
-  isModal?: boolean;
-};
-
-interface CartState {
-  cartItems: CartItemType[]
-  count: number
-  showCart: boolean
-}
+import type { CartState, ExtendedPayload } from '@/types/types'
 
 const initialState: CartState = {
   cartItems: [],
   count: 1,
   showCart: false,
-}
-
-type ExtendedPayload2 = CartItemType & {
-  isModal?: boolean;
-  // idCart
-  removeAll?: boolean;
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    toggleShowCart: (state, action) => {
+    toggleShowCart: (state, action: PayloadAction<boolean>) => {
       state.showCart = action.payload;
     },
     addToCart(state, action: PayloadAction<ExtendedPayload>) {
@@ -62,7 +27,7 @@ const cartSlice = createSlice({
         state.cartItems.push({ ...action.payload, amount })
       }
     },
-    removeFromCart(state, action: PayloadAction<ExtendedPayload2>) {
+    removeFromCart(state, action: PayloadAction<ExtendedPayload>) {
       const { idCart, amount = 1, removeAll = false } = action.payload
       const itemIndex = state.cartItems.findIndex(i => i.idCart === idCart)
       if (itemIndex >= 0) {
