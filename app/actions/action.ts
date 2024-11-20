@@ -1,33 +1,14 @@
 'use server'
 
-import Post from '@/models/Post'
-import { revalidateTag, revalidatePath } from 'next/cache'
-// const { MercadoPagoConfig, Preference } = require('mercadopago')
+import Product, { IProduct } from '@/models/Product'
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-interface Product extends Document {
-  _id?: string;
-  title: string;
-  description: string;
-  ingredient: string;
-  type: string;
-  size?: string;
-  price: number;
-  stock: number;
-}
+type UpdateProductData = Partial<IProduct>;
 
-type UpdateProductData = Partial<Product>;
-
-// type UpdateProductData = Partial<Product>;                   // not working
-// type PlainProduct = Omit<Product, '_id'> & { _id?: string }; // not working
-// interface PlainProduct extends Product {                     // not working
-//   _id?: string
-// }
-
-const getProduct = async () => {
+const getProduct = async (): Promise<IProduct[]>  => {
   console.log('getProduct starts')
   try {
-      const products = await Post?.find()?.lean();
+      const products = await Product?.find()?.lean();
       // console.log('products', products)
       const plainProducts = products.map(product => ({
         ...product,
@@ -41,12 +22,12 @@ const getProduct = async () => {
   }
 };
 
-const editProduct = async (id: string, updatedData: UpdateProductData): Promise<Product | null> => {
+const editProduct = async (id: string, updatedData: UpdateProductData): Promise<IProduct | null> => {
     try {
-    const updatedProduct = await Post.findByIdAndUpdate(id, updatedData, {
-      new: true, // Возвращает обновленный документ
+    const updatedProduct = await Product.findByIdAndUpdate(id, updatedData, {
+      new: true, // return updated record
       // new: false,
-      runValidators: true // Проверяет данные по схеме
+      runValidators: true // validate data by the schema
     });
   
     
@@ -70,7 +51,7 @@ const addProduct = async post => {
   const price = post.get('price')
   const stock = post.get('stock')
 
-  const newProduct = new Post({ title, description, ingredient, type, size, price, stock })
+  const newProduct = new Product({ title, description, ingredient, type, size, price, stock })
   return newProduct.save()
 }
 
@@ -104,7 +85,7 @@ const createPreference = async (cartItems, formValues) => {
     amount
   }));
 
-  const produ = await Post.findById(queryArray[0]._id);
+  const produ = await Product.findById(queryArray[0]._id);
 
   const client = new MercadoPagoConfig({
         accessToken: process.env.ACCESSTOKEN_TEST,

@@ -1,5 +1,6 @@
 import React, { Fragment, FC } from 'react';
 import { indicationsData } from '@/app/data'
+import type { IndicationsProps } from '@/types/types'
 
 import {
   IndicationsSection,
@@ -12,11 +13,6 @@ import {
   CautionWrapper,
   Caution
 } from './styled'
-
-
-interface IndicationsProps { 
-  indicationsImg: any;
-}
 
 const Indications: FC<IndicationsProps> = ({ indicationsImg }) => (
   <IndicationsSection>

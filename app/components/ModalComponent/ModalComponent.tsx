@@ -77,7 +77,6 @@ const ModalComponent = ({data}) => {
 
   //   await Promise.all(updatePromises);
   // }
-  // usePathname was on dif poject instead of router to define url of page
 
 // ===========================================
 // MERCADO PAGO LOGIC

@@ -2,6 +2,8 @@
 
 import React, { Suspense, FC } from 'react'
 import { useParams } from 'next/navigation';
+import type { FormationProps } from '@/types/types'
+import { init } from '@/app/components/helpers'
 import {
   FormationSection,
   ContentWrapper,
@@ -14,16 +16,6 @@ import {
 } from './styled'
 import Checkboxes from './Checkboxes'
 import Loading from '@/app/components/Loading/Loading'
-
-const init = (slug) => slug[0].includes("melena") 
-  ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
-  : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
-
-  interface FormationProps {
-    isMain?: Boolean;
-    [propName: string]: any // TODO
-  }
-   
 
 const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isLoading, error, slogMain, isMain }) => {
   const { slug } = useParams();

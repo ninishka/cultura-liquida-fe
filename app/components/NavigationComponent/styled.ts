@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import Link from 'next/link'
+import type { NavigationProps } from '@/types/types'
 
 export const UlItself = styled.ul`
   display: flex;
@@ -11,10 +12,6 @@ export const UlItself = styled.ul`
     flex-direction: column;
   }
 `
-
-interface NavigationProps {
-  $isopen: boolean;
-}
 
 export const Navigation = styled.nav<NavigationProps>`
   display: flex;

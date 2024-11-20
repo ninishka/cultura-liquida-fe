@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import type { AmountItemProps } from '@/types/types'
 
 export const CounterWrapper = styled.div`
   display: flex;
@@ -25,11 +26,6 @@ export const AmountWrapper = styled.div`
   align-items: center;
 
 `
-
-
-interface AmountItemProps {
-  $bgc: boolean;
-}
 
 export const AmountItem = styled.div<AmountItemProps>`
   display: flex;

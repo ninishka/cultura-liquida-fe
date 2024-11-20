@@ -19,7 +19,7 @@ import {
 import { RootState } from '@/lib/redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromCart } from '@/lib/redux/slices/cartSlice'
-import type { CartItemType } from '@/lib/redux/slices/cartSlice'
+import type { CartItemType } from '@/types/types'
 
 const CartItemComponent: FC<CartItemType> = item => {
   const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item

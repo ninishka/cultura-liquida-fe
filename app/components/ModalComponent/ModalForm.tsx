@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Radio } from 'antd'
-import { FormInstance } from 'antd'
 import ModalFormFields from './ModalFormFields'
+import type { ModalFormProps } from '@/types/types'
 import {
   StyledForm,
   StyledFormItem,
@@ -11,18 +11,11 @@ import {
   Comprar
 } from './styled'
 
-interface ModalFormProps {
-  form: FormInstance<any>;
-  loading: boolean;
-  onFinish: (values: any) => Promise<void>;
-}
-
-const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => { 
-
+const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
   return (
     <StyledForm 
       onFinish={onFinish} 
-      onFinishFailed={(errorInfo) => console.log('Failed:', errorInfo)}
+      onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
     >
       <ModalFormFields />
       <TotalBox>

@@ -1,4 +1,5 @@
 import React, { Fragment, FC } from 'react';
+import type { BenefitsProps } from '@/types/types'
 import {
   HeaderBenefitsWrapper,
   TextForBenefits,
@@ -10,12 +11,6 @@ import {
   BenefitIconWrapper,
   BenefitIcon,
 } from './styled'
-
-interface BenefitsProps {
-  benefitsHeaderData?: { title: string; description1: string; description2: string; }[];
-  benefitsCardsData?: { src: any; description: string; }[];
-  benefitsData?: [];
-}
 
 const Benefits: FC<BenefitsProps> = ({ benefitsHeaderData, benefitsCardsData, benefitsData }) => (
   <section>
