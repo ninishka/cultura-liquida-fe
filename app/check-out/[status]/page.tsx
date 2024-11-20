@@ -1,11 +1,13 @@
-// app/checkout/[status]/page.js was
+'use client'
+import { usePathname } from 'next/navigation';
 
 import React, { FC } from 'react'
 
 const CheckoutPage: FC = () => {
+  const pathname = usePathname()
   return (
     <div>
-      CheckoutPage
+      CheckoutPage {pathname}
     </div>
   );
 }
