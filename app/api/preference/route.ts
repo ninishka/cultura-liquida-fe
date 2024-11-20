@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createPreference } from '@/app/actions/action';
+import { createPreference } from '@/app/actions/payment';
 
 export async function POST(request) {
   try {
