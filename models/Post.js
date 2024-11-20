@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-console.log('model', process.env.MONGODB_URI)
+// console.log('model', process.env.MONGODB_URI)
 
 const postSchema = new mongoose.Schema({
     title: {
