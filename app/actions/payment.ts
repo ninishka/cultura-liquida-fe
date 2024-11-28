@@ -1,7 +1,7 @@
 'use server'
 
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-import Product from '@/models/Product'
+// import Product from '@/models/Product'
 
 const createPreference = async (cartItems, formValues) => {
     if (!cartItems || !cartItems.length) {
@@ -33,13 +33,12 @@ const createPreference = async (cartItems, formValues) => {
       amount
     }));
   
-    console.log('queryArray[0]._id', queryArray[0]._id)
-
+    // console.log('queryArray[0]._id', queryArray[0]._id)
     // const produ = await Product.findById(queryArray[0]._id);
   
     const client = new MercadoPagoConfig({
-          accessToken: process.env.ACCESSTOKEN_TEST,
-      // accessToken: process.env.ACCESSTOKEN',
+      accessToken: process.env.ACCESSTOKEN_TEST,
+      // accessToken: process.env.ACCESSTOKEN,
       // TODO idempotencyKey
       options: { timeout: 5000, idempotencyKey: 'abc' }
     });
@@ -55,21 +54,20 @@ const createPreference = async (cartItems, formValues) => {
     } = formValues
     const now = new Date()
   
+    console.log('queryArray?.title', queryArray?.title)
+    
     const preferenceBody = {
       items: [{
         id: queryArray[0]._id,
-        title: queryArray?.title,
-        quantity: queryArray?.[0]?.amount, // ??
-        unit_price: queryArray?.price,
+        title: queryArray?.[0]?.title,
+        quantity: queryArray?.[0]?.amount,
+        unit_price: queryArray?.[0]?.price,
         currency_id: 'COP'
       }],
       back_urls: {
-        // success: "https://cultura-liquida.com/check-out/success",
         success: `${process.env.PATH_TO_API}/check-out/success`,
         failure: `${process.env.PATH_TO_API}/check-out/failure`,
         pending: `${process.env.PATH_TO_API}/check-out/pending`,
-        // failure: "https://cultura-liquida.com/check-out/failure",
-        // pending: "https://cultura-liquida.com/check-out/pending"
       },
       auto_return: "approved",
       payer: {

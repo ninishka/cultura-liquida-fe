@@ -21,6 +21,7 @@ const productSchema = new mongoose.Schema<IProduct>({
 });
 
 const Product: Model<IProduct> = mongoose.models.Post || mongoose.model<IProduct>('Post', productSchema);
+// Singleton ?
 
 export default Product;
 

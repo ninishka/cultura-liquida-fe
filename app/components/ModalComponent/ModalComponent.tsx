@@ -77,37 +77,39 @@ const ModalComponent = ({data}) => {
 
 // ===========================================
 // MERCADO PAGO LOGIC
-const [formValues, setFormValues] = useState({})
+// const [formValues, setFormValues] = useState({})
 const [preferenceId, setPreferenceId] = useState('')
 const [loading, setLoading] = useState(false)
 
 useEffect(() => {
   console.log('initMercadoPago')
   initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
-  // initMercadoPago(PUBLIC_KEY) // Public key
 }, [])
 
   // PEYMENT SYSTEM
   const onFinish = async (values) => {
-    await setFormValues({
-      ...values,
-      // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
-      street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-    })
+    // await setFormValues({
+    //   ...values,
+    //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+    // })
     setLoading(true)
     try {
       const response = await fetch('/api/preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cartItems, formValues }),
+        body: JSON.stringify({ cartItems, formValues: {
+          ...values,
+          street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+        } }),
       });
   
       if (!response.ok) {
-        console.error('Error creating preference');
+        console.error('Error creating preference ONFINISH');
         return;
       }
       const { preferenceId } = await response.json()
       if (preferenceId) {
+        console.log('preferenceId', preferenceId)
         setPreferenceId(preferenceId)
       } else {
         console.error('id as preferenceId is missing in response');

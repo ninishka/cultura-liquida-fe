@@ -20,18 +20,16 @@ export const metadata = {
   copyright: "© 2024 Cultura Líquida. All rights reserved.",
   robots: {
     index: true,
-    follow: true,
-    // googleBot: {  do we need it?
-    //   index: true,
-    //   follow: true,
-    // },  
+    follow: true, 
   },
   link:{
     rel:"icon",
     href:"./favicon.ico",
     sizes:"any"
-  }
-
+  },
+  alternates: {
+    canonical: '/product/melena-de-leon-capsules',
+  },
 };
   //  robots.txt FILE ???
   //  Author and Copyright ?
