@@ -32,7 +32,9 @@ const Counter = ({
       >
         <ArrowPrev aria-label="Disminuir artículos" color={isModal && 'black'} />
       </ArrowButtons>
-      <Number>{count}</Number>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '3rem' }}>
+        <Number>{count}</Number>
+      </div>
       <ArrowButtons 
         aria-label={`Obtenga más información sobre cómo aumentar la cantidad de artículos, recuento actual: ${count}`} 
         onClick={() => setCount(count + 1)}        
@@ -54,7 +56,7 @@ const Counter = ({
     {isModal && 
       <BuyButton 
         aria-label="botón añadir al carrito" 
-        style={{ width: '50px' }}
+        style={{ width: '100px', height: '52px' }}
         onClick={() => dispatch(addToCart({...item, amount: count, isModal: true}))}
       >
         Edit

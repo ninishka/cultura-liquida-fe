@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
+import { Radio } from 'antd'
+
 
 export const FormationSection = styled.section`
   display: flex;
@@ -75,12 +77,12 @@ export const Description = styled.h2`
 `
 
 export const Release = styled.h3`
-  color: lightgray;
+  color: #9F9F9F;
   font-size: 24px;
   font-weight: 400;
   margin: 0;
-  margin-bottom: 20px;
-  margin-top: 24px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 
   @media (max-width: 850px) {
     font-size: 14px;
@@ -95,13 +97,13 @@ export const CheckBoxGroup = styled.div`
     justify-content: center
   }
 `
-export const Item = styled.form`
+export const Item = styled.form` // TODO change
   display: flex;
   flex-direction: row;
   align-items: center;
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
-  margin-right: 30px;
+  margin-right: 20px;
   cursor: pointer;
   width: 216px;
   height: 62px;
@@ -143,8 +145,8 @@ export const TextDesc = styled.h4`
   }
 `
 
-export const RadioButton = styled.input`
-  appearance: none;
+export const RadioButton = styled(Radio)`
+  /* appearance: none;
   display: inline-block;
   width: 1.3em;
   height: 1.3em;
@@ -171,7 +173,34 @@ export const RadioButton = styled.input`
     left: 50%; 
     transform: translate(-50%, -50%);
     z-index: 1;
-  }
+  } */
+
+display: flex;
+align-items: center;
+    margin-left: 20px;
+
+.ant-radio-inner {
+  border: 1px solid #FFFFFF; 
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  border-color: #FFFFFF;
+  background-color: transparent;
+}
+
+.ant-radio-checked .ant-radio-inner::after {
+  background-color: #FFFFFF;
+}
+
+&:hover .ant-radio-inner {
+  border-color: #FFFFFF; 
+}
+
+.ant-radio-wrapper {
+  margin-left: 20px;
+}
 `
 
 export const LabelContent = styled.div`
@@ -181,5 +210,35 @@ export const LabelContent = styled.div`
 
  @media (max-width: 850px) {
     flex-direction: column;
+  }
+`
+
+
+
+
+export const Item2 = styled.div` // TODO change
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 16px 16px 16px 16px;
+  background-color: #2D2D2D;
+  margin-right: 20px;
+  cursor: pointer;
+  width: 216px;
+  height: 62px;
+
+  @media (max-width: 850px) {
+    width: 50px;
+    height: 105px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 20px;
+    text-align: center;
+    margin-right: 15px;
+    margin: 10px 1vh;
+  }
+
+  &:hover{
+    background-color: #252525;
   }
 `

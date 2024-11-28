@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Image from 'next/image'
-import { Form, Input, Select } from 'antd'
+import { Form, Input, Select, Dropdown} from 'antd'
 import { Modal } from 'antd';
 import { Button } from 'antd';
 import type { ModalStyledProps } from '@/types/types'
@@ -166,17 +166,53 @@ export const StyledInput = styled(Input)`
 
 export const StyledSelect = styled(Select)`
   height: 52px;
-
-
   .ant-select-selector {
     border-radius: 16px;
   }
+  .ant-select-dropdown {
+    border-radius: 16px !important;
+  }
+
 `
 
 export const StyledFormItem = styled(Form.Item)`
   margin-bottom: 0;
   width: 50%;
   padding: 7px 15px;
+
+  .ant-radio-checked .ant-radio-inner {
+    border-color: #4FDB40; 
+    background-color: #4FDB40; /* Inner dot color for checked radio */
+  }
+
+
+  .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+    content: ''; /* Remove the default asterisk */
+  }
+
+  .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
+    content: '*'; 
+    margin-inline-start: 4px; 
+    color: black;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+  }
+  .ant-form-item-explain-error{
+    color: red;
+    font-weight: 600;
+  }
+
+  .ant-input-status-error:not(.ant-input-disabled){
+    border-color: red;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2) !important;
+  }
+  .ant-input-status-error:not(.ant-input-disabled):focus,
+  .ant-input-status-error:not(.ant-input-disabled):hover {
+    border-color: red !important; 
+  }
+
+
   @media (max-width: 850px) {
     width: 100%;
   }
@@ -221,6 +257,10 @@ export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
   accent-color: black;
   border: 1px solid #ccc;
   cursor: pointer;
+  .ant-radio-checked{
+    border-color: green;
+    background-color: green;
+  }
 `;
 
 export const CheckboxLabel = styled.label`

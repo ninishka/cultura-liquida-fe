@@ -57,7 +57,7 @@ const ModalFormFields: FC = () => {
         <StyledSelect
           placeholder="Elige una opción..."
           // onChange={(v: any) => setSelectedDocumento(v)}
-          allowClear 
+          allowClear
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={[
             {
@@ -168,7 +168,7 @@ const ModalFormFields: FC = () => {
       </StyledFormItem>
       {/*Celular / Teléfono */}
       <StyledFormItem
-        label="Celular / Teléfono *"
+        label="Celular / Teléfono"
         name="phone_number"
         rules={[
           {
