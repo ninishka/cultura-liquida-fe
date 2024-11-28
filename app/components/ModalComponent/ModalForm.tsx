@@ -17,7 +17,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
       onFinish={onFinish} 
       onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
     >
-      <ModalFormFields />
+      {/* <ModalFormFields /> */}
       <TotalBox>
         <TotalWrap>
           <LeftSideWrap>

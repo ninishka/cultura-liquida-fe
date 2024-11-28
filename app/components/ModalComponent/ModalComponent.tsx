@@ -89,10 +89,22 @@ useEffect(() => {
 
   // PEYMENT SYSTEM
   const onFinish = async (values) => {
+    const hui = {
+      name: "One",
+      surname: "One",
+      document_type: "id",
+      id_number: "1234",
+      mail_address: "123",
+      state: "ANT",
+      city: "Abejorral",
+      phone_number: "3107883758",
+      email: "first@gmail.com",
+      remember: true
+  }
     await setFormValues({
-      ...values,
+      ...hui,
       // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
-      street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+      street_name: `${hui.state}, ${hui.city}, ${hui.mail_address}`
     })
     setLoading(true)
 
@@ -102,9 +114,9 @@ useEffect(() => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cartItems, formValues: {
-          ...values,
+          ...hui,
           // street_name: `${values.state}, ${values.city}, ${values.street_name}, ${values.street_number}`
-          street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+          street_name: `${hui.state}, ${hui.city}, ${hui.mail_address}`
         } }),
       });
   
