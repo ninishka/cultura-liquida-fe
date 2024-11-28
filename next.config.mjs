@@ -21,15 +21,15 @@ const nextConfig = {
     PATH_TO_API: process.env.PATH_TO_API
   },
 
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/product/melena-de-leon-capsules',
-  //       permanent: false,
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/product/melena-de-leon-capsules',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
