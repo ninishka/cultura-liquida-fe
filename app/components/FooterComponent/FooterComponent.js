@@ -19,7 +19,7 @@ import {
 const FooterComponent = () => (
   <FooterFull>
     <HeaderLikeFooter>
-    <LogoFull href='/'> 
+    <LogoFull href='/product/melena-de-leon-capsules'> 
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     <NavigationComponent />

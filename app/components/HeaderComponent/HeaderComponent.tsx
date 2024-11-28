@@ -30,7 +30,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
 
   return (
   <HeaderFull $isopen={showMenu ? true : false}>
-    <LogoFull href='/'>
+    <LogoFull href='/product/melena-de-leon-capsules'>
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     

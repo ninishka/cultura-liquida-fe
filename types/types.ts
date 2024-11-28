@@ -55,7 +55,6 @@ export interface ModalFormProps {
 }
 
 export interface FormationProps {
-  isMain?: Boolean;
   isLoading?: Boolean;
   error?: any;
   slogMain?: String[];

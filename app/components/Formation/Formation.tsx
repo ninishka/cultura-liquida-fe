@@ -17,10 +17,9 @@ import {
 import Checkboxes from './Checkboxes'
 import Loading from '@/app/components/Loading/Loading'
 
-const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isLoading, error, slogMain, isMain }) => {
+const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isLoading, error, slogMain }) => {
   const { slug } = useParams();
-  const conditionSlug = isMain ? slogMain : slug 
-  const rInit = init(conditionSlug)
+  const rInit = init(slug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
   // const filterdContent2 = formationData?.find(({ id }) => id === rInit)
   // TODO need to do something better with ids
