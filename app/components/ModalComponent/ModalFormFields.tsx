@@ -32,9 +32,9 @@ const ModalFormFields: FC = () => {
  
   return (
     <>
-      {/* Nombre*/}
+      {/* Nombres*/}
       <StyledFormItem
-        label="Nombre"
+        label="Nombres"
         name="name"
         rules={nameSurnameValidator}
       >
@@ -48,9 +48,9 @@ const ModalFormFields: FC = () => {
       >
         <StyledInput />
       </StyledFormItem>
-      {/* Tipo documento select*/}
+      {/* Tipo de documento select*/}
       <StyledFormItem
-        label="Tipo documento"
+        label="Tipo de documento"
         name="document_type"
         rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
       >
@@ -60,23 +60,11 @@ const ModalFormFields: FC = () => {
           allowClear 
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={[
-            {
-              value: 'id',
-              label: 'ID',
-            },
-            {
-              value: 'pasaporte',
-              label: 'Pasaporte',
-            },
-            {
-              value: 'licencia-de-conducir',
-              label: 'Licencia de conducir',
-            },
-            // {
-            //   value: 'disabled',
-            //   label: 'Disabled',
-            //   disabled: true,
-            // },
+            { label: 'CC', value: 'cc' },
+            { label: 'CE', value: 'ce' },
+            { label: 'NIT', value: 'nit' },
+            { label: 'Pasaporte', value: 'passport' },
+            { label: 'Otro', value: 'other' },
           ]}
         />
       </StyledFormItem>
