@@ -93,7 +93,7 @@ export const CautionWrapper = styled.div`
 `
 
 export const Caution = styled.span`
-  color: yellow;
+  color: #F2C94C;
   font-weight: 600;
 `
 

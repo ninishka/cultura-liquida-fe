@@ -42,7 +42,11 @@ const CartItemComponent: FC<CartItemType> = item => {
         </InfoContainer2>
       </CardInfoWrapper>
       <InfoContainer>
-        <p style={{color: 'red', textAlign: 'center', margin: '0 2vw' }}>{type === 'capsules' ? 'capsules': type + size}</p>
+        <p style={{
+          color: 'red', 
+          textAlign: 'center', margin: '0 2vw 2px', fontSize:'16px' }}>
+          {type === 'capsules' ? 'Capsules': type + size}
+        </p>
         <Price>{price * tAmount} COP</Price>
       </InfoContainer>
       <Counter amount={tAmount} item={item} isModal />

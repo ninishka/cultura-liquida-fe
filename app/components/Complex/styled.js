@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Image from 'next/image'
+import { Radio } from 'antd'
 
 export const AllWrap = styled.div`
   display: flex;
@@ -33,12 +34,15 @@ export const ImgMobile = styled(Image)`
 
   @media (max-width: 767px) {
     display: block;
+    width: 300px;
+    height: 200px;
   }
 `
 
 export const RightContentWrap = styled.div`
  display: flex;
  flex-direction: column;
+ margin-left: 25px;
 
  @media (max-width: 1200px) {
     align-items: center;
@@ -47,7 +51,7 @@ export const RightContentWrap = styled.div`
 export const TitleWrap = styled.div`
  display: flex;
  flex-direction: column;
- margin-left: 20px;
+ /* margin-left: 20px; */
 
  @media (max-width: 1200px) {
     align-items: center;
@@ -81,7 +85,7 @@ export const ComplexItemsWrap = styled.div`
   background-color: #2D2D2D;
   padding: 6px 25px;
   border-radius: 16px;
-  margin: 0px 21px;
+  /* margin: 0px 21px; */
   width: 50%;
 
   @media (max-width: 1200px) {
@@ -143,19 +147,20 @@ export const Item123 = styled.h3`
 export const LearnMoreWrap = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 15px;
 `
 export const LearnMoreText = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 17.6px;
   text-align: left;
-  color:#FFFFFF;
+  color:#9F9F9F;
 `
 
  export const ArrowIcon = styled(Image)`
   width: 15px;
   height: auto;
+  /* color: lightgray; */
  `
 
  export const ArrowButtons = styled.button`
@@ -165,10 +170,10 @@ export const LearnMoreText = styled.p`
   color: inherit;
   background: none;
   cursor: pointer;
-  :hover{
+  /* :hover{
     background-color:#252525;
     border-radius: 16px 16px;
-  }
+  } */
   `
 
 export const CheckBoxGroup = styled.div`
@@ -228,35 +233,37 @@ export const TextDesc = styled.h4`
   }
 `
 
-export const RadioButton = styled.input`
-  appearance: none;
-  display: inline-block;
-  width: 1.3em;
-  height: 1.3em;
-  background: transparent;
-  border-radius: 50%;
-  border: 0.5px solid #ddd;
-  cursor: pointer;
-  position: relative;
+export const RadioButton = styled(Radio)`
   margin-left: 20px;
+  display: flex;
+  align-items: center;
+  
+  .ant-radio-inner {
+    border: 1px solid #FFFFFF; 
+    background-color: transparent;
+    border-radius: 50%;
+  }
 
-  @media (max-width: 650px) {
+  .ant-radio-checked .ant-radio-inner {
+    border-color: #FFFFFF;
+    background-color: transparent;
+  }
+
+  .ant-radio-checked .ant-radio-inner::after {
+    background-color: #FFFFFF;
+  }
+
+  &:hover .ant-radio-inner {
+    border-color: #FFFFFF; 
+  }
+
+  .ant-radio-wrapper {
+    margin-left: 20px;
+  }
+  /* @media (max-width: 650px) {
     margin-left: 0;
   }
-
-  &:checked::after {
-    content: "";
-    display: block;
-    width: 0.7em; 
-    height: 0.7em;
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
+*/
 `
 
 export const LabelContent = styled.div`

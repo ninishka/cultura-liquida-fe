@@ -5,9 +5,9 @@ export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 30px 23px;
-  gap: 49px;
-
+  margin:40px 0px;
+  gap: 20px;
+  align-items: center;
   @media (max-width: 1220px) {
     justify-content: center;
     margin: 10px 1vh;
@@ -40,14 +40,14 @@ export const AmountItem = styled.div<AmountItemProps>`
   width: 100px;
   height: 52px;
   
-  &:hover{
+  /* &:hover{
     background-color: #252525;
     background-color: ${({$bgc}) => $bgc ? 'grey' : '#2D2D2D'};
-  }
+  } */
 
   @media (max-width: 850px) {
-    width: 89px;
-    height: 39px;
+    /* width: 89px;
+    height: 39px; */
     margin: 20px;
   }
 `
@@ -76,11 +76,10 @@ export const BuyButton = styled.button`
   border-radius: 16px 16px 16px 16px;
   background-color: #4FDB40;
   padding:  17px 29px;
-  margin-right: '30px';
+  margin-right: '37px';
   cursor: pointer;
   width: 200px;
-
-  height: 52px;
+  height: 55px;
   color: #2d2d2d;
   font-weight: 600;
   border: none;

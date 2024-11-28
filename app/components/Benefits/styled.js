@@ -8,8 +8,8 @@ export const HeaderBenefitsWrapper = styled.div`
  flex-direction: row;
  align-items: center;
  justify-content: space-between;
- margin: 0 2vh;
-
+ margin: 40px 12px;
+ 
  @media (max-width: 850px) {
     flex-direction: column;
     align-items: start;
@@ -64,10 +64,10 @@ export const BenefitsCards = styled.div`
   flex-direction: row;
   /* flex-wrap: wrap; */
   justify-content: space-between;
-  margin: 0 5px;
+  /* margin: 40px 0; */
 
   
-  @media (max-width: 945px) {
+  @media (max-width: 1200px) {
     flex-wrap: wrap;
   }
 
@@ -82,17 +82,16 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-  height: 204px;
-  width: 204px;
-  margin: 15px;
+  height: 226px;
+  width: 100%;
+  margin: 20px;
   border-radius: 16px;
   background-color: #2D2D2D;
   text-align: center;
 
   @media (max-width: 850px) {
-    height: 166px;
-    width: 195px;
+    height: 400px;
+    /* width: 195px; */
   }
 `
 export const BenefitIcon = styled(Image)`
