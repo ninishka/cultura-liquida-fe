@@ -39,7 +39,7 @@ const createPreference = async (cartItems, formValues) => {
   
     const client = new MercadoPagoConfig({
           accessToken: process.env.ACCESSTOKEN_TEST,
-      // accessToken: process.env.ACCESSTOKEN',
+      // accessToken: process.env.ACCESSTOKEN,
       // TODO idempotencyKey
       options: { timeout: 5000, idempotencyKey: 'abc' }
     });
@@ -53,14 +53,17 @@ const createPreference = async (cartItems, formValues) => {
     const {
       name, surname, email, phone_number, id_number, street_name,
     } = formValues
+    console.log('formValues', formValues)
     const now = new Date()
   
     const preferenceBody = {
       items: [{
         id: queryArray[0]._id,
-        title: queryArray?.title,
+        // title: queryArray?.title,
+        title: 'MELENA DE LEON',
         quantity: queryArray?.[0]?.amount, // ??
-        unit_price: queryArray?.price,
+        // unit_price: queryArray?.price,
+        unit_price: 12000,
         currency_id: 'COP'
       }],
       back_urls: {
@@ -81,6 +84,9 @@ const createPreference = async (cartItems, formValues) => {
       shipments: { receiver_address: { street_name } }
     };
   
+
+    console.log('preferenceBody', preferenceBody)
+
     return await preference.create({ body: preferenceBody });
   };
 
