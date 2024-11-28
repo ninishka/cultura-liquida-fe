@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addProduct, getProduct, editProduct } from '@/app/actions/action';
+import { addProduct, getProduct, editProduct } from '@/app/actions/crud';
 import { ProductG, UpdateProductRequest } from '@/types/types';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {

@@ -1,4 +1,4 @@
-import { addProduct } from '@/app/actions/action'
+import { addProduct } from '@/app/actions/crud'
 
 const AddProductComponent = () => {
     return (
