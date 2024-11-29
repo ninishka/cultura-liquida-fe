@@ -45,18 +45,6 @@ const Complex: FC = () => {
     if(checkedState !== id) setCheckedState(id)
   }
 
-  const isBrowser = (): boolean  => typeof window !== 'undefined';
-
-  const scrollToTop = (): void => {
-    if (!isBrowser()) return;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  const handleClick = (id: string): void => {
-    // make new routing
-    scrollToTop()
-  }
-
   const filterdContent = complexData2.filter(({ id }) => id === checkedState)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
   const preObj = {idCart , ...filterdContent?.[0]}
@@ -81,22 +69,19 @@ const Complex: FC = () => {
             <ComplexItemsWrap>
               <LeftSide>
                 <LeftTitle>El complejo consta de:</LeftTitle>
-                {data.map(({ title }, index) => {
-                  const id = `${index + 1}`.toString()
-                  return (
-                    <ThreeItemsWrap key={title}>
+                {data.map(({ url, title, types }, index) => (
+                  <ThreeItemsWrap key={title}>
                     <InsideItemWrap>
                       <Item123>{title}</Item123>
                     </InsideItemWrap>
-                    <ArrowButtons aria-label={`Obtenga más información sobre ${title}`} onClick={() => handleClick(id)}>
-                      <LearnMoreWrap key={title + id}>
+                    <ArrowButtons href={`/product/${url}-${types[0]}`} aria-label={`Obtenga más información sobre ${title}`}>
+                      <LearnMoreWrap key={title + `${index + 1}`.toString()}>
                         <LearnMoreText>Leer más</LearnMoreText>
                         <ArrowIcon src={imgC} alt='arrow' />
                       </LearnMoreWrap>
                     </ArrowButtons>
-                    </ThreeItemsWrap>
-                  )
-                })} 
+                  </ThreeItemsWrap>
+                ))} 
               </LeftSide>
             </ComplexItemsWrap>
             <FormationWrap>
@@ -128,7 +113,6 @@ const Complex: FC = () => {
        </RightContentWrap>
       </AllWrap>
     </section>
-    
 )}
 
 

@@ -26,34 +26,17 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
           {formationData.map(({type, icon, id, url, size, price, stock}) => {
             const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
             return (
-              <Fragment key={hrefLogic}>
-                {/* {!!stock && ( */}
+<Fragment key={hrefLogic}>
+                {!!stock ? (
                   <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff', zIndex: !stock && -99 }}>
-                  <Item aria-label={`Elección del tamaño del producto`}> 
-                    <label htmlFor={id} aria-label={`Elección del tamaño del producto`} >
-                     {!stock ?  <p style={{
-                      position: 'absolute',
-                      margin: '-15px 0px 0px -20px',
-                      color: 'red',
-                      fontSize: '20px',
-                     }}>SOLD</p> : (
-                        <RadioButton
+                  <Item aria-label='Elección del tamaño del producto'> 
+                    <label htmlFor={id} aria-label='Elección del tamaño del producto'>
+                      <RadioButton
                         id={id}
-                        type="radio" 
-                        name="group1" 
+                        type="radio"
+                        name="group1"
                         checked={id === rInit}
-                        readOnly
-                        
                       />
-                      )}
-                      {/* <RadioButton
-                        id={id}
-                        type="radio" 
-                        name="group1" 
-                        checked={id === rInit}
-                        readOnly
-                        
-                      /> */}
                     </label>  
                     <LabelContent >
                       <Icon src={icon} alt={type}/>
@@ -61,7 +44,13 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
                     </LabelContent>
                   </Item>
                   </Link>
-                {/* )} */}
+                ) : (
+                  <Item aria-label='Elección del tamaño del producto' style={{ zIndex: !stock && -99, backgroundColor: '#F2654C' }}> 
+                    <LabelContent>
+                      <p style={{maxWidth: 100, position: 'relative', left: '50%'}}>{'¡vendido! ¿Libro?'.toUpperCase()}</p>
+                    </LabelContent>
+                  </Item>
+                )}
               </Fragment>
             )})
           }
