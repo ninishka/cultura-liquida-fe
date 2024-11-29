@@ -332,17 +332,17 @@ export const LeftSideWrap = styled.div`
 `
 
 
-export const Comprar = styled(Button)`
+export const CartPayButton = styled(Button)`
   width: 100%;
- background-color: #4FDB40;
- border: none;
- padding: 30px;
- border-radius: 16px 16px;
- font-weight: 600;
- cursor: pointer;
- font-family: var(--font-mohave);
- font-size: large;
-
+  background-color: #4FDB40;
+  border: none;
+  padding: 30px;
+  border-radius: 16px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-mohave);
+  font-size: large;
+  text-transform: uppercase;
  
   
 /* TODO - so we need to change color btns, but Accessability dont let us */ 

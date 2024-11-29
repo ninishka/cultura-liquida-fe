@@ -8,8 +8,12 @@ import {
   TotalBox,
   TotalWrap,
   LeftSideWrap,
-  Comprar
+  CartPayButton
 } from './styled'
+
+// TODO: Add PSE, PayU, ePayco
+// Debit, credit
+// Allow crypto?
 
 const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
   return (
@@ -30,15 +34,15 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
           >
             <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
               <Radio value="apple" style={{ color: 'white'}} > Mercado Pago </Radio>
-              <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio>
-              <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta Bancolombia </Radio>
+              {/* <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio> */}
+              <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta bancaria </Radio>
             </Radio.Group>
           </StyledFormItem>
         </TotalWrap>
         <StyledFormItem style={{width: '100%'}}>
-            <Comprar htmlType="submit" loading={loading}>
-              {'Comprar'.toUpperCase()}
-            </Comprar>
+            <CartPayButton htmlType="submit" loading={loading}>
+              Comprar
+            </CartPayButton>
         </StyledFormItem>
       </TotalBox>
     </StyledForm>
