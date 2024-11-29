@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 import { Button, Form } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-
 import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
 import ModalForm from './ModalForm'
@@ -13,11 +12,8 @@ import {
   ListItemsWrapper,
   ModalTitle,
   TotalBox,
-  Comprar
+  CartPayButton
 } from './styled'
-
-import { useRouter } from 'next/navigation';
-
 
 const ModalComponent = ({data}) => {
   const router = useRouter();
@@ -203,9 +199,9 @@ const onFinish = async (values) => {
               <TotalBox>
                 <ModalTitle style={{color: 'white'}}>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
                 <div style={{marginBottom: 0, padding: 10}}>
-                  <Comprar onClick={() => dispatch(toggleShowCart(false))} style={{color: 'white'}}>
+                  <CartPayButton onClick={() => dispatch(toggleShowCart(false))} style={{color: 'white'}}>
                     {'volver a comprar'.toUpperCase()}
-                  </Comprar>
+                  </CartPayButton>
                 </div>
               </TotalBox>
             </div>

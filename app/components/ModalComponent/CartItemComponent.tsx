@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
-import Counter from '../Counter/Counter'
+import Counter from '@/app/components/Counter/Counter'
 import img6 from '@/app/icons/delete_good_from_cart.png'
+import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
+import type { CartItemType } from '@/types/types'
+import { handleDelete } from '@/app/components/helpers'
 import {
     CartItem,
     CartItemWrap,
@@ -15,21 +18,11 @@ import {
     InfoContainer,
     InfoContainer2
   } from './styled'
- 
-import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
-import { removeFromCart } from '@/lib/redux/slices/cartSlice'
-import type { CartItemType } from '@/types/types'
 
 const CartItemComponent: FC<CartItemType> = item => {
   const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item
-  
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector(state => state.cart.cartItems)
-
-  const handleDelete = itemId => {
-    const item = cartItems.filter(item => item?.id === itemId)
-    dispatch(removeFromCart(...item, 0, true))
-  }
 
   return (
     <CartItemWrap key={type}>
@@ -44,15 +37,19 @@ const CartItemComponent: FC<CartItemType> = item => {
       <InfoContainer>
         <p style={{
           color: 'red', 
-          textAlign: 'center', margin: '0 2vw 2px', fontSize:'16px' }}>
+          textAlign: 'center',
+          margin: '0 2vw 2px',
+          fontSize:'16px'
+          }}
+        >
           {type === 'capsules' ? 'Capsules': type + size}
         </p>
-        <Price>{price * tAmount} COP</Price>
-      </InfoContainer>
-      <Counter amount={tAmount} item={item} isModal />
+        <Counter amount={tAmount} item={item} isModal />
+        </InfoContainer>
+      <Price style={{margin: '0px 20px'}}>{price * tAmount} COP</Price>
     </CartItem>
     <DeleteButtonWrap>
-      <DeleteButtonItself onClick={() => handleDelete(id)}>
+      <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
         <DeleteButtonIcon sizes='100vh' src={img6} alt='cartitemcomponent'/>
       </DeleteButtonItself>
     </DeleteButtonWrap>
