@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Radio } from 'antd'
+import Link from 'next/link'
 
 export const AllWrap = styled.div`
   display: flex;
@@ -163,17 +164,9 @@ export const LearnMoreText = styled.p`
   /* color: lightgray; */
  `
 
- export const ArrowButtons = styled.button`
-  border: none;
-  outline: none;
-  font: inherit;
-  color: inherit;
-  background: none;
+ export const ArrowButtons = styled(Link)`
   cursor: pointer;
-  /* :hover{
-    background-color:#252525;
-    border-radius: 16px 16px;
-  } */
+  text-decoration: none;
   `
 
 export const CheckBoxGroup = styled.div`
