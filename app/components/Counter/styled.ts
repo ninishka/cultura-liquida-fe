@@ -8,9 +8,10 @@ export const CounterWrapper = styled.div`
   margin:40px 0px;
   gap: 20px;
   align-items: center;
+
   @media (max-width: 1220px) {
     justify-content: center;
-    margin: 10px 1vh;
+    margin: 20px 1vh 20px 3vh;
   } 
   
   @media (max-width: 850px) {
@@ -59,6 +60,7 @@ export const ArrowButtons = styled.button`
   font: inherit;
   color: inherit;
   background: none;
+  cursor: pointer;
 `
 
 export const Number = styled.h1`
@@ -84,6 +86,18 @@ export const BuyButton = styled.button`
   font-weight: 600;
   border: none;
   font-size: 16px;
+  font-family: var(--font-mohave);
+  color: white;
+  text-transform: uppercase;
+
+  @media (max-width: 1220px) {
+    width: 216px;
+  } 
+
+  @media (max-width: 850px) {
+    width: 180px;
+  }
+
   &:hover{
     background-color: #F2C94C;
   }

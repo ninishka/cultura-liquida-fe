@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { Radio } from 'antd'
 import ModalFormFields from './ModalFormFields'
 import type { ModalFormProps } from '@/types/types'
+import { useAppSelector } from '@/lib/redux/store/hooks'
+import { calculateTotalSum } from '@/app/components/helpers'
 import {
   StyledForm,
   StyledFormItem,
@@ -16,6 +18,9 @@ import {
 // Allow crypto?
 
 const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
+  const { cartItems } = useAppSelector(state => state.cart);
+  const totalSum = calculateTotalSum(cartItems);
+
   return (
     <StyledForm 
       onFinish={onFinish} 
@@ -26,7 +31,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
         <TotalWrap>
           <LeftSideWrap>
             <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
-            <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>420.000 COP</p>
+            <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>{totalSum}</p>
           </LeftSideWrap>  
           <StyledFormItem 
             label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 

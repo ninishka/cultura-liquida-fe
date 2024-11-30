@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
-import { Form } from 'antd'
+import { useRouter } from 'next/navigation';
+import { Button, Form } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-
 import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
 import ModalForm from './ModalForm'
@@ -13,10 +12,12 @@ import {
   ListItemsWrapper,
   ModalTitle,
   TotalBox,
-  Comprar
+  CartPayButton
 } from './styled'
 
 const ModalComponent = ({data}) => {
+  const router = useRouter();
+
   const [form] = Form.useForm();
   const dispatch = useAppDispatch()
   const { showCart, cartItems } = useAppSelector(state => state.cart);
@@ -78,49 +79,88 @@ const ModalComponent = ({data}) => {
 // ===========================================
 // MERCADO PAGO LOGIC
 // const [formValues, setFormValues] = useState({})
-const [preferenceId, setPreferenceId] = useState('')
+// const [preferenceId, setPreferenceId] = useState('')
 const [loading, setLoading] = useState(false)
 
-useEffect(() => {
-  console.log('initMercadoPago')
-  initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
-}, [])
+// useEffect(() => {
+//   console.log('initMercadoPago')
+//   initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
+// }, [])
 
-  // PEYMENT SYSTEM
-  const onFinish = async (values) => {
-    // await setFormValues({
-    //   ...values,
-    //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-    // })
-    setLoading(true)
-    try {
-      const response = await fetch('/api/preference', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cartItems, formValues: {
-          ...values,
-          street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-        } }),
-      });
+//   // PEYMENT SYSTEM
+//   const onFinish = async (values) => {
+//     // await setFormValues({
+//     //   ...values,
+//     //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+//     // })
+//     setLoading(true)
+//     try {
+//       const response = await fetch('/api/preference', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ cartItems, formValues: {
+//           ...values,
+//           street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+//         } }),
+//       });
   
-      if (!response.ok) {
-        console.error('Error creating preference ONFINISH');
-        return;
-      }
-      const { preferenceId } = await response.json()
-      if (preferenceId) {
-        console.log('preferenceId', preferenceId)
-        setPreferenceId(preferenceId)
-      } else {
-        console.error('id as preferenceId is missing in response');
-      }
-    } catch (e) {
-      console.error('Error processing preference:', e);
-    } finally {
-      setLoading(false)
-    }
-  };
+//       if (!response.ok) {
+//         console.error('Error creating preference ONFINISH');
+//         return;
+//       }
+//       const { preferenceId } = await response.json()
+//       if (preferenceId) {
+//         console.log('preferenceId', preferenceId)
+//         setPreferenceId(preferenceId)
+//       } else {
+//         console.error('id as preferenceId is missing in response');
+//       }
+//     } catch (e) {
+//       console.error('Error processing preference:', e);
+//     } finally {
+//       setLoading(false)
+//     }
+//   };
 
+
+
+const [payUurl, setPayUurl] = useState('')
+
+const onFinish = async (values) => {
+  setLoading(true);
+  const mockedFormValues = {
+      name: "One",
+      surname: "One",
+      document_type: "cc",
+      id_number: "123456789",
+      mail_address: "123",
+      state: "ANT",
+      city: "Abejorral",
+      phone_number: "3107883758",
+      email: "first@gmail.com",
+      remember: true
+  }
+  try {
+    const response = await fetch('/api/payu', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cartItems, formValues: mockedFormValues }),
+    });
+
+    const data = await response.json();
+    console.log('data', data)
+    if (data.paymentUrl) {
+      setPayUurl(data.paymentUrl)
+      // router.push(data.paymentUrl);
+    } else {
+      console.error('Missing paymentUrl in PayU response');
+    }
+  } catch (error) {
+    console.error('Error processing PayU preference:', error);
+  } finally {
+    setLoading(false);
+  }
+};
   const isEmpty = !cartItems?.length
 
   return (
@@ -159,9 +199,9 @@ useEffect(() => {
               <TotalBox>
                 <ModalTitle style={{color: 'white'}}>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
                 <div style={{marginBottom: 0, padding: 10}}>
-                  <Comprar onClick={() => dispatch(toggleShowCart(false))} style={{color: 'white'}}>
+                  <CartPayButton onClick={() => dispatch(toggleShowCart(false))} style={{color: 'white'}}>
                     {'volver a comprar'.toUpperCase()}
-                  </Comprar>
+                  </CartPayButton>
                 </div>
               </TotalBox>
             </div>
@@ -191,11 +231,14 @@ useEffect(() => {
               <ModalForm form={form} onFinish={onFinish} loading={loading} />
             </>
               {/* Public key */}
-              {preferenceId && <Wallet
+              {/* {preferenceId && <Wallet
                 key={process.env.PUBLIC_KEY_BTN}
                 initialization={{ preferenceId }}
                 customization={{ texts:{ valueProp: 'smart_option'}}} 
-              />}
+              />} */}
+              {payUurl && 
+                <Button onClick={() => router.push(data.paymentUrl)} />
+              }
           </>
         )}
       </ModalStyled>

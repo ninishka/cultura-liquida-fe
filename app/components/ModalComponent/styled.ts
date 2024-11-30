@@ -142,7 +142,7 @@ export const Description = styled.p`
   font-style: italic;
   font-weight: 400;
   max-width: 300px;
-  margin: 0
+  margin: 0;
 `
 export const StyledForm = styled(Form)`
   display: flex;
@@ -343,6 +343,7 @@ export const CartPayButton = styled(Button)`
   font-family: var(--font-mohave);
   font-size: large;
   text-transform: uppercase;
+  color: white;
  
   
 /* TODO - so we need to change color btns, but Accessability dont let us */ 

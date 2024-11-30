@@ -97,7 +97,7 @@ export const CheckBoxGroup = styled.div`
     justify-content: center
   }
 `
-export const Item = styled.form` // TODO change
+export const Item = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -124,7 +124,7 @@ export const Item = styled.form` // TODO change
   }
 `
 
-export const  Icon = styled(Image)`
+export const Icon = styled(Image)`
   width: 50px;
   height: auto;
   margin-left: 10px;
@@ -213,19 +213,14 @@ export const LabelContent = styled.div`
   }
 `
 
-
-
-
-export const Item2 = styled.div` // TODO change
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+export const AbsentProductCheckboxWrapper = styled.div`
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
   margin-right: 20px;
-  cursor: pointer;
   width: 216px;
   height: 62px;
+  text-align: center;
+  background-color: #F2654C;
 
   @media (max-width: 850px) {
     width: 50px;
@@ -237,8 +232,12 @@ export const Item2 = styled.div` // TODO change
     margin-right: 15px;
     margin: 10px 1vh;
   }
+`
 
-  &:hover{
-    background-color: #252525;
+export const AbsentProductText = styled.p`
+  margin: 10px 0 0 0;
+  text-align: center;
+  @media (max-width: 850px) {
+    margin-top: 60%;
   }
 `
