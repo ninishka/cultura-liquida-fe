@@ -394,24 +394,30 @@ interface ComplexData {
   title: string;
   type: string;
   iconSrc: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
+  icon: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
   price: number;
   originalPrice: number;
+  size: string;
 }
 
 export const complexData2: ComplexData[] = [
   {
-    title:'complejo 100ml',
+    title:'complejo',
     id: '1',
-    type: 'extracts 100ml',
-    iconSrc: imgC10,
+    type: 'Extracto 100ml',
+    size: '100ml',
+    iconSrc: colaSrc,
+    icon: imgC10,
     price: 240000,
     originalPrice: 300000
   },
   {
-    title:'complejo 30ml',
+    title:'complejo',
     id: '2',
-    type: 'extracts 30ml',
-    iconSrc: imgC11,
+    type: 'Extracto 30ml',
+    size: '30ml',
+    iconSrc: colaSrc,
+    icon: imgC11,
     price: 105000,
     originalPrice: 84000
   },

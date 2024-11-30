@@ -93,7 +93,7 @@ export const CheckBoxGroup = styled.div`
  display: flex;
  flex-direction: row;
 
- @media (max-width: 850px) {
+ @media (max-width: 1200px) {
     justify-content: center
   }
 `
@@ -201,6 +201,10 @@ align-items: center;
 .ant-radio-wrapper {
   margin-left: 20px;
 }
+
+@media (max-width: 850px) {
+    margin-left: 8px;
+  }
 `
 
 export const LabelContent = styled.div`
@@ -238,7 +242,7 @@ export const AbsentProductText = styled.p`
   margin: 10px 0 0 0;
   text-align: center;
   text-transform: uppercase;
-  
+
   @media (max-width: 850px) {
     margin-top: 60%;
   }

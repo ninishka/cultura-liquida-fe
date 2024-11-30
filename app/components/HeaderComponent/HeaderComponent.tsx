@@ -27,7 +27,8 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useAppDispatch()
   const { cartItems } = useAppSelector(state => state.cart);
   const [ showMenu, setShowMenu ] = useState(false)
-
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.amount, 0);
+  
   return (
   <HeaderFull $isopen={showMenu ? true : false}>
     <LogoFull href='/product/melena-de-leon-capsules'>
@@ -41,8 +42,8 @@ const HeaderComponent: FC<NavigationProps> = () => {
 
     <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
       <CounterCartWrap>
-        <p style={{color: 'black', margin: '0 7px' }}>
-          {cartItems?.length}
+        <p style={{color: 'black', fontSize: 14, fontWeight: 500 }}>
+          {totalAmount}
         </p>
       </CounterCartWrap>
       <Cart src={CartIcon} alt="Cart logo" />

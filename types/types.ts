@@ -95,3 +95,7 @@ export interface AmountItemProps {
   $bgc: boolean;
 }
 
+export interface ModalStyledProps2 {
+  $isModal: boolean;
+}
+

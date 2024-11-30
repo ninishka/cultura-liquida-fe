@@ -77,6 +77,10 @@ export const CounterCartWrap = styled.div`
  height: 23px;
  margin: 0 31px;
  margin-top: -13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const BurgerWrap = styled.div`
