@@ -237,6 +237,8 @@ export const AbsentProductCheckboxWrapper = styled.div`
 export const AbsentProductText = styled.p`
   margin: 10px 0 0 0;
   text-align: center;
+  text-transform: uppercase;
+  
   @media (max-width: 850px) {
     margin-top: 60%;
   }

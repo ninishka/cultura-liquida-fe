@@ -56,10 +56,10 @@ const NotFound: FC = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center'}}>
       <Wrapper>
-        <Title style={{ marginBottom: 10}}>{'Página no encontrada'.toUpperCase()}</Title>
+        <Title style={{ marginBottom: 10, textTransform: 'uppercase'}}>Página no encontrada</Title>
         <H href="/product/melena-de-leon-capsules">
           <ArrowPrev aria-label="Back" />
-          <p style={{ marginLeft: 10}}>{'Devolver'.toUpperCase()}</p>
+          <p style={{ marginLeft: 10, textTransform: 'uppercase'}}>Devolver</p>
         </H>
       </Wrapper>
 

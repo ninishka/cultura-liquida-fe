@@ -30,7 +30,7 @@ const CartItemComponent: FC<CartItemType> = item => {
       <CartImg sizes='100vh' src={iconSrc} alt='cartitemcomponent'/>
       <CardInfoWrapper>
         <InfoContainer2>
-          <Title>{title?.toUpperCase()}</Title>
+          <Title style={{textTransform: 'uppercase'}}>title</Title>
           <Description>{ingredient}</Description>
         </InfoContainer2>
       </CardInfoWrapper>

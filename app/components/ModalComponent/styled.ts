@@ -11,6 +11,8 @@ export const ModalTitle = styled.h2`
   font-size: 48px;
   color: black;
   text-align: center;
+  text-transform: uppercase;
+  
   @media (max-width: 850px) {
     font-size: 30px;
   }

@@ -243,10 +243,13 @@ const onFinish = async (values) => {
                 }} 
               />
               <TotalBox>
-                <ModalTitle style={{color: 'white'}}>{'¡tu canasta esta vacía!'.toUpperCase()}</ModalTitle>
+                <ModalTitle style={{color: 'white'}}>¡tu canasta esta vacía!</ModalTitle>
                 <div style={{marginBottom: 0, padding: 10}}>
-                  <CartPayButton onClick={() => dispatch(toggleShowCart(false))} style={{color: 'white'}}>
-                    {'volver a comprar'.toUpperCase()}
+                  <CartPayButton 
+                    onClick={() => dispatch(toggleShowCart(false))} 
+                    style={{color: 'white', textTransform: 'uppercase'}}
+                  >
+                    volver a comprar
                   </CartPayButton>
                 </div>
               </TotalBox>
