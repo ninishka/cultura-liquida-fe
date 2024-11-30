@@ -138,22 +138,68 @@ const onFinish = async (values) => {
       city: "Abejorral",
       phone_number: "3107883758",
       email: "first@gmail.com",
-      remember: true
+      remember: true,
+
+      merchantId: process.env.PAYU_API_MERCHANT,
+      accountId: process.env.PAYU_ACCOUNT_ID,
+      referenceCode: 'TestPayU',
+      amount: 1,
+      signature: 'dc950c409aed0cfc440400650bef8ec2360fcc779638ed5a2b400f48a9471eaa',
+      taxReturnBase: 16806,
+      responseUrl: `${process.env.PATH_TO_API}/check-out/success`,
+      confirmationUrl: `${process.env.PATH_TO_API}/check-out/pending`,
+      shippingAddress: 'ANT',
+      shippingCity: 'Abejorral',
+      shippingCountry: 'CO',
+      currency: 'COP',
+      buyerEmail: "first@gmail.com"
   }
   try {
     const response = await fetch('/api/payu', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 
+        // 'Accept': 'application/json', // anyway 
+      },
       body: JSON.stringify({ cartItems, formValues: mockedFormValues }),
     });
 
-    const data = await response.json();
-    console.log('data', data)
-    if (data.paymentUrl) {
-      setPayUurl(data.paymentUrl)
-      // router.push(data.paymentUrl);
+    // const data = await response.json();
+    // console.log('data', data)
+    // if (data.paymentUrl) {
+    //   setPayUurl(data.paymentUrl)
+    //   // router.push(data.paymentUrl);
+    // } else {
+    //   console.error('Missing paymentUrl in PayU response');
+    // }
+
+    // madness below
+    // if (response.headers.get('content-type')?.includes('text/html')) {
+    //   const html = await response.text();
+    //   document.body.innerHTML = html; // Вставить HTML прямо в DOM
+    // }
+
+    // auto sendind data form
+    if (response.ok) {
+      const { redirectUrl, formData } = await response.json();
+    
+      // Создаем и отправляем форму
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = redirectUrl;
+    
+      // Добавляем данные в форму
+      Object.keys(formData).forEach(key => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = formData[key];
+        form.appendChild(input);
+      });
+    
+      document.body.appendChild(form);
+      form.submit(); // Отправляем форму
     } else {
-      console.error('Missing paymentUrl in PayU response');
+      console.error('Error processing PayU transaction:', await response.json());
     }
   } catch (error) {
     console.error('Error processing PayU preference:', error);

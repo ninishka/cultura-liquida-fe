@@ -55,6 +55,8 @@ export const CartWrap = styled.div`
   padding:  6px 9px 6px 9px;
   margin-right: 30px;
   position: relative;
+  cursor: pointer;
+
   /* box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); */
 
   &:hover{

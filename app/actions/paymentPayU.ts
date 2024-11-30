@@ -27,7 +27,16 @@ export const generatePayUSignature = (apiKey, merchantId, referenceCode, txValue
 // URL for test: https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi
 // Environment::setReportsCustomUrl(“https://api.payulatam.com/reports-api/4.0/service.cgi”);
 
-const PAYU_URL = 'https://sandbox.api.payulatam.com/payments-api/';
+// const PAYU_URL = 'https://sandbox.api.payulatam.com/payments-api/';
+
+
+
+
+// Test: https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/
+// Production: https://checkout.payulatam.com/ppp-web-gateway-payu/
+
+const PAYU_URL = 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/';
+
 
 
 export const createPayUPreference = async (cartItems, formValues) => {
@@ -102,6 +111,33 @@ export const createPayUPreference = async (cartItems, formValues) => {
   // };
 
   // Banking?
+  // const paymentRequest = {
+  //   language: 'es',
+  //   command: 'SUBMIT_TRANSACTION',
+  //   merchant: {
+  //     apiKey: process.env.PAYU_API_KEY,
+  //     apiLogin: process.env.PAYU_API_MERCHANT,
+  //   },
+  //   transactions: [
+  //     {
+  //       payMethod: {
+  //         value: "m"
+  //       },
+  //       bankAccount: {
+  //         number: "80607787095718703296721164",
+  //         name: "JAN KOWALSKI",
+  //         // depending on the bank, the name and address may be all included in any of below fields
+  //         city: "WARSZAWA",
+  //         postalCode: "02-638",
+  //         street: "UL.NOWOWIEJSKIEGO 8",
+  //         address: "Warszawa Nowowiejskiego 8"
+  //       }
+  //     }
+  //   ],
+  //   test: true, // Sandbox mode
+  // }
+
+  // CH
   const paymentRequest = {
     language: 'es',
     command: 'SUBMIT_TRANSACTION',
@@ -109,26 +145,51 @@ export const createPayUPreference = async (cartItems, formValues) => {
       apiKey: process.env.PAYU_API_KEY,
       apiLogin: process.env.PAYU_API_MERCHANT,
     },
-    transactions: [
-      {
-        payMethod: {
-          value: "m"
+    transaction: {
+      order: {
+        accountId: process.env.PAYU_ACCOUNT_ID,
+        referenceCode: orderId,
+        description: 'Purchase at Your Store',
+        language: 'es',
+        signature: 'dc950c409aed0cfc440400650bef8ec2360fcc779638ed5a2b400f48a9471eaa',
+        // signature,
+        buyer: {
+          merchantBuyerId: '1',
+          fullName: `${name} ${surname}`,
+          emailAddress: email,
+          contactPhone: phone_number,
+          shippingAddress: {
+            street1: street_name,
+            city,
+            country: 'CO',
+          },
         },
-        bankAccount: {
-          number: "80607787095718703296721164",
-          name: "JAN KOWALSKI",
-          // depending on the bank, the name and address may be all included in any of below fields
-          city: "WARSZAWA",
-          postalCode: "02-638",
-          street: "UL.NOWOWIEJSKIEGO 8",
-          address: "Warszawa Nowowiejskiego 8"
-        }
-      }
-    ],
-    test: true, // Sandbox mode
-  }
+        shippingAddress: {
+          street1: street_name,
+          city,
+          country: 'CO',
+        },
+        additionalValues: {
+          TX_VALUE: {
+            value: txValue,
+            currency,
+          },
+        },
+      },
+      payer: {
+        fullName: `${name} ${surname}`,
+        emailAddress: email,
+        contactPhone: phone_number,
+      },
+      // creditCard: null, //
+      type: 'AUTHORIZATION_AND_CAPTURE',
+      // paymentMethod: 'PSE', //
+      paymentCountry: 'CO',
+    },
+    test: 0, // Sandbox mode
+  };
 
-  console.log('paymentRequest:', paymentRequest);
+  // console.log('paymentRequest:', paymentRequest);
 
   // Выполняем запрос
   const response = await fetch(PAYU_URL, {
@@ -138,14 +199,17 @@ export const createPayUPreference = async (cartItems, formValues) => {
   });
 
   const result2 = await response.text();
-  console.log('result2', result2)
-  const result = await response.json();
+  
+  // console.log('result2', result2)
+  // const result = await response.json();
 
-  if (!response.ok || !result.transactionResponse) {
-    throw new Error(result?.error || 'Failed to create PayU transaction');
-  }
+  // if (!response.ok || !result.transactionResponse) {
+  //   throw new Error(result?.error || 'Failed to create PayU transaction');
+  // }
 
-  return {
-    paymentUrl: result?.transactionResponse?.extraParameters?.BANK_URL || '',
-  };
+  // return {
+  //   paymentUrl: result?.transactionResponse?.extraParameters?.BANK_URL || '',
+  // };
+
+  return result2
 };
