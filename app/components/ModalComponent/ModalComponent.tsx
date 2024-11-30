@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
 import ModalForm from './ModalForm'
 import {
   ModalStyled,
@@ -79,7 +81,7 @@ const ModalComponent = ({data}) => {
 // ===========================================
 // MERCADO PAGO LOGIC
 // const [formValues, setFormValues] = useState({})
-// const [preferenceId, setPreferenceId] = useState('')
+const [preferenceId, setPreferenceId] = useState('')
 const [loading, setLoading] = useState(false)
 
 // useEffect(() => {
@@ -124,8 +126,8 @@ const [loading, setLoading] = useState(false)
 
 
 
-const [payUurl, setPayUurl] = useState('')
-
+// PAY U
+// const [payUurl, setPayUurl] = useState('')
 const onFinish = async (values) => {
   setLoading(true);
   const mockedFormValues = {
@@ -140,6 +142,7 @@ const onFinish = async (values) => {
       email: "first@gmail.com",
       remember: true,
 
+      // fields from FORM PAYU example
       merchantId: process.env.PAYU_API_MERCHANT,
       accountId: process.env.PAYU_ACCOUNT_ID,
       referenceCode: 'TestPayU',
@@ -280,14 +283,14 @@ const onFinish = async (values) => {
               <ModalForm form={form} onFinish={onFinish} loading={loading} />
             </>
               {/* Public key */}
-              {/* {preferenceId && <Wallet
+              {preferenceId && <Wallet
                 key={process.env.PUBLIC_KEY_BTN}
                 initialization={{ preferenceId }}
                 customization={{ texts:{ valueProp: 'smart_option'}}} 
-              />} */}
-              {payUurl && 
+              />}
+              {/* {payUurl && 
                 <Button onClick={() => router.push(data.paymentUrl)} />
-              }
+              } */}
           </>
         )}
       </ModalStyled>

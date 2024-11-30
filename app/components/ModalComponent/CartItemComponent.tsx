@@ -16,44 +16,43 @@ import {
     DeleteButtonIcon,
     Price,
     InfoContainer,
-    InfoContainer2
+    InfoContainer2,
+    ItemProductTypeText
   } from './styled'
 
 const CartItemComponent: FC<CartItemType> = item => {
   const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item
+  
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector(state => state.cart.cartItems)
+  const modalProductTitle = title.includes('EXTRACTO') ? title.split(',')[0] : title 
 
   return (
     <CartItemWrap key={type}>
-    <CartItem>
-      <CartImg sizes='100vh' src={iconSrc} alt='cartitemcomponent'/>
-      <CardInfoWrapper>
-        <InfoContainer2>
-          <Title style={{textTransform: 'uppercase'}}>title</Title>
-          <Description>{ingredient}</Description>
-        </InfoContainer2>
-      </CardInfoWrapper>
-      <InfoContainer>
-        <p style={{
-          color: 'red', 
-          textAlign: 'center',
-          margin: '0 2vw 2px',
-          fontSize:'16px'
-          }}
-        >
-          {type === 'capsules' ? 'Capsules': type + size}
-        </p>
-        <Counter amount={tAmount} item={item} isModal />
+      <CartItem>
+        <CartImg sizes='100vh' src={iconSrc} alt='cartitemcomponent'/>
+        <CardInfoWrapper>
+          <InfoContainer2>
+            <Title style={{textTransform: 'uppercase'}}>{modalProductTitle}</Title>
+            <Description>{ingredient}</Description>
+          </InfoContainer2>
+          <ItemProductTypeText>
+            {type === 'capsules' ? 'Cápsulas': 'Extracto ' + size}
+          </ItemProductTypeText>
+        </CardInfoWrapper>
+        <InfoContainer>
+          <Counter amount={tAmount} item={item} isModal />
+          <Price 
+          style={{margin: '0px 20px'}}
+          >{price * tAmount} COP</Price>
         </InfoContainer>
-      <Price style={{margin: '0px 20px'}}>{price * tAmount} COP</Price>
-    </CartItem>
-    <DeleteButtonWrap>
-      <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
-        <DeleteButtonIcon sizes='100vh' src={img6} alt='cartitemcomponent'/>
-      </DeleteButtonItself>
-    </DeleteButtonWrap>
-  </CartItemWrap>
+      </CartItem>
+      <DeleteButtonWrap>
+        <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
+          <DeleteButtonIcon sizes='100vh' src={img6} alt='cartitemcomponent'/>
+        </DeleteButtonItself>
+      </DeleteButtonWrap>
+    </CartItemWrap>
   )
 }
 

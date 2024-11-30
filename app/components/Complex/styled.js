@@ -218,6 +218,7 @@ export const TextDesc = styled.h4`
   font-weight: 400;
   font-size: 16px;
   padding-right: 10px;
+  margin-left: 15px;
 
   @media (max-width: 850px) {
     /* margin: 0; */
