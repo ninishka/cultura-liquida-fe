@@ -131,6 +131,9 @@ const [loading, setLoading] = useState(false)
 const onFinish = async (values) => {
   setLoading(true);
   const mockedFormValues = {
+      usuarioId: '1017670',
+      cuentaId: '1026623',
+      descripcion: '1',
       name: "One",
       surname: "One",
       document_type: "cc",
