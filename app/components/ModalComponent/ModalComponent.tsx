@@ -133,7 +133,7 @@ const onFinish = async (values) => {
   const mockedFormValues = {
       usuarioId: '1017670',
       cuentaId: '1026623',
-      descripcion: '1',
+      descripcion: '123',
       name: "One",
       surname: "One",
       document_type: "cc",
