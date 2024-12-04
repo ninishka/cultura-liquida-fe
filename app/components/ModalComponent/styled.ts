@@ -192,9 +192,6 @@ export const StyledSelect = styled(Select)`
   .ant-select-selector {
     border-radius: 16px;
   }
-  .ant-select-dropdown {
-    border-radius: 16px !important;
-  }
 
 `
 
@@ -385,6 +382,7 @@ export const CartPayButton = styled(Button)`
 
 
 
+ transition: all 0.3s ease;
  &:hover{
     background-color: #F2C94C !important;
     color: white !important;

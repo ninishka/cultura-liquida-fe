@@ -12,24 +12,20 @@ import { nameSurnameValidator } from '../helpers'
 // console.log( State.getStatesOfCountry('CO') ) 
 // console . log ( State . getAllStates ( ) )
 
+const states = State.getStatesOfCountry('CO')?.map(({name, isoCode}) => ({
+  value: isoCode,
+  label: name
+}))
+
+  
+const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => ({
+  value: name,
+  label: name
+})); // now if state and cityes choosen and u change state - we need to clear choosen city
 
 const ModalFormFields: FC = () => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
-  // const [selectedDocumento, setSelectedDocumento] = useState<string>('');
-  // const handleChange = (value: any, x?: string) => {
-  //   // console.log('value', value)
-  //   if(x) setSelectedDepartment(value);
-  // };
-  const states = State.getStatesOfCountry('CO')?.map(({name, isoCode}) => ({
-    value: isoCode,
-    label: name
-  }))
-  
-  const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => ({
-    value: name,
-    label: name
-  })); // now if state and cityes choosen and u change state - we need to clear choosen city
- 
+
   return (
     <>
       {/* Nombres*/}
@@ -98,11 +94,9 @@ const ModalFormFields: FC = () => {
       <StyledFormItem
         label="País"
         name="country"
-        // rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          style={{borderRadius: '16px'}}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={[{ value: 'colombia', label: 'Colombia' }]}
           defaultValue="colombia"
@@ -132,7 +126,6 @@ const ModalFormFields: FC = () => {
           placeholder="Elige una opción..."
           onChange={(v: any) => setSelectedDepartment(v)}
           allowClear 
-          style={{borderRadius: '16px'}}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}       
           options={states}
         />
@@ -146,10 +139,9 @@ const ModalFormFields: FC = () => {
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          // onChange={handleChange}
           allowClear 
-          style={{borderRadius: '16px'}}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
+          disabled={!selectedDepartment}
           options={cities(selectedDepartment)}
         />
 
@@ -218,16 +210,18 @@ const ModalFormFields: FC = () => {
         label="Notas (opcional)"
         name="notes">
         <StyledInput.TextArea   
+          style={{ borderRadius: '16px'}} 
           autoSize={{
-          minRows: 2,
-          maxRows: 6,
+            minRows: 2,
+            maxRows: 6,
           }} 
-        style={{ borderRadius: '16px'}} />
+        />
       </StyledFormItem>
       {/* checkbox */}
       <StyledFormItem      
         name="remember" 
         valuePropName="checked"
+        style={{ width: '100%'}}
         rules={[
           {
             validator: (_, value) => {
@@ -238,11 +232,6 @@ const ModalFormFields: FC = () => {
             },
           },
         ]}
-        wrapperCol={{
-          // offset: 8,
-          // span: 16,
-        }}
-        style={{ width: '100%'}}
       >
         <Checkbox >
           Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.

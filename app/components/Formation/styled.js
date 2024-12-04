@@ -119,6 +119,7 @@ export const Item = styled.div`
     margin: 10px 1vh;
   }
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
   }

@@ -106,6 +106,7 @@ export const BuyButton = styled.button`
     width: 180px;
   }
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #F2C94C;
   }

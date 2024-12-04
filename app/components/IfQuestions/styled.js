@@ -56,3 +56,14 @@ export const Text = styled.p`
   text-align: center;
 
 `
+
+export const StyledSVG = styled.svg`
+  rect {
+    transition: fill 0.3s ease;
+    fill: #4FDB40;
+  }
+
+  &:hover rect {
+    fill: #FFD700;
+  }
+`;

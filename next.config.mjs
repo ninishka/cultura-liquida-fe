@@ -23,7 +23,9 @@ const nextConfig = {
 
     PAYU_API_KEY: process.env.PAYU_API_KEY,
     PAYU_API_MERCHANT: process.env.PAYU_API_MERCHANT,
-    PAYU_ACCOUNT_ID: process.env.PAYU_ACCOUNT_ID
+    PAYU_ACCOUNT_ID: process.env.PAYU_ACCOUNT_ID,
+
+    SIGNATURE_MELENA_CAPSULA_1AMOUNT: process.env.SIGNATURE_MELENA_CAPSULA_1AMOUNT,
   },
 
   async redirects() {
