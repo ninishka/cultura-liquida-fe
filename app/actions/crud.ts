@@ -7,11 +7,16 @@ type UpdateProductData = Partial<IProduct>;
 const getProduct = async (): Promise<IProduct[]>  => {
   console.log('getProduct starts')
   try {
-      const products = await Product?.find()?.lean();
-      // console.log('products', products)
+      const products = await Product?.find<IProduct>()?.lean();
       const plainProducts = products.map(product => ({
-        ...product,
         _id: product._id.toString(),
+        title: product.title,
+        description: product.description,
+        ingredient: product.ingredient,
+        type: product.type,
+        size: product.size,
+        price: product.price,
+        stock: product.stock,
       }));
   
     return plainProducts;
