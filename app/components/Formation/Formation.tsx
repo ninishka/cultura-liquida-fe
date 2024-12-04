@@ -12,12 +12,13 @@ import {
   ImageStyled,
   TitleFrame,
   TitleH1,
-  Description
+  Description,
+  Release,
+
 } from './styled'
 import Checkboxes from './Checkboxes'
-import Loading from '@/app/components/Loading/Loading'
 
-const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isLoading, error, slogMain }) => {
+const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, error, slogMain }) => {
   const { slug } = useParams();
   const rInit = init(slug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
@@ -28,12 +29,11 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isL
   const source = filterdContent?.[0]?.src || ''
 
 
-  if (isLoading) return <Loading />
+  // if (isLoading) return <Loading />
   // if (error) return <div>Error: {error?.message}</div>;
 
   return (
     <FormationSection>
-      <Suspense fallback={<Loading />}>
         <ContentWrapper>
           <TitleFrame>
             {/* <p>{filterdContent?.[0]?.stock}</p> */}
@@ -52,9 +52,13 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isL
               sizes='(max-width: 850px) 100vw, 50vw'
             />
           </ImageWrapperMobile>
-          {/* <Suspense fallback={<Loading />}> */}
-            <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData}/>
-          {/* </Suspense> */}
+          <Release>Seleccione la presentación del producto:</Release>
+          <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
+          {/* <div>
+            <Release>Seleccione la presentación del producto:</Release>
+            <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
+            <Counter filterdContent={filterdContent} preObj={preObj} />
+          </div> */}
         </ContentWrapper>
         <ImageWrapperDesktop key={source}>
           <ImageStyled 
@@ -65,7 +69,6 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, isL
             priority // hight loading priority
           />
         </ImageWrapperDesktop>
-      </Suspense>
     </FormationSection>
   )
 }

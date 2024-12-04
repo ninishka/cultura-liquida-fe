@@ -135,6 +135,7 @@ const melenaFormationData = [
     iconSrc: melenaCapsulsSrc,
     url: 'melena-de-leon',
     title: 'MELENA DE LEON',
+    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
 
     type: 'capsules',
   },
@@ -145,6 +146,7 @@ const melenaFormationData = [
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
     title: 'MELENA DE LEON',
+    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
 
     type: 'extracts',
     size: '100ml',
@@ -156,6 +158,7 @@ const melenaFormationData = [
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
     title: 'MELENA DE LEON',
+    description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
 
     type: 'extracts',
     size: '30ml',
@@ -214,7 +217,8 @@ const reishiFormationData = [
     src: reishiextract,
     url: 'reishi',
     title: 'REISHI, EXTRACTO',
-
+    description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
+    
     type: 'extracts',
     size: '100ml',
     iconSrc: reishiSrc,
@@ -225,6 +229,7 @@ const reishiFormationData = [
     src: reishiextract,
     url: 'reishi',
     title: 'REISHI, EXTRACTO',
+    description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
 
     type: 'extracts',
     size: '30ml',
@@ -276,6 +281,7 @@ const colaFormationData = [
     src: colaextract,
     url: 'cola-de-pavo',
     title: 'COLA DE PAVO, EXTRACTO',
+    description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
 
     type: 'extracts',
     size: '100ml',
@@ -287,6 +293,7 @@ const colaFormationData = [
     src: colaextract,
     url: 'cola-de-pavo',
     title: 'COLA DE PAVO, EXTRACTO',
+    description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
 
     type: 'extracts',
     size: '30ml',
