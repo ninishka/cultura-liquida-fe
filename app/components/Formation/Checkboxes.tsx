@@ -44,7 +44,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
                         type="radio"
                         name="group1"
                         checked={id === rInit}
-                        disabled={hasStock}
+                        disabled={!hasStock}
                       />
                     </label>  
                     <LabelContent >
