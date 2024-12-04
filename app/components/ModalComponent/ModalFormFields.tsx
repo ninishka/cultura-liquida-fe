@@ -5,6 +5,7 @@ import {
   StyledInput,
   StyledSelect,
   StyledFormItem,
+  CheckboxInput
 } from './styled'
 import  {  Country ,  State ,  City  }   from  'country-state-city' ; 
 import { nameSurnameValidator } from '../helpers'
@@ -233,9 +234,9 @@ const ModalFormFields: FC = () => {
           },
         ]}
       >
-        <Checkbox >
+        <CheckboxInput>
           Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
-        </Checkbox>
+        </CheckboxInput>
       </StyledFormItem>
     </>
   );

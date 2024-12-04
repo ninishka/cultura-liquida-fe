@@ -282,11 +282,13 @@ useEffect(() => {
               <ModalForm form={form} onFinish={onFinish} loading={loading} />
             </>
               {/* Public key */}
-              {preferenceId && <Wallet
-                key={process.env.PUBLIC_KEY_BTN}
-                initialization={{ preferenceId }}
-                customization={{ texts:{ valueProp: 'smart_option'}}} 
-              />}
+              {preferenceId && (
+                <Wallet
+                  key={process.env.PUBLIC_KEY_BTN}
+                  initialization={{ preferenceId }}
+                  customization={{ texts:{ valueProp: 'smart_option'}}} 
+                />
+              )}
               {/* {payUurl && 
                 <Button onClick={() => router.push(data.paymentUrl)} />
               } */}

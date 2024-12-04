@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Image from 'next/image'
-import { Form, Input, Select, Dropdown} from 'antd'
+import { Form, Input, Select, Checkbox } from 'antd'
 import { Modal } from 'antd';
 import { Button } from 'antd';
 import type { ModalStyledProps } from '@/types/types'
@@ -277,16 +277,13 @@ export const CheckboxContainer = styled.div`
   margin-top: 12px;
 `;
 
-export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
-  width: 16px;
-  height: 16px;
-  background-color: black;
-  accent-color: black;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  .ant-radio-checked{
-    border-color: green;
-    background-color: green;
+export const CheckboxInput = styled(Checkbox)`
+  .ant-checkbox-inner {
+    border-color: #4FDB40;
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #4FDB40;
   }
 `;
 
