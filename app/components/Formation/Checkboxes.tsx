@@ -27,15 +27,10 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
     <>
       <CheckBoxGroup>
         {formationData.map(({type, icon, id, url, size, price, stock}) => {
-          const isExtract = type === 'extracts'
-          const hrefLogic = isExtract ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
-          const hasStock = !!stock
-          let name = isExtract ? "Extracto " + size : "Cápsulas"
-          if (!hasStock)
-            name = 'Vendido'
-
+          const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
           return (
             <Fragment key={hrefLogic}>
+              {!!stock ? (
                 <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff', zIndex: !stock && -99 }}>
                   <Item aria-label='Elección del tamaño del producto'> 
                     <label htmlFor={id} aria-label='Elección del tamaño del producto'>
@@ -44,15 +39,19 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
                         type="radio"
                         name="group1"
                         checked={id === rInit}
-                        disabled={hasStock}
                       />
                     </label>  
                     <LabelContent >
                       <Icon src={icon} alt={type}/>
-                      <TextDesc>{name}</TextDesc>
+                      <TextDesc>{type === 'extracts' ? "Extracto " + size : "Cápsulas"}</TextDesc>
                     </LabelContent>
                   </Item>
                 </Link>
+              ) : (
+                <AbsentProductCheckboxWrapper>
+                  <AbsentProductText>¡vendido! <br/> ¿Libro?</AbsentProductText>
+                </AbsentProductCheckboxWrapper>
+              )}
             </Fragment>
           )})
         }
