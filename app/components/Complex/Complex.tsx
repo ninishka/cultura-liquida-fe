@@ -92,7 +92,7 @@ const Complex: FC = () => {
                     <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
                       <RadioButton 
                         type="radio" 
-                        id={id}
+                        id={`${id}+${type}`}
                         name="group1" 
                         checked={id === checkedState}
                         onChange={() => rechecking(id)}

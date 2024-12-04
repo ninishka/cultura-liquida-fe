@@ -1,5 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useParams } from 'next/navigation';
+
+import {
+  CheckBoxGroup,
+  Item,
+} from './styled'
 
 // const SkeletonBox = styled.div`
 //   background-color: #FFD700;
@@ -52,8 +57,7 @@ import { useParams } from 'next/navigation';
 //   }
 // `
 
-
-const SkeletonBox3 = styled.div`
+const animationSettings = css`
   background: linear-gradient(90deg, #4FDB40, #FFD700, #4FDB40);
   animation: leftToRight 1.5s infinite reverse;
   background-size: 200%; 
@@ -68,46 +72,68 @@ const SkeletonBox3 = styled.div`
     }
   }
 `
+const SkeletonBox3 = styled.div`
+  ${animationSettings}
+
+  @media (max-width: 1200px) {
+    margin-top: 20px;
+  }
+`
+
+const SkeletonCounter = styled(SkeletonBox3)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 200px; 
+  height: 55px; 
+  border-radius: 16px;
+
+  @media (max-width: 1200px) {
+    width: 217px;
+  }
+`
+
+const SkeletonItem = styled(Item)`
+  ${animationSettings}
+`
+
+const CounterContainer = styled.div`
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 1200px) {
+    justify-content: left;
+    margin: ${({$isMelena}) => $isMelena ? '0 16%' : '0 40px'};
+  }
+
+  @media (max-width: 850px) {
+    justify-content: center
+  }
+`
+
+const LoadingContainer = styled.div`
+  @media (max-width: 1200px) {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 850px) {
+    margin-bottom: 60px;
+  }
+`
 
 export default function Loading() {
   const { slug } = useParams();
+  const isMelena = slug?.[0]?.includes('melena')
+  console.log('isMelena', isMelena)
 
   return (
-    <CC>
-      <div style={{ display: 'flex', gap: '20px', marginBottom: 40 }}>
-        <SkeletonBox3 
-          style={{ 
-            // width: '22.7vw', 
-            width: '216px', 
-            height: '62px', 
-            borderRadius: '16px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        />
-        <SkeletonBox3 
-          style={{ 
-            width: '216px', 
-            height: '62px', 
-            borderRadius: '16px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        />
-        {slug?.[0]?.includes('melena') && <SkeletonBox3 
-          style={{ 
-            width: '216px', 
-            height: '62px', 
-            borderRadius: '16px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        />}
-      </div>
-      <HH>
+    <LoadingContainer>
+      <CheckBoxGroup>
+        <SkeletonItem />
+        <SkeletonItem />
+        {isMelena && <SkeletonItem />}
+      </CheckBoxGroup>
+      <CounterContainer $isMelena={isMelena}>
         <SkeletonBox3 
           style={{ 
             width: '102px', 
@@ -118,35 +144,8 @@ export default function Loading() {
             alignItems: 'center'
           }}
         />
-        <SkeletonBox3 
-          style={{ 
-            width: '200px', 
-            height: '55px', 
-            borderRadius: '16px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        />
-      </HH>
-    </CC>
+        <SkeletonCounter />
+      </CounterContainer>
+    </LoadingContainer>
   )
 }
-
-
-const HH = styled.div`
-  display: flex;
-  gap: 20px;
-
-  @media (max-width: 1200px) {
-    justify-content: center
-  }
-`
-
-const CC = styled.div`
-
-  
-  @media (max-width: 1200px) {
-    margin-bottom: 40px;
-  }
-`
