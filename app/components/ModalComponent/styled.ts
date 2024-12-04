@@ -134,15 +134,22 @@ export const InfoContainer2 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* margin: auto; */
-  /* margin-right: 8vw; */
   min-width: 13vw;
 
-  @media (max-width: 1620px) {
-    min-width: 20vw;
+  @media (max-width: 2200px) {
+    min-width: 15vw;
+  }
+
+  @media (max-width: 1880px) {
+    min-width: 17vw;
+  }
+
+  @media (max-width: 1520px) {
+    min-width: 23vw;
   }
 
   @media (max-width: 1060px) {
+    min-width: 22vw;
     flex-direction: column;
     margin: auto 20px;
   }
