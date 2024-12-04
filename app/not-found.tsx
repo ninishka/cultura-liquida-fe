@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
   justify-content: center;
 `
 
-export const H = styled(Link)`
+export const BackLink = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -46,6 +46,7 @@ export const H = styled(Link)`
   color: white;
   text-decoration: none;
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #F2C94C;
   }
@@ -57,10 +58,10 @@ const NotFound: FC = () => {
     <div style={{ display: 'flex', justifyContent: 'center'}}>
       <Wrapper>
         <Title style={{ marginBottom: 10, textTransform: 'uppercase'}}>Página no encontrada</Title>
-        <H href="/product/melena-de-leon-capsules">
+        <BackLink href="/product/melena-de-leon-capsules">
           <ArrowPrev aria-label="Back" />
           <p style={{ marginLeft: 10, textTransform: 'uppercase'}}>Devolver</p>
-        </H>
+        </BackLink>
       </Wrapper>
 
       <Image             

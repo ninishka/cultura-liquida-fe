@@ -35,9 +35,9 @@ const HeaderComponent: FC<NavigationProps> = () => {
       <LogoItself src={Logo} alt="Company Logo" />
     </LogoFull>
     
-    <NavigationComponent isopen={showMenu ? true : false} />
+    <NavigationComponent isopen={showMenu ? true : false} setShowMenu={setShowMenu} />
     <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
-      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="Menu icon"/>
+      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="Menu icon" />
     </BurgerWrap>
 
     <CartWrap onClick={() => dispatch(toggleShowCart(true))}>

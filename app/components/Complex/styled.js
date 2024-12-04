@@ -180,7 +180,7 @@ export const CheckBoxGroup = styled.div`
     align-items: center;
   }
 `
-export const Item = styled.form`
+export const Item = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -200,6 +200,7 @@ export const Item = styled.form`
     margin: 10px 1vh;
   }
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
   }

@@ -151,6 +151,7 @@ export const createPayUPreference = async (cartItems, formValues) => {
         referenceCode: orderId,
         description: 'Purchase at Your Store',
         language: 'es',
+        signature: process.env.SIGNATURE_MELENA_CAPSULA_1AMOUNT,
         // signature,
         buyer: {
           merchantBuyerId: '1',

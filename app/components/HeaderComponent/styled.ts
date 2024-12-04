@@ -16,7 +16,7 @@ export const HeaderFull = styled.header<NavigationProps>`
   position: sticky;
   top: 0;
   background-color: #333;
-  z-index: 9999;
+  z-index: 10;
   
   @media (max-width: 850px) {
     border-radius: 0 16px 16px;
@@ -59,6 +59,7 @@ export const CartWrap = styled.div`
 
   /* box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); */
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
   }

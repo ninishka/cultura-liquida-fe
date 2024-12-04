@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Counter from '@/app/components/Counter/Counter'
-import img6 from '@/app/icons/delete_good_from_cart.png'
+import img6 from '@/app/icons/delete_good_from_cart.svg'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import type { CartItemType } from '@/types/types'
 import { handleDelete } from '@/app/components/helpers'
