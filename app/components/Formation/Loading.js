@@ -80,7 +80,7 @@ const SkeletonBox3 = styled.div`
   }
 `
 
-const SkeletonCounter = styled(SkeletonBox3)`
+const SkeletonBuyButton = styled(SkeletonBox3)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -93,6 +93,19 @@ const SkeletonCounter = styled(SkeletonBox3)`
   }
 `
 
+// const SkeletonCounter = styled(SkeletonBox3)`
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   width: 102px; 
+//   height: 55px; 
+//   border-radius: 16px;
+
+//   @media (max-width: 1200px) {
+//     width: 217px;
+//   }
+// `
+
 const SkeletonItem = styled(Item)`
   ${animationSettings}
 `
@@ -100,6 +113,7 @@ const SkeletonItem = styled(Item)`
 const CounterContainer = styled.div`
   display: flex;
   gap: 20px;
+  margin-top: 40px;
 
   @media (max-width: 1200px) {
     justify-content: left;
@@ -144,7 +158,7 @@ export default function Loading() {
             alignItems: 'center'
           }}
         />
-        <SkeletonCounter />
+        <SkeletonBuyButton />
       </CounterContainer>
     </LoadingContainer>
   )
