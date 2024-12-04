@@ -15,7 +15,7 @@ import {
 
 const HowTo: FC = () => (
   <section style={{borderBottom: ' 2px solid #9F9F9F ', margin: '10px 15px'}}>
-    <TextForHeader> {'cómo recibir un pedido'.toUpperCase()}</TextForHeader>
+    <TextForHeader>cómo recibir un pedido</TextForHeader>
     <HowToWrapper>
     {howToCardsData.map(({img1, description, description2, arrow }, index) => (
       <Fragment key={description}>

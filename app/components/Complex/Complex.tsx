@@ -87,7 +87,7 @@ const Complex: FC = () => {
             <FormationWrap>
               <CheckBoxGroup>
                 <Selecting>Seleccione la presentación del producto:</Selecting>
-                {complexData2.map(({type, iconSrc, id,}) => (
+                {complexData2.map(({type, icon, id}) => (
                   <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
                     <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
                       <RadioButton 
@@ -99,7 +99,7 @@ const Complex: FC = () => {
                       />
                     </label>
                     <LabelContent>
-                      <Icon src={iconSrc} alt={type}/>
+                      <Icon src={icon} alt={type}/>
                       <TextDesc>{type}</TextDesc>
                     </LabelContent>
                   </Item>

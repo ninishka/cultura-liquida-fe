@@ -4,12 +4,12 @@ import icon3 from './icons/icon_ex30.svg'
 import melenacaps from './icons/Frame_878.png'
 import melenaextract from './icons/Frame_87.png'
 
-import img1 from './icons/icon_LM1.png'
-import img2 from './icons/icon_LM7.png'
-import img3 from './icons/icon_LM3.png'
-import img4 from './icons/icon_LM4.png'
-import img5 from './icons/icon_LM8.png'
-import img6 from './icons/icon_LM6.png'
+import img1 from './icons/icon_LM1.svg'
+import img2 from './icons/icon_LM7.svg'
+import img3 from './icons/icon_LM3.svg'
+import img4 from './icons/icon_LM4.svg'
+import img5 from './icons/icon_LM8.svg'
+import img6 from './icons/icon_LM6.svg'
 
 import indicationsMelena from './icons/icon_indications_for_the_use.png'
 import indicationsReishi from './icons/icon_indications_for_the_use_R.png'
@@ -394,24 +394,30 @@ interface ComplexData {
   title: string;
   type: string;
   iconSrc: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
+  icon: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
   price: number;
   originalPrice: number;
+  size: string;
 }
 
 export const complexData2: ComplexData[] = [
   {
-    title:'complejo 100ml',
+    title:'complejo',
     id: '1',
-    type: 'extracts 100ml',
-    iconSrc: imgC10,
+    type: 'Extracto 100ml',
+    size: '100ml',
+    iconSrc: colaSrc,
+    icon: imgC10,
     price: 240000,
     originalPrice: 300000
   },
   {
-    title:'complejo 30ml',
+    title:'complejo',
     id: '2',
-    type: 'extracts 30ml',
-    iconSrc: imgC11,
+    type: 'Extracto 30ml',
+    size: '30ml',
+    iconSrc: colaSrc,
+    icon: imgC11,
     price: 105000,
     originalPrice: 84000
   },

@@ -180,7 +180,7 @@ export const CheckBoxGroup = styled.div`
     align-items: center;
   }
 `
-export const Item = styled.form`
+export const Item = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -200,6 +200,7 @@ export const Item = styled.form`
     margin: 10px 1vh;
   }
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
   }
@@ -218,6 +219,7 @@ export const TextDesc = styled.h4`
   font-weight: 400;
   font-size: 16px;
   padding-right: 10px;
+  margin-left: 15px;
 
   @media (max-width: 850px) {
     /* margin: 0; */

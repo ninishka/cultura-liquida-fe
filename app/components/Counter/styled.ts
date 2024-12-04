@@ -1,23 +1,30 @@
 import styled from 'styled-components'
-import type { AmountItemProps } from '@/types/types'
+import type { ModalStyledProps2 } from '@/types/types'
 
-export const CounterWrapper = styled.div`
+export const CounterWrapper = styled.div<ModalStyledProps2>`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin:40px 0px;
+  /* margin:40px 0px; */
+  margin: ${({$isModal}) => $isModal ? '40px 3vw' : '40px 0px'};
   gap: 20px;
   align-items: center;
 
   @media (max-width: 1220px) {
     justify-content: center;
-    margin: 20px 1vh 20px 3vh;
+    /* margin: 20px 1vh 20px 3vh; */
+    margin: ${({$isModal}) => !$isModal && '20px 1vh 20px 3vh'};
   } 
   
   @media (max-width: 850px) {
     justify-content: center;
     align-items: center;
     gap: 0px;
+    margin: 0;
+    max-width: 400px;
+
+    /* justify-content: flex-start;
+        margin: 0 13%; */
   } 
 `
 
@@ -28,28 +35,29 @@ export const AmountWrapper = styled.div`
 
 `
 
-export const AmountItem = styled.div<AmountItemProps>`
+export const AmountItem = styled.div<ModalStyledProps2>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 16px 16px 16px 16px;
   /* background-color: #2D2D2D; */
-  background-color: ${({$bgc}) => $bgc ? 'white' : '#2D2D2D'};
-  border: ${({$bgc}) => $bgc ? '1.5px solid black' : '1.5px solid white'};
-  color: ${({$bgc}) => $bgc && 'black'};
+  background-color: ${({$isModal}) => $isModal ? 'white' : '#2D2D2D'};
+  border: ${({$isModal}) => $isModal ? '1.5px solid black' : '1.5px solid white'};
+  color: ${({$isModal}) => $isModal && 'black'};
   width: 100px;
   height: 52px;
   
   /* &:hover{
     background-color: #252525;
-    background-color: ${({$bgc}) => $bgc ? 'grey' : '#2D2D2D'};
+    background-color: ${({$isModal}) => $isModal ? 'grey' : '#2D2D2D'};
   } */
 
   @media (max-width: 850px) {
     /* width: 89px;
     height: 39px; */
     margin: 20px;
+    margin-left: ${({$isModal}) => !$isModal && 0};
   }
 `
 
@@ -98,12 +106,13 @@ export const BuyButton = styled.button`
     width: 180px;
   }
 
+  transition: all 0.3s ease;
   &:hover{
     background-color: #F2C94C;
   }
 `
 
-export const Price = styled.p`
+export const Price = styled.p<ModalStyledProps2>`
   font-size: 36px;
   font-weight: 500;
   margin: 0;
@@ -112,8 +121,8 @@ export const Price = styled.p`
   @media (max-width: 850px) {
     text-align: left;
     font-size: 24px;
-    margin-top: 20px;
     margin: 25px;
+    margin-top: ${({$isModal}) => !$isModal && 0};
   }  
 `
 

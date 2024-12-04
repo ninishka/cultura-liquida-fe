@@ -47,7 +47,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
                   </Link>
                 ) : (
                   <AbsentProductCheckboxWrapper>
-                    <AbsentProductText>{'¡vendido!'.toUpperCase()} <br/> {'¿Libro?'.toUpperCase()}</AbsentProductText>
+                    <AbsentProductText>¡vendido! <br/> ¿Libro?</AbsentProductText>
                   </AbsentProductCheckboxWrapper>
                 )}
               </Fragment>

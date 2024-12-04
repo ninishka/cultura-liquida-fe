@@ -22,8 +22,8 @@ const Counter = ({
   const [ count, setCount ] = useState(amount || 1)
 
   return (                             
-    <CounterWrapper>
-      <AmountItem $bgc={isModal}>
+    <CounterWrapper $isModal={isModal}>
+      <AmountItem $isModal={isModal}>
         <ArrowButtons
           aria-label={`Disminuir la cantidad de elementos, recuento actual: ${count}`}
           onClick={() => decrease(count, setCount, isModal, dispatch, addToCart, item)}
@@ -52,9 +52,9 @@ const Counter = ({
           Comprar
         </BuyButton>
       }
-      {filterdContent?.[0]?.price && <Price style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}
+      {filterdContent?.[0]?.price && <Price $isModal={isModal} style={{color:'white'}}>{filterdContent?.[0]?.price} COP</Price>}
       {isComplex && (
-        <PriceWithoutDiscount>
+        <PriceWithoutDiscount $isModal={false}>
           {filterdContent?.[0]?.originalPrice} COP
         </PriceWithoutDiscount>
       )}

@@ -11,6 +11,8 @@ export const ModalTitle = styled.h2`
   font-size: 48px;
   color: black;
   text-align: center;
+  text-transform: uppercase;
+  
   @media (max-width: 850px) {
     font-size: 30px;
   }
@@ -44,9 +46,11 @@ export const ContentWrapper = styled.div`
 `
 
 export const ListItemsWrapper = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: stretch; */
+  width: -webkit-fill-available;
+    margin: 10px;
 `
 
 export const CartItemWrap = styled.div`
@@ -58,8 +62,9 @@ export const CartItemWrap = styled.div`
 export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: white;
   align-items: center;
+  /* justify-content: space-between; */
+  background-color: white;
   border-radius: 16px 16px;
   margin: 22px 0px 22px;
   width: inherit;
@@ -70,8 +75,9 @@ export const CartItem = styled.div`
     gap: 0;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 622px) {
     flex-wrap: wrap;
+    justify-content: flex-start;
   }
 `
 
@@ -97,19 +103,30 @@ export const CardInfoWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+
+  /* margin-right: auto; */
+
   @media (max-width: 764px) {
     flex-direction: column;
+    align-items: baseline;
   }  
+  @media (max-width: 622px) {
+    flex-direction: row;
+  }
+  @media (max-width: 454px) {
+    flex-direction: column;
+  }
 `
 
 export const InfoContainer = styled.div`
   display: flex;
-  margin: auto;
+  /* margin: auto; */
   align-items: center;
   
   @media (max-width: 1060px) {
-    display: block;
-    margin: auto;
+    /* display: block; */
+    /* margin: auto; */
   }
 ` 
 
@@ -117,7 +134,13 @@ export const InfoContainer2 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: auto;
+  /* margin: auto; */
+  /* margin-right: 8vw; */
+  min-width: 13vw;
+
+  @media (max-width: 1620px) {
+    min-width: 20vw;
+  }
 
   @media (max-width: 1060px) {
     flex-direction: column;
@@ -168,9 +191,6 @@ export const StyledSelect = styled(Select)`
   height: 52px;
   .ant-select-selector {
     border-radius: 16px;
-  }
-  .ant-select-dropdown {
-    border-radius: 16px !important;
   }
 
 `
@@ -362,8 +382,31 @@ export const CartPayButton = styled(Button)`
 
 
 
+ transition: all 0.3s ease;
  &:hover{
     background-color: #F2C94C !important;
     color: white !important;
+  }
+`
+
+export const ItemProductTypeText = styled.p`
+  color: red;
+  text-align: center;
+  /* margin: 0 20px 2px 2vw; */
+  font-size: 16px;
+  /* margin: 0 6vh 0 8vh;
+  
+
+  @media (max-width: 1650px) {
+    margin: 0 5vh 0 7vh;
+  }
+
+  @media (max-width: 940px) {
+    margin: 0 0.5vh 0 1.5vh;
+  } */
+
+  @media (max-width: 764px) {
+    margin: 0 8vw 0 0;
+    /* margin: auto 20px; */
   }
 `

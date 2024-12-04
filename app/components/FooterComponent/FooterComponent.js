@@ -1,8 +1,8 @@
 "use client"
 
 import Logo from '@/app/icons/logo_full 1.svg'
-import telegram from '@/app/icons/telegram.png'
-import phone from '@/app/icons/phone_1.png'
+import telegram from '@/app/icons/Frame 127.svg'
+import phone from '@/app/icons/Frame12911111.svg'
 import NavigationComponent from '@/app/components/NavigationComponent/NavigationComponent'
 import Link from 'next/link'
 

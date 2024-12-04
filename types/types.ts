@@ -85,6 +85,7 @@ export interface ArrowCounterProps {
 export interface NavigationProps {
   isopen?: boolean;
   $isopen?: boolean;
+  setShowMenu?: (value: boolean) => void;
 }
 
 export interface ModalStyledProps {
@@ -93,5 +94,9 @@ export interface ModalStyledProps {
 
 export interface AmountItemProps {
   $bgc: boolean;
+}
+
+export interface ModalStyledProps2 {
+  $isModal: boolean;
 }
 

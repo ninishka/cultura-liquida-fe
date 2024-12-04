@@ -24,6 +24,7 @@ export const TextForHeader = styled.h2`
  letter-spacing: 2%;
  margin: 35px 2vh;
  text-align: center;
+ text-transform: uppercase;
 
  @media (max-width: 850px) {
     font-size: 40px;
