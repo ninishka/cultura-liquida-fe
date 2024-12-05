@@ -34,41 +34,42 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, err
 
   return (
     <FormationSection>
-        <ContentWrapper>
-          <TitleFrame>
-            {/* <p>{filterdContent?.[0]?.stock}</p> */}
-            <TitleH1>{filterdContent?.[0]?.title || ''}</TitleH1>
-            <Description>{filterdContent?.[0]?.description || ''}</Description>
-          </TitleFrame>
+      <ContentWrapper>
+        <TitleFrame>
+          {/* <p>{filterdContent?.[0]?.stock}</p> */}
+          <TitleH1>{filterdContent?.[0]?.title || ''}</TitleH1>
+          <Description>{filterdContent?.[0]?.description || ''}</Description>
+        </TitleFrame>
 
-          <ImageWrapperMobile key={source}>
-            <ImageStyled
-              src={source} 
-              height={558} 
-              width={486} 
-              // sizes='fill'
-              alt='Product image'
-              loading="eager"
-              sizes='(max-width: 850px) 100vw, 50vw'
-            />
-          </ImageWrapperMobile>
+        <ImageWrapperMobile key={source}>
+          <ImageStyled
+            src={source} 
+            height={558} 
+            width={486} 
+            // sizes='fill'
+            alt='Product image'
+            priority // hight loading priority
+            loading="eager"
+            sizes='(max-width: 850px) 100vw, 50vw'
+          />
+        </ImageWrapperMobile>
+        <Release>Seleccione la presentación del producto:</Release>
+        <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
+        {/* <div>
           <Release>Seleccione la presentación del producto:</Release>
           <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
-          {/* <div>
-            <Release>Seleccione la presentación del producto:</Release>
-            <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
-            <Counter filterdContent={filterdContent} preObj={preObj} />
-          </div> */}
-        </ContentWrapper>
-        <ImageWrapperDesktop key={source}>
-          <ImageStyled 
-            src={source} 
-            alt='formation'
-            loading="eager"
-            sizes="(max-width: 1220px) 100vw, 50vw" 
-            priority // hight loading priority
-          />
-        </ImageWrapperDesktop>
+          <Counter filterdContent={filterdContent} preObj={preObj} />
+        </div> */}
+      </ContentWrapper>
+      <ImageWrapperDesktop key={source}>
+        <ImageStyled 
+          src={source} 
+          alt='formation'
+          loading="eager"
+          sizes="(max-width: 1200px) 100vw, 50vw" 
+          priority // hight loading priority
+        />
+      </ImageWrapperDesktop>
     </FormationSection>
   )
 }

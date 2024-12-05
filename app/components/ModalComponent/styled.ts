@@ -71,7 +71,7 @@ export const CartItem = styled.div`
   gap: 9px;
   font-family: var(--font-mohave);
 
-  @media (max-width: 700px) {
+  @media (max-width: 850px) {
     gap: 0;
   }
 
@@ -90,12 +90,12 @@ export const CountAndAmountWrap = styled.div`
 
 
 export const CartImg = styled(Image)`
-  width: auto;
-  /* height: auto; */
- margin: 20px;
- @media (max-width: 850px) {
-  margin: 10px;
- }
+  width: revert-layer;
+  height: auto;
+  margin: 20px;
+  @media (max-width: 850px) {
+    margin: 10px;
+  }
 `
 
 export const CardInfoWrapper = styled.div`

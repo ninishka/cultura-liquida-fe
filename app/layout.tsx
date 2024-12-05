@@ -44,9 +44,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
            <GlobalStyle />
              <ReduxProvider>
                 <HeaderComponent />
-                  <div style={{ maxWidth: '1920px', margin: '0 auto' }}>
+                  <main style={{ maxWidth: '1920px', margin: '0 auto' }}>
                     {children}
-                  </div>
+                  </main>
                 <FooterComponent />
              </ReduxProvider>
          </StyledRegistry>

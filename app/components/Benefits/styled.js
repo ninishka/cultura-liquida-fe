@@ -3,6 +3,12 @@ import Image from 'next/image'
 
 import styled from 'styled-components'
 
+export const BenefitsSection = styled.div`
+   @media (max-width: 1200px) {
+    margin: 0 4vh;
+  }
+`
+
 export const HeaderBenefitsWrapper = styled.div`
  display: flex;
  flex-direction: row;
@@ -23,10 +29,9 @@ export const TextForBenefits = styled.h2`
  font-size: 48px;
  font-weight: 600;
  line-height: 57.6px;
- letter-spacing: 2%;
  margin-right: 6vh;
 
- @media (max-width: 850px) {
+ @media (max-width: 1200px) {
     font-size: 40px;
     line-height: 45px;   
   }
@@ -62,12 +67,10 @@ export const DescriptionCard = styled.p`
 export const BenefitsCards = styled.div`
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
-  justify-content: center;
-  /* margin: 40px 0; */
-
+  justify-content: space-between;
   
   @media (max-width: 1200px) {
+    justify-content: space-around;
     flex-wrap: wrap;
   }
 

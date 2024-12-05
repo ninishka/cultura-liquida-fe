@@ -8,7 +8,7 @@ export const UlItself = styled.ul`
   display: flex;
   align-items: center;
 
-  @media (max-width: 860px) {
+  @media (max-width: 850px) {
     flex-direction: column;
   }
 `
@@ -17,7 +17,8 @@ export const Navigation = styled.nav<NavigationProps>`
   display: flex;
   align-items: center;
   flex-direction: row;
-  @media (max-width: 860px) {
+
+  @media (max-width: 850px) {
     display: ${({$isopen}) => $isopen ? 'block' : 'none'};
     position: fixed;
     top: 67px;
@@ -50,7 +51,7 @@ export const StyledLink = styled(Link)`
   font-size: 16px;
   text-decoration: none;
  
-  @media (max-width:860px) {
+  @media (max-width:850px) {
     width: 268px;
     margin: 12px;
     background-color: #2D2D2D;

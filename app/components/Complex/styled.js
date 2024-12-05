@@ -16,27 +16,30 @@ export const AllWrap = styled.div`
     justify-content: center;
   }
 `
-export const ImgSide = styled.div`
-  /* position: relative; */
-
-`
-export const ImgDesktop = styled(Image)`
-  /* width: 100%;
-  height: auto;  */
-  display: block; 
-
-  @media (max-width: 767px) {
-    display: none; 
+export const ImgMobileWrapper = styled.div`
+  display: none;
+  @media (max-width: 1200px) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 40px;
   }
 `
+export const ImgDesctopWrapper = styled.div`
+  display: block;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`
+
 export const ImgMobile = styled(Image)`
-
   display: none; 
-
-  @media (max-width: 767px) {
+  @media (max-width: 1200px) {
     display: block;
-    width: 300px;
-    height: 200px;
+    width: -webkit-fill-available;
+    height: auto;
+    margin: 0px 10vw;
   }
 `
 
@@ -47,6 +50,7 @@ export const RightContentWrap = styled.div`
 
  @media (max-width: 1200px) {
     align-items: center;
+    margin: 0 4vw;
   }
 `
 export const TitleWrap = styled.div`
@@ -90,10 +94,9 @@ export const ComplexItemsWrap = styled.div`
   width: 50%;
 
   @media (max-width: 1200px) {
-    margin: 20px 0;
-    width: 543px;
+    margin: 40px;
   }
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     width: auto
   }
 `
@@ -106,7 +109,7 @@ export const TwoCardwrap = styled.div`
     gap: 10px;
 
   }
-  @media (max-width: 880px) {
+  @media (max-width: 850px) {
     flex-direction: column; 
   }
 
@@ -162,12 +165,12 @@ export const LearnMoreText = styled.p`
   width: 15px;
   height: auto;
   /* color: lightgray; */
- `
+`
 
  export const ArrowButtons = styled(Link)`
   cursor: pointer;
   text-decoration: none;
-  `
+`
 
 export const CheckBoxGroup = styled.div`
  display: flex;
@@ -175,7 +178,8 @@ export const CheckBoxGroup = styled.div`
  justify-content: flex-end;
  margin-bottom: 12px;
  width: -webkit-fill-available;
- @media (max-width: 650px) {
+
+ @media (max-width: 850px) {
     justify-content: center;
     align-items: center;
   }
@@ -190,7 +194,7 @@ export const Item = styled.div`
   height: 54px;
   margin: 6px;
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     /* width: 70px;
     height: 125px; */
     /* flex-direction: column; */
@@ -206,13 +210,13 @@ export const Item = styled.div`
   }
 `
 
-export const  Icon = styled(Image)`
+export const Icon = styled(Image)`
   width: 50px;
   height: auto;
   margin-left: 10px;
 
-  @media (max-width: 650px) {
-    margin-left: 0
+  @media (max-width: 850px) {
+    margin-left: 0;
   }
 `
 export const TextDesc = styled.h4`
@@ -255,10 +259,6 @@ export const RadioButton = styled(Radio)`
   .ant-radio-wrapper {
     margin-left: 20px;
   }
-  /* @media (max-width: 650px) {
-    margin-left: 0;
-  }
-*/
 `
 
 export const LabelContent = styled.div`
@@ -278,7 +278,7 @@ export const FormationWrap = styled.div`
   border: 2px solid #9F9F9F;
 
   @media (max-width: 1200px) {
-    margin: 20px 0;
+    margin: 40px;
     width: auto
   }
 `
@@ -292,10 +292,11 @@ export const Selecting = styled.p`
   margin: 13px 16px;
 `
 export const PriceCounterWrap = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center;
- @media (max-width: 700px) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  @media (max-width: 850px) {
     flex-direction: column;
- }
+  }
 `

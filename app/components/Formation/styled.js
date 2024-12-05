@@ -9,7 +9,7 @@ export const FormationSection = styled.section`
   margin: 10px 15px;
   border-bottom: 2px solid #9F9F9F;
 
-  @media (max-width: 1220px) {
+  @media (max-width: 1200px) {
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -24,32 +24,29 @@ export const ContentWrapper = styled.div`
   width: 60%;
   margin-top: 50px;
 
-  @media (max-width: 1220px) {
+  @media (max-width: 1200px) {
     width: auto;
     margin-top: 0;
   }
 `
 
 export const ImageWrapperDesktop = styled.div`
-  @media (max-width: 1220px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 `
 
 export const ImageWrapperMobile = styled.div`
   display: none;
-  @media (max-width: 1220px) {
+  @media (max-width: 1200px) {
     display: flex;
     justify-content: center;
   }
 `
 
 export const ImageStyled = styled(Image)`
-
-  @media (max-width: 850px) {
-    height: 300px;
-    width: auto
-  }
+    height: 470px;
+    width: auto 
 `
 
 export const TitleFrame = styled.div`
