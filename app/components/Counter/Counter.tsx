@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import ArrowNext from '@/app/components/ArrowNext/ArrowNext'
-import ArrowPrev from '@/app/components/ArrowPrev/ArrowPrev'
+import ArrowNext from '@/app/components/IconComponents/ArrowNext'
+import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
 import { addToCart } from '@/lib/redux/slices/cartSlice'
 import { useAppDispatch } from '@/lib/redux/store/hooks'
 import { decrease, increase } from '@/app/components/helpers'

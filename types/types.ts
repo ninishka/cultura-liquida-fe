@@ -78,8 +78,9 @@ export  interface ErrorProps {
   reset: () => void;
 }
 
-export interface ArrowCounterProps {
+export interface IconProps {
   color?: string;
+  isDark?: boolean;
 }
 
 export interface NavigationProps {
@@ -98,5 +99,9 @@ export interface AmountItemProps {
 
 export interface ModalStyledProps2 {
   $isModal: boolean;
+}
+
+export interface IconStyledProps {
+  $isDark: boolean;
 }
 

@@ -8,6 +8,7 @@ export const ContactWrapper = styled.div`
   padding:  6px 9px 6px 9px;
   margin-right: 30px;
   gap: 30px;
+  
   @media (max-width: 850px) {
     margin-right: 0;
   }
@@ -39,11 +40,13 @@ export const Wrapper = styled.div`
     margin: 41px auto;
   }
 `
+
 export const TextWrapper = styled.div`
- display: flex;
- flex-direction: column;
- align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `
+
 export const ContactText = styled.h2`
   font-size: 48px;
   font-weight: 600;
@@ -59,16 +62,4 @@ export const Text = styled.p`
   line-height: 28.8px;
   letter-spacing: 0.02em;
   text-align: center;
-
 `
-
-export const StyledSVG = styled.svg`
-  rect {
-    transition: fill 0.3s ease;
-    fill: #4FDB40;
-  }
-
-  &:hover rect {
-    fill: #FFD700;
-  }
-`;

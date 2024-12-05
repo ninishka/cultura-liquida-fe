@@ -30,7 +30,7 @@ const CartItemComponent: FC<CartItemType> = item => {
   return (
     <CartItemWrap key={type}>
       <CartItem>
-        <CartImg sizes='100vh' src={iconSrc} alt='cartitemcomponent'/>
+        <CartImg sizes='100vh' src={iconSrc} alt='El artículo del producto elegido'/>
         <CardInfoWrapper>
           <InfoContainer2>
             <Title style={{textTransform: 'uppercase'}}>{modalProductTitle}</Title>
@@ -42,14 +42,12 @@ const CartItemComponent: FC<CartItemType> = item => {
         </CardInfoWrapper>
         <InfoContainer>
           <Counter amount={tAmount} item={item} isModal />
-          <Price 
-          style={{margin: '0px 20px'}}
-          >{price * tAmount} COP</Price>
+          <Price style={{margin: '0px 20px'}}>{price * tAmount} COP</Price>
         </InfoContainer>
       </CartItem>
       <DeleteButtonWrap>
         <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
-          <DeleteButtonIcon sizes='100vh' src={img6} alt='cartitemcomponent'/>
+          <DeleteButtonIcon sizes='100vh' src={img6} alt='Eliminar el artículo del producto seleccionado'/>
         </DeleteButtonItself>
       </DeleteButtonWrap>
     </CartItemWrap>
