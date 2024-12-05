@@ -68,7 +68,7 @@ const NotFound: FC = () => {
         src={img404} 
         alt='Page Not Found Image'
         loading="eager"
-        // sizes="(max-width: 1220px) 100vw, 50vw" 
+        // sizes="(max-width: 1200px) 100vw, 50vw" 
         priority // hight loading priority 
       />
     </div>

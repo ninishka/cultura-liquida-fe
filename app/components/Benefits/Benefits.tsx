@@ -1,6 +1,7 @@
 import React, { Fragment, FC } from 'react';
 import type { BenefitsProps } from '@/types/types'
 import {
+  BenefitsSection,
   HeaderBenefitsWrapper,
   TextForBenefits,
   DescrWrapper,
@@ -13,7 +14,7 @@ import {
 } from './styled'
 
 const Benefits: FC<BenefitsProps> = ({ benefitsHeaderData, benefitsCardsData, benefitsData }) => (
-  <section>
+  <BenefitsSection>
     <HeaderBenefitsWrapper>
       {benefitsHeaderData?.length && benefitsHeaderData.map(({ title, description1 ,description2 }) => (
         <Fragment key={title}>
@@ -42,7 +43,7 @@ const Benefits: FC<BenefitsProps> = ({ benefitsHeaderData, benefitsCardsData, be
         </Card>
       ))}
     </BenefitsCards>
-  </section>
+  </BenefitsSection>
 );
 
 

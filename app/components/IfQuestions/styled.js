@@ -28,10 +28,15 @@ export const Wrapper = styled.div`
   padding: 82px;
   background-color: #2D2D2D;
   gap: 129px;
-  @media (max-width: 980px) {
+
+  @media (max-width: 1200px) {
     flex-direction: column;
     gap: 50px;
     margin: 41px 41px;
+  }
+
+  @media (max-width: 850px) {
+    margin: 41px auto;
   }
 `
 export const TextWrapper = styled.div`

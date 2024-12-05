@@ -10,7 +10,7 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
   gap: 20px;
   align-items: center;
 
-  @media (max-width: 1220px) {
+  @media (max-width: 1200px) {
     justify-content: center;
     /* margin: 20px 1vh 20px 3vh; */
     margin: ${({$isModal}) => !$isModal && '20px 1vh 20px 3vh'};
@@ -98,7 +98,7 @@ export const BuyButton = styled.button`
   color: white;
   text-transform: uppercase;
 
-  @media (max-width: 1220px) {
+  @media (max-width: 1200px) {
     width: 216px;
   } 
 

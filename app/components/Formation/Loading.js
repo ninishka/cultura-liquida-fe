@@ -113,7 +113,7 @@ const SkeletonItem = styled(Item)`
 const CounterContainer = styled.div`
   display: flex;
   gap: 20px;
-  margin-top: 40px;
+  margin: 40px 0;
 
   @media (max-width: 1200px) {
     justify-content: left;

@@ -10,7 +10,7 @@ export const HowToWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  @media (max-width: 1150px) {
+  @media (max-width: 1200px) {
     flex-wrap: wrap;
   }
 `

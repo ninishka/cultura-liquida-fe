@@ -39,7 +39,7 @@ export const LogoItself = styled(Image)`
 const reusedStyles = css`
   width: 40px;
   height: 40px;
-  @media (max-width: 860px) {
+  @media (max-width: 850px) {
     width: 33px;
     height: 33px;
   }
@@ -64,7 +64,7 @@ export const CartWrap = styled.div`
     background-color: #252525;
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: 850px) {
     width: 33px;
     height: 33px;
   }
@@ -94,7 +94,7 @@ export const BurgerWrap = styled.div`
     background-color: #252525;
   }
   display: none;
-  @media (max-width: 860px) {
+  @media (max-width: 850px) {
     display: block;
     width: 33px;
     height: 33px;
