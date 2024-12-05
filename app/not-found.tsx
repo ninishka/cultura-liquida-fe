@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import img404 from '@/app/icons/404error.svg'
 import styled from 'styled-components'
-import ArrowPrev from '@/app/components/ArrowPrev/ArrowPrev'
+import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
 
 export const Title = styled.h2`
   font-size: 48px;
@@ -66,7 +66,7 @@ const NotFound: FC = () => {
 
       <Image             
         src={img404} 
-        alt='Page Not Found Image'
+        alt='La imagen Página no encontrada'
         loading="eager"
         // sizes="(max-width: 1200px) 100vw, 50vw" 
         priority // hight loading priority 

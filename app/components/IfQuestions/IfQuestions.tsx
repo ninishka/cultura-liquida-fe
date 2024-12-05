@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import Tg from './TgIcon'
-// import WhatsApp from './WhatsAppIcon'
-
+import Link from 'next/link'
+import Tg from '@/app/components/IconComponents/TgIcon'
+import Wa from '@/app/components/IconComponents/WaIcon'
 import {
   ContactWrapper,
   Wrapper,
@@ -19,12 +19,11 @@ const IfQuestions: FC = () => (
         {/* TODO add whatsapp link and icon */}
       </TextWrapper>
       <ContactWrapper>
-        <a href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en Telegram"><Tg /></a>
-        {/* <a href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en WhatsApp"><WhatsApp /></a> */}
+        <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en Telegram"><Tg /></Link>
+        <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en WhatsApp"><Wa /></Link>
       </ContactWrapper>   
     </Wrapper>
   </section>
 )
-
 
 export default IfQuestions

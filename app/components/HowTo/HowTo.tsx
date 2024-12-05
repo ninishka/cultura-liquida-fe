@@ -20,13 +20,12 @@ const HowTo: FC = () => (
     {howToCardsData.map(({img1, description, description2, arrow }, index) => (
       <Fragment key={description}>
         <CardsWrapper>
-          <HowToImage src={img1} alt={`step-${index + 1}`}/>
+          <HowToImage src={img1} alt={`Paso-${index + 1} del pedido`}/>
           <DescWrapper>
             <HowToDesc>{description}</HowToDesc>
             <SecondDesc>{description2}</SecondDesc>
           </DescWrapper>
         </CardsWrapper>
-        {/* {arrow && <ArrowIcon src={arrow} alt='arrow-icon'/>} */}
       </Fragment> 
     ))}
     </HowToWrapper>

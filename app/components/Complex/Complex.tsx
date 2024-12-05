@@ -54,7 +54,7 @@ const Complex: FC = () => {
     <section>
       <AllWrap>
         <ImgDesctopWrapper>
-          <Image sizes='100vw' src={imgC9} alt='Complex'/>
+          <Image sizes='100vw' src={imgC9} alt='El complejo de imágenes de los productos'/>
         </ImgDesctopWrapper>
         <RightContentWrap>
             <TitleWrap>
@@ -66,7 +66,7 @@ const Complex: FC = () => {
               </DiscountText>
             </TitleWrap>
             <ImgMobileWrapper> 
-              <ImgMobile sizes='100vw' src={imgC10} alt='Complex' />
+              <ImgMobile sizes='100vw' src={imgC10} alt='El complejo de imágenes de los productos' />
             </ImgMobileWrapper>
             <TwoCardwrap>
               <ComplexItemsWrap>
@@ -80,7 +80,7 @@ const Complex: FC = () => {
                       <ArrowButtons href={`/product/${url}-${types[0]}`} aria-label={`Obtenga más información sobre ${title}`}>
                         <LearnMoreWrap key={title + `${index + 1}`.toString()}>
                           <LearnMoreText>Leer más</LearnMoreText>
-                          <ArrowIcon src={imgC} alt='arrow' />
+                          <ArrowIcon src={imgC} alt='La imagen del botón' />
                         </LearnMoreWrap>
                       </ArrowButtons>
                     </ThreeItemsWrap>

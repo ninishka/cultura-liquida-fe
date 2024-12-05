@@ -47,7 +47,7 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, err
             height={558} 
             width={486} 
             // sizes='fill'
-            alt='Product image'
+            alt='La imagen del producto'
             priority // hight loading priority
             loading="eager"
             sizes='(max-width: 850px) 100vw, 50vw'
@@ -64,7 +64,7 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, err
       <ImageWrapperDesktop key={source}>
         <ImageStyled 
           src={source} 
-          alt='formation'
+          alt='La imagen del producto'
           loading="eager"
           sizes="(max-width: 1200px) 100vw, 50vw" 
           priority // hight loading priority

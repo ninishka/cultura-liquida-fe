@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import type { ArrowCounterProps } from '@/types/types'
+import type { IconProps } from '@/types/types'
 
-const ArrowPrev: FC<ArrowCounterProps> = ({ color }) => (
+const ArrowPrev: FC<IconProps> = ({ color }) => (
   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_1087_9597)">
       <path d="M1 7.5L12.25 13.9952L12.25 1.00481L1 7.5Z" fill={color || "white"}/>

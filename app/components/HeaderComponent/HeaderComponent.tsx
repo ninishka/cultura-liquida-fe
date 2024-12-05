@@ -32,12 +32,12 @@ const HeaderComponent: FC<NavigationProps> = () => {
   return (
   <HeaderFull $isopen={showMenu ? true : false}>
     <LogoFull href='/product/melena-de-leon-capsules'>
-      <LogoItself src={Logo} alt="Company Logo" />
+      <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" />
     </LogoFull>
     
     <NavigationComponent isopen={showMenu ? true : false} setShowMenu={setShowMenu} />
     <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
-      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="Menu icon" />
+      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
     </BurgerWrap>
 
     <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
@@ -46,7 +46,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
           {totalAmount}
         </p>
       </CounterCartWrap>
-      <Cart src={CartIcon} alt="Cart logo" />
+      <Cart src={CartIcon} alt="El icono del carrito" />
     </CartWrap>
   </HeaderFull>
 )}

@@ -184,12 +184,10 @@ useEffect(() => {
 //     if (response.ok) {
 //       const { redirectUrl, formData } = await response.json();
     
-//       // Создаем и отправляем форму
 //       const form = document.createElement('form');
 //       form.method = 'POST';
 //       form.action = redirectUrl;
     
-//       // Добавляем данные в форму
 //       Object.keys(formData).forEach(key => {
 //         const input = document.createElement('input');
 //         input.type = 'hidden';
@@ -237,7 +235,7 @@ useEffect(() => {
               <Image 
                 src={img55} 
                 fill={true} 
-                alt='the modal background image' 
+                alt='Imagen de fondo del carrito' 
                 priority // hight loading priority
                 style={{
                   objectFit: "cover",
