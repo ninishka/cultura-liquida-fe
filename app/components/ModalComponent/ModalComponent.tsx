@@ -17,6 +17,19 @@ import {
   CartPayButton
 } from './styled'
 
+  const mockedFormValues = {
+      name: "One",
+      surname: "One",
+      document_type: "id",
+      id_number: "1234",
+      mail_address: "123",
+      state: "ANT",
+      city: "Abejorral",
+      phone_number: "3107883758",
+      email: "first@gmail.com",
+      remember: true
+  }
+
 const ModalComponent = ({data}) => {
   // const router = useRouter();
   const [form] = Form.useForm();
@@ -42,7 +55,6 @@ const ModalComponent = ({data}) => {
     return null
   });
 
-// Удаляем элементы с null
   const validPostsToUpdate = productsToUpdate.filter(item => item !== null);
 
   const updatedProductsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
@@ -88,40 +100,41 @@ useEffect(() => {
   initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
 }, [])
 
+
   // PEYMENT SYSTEM
-  const onFinish = async (values) => {
-    // await setFormValues({
-    //   ...values,
-    //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-    // })
-    setLoading(true)
-    try {
-      const response = await fetch('/api/preference', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cartItems, formValues: {
-          ...values,
-          street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-        } }),
-      });
+  // const onFinish = async (values) => {
+  //   // await setFormValues({
+  //   //   ...values,
+  //   //   street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+  //   // })
+  //   setLoading(true)
+  //   try {
+  //     const response = await fetch('/api/preference', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ cartItems, formValues: {
+  //         ...mockedFormValues,
+  //         street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`
+  //       } }),
+  //     });
   
-      if (!response.ok) {
-        console.error('Error creating preference ONFINISH');
-        return;
-      }
-      const { preferenceId } = await response.json()
-      if (preferenceId) {
-        console.log('preferenceId', preferenceId)
-        setPreferenceId(preferenceId)
-      } else {
-        console.error('id as preferenceId is missing in response');
-      }
-    } catch (e) {
-      console.error('Error processing preference:', e);
-    } finally {
-      setLoading(false)
-    }
-  };
+  //     if (!response.ok) {
+  //       console.error('Error creating preference ONFINISH');
+  //       return;
+  //     }
+  //     const { preferenceId } = await response.json()
+  //     if (preferenceId) {
+  //       console.log('preferenceId', preferenceId)
+  //       setPreferenceId(preferenceId)
+  //     } else {
+  //       console.error('id as preferenceId is missing in response');
+  //     }
+  //   } catch (e) {
+  //     console.error('Error processing preference:', e);
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // };
 
 
 
@@ -208,6 +221,97 @@ useEffect(() => {
 //   }
 // };
   const isEmpty = !cartItems?.length
+
+
+
+
+
+
+
+
+
+
+
+  const onFinish = async (values) => {
+    setLoading(true);
+
+    try {
+      // 1. Обновляем продукты в БД
+      const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
+        const response = await fetch('/api/products', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id, updatedData }),
+        });
+
+        if (!response.ok) {
+          console.error('Error updating product:', id);
+        }
+      });
+
+      await Promise.all(updatePromises);
+
+      // 2. Создаем заказ
+      const totalPrice = cartItems.reduce(
+        (sum, item) => sum + item.amount * item.price,
+        0
+      );
+      const orderResponse = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: 'mockedUserId', // Здесь подставьте реальный userId из вашего состояния
+          products: cartItems.map(({ idCart, amount }) => ({ productId: idCart, quantity: amount })),
+          totalPrice,
+        }),
+      });
+
+      if (!orderResponse.ok) {
+        console.error('Error creating order');
+        return;
+      }
+
+      console.log('Order created successfully');
+
+      // 3. Логика Mercado Pago
+      const paymentResponse = await fetch('/api/preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cartItems,
+          formValues: {
+            ...values,
+            street_name: `${values.state}, ${values.city}, ${values.mail_address}`,
+          },
+        }),
+      });
+
+      if (!paymentResponse.ok) {
+        console.error('Error creating MercadoPago preference');
+        return;
+      }
+
+      const { preferenceId } = await paymentResponse.json();
+      setPreferenceId(preferenceId);
+    } catch (error) {
+      console.error('Error processing order:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <main style={{ backgroundColor: '#F2C94CCC' }}>
