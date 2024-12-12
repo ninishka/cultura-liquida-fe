@@ -18,12 +18,15 @@ const ProductSections: FC = () => {
   const { data, isLoading, error } = useGetProductQuery('');
  
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
+
+  if (!data) return 'Loading...'
+
   const f = {...getActiveComponent(data, slug)}
 
   return (
     <div style={{ color: '#fff'}}>
       {showCart && <ModalComponent data={data} />}
-      <Formation formationData={f?.formationData} isLoading={isLoading} error={error} formationDataStatic={staticData?.[0]} />
+      <Formation formationData={f?.formationData} isLoading={isLoading} error={error} />
       <Benefits 
         benefitsHeaderData={staticData?.[0]?.benefitsHeaderData} 
         benefitsCardsData={staticData?.[0]?.benefitsCardsData} 

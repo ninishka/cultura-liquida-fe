@@ -57,11 +57,14 @@ const ModalComponent = ({data}) => {
 
   const validPostsToUpdate = productsToUpdate.filter(item => item !== null);
 
-  const updatedProductsData = validPostsToUpdate.map(({ id, stock, amount, ...restOfItem }) => {
+  const updatedProductsData = validPostsToUpdate.map(({ id, amount, availableStock, reservedStock, ...restOfItem }) => {
     const updatedData = {
-      stock: stock - amount,
+      // stock: stock - amount,
       // stockSoftHold: stock - amount, // <- prepayment holding
       // stockHardHold: stock - amount, // <- postpayment holding
+
+      availableStock: availableStock - amount,
+      reservedStock: reservedStock + amount,
       ...restOfItem,
     };
 
@@ -236,7 +239,7 @@ useEffect(() => {
     setLoading(true);
 
     try {
-      // 1. Обновляем продукты в БД
+      // UPDATE EXISTING PRODUCT BD
       const updatePromises = updatedProductsData.map(async ({ id, updatedData }) => {
         const response = await fetch('/api/products', {
           method: 'PUT',
@@ -253,7 +256,7 @@ useEffect(() => {
 
       await Promise.all(updatePromises);
 
-      // 2. Создаем заказ
+      // CREATE NEW ORDER BD
       const totalPrice = cartItems.reduce(
         (sum, item) => sum + item.amount * item.price,
         0
@@ -262,7 +265,7 @@ useEffect(() => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId: 'mockedUserId', // Здесь подставьте реальный userId из вашего состояния
+          userId: 'mockedUserId',
           products: cartItems.map(({ idCart, amount }) => ({ productId: idCart, quantity: amount })),
           totalPrice,
         }),
@@ -275,7 +278,7 @@ useEffect(() => {
 
       console.log('Order created successfully');
 
-      // 3. Логика Mercado Pago
+      // Mercado Pago
       const paymentResponse = await fetch('/api/preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

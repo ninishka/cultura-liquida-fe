@@ -7,7 +7,9 @@ export interface ProductG {
   type: string;
   size?: string;
   price: number;
-  stock: number;
+  totalStock: number;
+  reservedStock: number;
+  availableStock: number;
   [key: string]: any; // TODO
 }
 
@@ -22,9 +24,12 @@ export interface CartItemType {
   description: string;
   ingredient: string;
   price: number;
-  stock: number;
+  totalStock: number;
+  reservedStock: number;
+  availableStock: number;
   size?: string;
   type: string;
+  displayingType: string;
 
   icon: any;
   iconSrc: any;
@@ -59,7 +64,7 @@ export interface FormationProps {
   error?: any;
   slogMain?: String[];
   formationData: CartItemType[]; 
-  formationDataStatic: any;
+  // formationDataStatic: any;
   // [propName: string]: any
 }
  
