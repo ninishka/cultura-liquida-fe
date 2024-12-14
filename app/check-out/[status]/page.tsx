@@ -5,7 +5,6 @@ import { useAppSelector } from '@/lib/redux/store/hooks'
 import { Button, Space, Form } from 'antd';
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/ModalForm'
-import TotalBoxComponent from '@/app/components/ModalComponent/TotalBox'
 import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 
 import {
@@ -70,6 +69,9 @@ const CheckoutPage: FC = () => {
   console.log('params', params)
   const userId = 'mockedUserId'
 
+  const status = searchParams?.get('status')
+  console.log('status', status)
+
   useEffect(() => {
       const fetchData = async () => {
         try {
@@ -82,6 +84,7 @@ const CheckoutPage: FC = () => {
               userId,
               updatedData: {
                 mp_data: params,
+                status
               },
             }),
           });
@@ -154,8 +157,13 @@ const CheckoutPage: FC = () => {
           </div>
         </CheckoutWrapperContent>
         <RightPanel>
-          <StatusPanel />
-          <TotalBoxComponent />
+          <StatusPanel $status={status === 'approved' && 'red'} />
+          <div style={{ margin: 10}}>
+            <p style={{ fontSize: 32, margin: 0, color: 'white'}}>Subtotal:</p>
+            <p style={{ fontSize: 32, margin: 0, color: 'white'}}>Envio:</p>
+            <p style={{ fontSize: 48, margin: 0, color: '#4FDB40'}}>Total:</p>
+          </div>
+          
         </RightPanel>
       </CheckoutWrapper>
     </div>

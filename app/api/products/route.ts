@@ -19,10 +19,15 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
 export async function PUT(request: NextRequest): Promise<NextResponse> {
   try {
-    const { id, updatedData }: UpdateProductRequest = await request.json();
-    const updatedProduct = await editProduct(id, updatedData); // TODO here also type for sending 
+    const { updates } = await request.json();
 
-    return NextResponse.json(updatedProduct);
+    const updatedProducts = await Promise.all(
+      updates.map(async ({ id, updatedData }) => {
+        return await editProduct(id, updatedData);
+      })
+    );
+  
+    return NextResponse.json({ success: true, updatedProducts });
   } catch (error) {
     console.error('PUT Error updating product:', error);
     
@@ -32,7 +37,6 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
     );
   }
 }
-
 
 // REV 5
 // export const dynamic = 'force-dynamic';

@@ -14,7 +14,7 @@ export const createOrder = async (
       products,
       totalPrice,
       form_data,
-      mp_data: {}
+      // mp_data: {}
     });
     return await newOrder.save();
   } catch (error) {
@@ -57,7 +57,7 @@ export const updateOrder = async (userId: string, updatedData: UpdatedData) => {
     const order = await Order.findOneAndUpdate(
       { userId },
       { ...updatedData, updatedAt: new Date() },
-      { new: true } // возвращает обновленный документ
+      { new: true }
     );
 
     if (!order) {

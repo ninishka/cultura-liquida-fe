@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import Backlink from '@/app/components/IconComponents/Backlink'
+import type { StatusStyledProps } from '@/types/types'
 
 export const CheckoutWrapper = styled.div`
   display: flex;
@@ -9,10 +10,12 @@ export const CheckoutWrapper = styled.div`
 export const RightPanel = styled.div`
   background-color: #252525;
   border-radius: 16px;
+  min-width: 30vw;
+  margin: 10px 10px 20px;
 `
 
-export const StatusPanel = styled.div`
-  background-color: #F2C94C;
+export const StatusPanel = styled.div<StatusStyledProps>`
+  background-color: ${({$status}) => $status ? $status : '#F2C94C'};
   border-radius: 16px;
   height: 92px;
   margin: 10px;

@@ -111,3 +111,7 @@ export interface IconStyledProps {
   $isDark: boolean;
 }
 
+export interface StatusStyledProps {
+  $status: string;
+}
+
