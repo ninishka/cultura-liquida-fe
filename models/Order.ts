@@ -1,4 +1,4 @@
-import mongoose, { Document, Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 export interface IOrder {
   _id: string;
@@ -11,6 +11,8 @@ export interface IOrder {
   status: string;
   createdAt: Date;
   updatedAt: Date;
+  form_data: Record<string, string>;
+  mp_data?: Record<string, string>;
 }
 
 const orderSchema = new mongoose.Schema<IOrder>({
@@ -25,6 +27,16 @@ const orderSchema = new mongoose.Schema<IOrder>({
   status: { type: String, default: 'pending' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  form_data: {
+    type: Map,
+    of: String,
+    required: true,
+  },
+  mp_data: {
+    type: Map,
+    of: String,
+    required: false,
+  },
 });
 
 const Order: Model<IOrder> = mongoose.models.Order || mongoose.model<IOrder>('Order', orderSchema);

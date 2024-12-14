@@ -191,7 +191,6 @@ export const createPayUPreference = async (cartItems, formValues) => {
 
   // console.log('paymentRequest:', paymentRequest);
 
-  // Выполняем запрос
   const response = await fetch(PAYU_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
