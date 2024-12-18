@@ -134,7 +134,7 @@ const melenaFormationData = [
     src: melenacaps,
     iconSrc: melenaCapsulsSrc,
     url: 'melena-de-leon',
-    title: 'MELENA DE LEON',
+    title: 'Melena de León',
     description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
 
     type: 'capsules',
@@ -145,7 +145,7 @@ const melenaFormationData = [
     src: melenaextract,
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
-    title: 'MELENA DE LEON',
+    title: 'Melena de León',
     description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
 
     type: 'extracts',
@@ -157,7 +157,7 @@ const melenaFormationData = [
     src: melenaextract,
     iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
-    title: 'MELENA DE LEON',
+    title: 'Melena de León',
     description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
 
     type: 'extracts',
@@ -216,7 +216,7 @@ const reishiFormationData = [
     icon: icon2,
     src: reishiextract,
     url: 'reishi',
-    title: 'REISHI, EXTRACTO',
+    title: 'Reishi',
     description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
     
     type: 'extracts',
@@ -228,7 +228,7 @@ const reishiFormationData = [
     icon: icon3,
     src: reishiextract,
     url: 'reishi',
-    title: 'REISHI, EXTRACTO',
+    title: 'Reishi',
     description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
 
     type: 'extracts',
@@ -280,7 +280,7 @@ const colaFormationData = [
     icon: icon2,
     src: colaextract,
     url: 'cola-de-pavo',
-    title: 'COLA DE PAVO, EXTRACTO',
+    title: 'Cola de Pavo',
     description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
 
     type: 'extracts',
@@ -292,7 +292,7 @@ const colaFormationData = [
     icon: icon3,
     src: colaextract,
     url: 'cola-de-pavo',
-    title: 'COLA DE PAVO, EXTRACTO',
+    title: 'Cola de Pavo',
     description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
 
     type: 'extracts',

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from "@reduxjs/toolkit/query";
 import cartReducer from '@/lib/redux/slices/cartSlice'
 import { productsAPI } from "@/lib/redux/slices/api";
+import { ordersAPI } from "@/lib/redux/slices/orderApi";
 
 const loggerMiddleware = (storeAPI) => (next) => (action) => {
   console.log('Dispatching:', action);
@@ -14,10 +15,15 @@ export const makeStore = () => {
   const store = configureStore({
     reducer: {
       cart: cartReducer,
+      [ordersAPI.reducerPath]: ordersAPI.reducer,
       [productsAPI.reducerPath]: productsAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(productsAPI.middleware, loggerMiddleware),
+      getDefaultMiddleware().concat(
+        productsAPI.middleware,
+        ordersAPI.middleware,
+        loggerMiddleware
+      ),
   });
 
   setupListeners(store.dispatch);

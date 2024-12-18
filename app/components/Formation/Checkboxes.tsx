@@ -14,24 +14,24 @@ import {
     AbsentProductText
   } from './styled'
 
-const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
+const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => {
+  const { data, isLoading, error } = useGetProductQuery('');
   // await new Promise(resolve => {
   //   if (data) setTimeout(resolve, 0)
   // }) // its how Suspense  for all Formation can be controled
   // console.log('formationData', formationData)
-  const { isLoading } = useGetProductQuery('');
 
-  if (isLoading) return <Loading /> 
+  if (isLoading) return <Loading />
 
   return (
     <>
       <CheckBoxGroup>
-        {formationData.map(({type, icon, id, url, size, price, stock}) => {
-          const hrefLogic = type === "capsules" ? `/product/${url}-${type}` : `/product/${url}-${type}-${size}`
+        {formationData.map(({type, displayingType, icon, id, url, size, price, availableStock}) => {
+          const hrefLogic = `/product/${url}-${type}${size ? `-${size}` : ''}`;
           return (
             <Fragment key={hrefLogic}>
-              {!!stock ? (
-                <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff', zIndex: !stock && -99 }}>
+              {!!availableStock ? (
+                <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff', zIndex: !availableStock && -99 }}>
                   <Item aria-label='Elección del tamaño del producto'> 
                     <label htmlFor={id} aria-label='Elección del tamaño del producto'>
                       <RadioButton
@@ -43,7 +43,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj, data }) => {
                     </label>  
                     <LabelContent >
                       <Icon src={icon} alt={type}/>
-                      <TextDesc>{type === 'extracts' ? "Extracto " + size : "Cápsulas"}</TextDesc>
+                      <TextDesc>{displayingType}{size ? ` ${size}` : ''}</TextDesc>
                     </LabelContent>
                   </Item>
                 </Link>

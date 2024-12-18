@@ -14,9 +14,12 @@ const getProduct = async (): Promise<IProduct[]>  => {
         description: product.description,
         ingredient: product.ingredient,
         type: product.type,
+        displayingType: product.displayingType,
         size: product.size,
         price: product.price,
-        stock: product.stock,
+        totalStock: product.totalStock,
+        reservedStock: product.reservedStock,
+        availableStock: product.availableStock,
       }));
   
     return plainProducts;
@@ -51,11 +54,14 @@ const addProduct = async post => {
   const description = post.get('description')
   const ingredient = post.get('ingredient')
   const type = post.get('type')
+  const displayingType = post.get('displayingType')
   const size = post.get('size')
   const price = post.get('price')
-  const stock = post.get('stock')
+  const totalStock = post.get('totalStock')
+  const reservedStock = post.get('reservedStock')
+  const availableStock = post.get('availableStock')
 
-  const newProduct = new Product({ title, description, ingredient, type, size, price, stock })
+  const newProduct = new Product({ title, description, ingredient, type, displayingType, size, price, totalStock, reservedStock, availableStock })
   return newProduct.save()
 }
 

@@ -21,11 +21,10 @@ import {
   } from './styled'
 
 const CartItemComponent: FC<CartItemType> = item => {
-  const { iconSrc, title, ingredient, type, amount: tAmount, id, price, size } = item
+  const { iconSrc, title, ingredient, type, displayingType, amount: tAmount, id, price, size } = item
   
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector(state => state.cart.cartItems)
-  const modalProductTitle = title.includes('EXTRACTO') ? title.split(',')[0] : title 
 
   return (
     <CartItemWrap key={type}>
@@ -33,11 +32,11 @@ const CartItemComponent: FC<CartItemType> = item => {
         <CartImg sizes='100vh' src={iconSrc} alt='El artículo del producto elegido'/>
         <CardInfoWrapper>
           <InfoContainer2>
-            <Title style={{textTransform: 'uppercase'}}>{modalProductTitle}</Title>
+            <Title style={{textTransform: 'uppercase'}}>{title}</Title>
             <Description>{ingredient}</Description>
           </InfoContainer2>
           <ItemProductTypeText>
-            {type === 'capsules' ? 'Cápsulas': 'Extracto ' + size}
+            {displayingType}{size ? ` ${size}` : ''}
           </ItemProductTypeText>
         </CardInfoWrapper>
         <InfoContainer>
