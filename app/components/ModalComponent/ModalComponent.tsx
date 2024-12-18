@@ -97,13 +97,25 @@ const ModalComponent = ({data}) => {
         (sum, item) => sum + item.amount * item.price,
         0
       );
+      const filteredArray = cartItems.map(obj => ({
+        title: obj.title,
+        ingredient: obj.ingredient,
+        type: obj.type,
+        displayingType: obj.displayingType,
+        amount: obj.amount,
+        price: obj.price,
+        id: obj.id,
+        idCart: obj.idCart,
+        size: obj.size,
+      }));
       const orderResponse = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: 'mockedUserId',
           totalPrice,
-          products: cartItems.map(({ idCart, amount }) => ({ productId: idCart, quantity: amount })),
+          products: filteredArray,
+          // products: cartItems.map(({ idCart, amount }) => ({ productId: idCart, quantity: amount })),
           form_data: mockedFormValues,
         }),
       });
@@ -124,8 +136,8 @@ const ModalComponent = ({data}) => {
         body: JSON.stringify({
           cartItems,
           formValues: {
-            ...values,
-            street_name: `${values.state}, ${values.city}, ${values.mail_address}`,
+            ...mockedFormValues,
+            street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
           },
         }),
       });

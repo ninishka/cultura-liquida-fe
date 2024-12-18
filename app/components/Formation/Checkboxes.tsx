@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import Counter from '@/app/components/Counter/Counter'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
-import Loading from './Loading'
 import {
     CheckBoxGroup,
     Item,
@@ -20,8 +19,6 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => {
   //   if (data) setTimeout(resolve, 0)
   // }) // its how Suspense  for all Formation can be controled
   // console.log('formationData', formationData)
-
-  if (isLoading) return <Loading />
 
   return (
     <>

@@ -24,7 +24,11 @@ const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => (
   label: name
 })); // now if state and cityes choosen and u change state - we need to clear choosen city
 
-const ModalFormFields: FC = () => { 
+export interface ModalFormFieldsProps {
+  isOrder?: boolean;
+}
+
+const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
 
   return (
@@ -35,7 +39,7 @@ const ModalFormFields: FC = () => {
         name="name"
         rules={nameSurnameValidator}
       >
-        <StyledInput />
+        <StyledInput disabled={isOrder} />
       </StyledFormItem>
       {/* Apellidos*/}
       <StyledFormItem
@@ -43,7 +47,7 @@ const ModalFormFields: FC = () => {
         name="surname"
         rules={nameSurnameValidator}
       >
-        <StyledInput />
+        <StyledInput disabled={isOrder} />
       </StyledFormItem>
       {/* Tipo de documento select*/}
       <StyledFormItem
@@ -63,6 +67,8 @@ const ModalFormFields: FC = () => {
             { label: 'Pasaporte', value: 'passport' },
             { label: 'Otro', value: 'other' },
           ]}
+          disabled={isOrder}
+          isOrder={isOrder}
         />
       </StyledFormItem>
       {/* Número de documento*/}
@@ -89,7 +95,7 @@ const ModalFormFields: FC = () => {
           }
         ]}
       >
-        <StyledInput />
+        <StyledInput disabled={isOrder} />
       </StyledFormItem>
       {/*Country*/}
       <StyledFormItem
@@ -102,6 +108,7 @@ const ModalFormFields: FC = () => {
           options={[{ value: 'colombia', label: 'Colombia' }]}
           defaultValue="colombia"
           disabled
+          isOrder={isOrder}
         />
       </StyledFormItem>
       {/* Dirección de envío*/}
@@ -115,7 +122,7 @@ const ModalFormFields: FC = () => {
           },
         ]}
       >
-        <StyledInput />
+        <StyledInput disabled={isOrder} />
       </StyledFormItem>
       {/* Departamento select*/}
       <StyledFormItem
@@ -129,6 +136,8 @@ const ModalFormFields: FC = () => {
           allowClear 
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}       
           options={states}
+          disabled={isOrder}
+          isOrder={isOrder}
         />
 
       </StyledFormItem>
@@ -142,8 +151,9 @@ const ModalFormFields: FC = () => {
           placeholder="Elige una opción..."
           allowClear 
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
-          disabled={!selectedDepartment}
           options={cities(selectedDepartment)}
+          disabled={isOrder || !selectedDepartment}
+          isOrder={isOrder}  
         />
 
       </StyledFormItem>
@@ -186,7 +196,7 @@ const ModalFormFields: FC = () => {
           }
         ]}
       >
-        <StyledInput />
+        <StyledInput disabled={isOrder} />
       </StyledFormItem>
 
       {/* EMAIL */}
@@ -204,7 +214,7 @@ const ModalFormFields: FC = () => {
           }
         ]}
       >
-        <StyledInput />
+        <StyledInput disabled={isOrder} />
       </StyledFormItem>
       {/* textarea */}
       <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
@@ -219,25 +229,27 @@ const ModalFormFields: FC = () => {
         />
       </StyledFormItem>
       {/* checkbox */}
-      <StyledFormItem      
-        name="remember" 
-        valuePropName="checked"
-        style={{ width: '100%'}}
-        rules={[
-          {
-            validator: (_, value) => {
-              if (!value) {
-                return Promise.reject('Debes aceptar los términos y condiciones');
-              }
-              return Promise.resolve();
+      {!isOrder && (
+        <StyledFormItem      
+          name="remember" 
+          valuePropName="checked"
+          style={{ width: '100%'}}
+          rules={[
+            {
+              validator: (_, value) => {
+                if (!value) {
+                  return Promise.reject('Debes aceptar los términos y condiciones');
+                }
+                return Promise.resolve();
+              },
             },
-          },
-        ]}
-      >
-        <CheckboxInput>
-          Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
-        </CheckboxInput>
-      </StyledFormItem>
+          ]}
+        >
+          <CheckboxInput>
+            Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
+          </CheckboxInput>
+        </StyledFormItem>
+      )}
     </>
   );
 };

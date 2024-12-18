@@ -20,7 +20,7 @@ import {
     ItemProductTypeText
   } from './styled'
 
-const CartItemComponent: FC<CartItemType> = item => {
+const CartItemComponent: FC<CartItemType> = ( item, isOrder ) => {
   const { iconSrc, title, ingredient, type, displayingType, amount: tAmount, id, price, size } = item
   
   const dispatch = useAppDispatch()
@@ -40,15 +40,17 @@ const CartItemComponent: FC<CartItemType> = item => {
           </ItemProductTypeText>
         </CardInfoWrapper>
         <InfoContainer>
-          <Counter amount={tAmount} item={item} isModal />
+        {!isOrder ? ( <Counter amount={tAmount} item={item} isModal />) : (<p style={{color: 'black', margin: 20}}>x{tAmount}</p>)}
           <Price style={{margin: '0px 20px'}}>{price * tAmount} COP</Price>
         </InfoContainer>
       </CartItem>
-      <DeleteButtonWrap>
-        <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
-          <DeleteButtonIcon sizes='100vh' src={img6} alt='Eliminar el artículo del producto seleccionado'/>
-        </DeleteButtonItself>
-      </DeleteButtonWrap>
+      {!isOrder && (
+        <DeleteButtonWrap>
+          <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
+            <DeleteButtonIcon sizes='100vh' src={img6} alt='Eliminar el artículo del producto seleccionado'/>
+          </DeleteButtonItself>
+        </DeleteButtonWrap>
+      )}
     </CartItemWrap>
   )
 }

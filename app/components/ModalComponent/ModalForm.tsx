@@ -17,7 +17,7 @@ import {
 // Debit, credit
 // Allow crypto?
 
-const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
+const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrder }) => {
   const { cartItems } = useAppSelector(state => state.cart);
   const totalSum = calculateTotalSum(cartItems);
 
@@ -25,31 +25,34 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading }) => {
     <StyledForm 
       onFinish={onFinish} 
       onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
+      initialValues={initialValues}
     >
-      <ModalFormFields />
-      <TotalBox>
-        <TotalWrap>
-          <LeftSideWrap>
-            <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
-            <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>{totalSum}</p>
-          </LeftSideWrap>  
-          <StyledFormItem 
-            label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
-            // style={{ width: '33%'}}
-          >
-            <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
-              <Radio value="apple" style={{ color: 'white'}} > Mercado Pago </Radio>
-              {/* <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio> */}
-              <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta bancaria </Radio>
-            </Radio.Group>
+      <ModalFormFields isOrder={isOrder} />
+      {!isOrder && (
+        <TotalBox>
+          <TotalWrap>
+            <LeftSideWrap>
+              <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
+              <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>{totalSum}</p>
+            </LeftSideWrap>  
+            <StyledFormItem 
+              label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
+              // style={{ width: '33%'}}
+            >
+              <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
+                <Radio value="apple" style={{ color: 'white'}} > Mercado Pago </Radio>
+                {/* <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio> */}
+                <Radio value="pear2" style={{ color: 'white'}}> Transferencia a cuenta bancaria </Radio>
+              </Radio.Group>
+            </StyledFormItem>
+          </TotalWrap>
+          <StyledFormItem style={{width: '100%'}}>
+              <CartPayButton htmlType="submit" loading={loading}>
+                Comprar
+              </CartPayButton>
           </StyledFormItem>
-        </TotalWrap>
-        <StyledFormItem style={{width: '100%'}}>
-            <CartPayButton htmlType="submit" loading={loading}>
-              Comprar
-            </CartPayButton>
-        </StyledFormItem>
-      </TotalBox>
+        </TotalBox>
+      )}
     </StyledForm>
   );
 };

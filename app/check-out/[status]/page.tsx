@@ -1,7 +1,6 @@
 'use client'
 import React, { FC, useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useAppSelector } from '@/lib/redux/store/hooks'
 import { Button, Space, Form } from 'antd';
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/ModalForm'
@@ -59,7 +58,6 @@ const CheckoutPage: FC = () => {
 
   const pathname = usePathname()
   const searchParams = useSearchParams();
-  const { showCart, cartItems } = useAppSelector(state => state.cart);
 
   const params = keysFromMP.reduce((acc, key) => {
     acc[key] = searchParams?.get(key) || "Not provided";
@@ -147,12 +145,12 @@ const CheckoutPage: FC = () => {
           <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>
-                {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
+                {data?.[0]?.products.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
               </ListItemsWrapper>
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} isOrder />
+              <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} initialValues={data?.[0]?.form_data} isOrder />
             </>
           </div>
         </CheckoutWrapperContent>

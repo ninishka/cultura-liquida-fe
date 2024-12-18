@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import Backlink from '@/app/components/IconComponents/Backlink'
+// import Backlink from '@/app/components/IconComponents/Backlink'
 import type { StatusStyledProps } from '@/types/types'
 
 export const CheckoutWrapper = styled.div`
@@ -68,10 +68,10 @@ export const StyledLink = styled(Link)`
   }
 `
 
-export const BacklinkS = styled(Backlink)`
-  :hover {
-    path {
-      fill: #FFD700;
-    }
-  }
-`;
+// export const BacklinkS = styled(Backlink)`
+//   :hover {
+//     path {
+//       fill: #FFD700;
+//     }
+//   }
+// `;

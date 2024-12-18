@@ -3,10 +3,19 @@ import mongoose, { Model } from 'mongoose';
 export interface IOrder {
   _id: string;
   userId: string;
-  products: Array<{
-    productId: string;
-    quantity: number;
-  }>;
+  // products: Array<{
+  //   productId: string;
+  //   title: string;
+  //   ingredient: string;
+  //   type: string;
+  //   displayingType: string;
+  //   amount: number;
+  //   price: number;
+  //   id: string;
+  //   idCart: string;
+  //   size?: string;
+  // }>;
+  products: Array<Map<string, any>>;
   totalPrice: number;
   status: string;
   createdAt: Date;
@@ -17,10 +26,25 @@ export interface IOrder {
 
 const orderSchema = new mongoose.Schema<IOrder>({
   userId: { type: String, required: true },
+  // products: [
+  //   {
+  //     productId: { type: String, required: true },
+  //     title: { type: String, required: true },
+  //     ingredient: { type: String, required: true },
+  //     type: { type: String, required: true },
+  //     displayingType: { type: String, required: true },
+  //     amount: { type: Number, required: true },
+  //     price: { type: Number, required: true },
+  //     id: { type: String, required: true },
+  //     idCart: { type: String, required: true },
+  //     size: { type: String, required: false },
+  //   },
+  // ],
   products: [
     {
-      productId: { type: String, required: true },
-      quantity: { type: Number, required: true },
+      type: Map,
+      of: mongoose.Schema.Types.Mixed,
+      required: true,
     },
   ],
   totalPrice: { type: Number, required: true },

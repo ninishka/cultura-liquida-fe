@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import { Form, Input, Select, Checkbox } from 'antd'
 import { Modal } from 'antd';
 import { Button } from 'antd';
-import type { ModalStyledProps } from '@/types/types'
+import type { ModalStyledProps, OrderStyledProps } from '@/types/types'
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -192,14 +192,45 @@ export const StyledForm = styled(Form)`
 export const StyledInput = styled(Input)`
   height: 52px;
   border-radius: 16px;
+
+  &.ant-input[disabled] {
+    background-color: #2D2D2D;
+    border-color: #2D2D2D;
+    text-transform: uppercase;
+    color: #F2C94C;
+    font-weight: 600;
+    cursor: auto;
+  }
 `
 
-export const StyledSelect = styled(Select)`
+export const StyledSelect = styled(Select)<OrderStyledProps>`
   height: 52px;
+  ${({isOrder}) => isOrder && css`
+    &.ant-select * {
+      cursor: auto  !important;
+    }
+
+    &.ant-select-disabled {
+      background-color: #2D2D2D;
+      border-color: #2D2D2D;
+      border-radius: 16px;
+
+      .ant-select-selector {
+        border-color: #2D2D2D;
+        text-transform: uppercase;
+        color: #F2C94C !important;
+        font-weight: 600;
+      }
+
+      .ant-select-arrow {
+        color: #F2C94C;
+      }
+    }
+  `}
+
   .ant-select-selector {
     border-radius: 16px;
   }
-
 `
 
 export const StyledFormItem = styled(Form.Item)`

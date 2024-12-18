@@ -40,6 +40,8 @@ export interface CartItemType {
   __v: number;
   amount?: number;
   idCart?: string;
+
+  isOrder?: boolean
 }
 
 export interface CartState {
@@ -58,6 +60,7 @@ export interface ModalFormProps {
   loading: boolean;
   isOrder?: boolean;
   onFinish: (values: any) => Promise<void>;
+  initialValues?: any
 }
 
 export interface FormationProps {
@@ -113,5 +116,9 @@ export interface IconStyledProps {
 
 export interface StatusStyledProps {
   $status: string;
+}
+
+export interface OrderStyledProps {
+  isOrder?: boolean;
 }
 

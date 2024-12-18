@@ -29,7 +29,6 @@ const Formation: FC<FormationProps> = ({ formationData, error }) => {
   const source = filterdContent?.[0]?.src || ''
 
 
-  // if (isLoading) return <Loading />
   // if (error) return <div>Error: {error?.message}</div>;
 
   return (
