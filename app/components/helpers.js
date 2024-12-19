@@ -27,7 +27,6 @@ export const nameSurnameValidator = [
         );
       }
       
-      
       return Promise.resolve();
     },
   },
@@ -39,11 +38,15 @@ export const init = (slug) => slug[0].includes("melena")
 
 export const calculateTotalSum = cards => {
   const num = cards.reduce((total, card) => total + card.price * card.amount, 0);
-  let parts = num.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-  return parts.join('.');
+  const deliveryIncluded = num + 15000
+  return deliveryIncluded
 };
+
+export const totalSumStyledByDot = (sum, spec = '.') => {
+  let parts = sum.toString().split(spec);
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, spec);
+  return parts.join(spec);
+}
 
 
 export const decrease = (count, setCount, isModal, dispatch, addToCart, item) => {

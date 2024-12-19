@@ -32,7 +32,7 @@ export interface CartItemType {
   displayingType: string;
 
   icon: any;
-  iconSrc: any;
+  // iconSrc: any;
   src: any;
   id: string;
   _id: string;

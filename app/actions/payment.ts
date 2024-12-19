@@ -58,7 +58,8 @@ const createPreference = async (cartItems, formValues) => {
     
     const preferenceBody = {
       items: [{
-        id: queryArray[0]._id, // TODO order id need
+        // id: queryArray[0]._id,
+        id: queryArray[0].idCart, // TODO order id need
         title: queryArray?.[0]?.title,
         quantity: queryArray?.[0]?.amount,
         unit_price: queryArray?.[0]?.price,

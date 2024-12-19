@@ -106,7 +106,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
           placeholder="Elige una opción..."
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={[{ value: 'colombia', label: 'Colombia' }]}
-          defaultValue="colombia"
           disabled
           isOrder={isOrder}
         />

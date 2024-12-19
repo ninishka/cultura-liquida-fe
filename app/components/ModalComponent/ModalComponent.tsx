@@ -7,6 +7,7 @@ import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import ModalForm from './ModalForm'
+import { calculateTotalSum } from '@/app/components/helpers'
 import {
   ModalStyled,
   ListItemsWrapper,
@@ -93,10 +94,7 @@ const ModalComponent = ({data}) => {
 
 
       // CREATE NEW ORDER BD
-      const totalPrice = cartItems.reduce(
-        (sum, item) => sum + item.amount * item.price,
-        0
-      );
+      const totalPrice = calculateTotalSum(cartItems);
       const filteredArray = cartItems.map(obj => ({
         title: obj.title,
         ingredient: obj.ingredient,
@@ -104,8 +102,8 @@ const ModalComponent = ({data}) => {
         displayingType: obj.displayingType,
         amount: obj.amount,
         price: obj.price,
-        id: obj.id,
         idCart: obj.idCart,
+        id: obj.idCart, //mb remove?
         size: obj.size,
       }));
       const orderResponse = await fetch('/api/orders', {
@@ -134,7 +132,7 @@ const ModalComponent = ({data}) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          cartItems,
+          cartItems: filteredArray,
           formValues: {
             ...mockedFormValues,
             street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
@@ -214,13 +212,13 @@ const ModalComponent = ({data}) => {
             <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>
-                {cartItems.map(props => <CartItemComponent key={props?.id || ''} {...props} /> )}
+                {cartItems.map(props => <CartItemComponent key={props?.idCart || ''} {...props} /> )}
               </ListItemsWrapper>
               
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm form={form} onFinish={onFinish} loading={loading} />
+              <ModalForm form={form} onFinish={onFinish} loading={loading} initialValues={{ country: 'colombia' }} />
             </>
               {/* Public key */}
               {preferenceId && (

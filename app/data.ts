@@ -132,7 +132,7 @@ const melenaFormationData = [
     id: '1',
     icon: icon1,
     src: melenacaps,
-    iconSrc: melenaCapsulsSrc,
+    // iconSrc: melenaCapsulsSrc,
     url: 'melena-de-leon',
     title: 'Melena de León',
     description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
@@ -143,7 +143,7 @@ const melenaFormationData = [
     id: '2',
     icon: icon2,
     src: melenaextract,
-    iconSrc: melenaExtractSrc,
+    // iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
     title: 'Melena de León',
     description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
@@ -155,7 +155,7 @@ const melenaFormationData = [
     id: '3',
     icon: icon3,
     src: melenaextract,
-    iconSrc: melenaExtractSrc,
+    // iconSrc: melenaExtractSrc,
     url: 'melena-de-leon',
     title: 'Melena de León',
     description: 'Cuerpo fructífero de hongos y micelio de Hericium erinaceus.',
@@ -221,7 +221,7 @@ const reishiFormationData = [
     
     type: 'extracts',
     size: '100ml',
-    iconSrc: reishiSrc,
+    // iconSrc: reishiSrc,
   },
   {
     id: '2',
@@ -233,7 +233,7 @@ const reishiFormationData = [
 
     type: 'extracts',
     size: '30ml',
-    iconSrc: reishiSrc,
+    // iconSrc: reishiSrc,
   },
 ]
 
@@ -285,7 +285,7 @@ const colaFormationData = [
 
     type: 'extracts',
     size: '100ml',
-    iconSrc: colaSrc,
+    // iconSrc: colaSrc,
   },
   {
     id: '2',
@@ -297,7 +297,7 @@ const colaFormationData = [
 
     type: 'extracts',
     size: '30ml',
-    iconSrc: colaSrc,
+    // iconSrc: colaSrc,
   },
 ]
 
@@ -400,7 +400,7 @@ interface ComplexData {
   id: string;
   title: string;
   type: string;
-  iconSrc: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
+  // iconSrc: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
   icon: any; // any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
   price: number;
   originalPrice: number;
@@ -413,7 +413,7 @@ export const complexData2: ComplexData[] = [
     id: '1',
     type: 'Extracto 100ml',
     size: '100ml',
-    iconSrc: colaSrc,
+    // iconSrc: colaSrc,
     icon: imgC10,
     price: 240000,
     originalPrice: 300000
@@ -423,10 +423,10 @@ export const complexData2: ComplexData[] = [
     id: '2',
     type: 'Extracto 30ml',
     size: '30ml',
-    iconSrc: colaSrc,
+    // iconSrc: colaSrc,
     icon: imgC11,
-    price: 105000,
-    originalPrice: 84000
+    price: 84000,
+    originalPrice: 105000
   },
 ]
 

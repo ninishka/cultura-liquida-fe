@@ -198,7 +198,7 @@ export const StyledInput = styled(Input)`
     border-color: #2D2D2D;
     text-transform: uppercase;
     color: #F2C94C;
-    font-weight: 600;
+    font-weight: 700;
     cursor: auto;
   }
 `
@@ -219,7 +219,7 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
         border-color: #2D2D2D;
         text-transform: uppercase;
         color: #F2C94C !important;
-        font-weight: 600;
+        font-weight: 700;
       }
 
       .ant-select-arrow {

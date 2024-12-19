@@ -1,17 +1,13 @@
 'use client'
 import React, { FC, useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation';
-import { Button, Space, Form } from 'antd';
+import { useSearchParams } from 'next/navigation';
+import { Space, Form } from 'antd';
+import { SyncOutlined } from '@ant-design/icons';
+import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/ModalForm'
-import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
-
-import {
-  SyncOutlined,
-} from '@ant-design/icons';
-
-
-
+import { ListItemsWrapper, ModalTitle } from '@/app/components/ModalComponent/styled'
+import { totalSumStyledByDot } from '@/app/components/helpers'
 import {
   StyledLink,
   TitleH1,
@@ -20,13 +16,12 @@ import {
   RightPanel,
   StatusPanel,
   MPinfoItemsWrapper,
-  MPinfoItem
+  MPinfoItem,
+  SubtotalText,
+  PriceTextBox,
+  ScrolableZone
 } from './styled'
 
-import {
-  ListItemsWrapper,
-  ModalTitle,
-} from '@/app/components/ModalComponent/styled'
 
 
 
@@ -55,24 +50,19 @@ const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status'
 
 const CheckoutPage: FC = () => {
   const [form] = Form.useForm();
-
-  const pathname = usePathname()
   const searchParams = useSearchParams();
-
-  const params = keysFromMP.reduce((acc, key) => {
-    acc[key] = searchParams?.get(key) || "Not provided";
-    return acc;
-  }, {} as Record<string, string>);
-
-  console.log('params', params)
+  const { data, isLoading, error } = useGetOrderQuery('mockedUserId');
   const userId = 'mockedUserId'
 
-  const status = searchParams?.get('status')
-  console.log('status', status)
-
   useEffect(() => {
+    console.log('useEffect')
       const fetchData = async () => {
         try {
+          const mp_data = keysFromMP.reduce((acc, key) => {
+            acc[key] = searchParams?.get(key) || "Not provided";
+            return acc;
+          }, {} as Record<string, string>);         
+        
           const response = await fetch(`/api/orders`, {
             method: 'PUT',
             headers: {
@@ -81,45 +71,68 @@ const CheckoutPage: FC = () => {
             body: JSON.stringify({
               userId,
               updatedData: {
-                mp_data: params,
-                status
+                mp_data,
+                status: mp_data?.status
               },
             }),
           });
 
-          if (response.ok) {
-            const updatedOrder = await response.json();
-            console.log('Updated Order:', updatedOrder);
-          } else {
-            console.error('Error updating order:', response.status);
-          }
+          if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
+
+          const updatedOrder = await response.json();
+          console.log('Updated Order:', updatedOrder);
         } catch (error) {
           console.error('Error updating order:', error);
         }
       };
+      
+      // if data exist, but mp_data absent or status mismatched
+      // PS I am not sure about status
+      // TODO - need to check Buisness logic about status
+      if (data && Array.isArray(data)) {
+        const hasNoMercadoPagoData = !data.some((order) => order.mp_data);
+        const isStatusMismatched = data[0]?.status !== data[0]?.mp_data?.status;
+        
+        if (hasNoMercadoPagoData || isStatusMismatched) {
+          fetchData()
+        }
+      }
+  }, [data]); 
+  // searchParams is not dynamic, so no need to put it in dependencies
 
-      fetchData();
-  }, []);
 
 
-    const { data, isLoading, error } = useGetOrderQuery('mockedUserId');
-  console.log('data', data)
   if (isLoading) return <div>Loading...</div>;
   // if (error) return <div>Error loading orders: {error.message}</div>;
 
+  const formatDate = (dateString: string): string => {
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      // hour: 'numeric',
+      // minute: 'numeric',
+      // second: 'numeric',
+      // timeZoneName: 'short',
+    };
+    return new Date(dateString).toLocaleDateString('es-ES', options);
+  };
+
+  const displayTotal = totalSumStyledByDot(data?.[0]?.totalPrice, ' ')
+  const beforeDelivery = totalSumStyledByDot(data?.[0]?.totalPrice - 15000, ' ')
+
   return (
-    <div>
-      <StyledLink href="/check-out" aria-label="Contacto en WhatsApp">
+    <div style={{ margin: 10 }}>
+      <StyledLink href="/check-out" aria-label="Contacto en WhatsApp" style={{ marginTop: 10 }}>
         {/* <BacklinkS /> */}
-        <p> volver a la página principal </p>
+        <p> ← volver a la página principal </p>
       </StyledLink>
 
-      <Space>
-      <TitleH1 style={{textTransform: 'uppercase'}}>Checkout</TitleH1>
-       {/* <Button> */}
-         <SyncOutlined  />
-       {/* </Button> */}
-      </Space>
+      <div style={{display: 'flex', alignItems: 'center', marginTop: 70}}>
+        <h2 style={{textTransform: 'uppercase', fontSize: 48, fontWeight: 500}}>Checkout</h2>
+        <SyncOutlined style={{fontSize: 36, margin: '0 5px 10px'}}  />
+      </div>
       <CheckoutWrapper>
         <CheckoutWrapperContent>
           <MPinfoItemsWrapper> 
@@ -129,11 +142,11 @@ const CheckoutPage: FC = () => {
             </MPinfoItem>
             <MPinfoItem>
               <p>Fecha: </p>
-              {data?.[0]?.updatedAt}
+              {formatDate(data?.[0]?.updatedAt)}
             </MPinfoItem>
             <MPinfoItem>
               <p>Total: </p>
-              {data?.[0]?.totalPrice} cop
+              {displayTotal} cop
             </MPinfoItem>
             <MPinfoItem>
               <p>Metodos de pago: </p>
@@ -141,25 +154,31 @@ const CheckoutPage: FC = () => {
             </MPinfoItem>
 
           </MPinfoItemsWrapper>
-          <div>
-          <>
-              <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
-              <ListItemsWrapper>
-                {data?.[0]?.products.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
-              </ListItemsWrapper>
-            </>
+          <ScrolableZone>
+            <ListItemsWrapper style={{ marginTop: 10}}>
+              {data?.[0]?.products?.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
+            </ListItemsWrapper>
             <>
-              <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
+              <ModalTitle style={{ textAlign: 'start', color: 'white' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
               <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} initialValues={data?.[0]?.form_data} isOrder />
             </>
-          </div>
+          </ScrolableZone>
         </CheckoutWrapperContent>
         <RightPanel>
-          <StatusPanel $status={status === 'approved' && 'red'} />
-          <div style={{ margin: 10}}>
-            <p style={{ fontSize: 32, margin: 0, color: 'white'}}>Subtotal:</p>
-            <p style={{ fontSize: 32, margin: 0, color: 'white'}}>Envio:</p>
-            <p style={{ fontSize: 48, margin: 0, color: '#4FDB40'}}>Total:</p>
+          <StatusPanel $status={searchParams?.get('status') === 'approved' && '#4FDB40'} />
+          <div style={{ margin: 10 }}>
+            <PriceTextBox>
+              <SubtotalText>Subtotal: </SubtotalText>
+              <SubtotalText>{beforeDelivery} cop</SubtotalText>
+            </PriceTextBox>
+            <PriceTextBox>
+              <SubtotalText>Envio: </SubtotalText>
+              <SubtotalText>15 000 cop</SubtotalText>
+            </PriceTextBox>
+            <PriceTextBox style={{ marginTop: 10 }}>
+              <p style={{ fontSize: 48, margin: 0, color: '#4FDB40' }}>Total: </p>
+              <p style={{ fontSize: 48, margin: 0, color: '#4FDB40' }}>{displayTotal} COP</p>
+            </PriceTextBox>
           </div>
           
         </RightPanel>

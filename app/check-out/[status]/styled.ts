@@ -75,3 +75,38 @@ export const StyledLink = styled(Link)`
 //     }
 //   }
 // `;
+
+export const SubtotalText = styled.p`
+  font-size: 32px;
+  margin: 0;
+  color: white;
+`
+
+export const PriceTextBox = styled.p`
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+`
+
+export const ScrolableZone = styled.div`
+  max-height: 1140px; 
+  overflow: auto;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #F2C94C !important;
+    border-radius: 4px !important;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #F2C94C !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #252525 !important;
+  }
+`
