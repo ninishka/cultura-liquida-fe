@@ -37,7 +37,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
           <TotalWrap>
             <LeftSideWrap>
               {/* TODO design ?? */}
-              <p style={{ color: 'gray', fontSize: 24, margin: 0}}>delivery 15.000</p>
+              <p style={{ color: 'gray', fontSize: 24, margin: 0}}>envío 15.000</p>
               <p style={{ color: 'white', fontSize: 48, margin: 0}}>Total:</p>
               <p style={{ color: '#4FDB40', fontSize: 36, margin: 0}}>{styledTotalSum}</p>
             </LeftSideWrap>  
@@ -67,7 +67,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
                   Después de realizar el pago, envía el comprobante junto con el número de tu pedido al correo para confirmar la transacción.
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <p style={{ textTransform: 'uppercase', fontWeight: 700, margin: 10}}>llorar:</p>
+                  <p style={{ textTransform: 'uppercase', fontWeight: 700, margin: 10}}>email:</p>
                   <p style={{ fontWeight: 700, margin: 10 }}>culturaliquidacol@gmail.com:</p>  
                 </div>
               </div>

@@ -59,7 +59,7 @@ const Complex: FC = () => {
         <RightContentWrap>
             <TitleWrap>
               <Benefits>
-                MEJORAR SIGNIFICATIVAMENTE MEMORIA, SISTEMA NERVIOSO, METABOLISMO
+                MEJORAR MEMORIA, SISTEMA NERVIOSO, METABOLISMO
               </Benefits>
               <DiscountText>
                 ¡Con la ayuda de un complejo de suplementos de hongos con un 20% de descuento!
