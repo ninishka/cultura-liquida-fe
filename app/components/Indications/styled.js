@@ -7,7 +7,7 @@ export const IndicationsSection = styled.section`
   flex-direction: row-reverse;
   border-radius: 16px;
   border: 1px solid #9F9F9F;
-  margin: 50px;
+  margin: 70px 50px;
   background-color: #2D2D2D;
   line-height: 17.6px;
 

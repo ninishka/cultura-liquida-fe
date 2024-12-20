@@ -21,7 +21,7 @@ export const FormationSection = styled.section`
 `
 
 export const ContentWrapper = styled.div`
-  width: 60%;
+  width: 65%;
   margin-top: 50px;
 
   @media (max-width: 1200px) {
@@ -83,6 +83,7 @@ export const Release = styled.h3`
 
   @media (max-width: 850px) {
     font-size: 14px;
+    margin-bottom: 20px;
   }
 `
 

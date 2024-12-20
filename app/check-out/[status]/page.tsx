@@ -53,7 +53,12 @@ import { object } from 'yup';
 // site_id: MCO
 // processing_mode: aggregator
 // merchant_account_id: null
+
+// s http://localhost:3000/check-out/success?collection_id=1320658712&collection_status=approved&payment_id=1320658712&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=26357310094&preference_id=1700322474-82fa7b59-7f7e-4a8d-af3a-1b25fcf367ff&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
+// f http://localhost:3000/check-out/pending?collection_id=1329051277&collection_status=in_process&payment_id=1329051277&status=null&external_reference=null&payment_type=credit_card&merchant_order_id=26362077576&preference_id=1700322474-979af48d-fa96-4380-ad4a-6b5551ba674f&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
+// p http://localhost:3000/check-out/pending?collection_id=1329051277&collection_status=in_process&payment_id=1329051277&status=in_process&external_reference=null&payment_type=credit_card&merchant_order_id=26362077576&preference_id=1700322474-979af48d-fa96-4380-ad4a-6b5551ba674f&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
  
+
 const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status', 'payment_type',
   'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id']
 

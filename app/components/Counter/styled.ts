@@ -57,7 +57,7 @@ export const AmountItem = styled.div<ModalStyledProps2>`
     /* width: 89px;
     height: 39px; */
     margin: 20px;
-    margin-left: ${({$isModal}) => !$isModal && 0};
+    margin-left: ${({$isModal}) => !$isModal && '10px'};
   }
 `
 
