@@ -10,7 +10,8 @@ export const CheckoutWrapper = styled.div`
 export const RightPanel = styled.div`
   background-color: #252525;
   border-radius: 16px;
-  min-width: 28vw;
+  width: 100%;
+  max-width: 380px;
   margin: 0 0 20px 20px;
 `
 

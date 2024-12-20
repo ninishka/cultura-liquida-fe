@@ -106,6 +106,7 @@ const CheckoutPage: FC = () => {
           fetchData()
         }
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies
 
@@ -128,7 +129,7 @@ const CheckoutPage: FC = () => {
   const wording = (statusPayment === 'approved' && 'pagado') || (statusPayment === 'in_process' && 'pendiente') || 'no pagado'
 
   return (
-    <div style={{ margin: '10px auto', maxWidth: '1400px' }}>
+    <div style={{ margin: '10px auto', maxWidth: '1350px' }}>
       <StyledLink href="/product/melena-de-leon-capsules" aria-label="Volver a la página principal" style={{ marginTop: 10 }}>
         <p> ← volver a la página principal </p>
       </StyledLink>
