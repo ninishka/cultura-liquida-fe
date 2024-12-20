@@ -21,7 +21,6 @@ import {
 // Allow crypto?
 
 const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrder, paymentOption, setPaymentOption }) => {
-  console.log('paymentOption', paymentOption)
   const { cartItems } = useAppSelector(state => state.cart);
   const totalSum = calculateTotalSum(cartItems);
   const styledTotalSum = totalSumStyledByDot(totalSum)
@@ -32,7 +31,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
       onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
       initialValues={initialValues}
     >
-      <ModalFormFields isOrder={isOrder} />
+      <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} />
       {!isOrder && (
         <TotalBox>
           <TotalWrap>

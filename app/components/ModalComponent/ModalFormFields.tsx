@@ -26,9 +26,10 @@ const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => (
 
 export interface ModalFormFieldsProps {
   isOrder?: boolean;
+  notes?: string
 }
 
-const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => { 
+const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
 
   return (
@@ -37,6 +38,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Nombres"
         name="name"
+        isOrder={isOrder}
         rules={nameSurnameValidator}
       >
         <StyledInput disabled={isOrder} />
@@ -45,6 +47,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Apellidos"
         name="surname"
+        isOrder={isOrder}
         rules={nameSurnameValidator}
       >
         <StyledInput disabled={isOrder} />
@@ -53,12 +56,15 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Tipo de documento"
         name="document_type"
+        isOrder={isOrder}
         rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
       >
         <StyledSelect
           placeholder="Elige una opción..."
           // onChange={(v: any) => setSelectedDocumento(v)}
           allowClear
+          disabled={isOrder}
+          isOrder={isOrder}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={[
             { label: 'CC', value: 'cc' },
@@ -67,14 +73,14 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
             { label: 'Pasaporte', value: 'passport' },
             { label: 'Otro', value: 'other' },
           ]}
-          disabled={isOrder}
-          isOrder={isOrder}
+
         />
       </StyledFormItem>
       {/* Número de documento*/}
       <StyledFormItem
         label="Número de documento"
         name="id_number"
+        isOrder={isOrder}
         rules={[
           {
             required: true,
@@ -101,19 +107,21 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="País"
         name="country"
+        isOrder={isOrder}
       >
         <StyledSelect
           placeholder="Elige una opción..."
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={[{ value: 'colombia', label: 'Colombia' }]}
-          disabled
           isOrder={isOrder}
+          disabled
         />
       </StyledFormItem>
       {/* Dirección de envío*/}
       <StyledFormItem
         label="Dirección de envío"
         name="mail_address"
+        isOrder={isOrder}
         rules={[
           {
             required: true,
@@ -127,6 +135,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Departamento"
         name="state"
+        isOrder={isOrder}
         rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
       >
         <StyledSelect
@@ -144,6 +153,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Ciudad / Municipio"
         name="city"
+        isOrder={isOrder}
         rules={[{ required: true, message: '¡Por favor seleccione una opción!' }]}
       >
         <StyledSelect
@@ -160,6 +170,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Celular / Teléfono"
         name="phone_number"
+        isOrder={isOrder}
         rules={[
           {
             required: true,
@@ -202,6 +213,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
       <StyledFormItem
         label="Correo electrónico"
         name="email"
+        isOrder={isOrder}
         rules={[
           { 
             required: true, 
@@ -216,17 +228,19 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder }) => {
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
       {/* textarea */}
-      <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
-        label="Notas (opcional)"
-        name="notes">
-        <StyledInput.TextArea   
-          style={{ borderRadius: '16px'}} 
-          autoSize={{
-            minRows: 2,
-            maxRows: 6,
-          }} 
-        />
-      </StyledFormItem>
+      {(!isOrder || notes) && (
+        <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
+          label="Notas (opcional)"
+          name="notes">
+          <StyledInput.TextArea   
+            style={{ borderRadius: '16px'}} 
+            autoSize={{
+              minRows: 2,
+              maxRows: 6,
+            }} 
+          />
+        </StyledFormItem>
+      )}
       {/* checkbox */}
       {!isOrder && (
         <StyledFormItem      

@@ -24,15 +24,17 @@ import {
       mail_address: "123",
       state: "ANT",
       city: "Abejorral",
+      country: "Colombia",
       phone_number: "3107883758",
       email: "first@gmail.com",
+      notes: 'notesnotesnotesnotes'
   }
 
 const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch()
   const { showCart, cartItems } = useAppSelector(state => state.cart);
-  const [paymentOption, setPaymentOption] = useState(false)
+  const [paymentOption, setPaymentOption] = useState('')
 
   const [preferenceId, setPreferenceId] = useState('') //mp
   const [loading, setLoading] = useState(false) // mp
@@ -127,27 +129,28 @@ const ModalComponent = ({data}) => {
       console.log('Order created successfully');
 
 
+      if (paymentOption === 'mercado') {
+        // Mercado Pago
+        const paymentResponse = await fetch('/api/preference', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cartItems: filteredArray,
+            formValues: {
+              ...mockedFormValues,
+              street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
+            },
+          }),
+        });
 
-      // Mercado Pago
-      const paymentResponse = await fetch('/api/preference', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          cartItems: filteredArray,
-          formValues: {
-            ...mockedFormValues,
-            street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
-          },
-        }),
-      });
+        if (!paymentResponse.ok) {
+          console.error('Error creating MercadoPago preference');
+          return;
+        }
 
-      if (!paymentResponse.ok) {
-        console.error('Error creating MercadoPago preference');
-        return;
+        const { preferenceId } = await paymentResponse.json();
+        setPreferenceId(preferenceId);
       }
-
-      const { preferenceId } = await paymentResponse.json();
-      setPreferenceId(preferenceId);
     } catch (error) {
       console.error('Error processing order:', error);
     } finally {

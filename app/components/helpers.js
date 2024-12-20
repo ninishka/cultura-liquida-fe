@@ -43,7 +43,8 @@ export const calculateTotalSum = cards => {
 };
 
 export const totalSumStyledByDot = (sum, spec = '.') => {
-  let parts = sum.toString().split(spec);
+  // TODO false payment case
+  let parts = sum?.toString().split(spec);
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, spec);
   return parts.join(spec);
 }

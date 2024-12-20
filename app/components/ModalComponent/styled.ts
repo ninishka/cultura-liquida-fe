@@ -63,10 +63,10 @@ export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */
+  /* justify-content: space-around; */
   background-color: white;
   border-radius: 16px 16px;
-  margin: 22px 0px 22px;
+  margin: 10px 0;
   width: inherit;
   gap: 9px;
   font-family: var(--font-mohave);
@@ -208,6 +208,7 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
   ${({isOrder}) => isOrder && css`
     &.ant-select * {
       cursor: auto  !important;
+      font-weight: 700;
     }
 
     &.ant-select-disabled {
@@ -219,11 +220,10 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
         border-color: #2D2D2D;
         text-transform: uppercase;
         color: #F2C94C !important;
-        font-weight: 700;
       }
 
       .ant-select-arrow {
-        color: #F2C94C;
+        display: none;  
       }
     }
   `}
@@ -233,7 +233,7 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
   }
 `
 
-export const StyledFormItem = styled(Form.Item)`
+export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
   margin-bottom: 0;
   width: 50%;
   padding: 7px 15px;
@@ -252,19 +252,28 @@ export const StyledFormItem = styled(Form.Item)`
     border: 1px solid #4FDB40 !important
   } */
 
+    
+  ${({ isOrder }) => !isOrder && css`
+    .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
+      content: '*'; 
+      margin-inline-start: 4px; 
+      color: black;
+      font-size: 14px;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+    }`
+   }
+
+  ${({ isOrder }) => isOrder && css`
+      .ant-form-item-label > label {
+        color: white
+      }`
+   }
 
   .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
     content: ''; /* Remove the default asterisk */
   }
 
-  .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
-    content: '*'; 
-    margin-inline-start: 4px; 
-    color: black;
-    font-size: 14px;
-    font-family: SimSun, sans-serif;
-    line-height: 1;
-  }
   .ant-form-item-explain-error{
     color: red;
     font-weight: 600;
@@ -278,7 +287,6 @@ export const StyledFormItem = styled(Form.Item)`
   .ant-input-status-error:not(.ant-input-disabled):hover {
     border-color: red !important; 
   }
-
 
   @media (max-width: 850px) {
     width: 100%;
@@ -302,8 +310,7 @@ export const DeleteButtonItself = styled.button`
   color: inherit;
   background: none;
   cursor: pointer;
-
-  margin: 18px -12px;
+  margin: 5px -12px;
 `
 export const DeleteButtonIcon = styled(Image)`
   width: auto;
@@ -361,6 +368,7 @@ export const Price = styled.p`
   font-weight: 500;
   margin: 0;
   color: black;
+  white-space: nowrap;
 
   @media (max-width: 850px) {
     text-align: left;
@@ -432,6 +440,7 @@ export const CartPayButton = styled(Button)`
 export const ItemProductTypeText = styled.p`
   color: red;
   text-align: center;
+  width: 90px;
   /* margin: 0 20px 2px 2vw; */
   font-size: 16px;
   /* margin: 0 6vh 0 8vh;
@@ -473,4 +482,13 @@ export const BankInfoNumber = styled.p`
   margin: 0;
   color: #F2C94C;
   font-weight: 700;
+`
+
+export const BankInfoBlockOrder = styled(BankInfoBlock)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  /* max-width: max-content; */
 `

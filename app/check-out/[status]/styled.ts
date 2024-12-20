@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-// import Backlink from '@/app/components/IconComponents/Backlink'
 import type { StatusStyledProps } from '@/types/types'
+import { SyncOutlined } from '@ant-design/icons';
 
 export const CheckoutWrapper = styled.div`
   display: flex;
@@ -10,15 +10,15 @@ export const CheckoutWrapper = styled.div`
 export const RightPanel = styled.div`
   background-color: #252525;
   border-radius: 16px;
-  min-width: 30vw;
-  margin: 10px 10px 20px;
+  min-width: 28vw;
+  margin: 0 0 20px 20px;
 `
 
 export const StatusPanel = styled.div<StatusStyledProps>`
-  background-color: ${({$status}) => $status ? $status : '#F2C94C'};
+  background-color: ${({$status}) => $status || '#F2654C'};
   border-radius: 16px;
   height: 92px;
-  margin: 10px;
+  margin: 15px;
 `
 
 export const CheckoutWrapperContent = styled.div`
@@ -29,6 +29,7 @@ export const CheckoutWrapperContent = styled.div`
 export const MPinfoItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-right: 10px;
   /* background-color: #252525; */
 `
 export const MPinfoItem = styled.div`
@@ -68,16 +69,8 @@ export const StyledLink = styled(Link)`
   }
 `
 
-// export const BacklinkS = styled(Backlink)`
-//   :hover {
-//     path {
-//       fill: #FFD700;
-//     }
-//   }
-// `;
-
 export const SubtotalText = styled.p`
-  font-size: 32px;
+  font-size: 24px;
   margin: 0;
   color: white;
 `
@@ -92,6 +85,7 @@ export const ScrolableZone = styled.div`
   max-height: 1140px; 
   overflow: auto;
   height: 100%;
+  margin-bottom: 20px;
 
   &::-webkit-scrollbar {
     width: 8px !important;
@@ -108,5 +102,15 @@ export const ScrolableZone = styled.div`
 
   &::-webkit-scrollbar-track {
     background: #252525 !important;
+  }
+`
+
+export const SyncOutlinedStyled = styled(SyncOutlined)`
+  font-size: 36px;
+  margin: 0 5px 10px;
+  color: #4FDB40;
+
+  :hover {
+    color: #F2C94C;
   }
 `

@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import Counter from '@/app/components/Counter/Counter'
 import img6 from '@/app/icons/delete_good_from_cart.svg'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
+import { removeFromCart } from '@/lib/redux/slices/cartSlice'
 import type { CartItemType } from '@/types/types'
-import { handleDelete } from '@/app/components/helpers'
 import { totalSumStyledByDot } from '@/app/components/helpers'
 import {
     CartItem,
@@ -33,10 +33,8 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
   const { title, ingredient, type, displayingType, amount: tAmount, id, price, size, idCart, isOrder } = item
 
   const isMelena = title === 'Melena de León'
-  const isCapsulesMelena = isMelena && id?.includes('capsules') && melenaCapsulsSrc
-  // const isCapsulesMelena = isMelena && idCart?.includes('capsules') && melenaCapsulsSrc
-  const isExtractsMelena = isMelena && id?.includes('extracts') && melenaExtractSrc
-  // const isExtractsMelena = isMelena && idCart?.includes('extracts') && melenaExtractSrc
+  const isCapsulesMelena = isMelena && idCart?.includes('capsules') && melenaCapsulsSrc
+  const isExtractsMelena = isMelena && idCart?.includes('extracts') && melenaExtractSrc
   const isReishi = title === 'Reishi' && reishiSrc
   const isCola = title === 'Cola de Pavo' && colaSrc
   const isComplex = title?.includes('complejo') && colaSrc
@@ -46,6 +44,11 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
 
   const totalSum = price * tAmount
   const styledAmount = totalSumStyledByDot(totalSum, ' ')
+
+  const handleDelete = (itemId, cartItems, dispatch) => {
+    const item = cartItems.filter(item => item?.id === itemId)
+    dispatch(removeFromCart(...item, 0, true))
+  }
 
   return (
     <CartItemWrap key={type}>
@@ -64,7 +67,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
           {!isOrder ? (
               <Counter amount={tAmount} item={item} isModal />
             ) : (
-              <b style={{color: 'black', margin: 20}}>x{tAmount}</b>)
+              <b style={{color: 'black', margin: '20px 40px'}}>x {tAmount}</b>)
           }
           <Price style={{margin: '0px 20px'}}>{styledAmount} COP</Price>
         </InfoContainer>
