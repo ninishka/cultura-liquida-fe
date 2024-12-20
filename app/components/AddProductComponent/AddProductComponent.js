@@ -29,8 +29,16 @@ const AddProductComponent = () => {
                     <input name='price' type='number' />
                 </div>
                 <div>
-                    <label>Stock</label>
-                    <input name='stock' type='number' />
+                    <label>totalStock</label>
+                    <input name='totalStock' type='number' />
+                </div>
+                <div>
+                    <label>reservedStock</label>
+                    <input name='reservedStock' type='number' />
+                </div>
+                <div>
+                    <label>availableStock</label>
+                    <input name='availableStock' type='number' />
                 </div>
                 <button>Submit</button>
             </form>

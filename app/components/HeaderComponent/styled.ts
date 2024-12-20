@@ -11,7 +11,6 @@ export const HeaderFull = styled.header<NavigationProps>`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #9F9F9F;
-  margin: 0 10px 10px;
 
   position: sticky;
   top: 0;

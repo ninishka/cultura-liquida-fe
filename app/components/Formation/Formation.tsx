@@ -18,7 +18,7 @@ import {
 } from './styled'
 import Checkboxes from './Checkboxes'
 
-const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, error, slogMain }) => {
+const Formation: FC<FormationProps> = ({ formationData, error }) => {
   const { slug } = useParams();
   const rInit = init(slug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
@@ -29,7 +29,6 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, err
   const source = filterdContent?.[0]?.src || ''
 
 
-  // if (isLoading) return <Loading />
   // if (error) return <div>Error: {error?.message}</div>;
 
   return (
@@ -37,7 +36,7 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, err
       <ContentWrapper>
         <TitleFrame>
           {/* <p>{filterdContent?.[0]?.stock}</p> */}
-          <TitleH1>{filterdContent?.[0]?.title || ''}</TitleH1>
+          <TitleH1 style={{textTransform: 'uppercase'}}>{filterdContent?.[0]?.title || ''}</TitleH1>
           <Description>{filterdContent?.[0]?.description || ''}</Description>
         </TitleFrame>
 
@@ -54,7 +53,7 @@ const Formation: FC<FormationProps> = ({ formationData, formationDataStatic, err
           />
         </ImageWrapperMobile>
         <Release>Seleccione la presentación del producto:</Release>
-        <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
+        <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} />
         {/* <div>
           <Release>Seleccione la presentación del producto:</Release>
           <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />

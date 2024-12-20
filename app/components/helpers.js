@@ -2,27 +2,13 @@ import { productContentComponents } from '@/app/data'
 
 export const getActiveComponent = (layoutData, slug) => {
     const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
+    const filtredServerData = layoutData?.filter(i => i?.title === staticData?.formationData?.[0]?.title)
   
-    const newFormationData = staticData?.formationData?.map(fItem => {
-      let matchingBdItem;
-    
-      if (fItem?.type.includes('extracts')) {
-        matchingBdItem = layoutData?.find(({title, type, size}) => 
-          title === fItem?.title && type === fItem.type && size === fItem.size
-        );
-      } 
-      else if (fItem?.type.includes('capsules')) {
-        matchingBdItem = layoutData?.find(bItem => bItem?.type === fItem.type);
-      }  
-      if (matchingBdItem) {
-        return { ...fItem, ...matchingBdItem };
-      }
-    
-      return fItem;
+    const newFormationData = staticData?.formationData?.map((fItem, index) => {
+      return { ...fItem, ...filtredServerData?.[index] };
     });
-    
-    const combinedData2 = { ...staticData, formationData: newFormationData }
-    return combinedData2
+  
+  return { ...staticData, formationData: newFormationData }
 }
 
 export const nameSurnameValidator = [
@@ -41,7 +27,6 @@ export const nameSurnameValidator = [
         );
       }
       
-      
       return Promise.resolve();
     },
   },
@@ -53,11 +38,16 @@ export const init = (slug) => slug[0].includes("melena")
 
 export const calculateTotalSum = cards => {
   const num = cards.reduce((total, card) => total + card.price * card.amount, 0);
-  let parts = num.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-  return parts.join('.');
+  const deliveryIncluded = num + 15000
+  return deliveryIncluded
 };
+
+export const totalSumStyledByDot = (sum, spec = '.') => {
+  // TODO false payment case
+  let parts = sum?.toString().split(spec);
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, spec);
+  return parts.join(spec);
+}
 
 
 export const decrease = (count, setCount, isModal, dispatch, addToCart, item) => {

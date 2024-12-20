@@ -7,7 +7,9 @@ export interface ProductG {
   type: string;
   size?: string;
   price: number;
-  stock: number;
+  totalStock: number;
+  reservedStock: number;
+  availableStock: number;
   [key: string]: any; // TODO
 }
 
@@ -22,12 +24,15 @@ export interface CartItemType {
   description: string;
   ingredient: string;
   price: number;
-  stock: number;
+  totalStock: number;
+  reservedStock: number;
+  availableStock: number;
   size?: string;
   type: string;
+  displayingType: string;
 
   icon: any;
-  iconSrc: any;
+  // iconSrc: any;
   src: any;
   id: string;
   _id: string;
@@ -35,6 +40,8 @@ export interface CartItemType {
   __v: number;
   amount?: number;
   idCart?: string;
+
+  isOrder?: boolean
 }
 
 export interface CartState {
@@ -51,7 +58,11 @@ export type ExtendedPayload = CartItemType & {
 export interface ModalFormProps {
   form: FormInstance<any>;
   loading: boolean;
+  isOrder?: boolean;
   onFinish: (values: any) => Promise<void>;
+  initialValues?: any
+  [key: string]: any; // TODO
+
 }
 
 export interface FormationProps {
@@ -59,7 +70,7 @@ export interface FormationProps {
   error?: any;
   slogMain?: String[];
   formationData: CartItemType[]; 
-  formationDataStatic: any;
+  // formationDataStatic: any;
   // [propName: string]: any
 }
  
@@ -103,5 +114,13 @@ export interface ModalStyledProps2 {
 
 export interface IconStyledProps {
   $isDark: boolean;
+}
+
+export interface StatusStyledProps {
+  $status: string;
+}
+
+export interface OrderStyledProps {
+  isOrder?: boolean;
 }
 

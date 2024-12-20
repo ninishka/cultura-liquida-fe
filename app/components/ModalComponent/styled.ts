@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import { Form, Input, Select, Checkbox } from 'antd'
 import { Modal } from 'antd';
 import { Button } from 'antd';
-import type { ModalStyledProps } from '@/types/types'
+import type { ModalStyledProps, OrderStyledProps } from '@/types/types'
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -63,10 +63,10 @@ export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */
+  /* justify-content: space-around; */
   background-color: white;
   border-radius: 16px 16px;
-  margin: 22px 0px 22px;
+  margin: 10px 0;
   width: inherit;
   gap: 9px;
   font-family: var(--font-mohave);
@@ -192,17 +192,48 @@ export const StyledForm = styled(Form)`
 export const StyledInput = styled(Input)`
   height: 52px;
   border-radius: 16px;
+
+  &.ant-input[disabled] {
+    background-color: #2D2D2D;
+    border-color: #2D2D2D;
+    text-transform: uppercase;
+    color: #F2C94C;
+    font-weight: 700;
+    cursor: auto;
+  }
 `
 
-export const StyledSelect = styled(Select)`
+export const StyledSelect = styled(Select)<OrderStyledProps>`
   height: 52px;
+  ${({isOrder}) => isOrder && css`
+    &.ant-select * {
+      cursor: auto  !important;
+      font-weight: 700;
+    }
+
+    &.ant-select-disabled {
+      background-color: #2D2D2D;
+      border-color: #2D2D2D;
+      border-radius: 16px;
+
+      .ant-select-selector {
+        border-color: #2D2D2D;
+        text-transform: uppercase;
+        color: #F2C94C !important;
+      }
+
+      .ant-select-arrow {
+        display: none;  
+      }
+    }
+  `}
+
   .ant-select-selector {
     border-radius: 16px;
   }
-
 `
 
-export const StyledFormItem = styled(Form.Item)`
+export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
   margin-bottom: 0;
   width: 50%;
   padding: 7px 15px;
@@ -212,19 +243,37 @@ export const StyledFormItem = styled(Form.Item)`
     background-color: #4FDB40; /* Inner dot color for checked radio */
   }
 
+  /* TODO BORDER HOVER COLOR */
+  /* .ant-radio-checked .ant-radio-inner::after {
+    border: 1px solid #4FDB40 !important
+  } */
+
+  /* :hover {
+    border: 1px solid #4FDB40 !important
+  } */
+
+    
+  ${({ isOrder }) => !isOrder && css`
+    .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
+      content: '*'; 
+      margin-inline-start: 4px; 
+      color: black;
+      font-size: 14px;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+    }`
+   }
+
+  ${({ isOrder }) => isOrder && css`
+      .ant-form-item-label > label {
+        color: white
+      }`
+   }
 
   .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
     content: ''; /* Remove the default asterisk */
   }
 
-  .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
-    content: '*'; 
-    margin-inline-start: 4px; 
-    color: black;
-    font-size: 14px;
-    font-family: SimSun, sans-serif;
-    line-height: 1;
-  }
   .ant-form-item-explain-error{
     color: red;
     font-weight: 600;
@@ -238,7 +287,6 @@ export const StyledFormItem = styled(Form.Item)`
   .ant-input-status-error:not(.ant-input-disabled):hover {
     border-color: red !important; 
   }
-
 
   @media (max-width: 850px) {
     width: 100%;
@@ -262,8 +310,7 @@ export const DeleteButtonItself = styled.button`
   color: inherit;
   background: none;
   cursor: pointer;
-
-  margin: 18px -12px;
+  margin: 5px -12px;
 `
 export const DeleteButtonIcon = styled(Image)`
   width: auto;
@@ -321,6 +368,7 @@ export const Price = styled.p`
   font-weight: 500;
   margin: 0;
   color: black;
+  white-space: nowrap;
 
   @media (max-width: 850px) {
     text-align: left;
@@ -368,22 +416,6 @@ export const CartPayButton = styled(Button)`
   font-size: large;
   text-transform: uppercase;
   color: white;
- 
-  
-/* TODO - so we need to change color btns, but Accessability dont let us */ 
-/* Possible solution - border for white text or different color */
- // ========= here we can make border for text
- /* position: relative;
-  color: transparent;
- -webkit-text-stroke: 1px black;
- text-stroke: 1px black;
- transition: all 0.3s ease; */
-
- // ====== here how hover for example
- /* color: black; 
- -webkit-text-stroke: 0;
- text-stroke: 0; */
-
 
 
  transition: all 0.3s ease;
@@ -391,11 +423,24 @@ export const CartPayButton = styled(Button)`
     background-color: #F2C94C !important;
     color: white !important;
   }
+
+  ${({ disabled }) =>
+    disabled && css`
+    background-color: #BDBDBD !important;
+    color: #FFFFFF80 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    &:hover {
+      background-color: #BDBDBD !important;
+      color: #FFFFFF80 !important;
+    }
+  `}
 `
 
 export const ItemProductTypeText = styled.p`
   color: red;
   text-align: center;
+  width: 90px;
   /* margin: 0 20px 2px 2vw; */
   font-size: 16px;
   /* margin: 0 6vh 0 8vh;
@@ -413,4 +458,37 @@ export const ItemProductTypeText = styled.p`
     margin: 0 8vw 0 0;
     /* margin: auto 20px; */
   }
+`
+
+export const BankInfoBlock = styled.div`
+  background-color: #2D2D2D;
+  border-radius: 16px;
+  padding: 10px 20px;
+  width: -webkit-fill-available;
+  margin: 10px;
+`
+
+export const BankInfoText = styled.p`
+  margin: 0;
+  color: white;
+`
+
+export const BankNumberBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const BankInfoNumber = styled.p`
+  margin: 0;
+  color: #F2C94C;
+  font-weight: 700;
+`
+
+export const BankInfoBlockOrder = styled(BankInfoBlock)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  /* max-width: max-content; */
 `
