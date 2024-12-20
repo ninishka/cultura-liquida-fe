@@ -32,6 +32,7 @@ const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch()
   const { showCart, cartItems } = useAppSelector(state => state.cart);
+  const [paymentOption, setPaymentOption] = useState(false)
 
   const [preferenceId, setPreferenceId] = useState('') //mp
   const [loading, setLoading] = useState(false) // mp
@@ -218,7 +219,14 @@ const ModalComponent = ({data}) => {
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm form={form} onFinish={onFinish} loading={loading} initialValues={{ country: 'colombia' }} />
+              <ModalForm 
+                form={form} 
+                onFinish={onFinish} 
+                loading={loading} 
+                initialValues={{ country: 'colombia' }} 
+                paymentOption={paymentOption}
+                setPaymentOption={setPaymentOption}
+              />
             </>
               {/* Public key */}
               {preferenceId && (

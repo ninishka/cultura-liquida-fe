@@ -61,6 +61,8 @@ export interface ModalFormProps {
   isOrder?: boolean;
   onFinish: (values: any) => Promise<void>;
   initialValues?: any
+  [key: string]: any; // TODO
+
 }
 
 export interface FormationProps {

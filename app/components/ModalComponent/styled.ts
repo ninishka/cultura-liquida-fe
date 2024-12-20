@@ -243,6 +243,15 @@ export const StyledFormItem = styled(Form.Item)`
     background-color: #4FDB40; /* Inner dot color for checked radio */
   }
 
+  /* TODO BORDER HOVER COLOR */
+  /* .ant-radio-checked .ant-radio-inner::after {
+    border: 1px solid #4FDB40 !important
+  } */
+
+  /* :hover {
+    border: 1px solid #4FDB40 !important
+  } */
+
 
   .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
     content: ''; /* Remove the default asterisk */
@@ -399,22 +408,6 @@ export const CartPayButton = styled(Button)`
   font-size: large;
   text-transform: uppercase;
   color: white;
- 
-  
-/* TODO - so we need to change color btns, but Accessability dont let us */ 
-/* Possible solution - border for white text or different color */
- // ========= here we can make border for text
- /* position: relative;
-  color: transparent;
- -webkit-text-stroke: 1px black;
- text-stroke: 1px black;
- transition: all 0.3s ease; */
-
- // ====== here how hover for example
- /* color: black; 
- -webkit-text-stroke: 0;
- text-stroke: 0; */
-
 
 
  transition: all 0.3s ease;
@@ -422,6 +415,18 @@ export const CartPayButton = styled(Button)`
     background-color: #F2C94C !important;
     color: white !important;
   }
+
+  ${({ disabled }) =>
+    disabled && css`
+    background-color: #BDBDBD !important;
+    color: #FFFFFF80 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    &:hover {
+      background-color: #BDBDBD !important;
+      color: #FFFFFF80 !important;
+    }
+  `}
 `
 
 export const ItemProductTypeText = styled.p`
@@ -444,4 +449,28 @@ export const ItemProductTypeText = styled.p`
     margin: 0 8vw 0 0;
     /* margin: auto 20px; */
   }
+`
+
+export const BankInfoBlock = styled.div`
+  background-color: #2D2D2D;
+  border-radius: 16px;
+  padding: 10px 20px;
+  width: -webkit-fill-available;
+  margin: 10px;
+`
+
+export const BankInfoText = styled.p`
+  margin: 0;
+  color: white;
+`
+
+export const BankNumberBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const BankInfoNumber = styled.p`
+  margin: 0;
+  color: #F2C94C;
+  font-weight: 700;
 `
