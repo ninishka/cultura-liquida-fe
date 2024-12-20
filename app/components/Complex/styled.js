@@ -71,7 +71,8 @@ export const Benefits = styled.h2`
   margin-bottom: 0;
 
   @media (max-width: 850px) {
-    font-size: 30px;
+    font-size: 32px;
+    line-height: 40px;
   }
 
 `
@@ -97,7 +98,8 @@ export const ComplexItemsWrap = styled.div`
     margin: 40px;
   }
   @media (max-width: 850px) {
-    width: auto
+    width: auto;
+    margin: auto 40px;
   }
 `
 
@@ -198,7 +200,7 @@ export const Item = styled.div`
     /* width: 70px;
     height: 125px; */
     /* flex-direction: column; */
-    padding: 20px;
+    padding: 10px 20px;
     text-align: center;
     margin-right: 15px;
     margin: 10px 1vh;

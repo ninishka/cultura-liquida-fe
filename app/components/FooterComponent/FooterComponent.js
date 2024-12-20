@@ -23,9 +23,9 @@ const FooterComponent = () => (
     </LogoFull>
     <NavigationComponent />
     <ContactWrapper>
-      <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en Telegram"><Tg  isDark /></Link>
-      <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en WhatsApp"><Wa isDark /></Link>
-      <Link href="tel:+573107217798" target="_blank" aria-label="Contacto en teléfono"><Ph isDark /></Link>
+      <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en Telegram" style={{ margin: '0 8px' }}><Tg  isDark /></Link>
+      <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en WhatsApp" style={{ margin: '0 8px' }}><Wa isDark /></Link>
+      <Link href="tel:+573107217798" target="_blank" aria-label="Contacto en teléfono" style={{ margin: '0 8px' }}><Ph isDark /></Link>
     </ContactWrapper>
     </HeaderLikeFooter>
     <LastFooter>

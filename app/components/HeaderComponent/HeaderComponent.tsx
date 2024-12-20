@@ -36,6 +36,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
     </LogoFull>
     
     <NavigationComponent isopen={showMenu ? true : false} setShowMenu={setShowMenu} />
+    <div style={{ display: 'flex'}}>
     <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
       <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
     </BurgerWrap>
@@ -48,6 +49,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
       </CounterCartWrap>
       <Cart src={CartIcon} alt="El icono del carrito" />
     </CartWrap>
+    </div>
   </HeaderFull>
 )}
 

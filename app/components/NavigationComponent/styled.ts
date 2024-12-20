@@ -38,8 +38,6 @@ export const LiItself = styled.li`
 
 export const StyledLink = styled(Link)`
   display: block;
-  transition: color 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-  background-color 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);  
   padding: 15px;
   border: 2px solid transparent;
   border-radius: 16px 16px 16px 16px;
@@ -50,6 +48,11 @@ export const StyledLink = styled(Link)`
   font-weight: 400;
   font-size: 16px;
   text-decoration: none;
+
+  transition: all 0.3s ease;
+  &:hover{
+    background-color: #252525;
+  }
  
   @media (max-width:850px) {
     width: 268px;

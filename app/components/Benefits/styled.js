@@ -14,7 +14,7 @@ export const HeaderBenefitsWrapper = styled.div`
  flex-direction: row;
  align-items: center;
  justify-content: space-between;
- margin: 40px 12px;
+ margin: 40px 12px 10px;
  
  @media (max-width: 850px) {
     flex-direction: column;
@@ -30,10 +30,12 @@ export const TextForBenefits = styled.h2`
  font-weight: 600;
  line-height: 57.6px;
  margin-right: 6vh;
+ margin-bottom: 20px;
 
  @media (max-width: 1200px) {
     font-size: 40px;
-    line-height: 45px;   
+    line-height: 45px;
+    margin-bottom: 10px;
   }
 `
 export const DescrWrapper = styled.div`

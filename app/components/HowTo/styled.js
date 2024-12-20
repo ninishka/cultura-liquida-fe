@@ -22,7 +22,7 @@ export const TextForHeader = styled.h2`
  font-weight: 600;
  line-height: 57.6px;
  letter-spacing: 2%;
- margin: 35px 2vh;
+ margin: 70px 2vh 20px;
  text-align: center;
  text-transform: uppercase;
 
