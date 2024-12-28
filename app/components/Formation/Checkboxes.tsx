@@ -15,10 +15,6 @@ import {
 
 const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => {
   const { data, isLoading, error } = useGetProductQuery('');
-  // await new Promise(resolve => {
-  //   if (data) setTimeout(resolve, 0)
-  // }) // its how Suspense  for all Formation can be controled
-  // console.log('formationData', formationData)
 
   return (
     <>
@@ -46,7 +42,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => {
                 </Link>
               ) : (
                 <AbsentProductCheckboxWrapper>
-                  <AbsentProductText>¡vendido! <br/> ¿Libro?</AbsentProductText>
+                  <AbsentProductText>Agotado</AbsentProductText>
                 </AbsentProductCheckboxWrapper>
               )}
             </Fragment>

@@ -19,8 +19,8 @@ const IfQuestions: FC = () => (
         {/* TODO add whatsapp link and icon */}
       </TextWrapper>
       <ContactWrapper>
-        <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en Telegram"><Tg /></Link>
-        <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Contacto en WhatsApp"><Wa /></Link>
+        <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Telegram"><Tg /></Link>
+        <Link href="https://wa.me/573117662419" target="_blank" aria-label="WhatsApp"><Wa /></Link>
       </ContactWrapper>   
     </Wrapper>
   </section>

@@ -4,9 +4,6 @@ import Image from 'next/image'
 export const HowToWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
-  /* justify-content: center; */
-  /* gap: 20px; */
   justify-content: space-around;
   align-items: center;
 
@@ -54,8 +51,8 @@ export const CardsWrapper = styled.div`
 export const HowToImage = styled(Image)`
   width: 160px;
   height: 160px;
-
 `
+
 export const DescWrapper = styled.div`
   margin: 0px 15px;
 `
@@ -67,14 +64,17 @@ export const HowToDesc = styled.p`
   text-align: left;
 
 `
+
 export const SecondDesc = styled.p`
   color: #F2C94C;
   text-align: left;
 `
+
  export const ArrowIcon = styled(Image)`
  width: auto;
  height: auto;
- `
+`
+
 export const LeaveReview = styled.div`
   border-radius: 16px;
   max-width: 100%;
@@ -82,6 +82,7 @@ export const LeaveReview = styled.div`
   height: auto;
   background-color: #2D2D2D;
 `
+
 export const ReviewText = styled.p`
  color: #F2C94C;
  text-align: center;
