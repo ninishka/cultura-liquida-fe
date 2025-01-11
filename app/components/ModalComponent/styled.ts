@@ -59,7 +59,7 @@ export const CartItemWrap = styled.div`
   width: 100%;
   /* justify-content: flex-end; */
 `
-export const CartItem = styled.div`
+export const CartItem = styled.div<OrderStyledProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -75,10 +75,17 @@ export const CartItem = styled.div`
     gap: 0;
   }
 
-  @media (max-width: 622px) {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
+  ${({isOrder}) => isOrder ? css`
+    @media (max-width: 522px) {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  ` : css`
+    @media (max-width: 622px) {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  `}
 `
 
 export const CountAndAmountWrap = styled.div`
@@ -104,29 +111,22 @@ export const CardInfoWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-
-  /* margin-right: auto; */
-
   @media (max-width: 764px) {
     flex-direction: column;
     align-items: baseline;
   }  
-  @media (max-width: 622px) {
-    flex-direction: row;
-  }
-  @media (max-width: 454px) {
+
+  @media (max-width: 522px) {
     flex-direction: column;
   }
 `
 
-export const InfoContainer = styled.div`
+export const InfoContainer = styled.div<OrderStyledProps>`
   display: flex;
-  /* margin: auto; */
   align-items: center;
   
-  @media (max-width: 1060px) {
-    /* display: block; */
-    /* margin: auto; */
+  @media (max-width: 522px) {
+    ${({isOrder}) => isOrder ? 'padding-left: 40px' : ''}    
   }
 ` 
 
@@ -160,6 +160,7 @@ export const Title = styled.h3`
   font-weight: 500;
   color: #333333;
   margin: 0;
+  white-space: nowrap;
 
   @media (max-width: 1060px) {
     font-size: 20px;
@@ -363,7 +364,7 @@ export const BuyButton = styled.button`
   }
 `
 
-export const Price = styled.p`
+export const Price = styled.p<OrderStyledProps>`
   font-size: 36px;
   font-weight: 500;
   margin: 0;
@@ -374,7 +375,11 @@ export const Price = styled.p`
     text-align: left;
     font-size: 24px;
     /* margin-top: 20px; */
-  }  
+  }
+  
+  @media (max-width: 522px) {
+    ${({isOrder}) => isOrder ? 'padding-left: 40px' : ''}    
+  }
 `
 
 
@@ -491,4 +496,14 @@ export const BankInfoBlockOrder = styled(BankInfoBlock)`
   margin-top: 0;
   margin-bottom: 0;
   /* max-width: max-content; */
+
+  @media (max-width: 800px) {
+    margin-bottom: 10px;
+  }
+`
+
+export const OrderedAmount = styled.b`
+  color: black;
+  margin: 20px 2vw;
+  white-space: nowrap
 `

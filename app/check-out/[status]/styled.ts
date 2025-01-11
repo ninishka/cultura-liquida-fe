@@ -3,8 +3,20 @@ import Link from 'next/link'
 import type { StatusStyledProps } from '@/types/types'
 import { SyncOutlined } from '@ant-design/icons';
 
+export const PageWrapper = styled.div`
+  margin: 10px auto; 
+  max-width: 1350px; 
+
+  @media (max-width: 1200px) {
+    max-width: 900px;
+  }
+`
+
 export const CheckoutWrapper = styled.div`
   display: flex;
+  @media (max-width: 1200px) {
+    flex-direction: column-reverse;
+  }
 `
 
 export const RightPanel = styled.div`
@@ -13,6 +25,13 @@ export const RightPanel = styled.div`
   width: 100%;
   max-width: 380px;
   margin: 0 0 20px 20px;
+
+  @media (max-width: 1200px) {
+    min-width: min-content;
+    white-space: nowrap;
+    margin: 0 auto 40px auto;
+    max-width: 900px;
+  }
 `
 
 export const StatusPanel = styled.div<StatusStyledProps>`
@@ -31,14 +50,10 @@ export const MPinfoItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-right: 10px;
-  /* background-color: #252525; */
-`
-export const MPinfoItem = styled.div`
-  background-color: #252525;
-  border-radius: 16px;
-  height: 80px;
-  padding: 20px;
-  margin: 5px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 export const TitleH1 = styled.h1`
@@ -103,6 +118,11 @@ export const ScrolableZone = styled.div`
 
   &::-webkit-scrollbar-track {
     background: #252525 !important;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 1200px) {
+    margin: 0 auto;
   }
 `
 

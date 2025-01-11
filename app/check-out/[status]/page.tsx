@@ -29,7 +29,8 @@ import {
   SubtotalText,
   PriceTextBox,
   ScrolableZone,
-  SyncOutlinedStyled
+  SyncOutlinedStyled,
+  PageWrapper
 } from './styled'
 import { object } from 'yup';
 
@@ -134,12 +135,12 @@ const CheckoutPage: FC = () => {
   const wording = (statusPayment === 'approved' && 'pagado') || (statusPayment === 'in_process' && 'pendiente') || 'no pagado'
 
   return (
-    <div style={{ margin: '10px auto', maxWidth: '1350px' }}>
-      <StyledLink href="/product/melena-de-leon-capsules" aria-label="Volver a la página principal" style={{ marginTop: 10 }}>
+    <PageWrapper>
+      <StyledLink href="/product/melena-de-leon-capsules" aria-label="Volver a la página principal" style={{ margin: '10px auto 0 15px' }}>
         <p> ← volver a la página principal </p>
       </StyledLink>
 
-      <div style={{display: 'flex', alignItems: 'center', marginTop: 70}}>
+      <div style={{display: 'flex', alignItems: 'center', margin: '70px auto 0 15px'}}>
         <h2 style={{textTransform: 'uppercase', fontSize: 48, fontWeight: 500}}>Checkout</h2>
         <SyncOutlinedStyled />
       </div>
@@ -200,13 +201,13 @@ const CheckoutPage: FC = () => {
             </PriceTextBox>
             <PriceTextBox style={{ marginTop: 10 }}>
               <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
-              <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>{displayTotal} COP</p>
+              <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{displayTotal} COP</p>
             </PriceTextBox>
           </div>
           
         </RightPanel>
       </CheckoutWrapper>
-    </div>
+    </PageWrapper>
   );
 }
 
