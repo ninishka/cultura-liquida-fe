@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import type { ModalStyledProps2 } from '@/types/types'
 
 export const CounterWrapper = styled.div<ModalStyledProps2>`
@@ -20,11 +20,15 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
     justify-content: center;
     align-items: center;
     gap: 0px;
-    margin: 0;
+    /* margin: 0; */
     max-width: 400px;
 
     /* justify-content: flex-start;
         margin: 0 13%; */
+  } 
+
+  @media (max-width: 700px) {
+    margin: 0;
   } 
 `
 
@@ -58,7 +62,9 @@ export const AmountItem = styled.div<ModalStyledProps2>`
     height: 39px; */
     margin: 20px;
     margin-left: ${({$isModal}) => !$isModal && '10px'};
+    margin: ${({$isModal}) => $isModal && '0px'};
   }
+
 `
 
 export const ArrowButtons = styled.button`

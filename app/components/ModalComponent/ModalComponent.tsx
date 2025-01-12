@@ -7,7 +7,7 @@ import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import ModalForm from './ModalForm'
-import { calculateTotalSum } from '@/app/components/helpers'
+import { calculateSum, enivoPrice } from '@/app/components/helpers'
 import {
   ModalStyled,
   ListItemsWrapper,
@@ -97,7 +97,7 @@ const ModalComponent = ({data}) => {
 
 
       // CREATE NEW ORDER BD
-      const totalPrice = calculateTotalSum(cartItems);
+      const totalPrice = calculateSum(cartItems, enivoPrice);
       const filteredArray = cartItems.map(obj => ({
         title: obj.title,
         ingredient: obj.ingredient,

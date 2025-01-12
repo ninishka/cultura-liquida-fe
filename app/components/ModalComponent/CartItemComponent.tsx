@@ -19,7 +19,8 @@ import {
     InfoContainer,
     InfoContainer2,
     ItemProductTypeText,
-    OrderedAmount
+    OrderedAmount,
+    OrderedX
   } from './styled'
 
 import melenaCapsulsSrc from '@/app/icons/icon_caps_melena_cart.png'
@@ -68,7 +69,8 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
           {!isOrder ? (
               <Counter amount={tAmount} item={item} isModal />
             ) : (
-              <OrderedAmount>x {tAmount}</OrderedAmount>)
+              <OrderedX>x <OrderedAmount>{tAmount}</OrderedAmount></OrderedX>
+            )
           }
           <Price style={{margin: '0px 20px'}} isOrder={isOrder}>{styledAmount} COP</Price>
         </InfoContainer>

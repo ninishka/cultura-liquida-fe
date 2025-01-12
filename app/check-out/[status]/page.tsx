@@ -10,6 +10,7 @@ import { totalSumStyledByDot } from '@/app/components/helpers'
 import approvedIcon from '@/app/icons/icon_paid_true.svg'
 import pendingIcon from '@/app/icons/icon_paid_error.svg'
 import falseIcon from '@/app/icons/icon_paid_false.svg'
+import { enivoPrice } from '@/app/components/helpers'
 import { 
   ListItemsWrapper, 
   ModalTitle, 
@@ -127,7 +128,7 @@ const CheckoutPage: FC = () => {
   };
 
   const displayTotal = totalSumStyledByDot(data?.[0]?.totalPrice, ' ')
-  const beforeDelivery = totalSumStyledByDot(data?.[0]?.totalPrice - 15000, ' ')
+  const beforeDelivery = totalSumStyledByDot(data?.[0]?.totalPrice - enivoPrice, ' ')
 
   const statusPayment = searchParams?.get('status')
   const coloring = (statusPayment === 'approved' && '#4FDB40') || (statusPayment === 'in_process' && '#F2C94C') 
@@ -196,7 +197,7 @@ const CheckoutPage: FC = () => {
               <SubtotalText>{beforeDelivery} cop</SubtotalText>
             </PriceTextBox>
             <PriceTextBox>
-              <SubtotalText>Envio: </SubtotalText>
+              <SubtotalText>Envío: </SubtotalText>
               <SubtotalText>15 000 cop</SubtotalText>
             </PriceTextBox>
             <PriceTextBox style={{ marginTop: 10 }}>
