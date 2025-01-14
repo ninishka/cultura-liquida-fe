@@ -16,7 +16,11 @@ export const createOrder = async (
       form_data,
       // mp_data: {}
     });
-    return await newOrder.save();
+    await newOrder.save();
+
+    console.log("Created Order:", newOrder._id);
+
+    return newOrder
   } catch (error) {
     console.error('Error creating order:', error);
     throw new Error('Failed to create order');
@@ -26,11 +30,23 @@ export const createOrder = async (
 export const getOrdersByUser = async (userId: string): Promise<IOrder[]> => {
   try {
     const orders = await Order.find({ userId }).lean();
-    console.log('Fetched orders:', orders);
+    console.log('Fetched orders:', orders?.length);
     return orders;
   } catch (error) {
     console.error('Error fetching orders for user:', userId, error);
     throw new Error('Failed to fetch orders');
+  }
+};
+
+
+export const getOrderById = async (orderId: string): Promise<IOrder | null> => {
+  try {
+    const order = await Order.findById(orderId).lean();
+    console.log('Fetched order:', order);
+    return order;
+  } catch (error) {
+    console.error('Failed to fetch order by ID:', orderId, error);
+    throw new Error('Failed to fetch order by ID');
   }
 };
 

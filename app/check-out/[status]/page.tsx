@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 import { Form } from 'antd';
-import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
+import { useGetOrderQuery, useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/ModalForm'
 import { totalSumStyledByDot } from '@/app/components/helpers'
@@ -67,11 +67,21 @@ const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status'
 const CheckoutPage: FC = () => {
   const [form] = Form.useForm();
   const searchParams = useSearchParams();
-  const { data, isLoading, error } = useGetOrderQuery('mockedUserId');
+
   const userId = 'mockedUserId'
+  const orderIdParam = searchParams?.get('order_id')
+  const isMercado = searchParams?.get('payment_id')
+
+  const { data, isLoading, error , refetch} = useGetOrderByIdQuery(orderIdParam || userId);
+  // const { data, isLoading, error , refetch} = useGetOrderQuery(orderIdParam || userId); // that for old links abowe but data not flat - instead of data. need data.[0].
+
+  const handleRefetch = () => {
+    refetch()
+  };
 
   useEffect(() => {
     console.log('useEffect')
+    if (isMercado) {
       const fetchData = async () => {
         try {
           const mp_data = keysFromMP.reduce((acc, key) => {
@@ -113,11 +123,12 @@ const CheckoutPage: FC = () => {
           fetchData()
         }
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies
 
-  if (isLoading) return <div>Loading order...</div>;
+  if (isLoading) return <div>Loading order...<SyncOutlinedStyled isLoading={isLoading} /></div>;
   // if (error) return <div>Error loading orders: {error.message}</div>;
 
   const formatDate = (dateString: string): string => {
@@ -127,13 +138,13 @@ const CheckoutPage: FC = () => {
     return new Date(dateString).toLocaleDateString('es-ES', options);
   };
 
-  const displayTotal = totalSumStyledByDot(data?.[0]?.totalPrice, ' ')
-  const beforeDelivery = totalSumStyledByDot(data?.[0]?.totalPrice - enivoPrice, ' ')
+  const displayTotal = totalSumStyledByDot(data?.totalPrice, ' ')
+  const beforeDelivery = totalSumStyledByDot(data?.totalPrice - enivoPrice, ' ')
 
-  const statusPayment = searchParams?.get('status')
-  const coloring = (statusPayment === 'approved' && '#4FDB40') || (statusPayment === 'in_process' && '#F2C94C') 
-  const iconing = (statusPayment === 'approved' && approvedIcon) || (statusPayment === 'in_process' && pendingIcon) || falseIcon 
-  const wording = (statusPayment === 'approved' && 'pagado') || (statusPayment === 'in_process' && 'pendiente') || 'no pagado'
+  // const statusPayment = searchParams?.get('status')
+  const coloring = (data.status === 'approved' && '#4FDB40') || (data.status === 'in_process' && '#F2C94C') 
+  const iconing = (data.status === 'approved' && approvedIcon) || (data.status === 'in_process' && pendingIcon) || falseIcon 
+  const wording = (data.status === 'approved' && 'pagado') || (data.status === 'in_process' && 'pendiente') || 'no pagado'
 
   return (
     <PageWrapper>
@@ -143,7 +154,7 @@ const CheckoutPage: FC = () => {
 
       <div style={{display: 'flex', alignItems: 'center', margin: '70px auto 0 15px'}}>
         <h2 style={{textTransform: 'uppercase', fontSize: 48, fontWeight: 500}}>Checkout</h2>
-        <SyncOutlinedStyled />
+        <SyncOutlinedStyled onClick={handleRefetch} isLoading={isLoading} />
       </div>
       <CheckoutWrapper>
         <CheckoutWrapperContent>
@@ -151,11 +162,12 @@ const CheckoutPage: FC = () => {
             <MPinfoItemsWrapper>
               <BankInfoBlockOrder>
                 <BankInfoText>Numero de pedido:</BankInfoText>
-                <BankInfoNumber>{data?.[0]?.mp_data?.payment_id}</BankInfoNumber>
+                {/* <BankInfoNumber>{data?.mp_data?.payment_id}</BankInfoNumber> */}
+                <BankInfoNumber>{orderIdParam}</BankInfoNumber>
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Fecha:</BankInfoText>
-                <BankInfoNumber>{formatDate(data?.[0]?.updatedAt)}</BankInfoNumber>
+                <BankInfoNumber>{formatDate(data?.updatedAt)}</BankInfoNumber>
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Total:</BankInfoText>
@@ -167,11 +179,11 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
             </MPinfoItemsWrapper>
             <ListItemsWrapper style={{ margin: '10px 20px 10px 10px'}}>
-              {data?.[0]?.products?.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
+              {data?.products?.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
             </ListItemsWrapper>
             <>
               <ModalTitle style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} initialValues={data?.[0]?.form_data} isOrder />
+              <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} initialValues={data?.form_data} isOrder />
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>

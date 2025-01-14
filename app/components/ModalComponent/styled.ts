@@ -209,7 +209,7 @@ export const StyledForm = styled(Form)`
   }
 `
 
-export const StyledInput = styled(Input)`
+const inputStyle = css`
   height: 52px;
   border-radius: 16px;
 
@@ -221,6 +221,14 @@ export const StyledInput = styled(Input)`
     font-weight: 700;
     cursor: auto;
   }
+`
+
+export const StyledInput = styled(Input)`
+  ${inputStyle}
+`
+
+export const StyledTextarea = styled(Input.TextArea)`
+  ${inputStyle}
 `
 
 export const StyledSelect = styled(Select)<OrderStyledProps>`
@@ -605,7 +613,7 @@ export const MailWrapper = styled.div`
 
 export const MailDescription = styled.p`
   max-width: 50%;
-  margin: 7px 0;
+  margin: 10px 0;
   line-height: 1.2;
   @media (max-width: 650px) {
     max-width: none;
@@ -615,7 +623,7 @@ export const MailDescription = styled.p`
 export const MailLorar = styled.p`
   text-transform: uppercase;
   font-weight: 700;
-  margin: 10;
+  margin: 0 10px 0 0;
   @media (max-width: 650px) {
     margin: 5px 0;
   }

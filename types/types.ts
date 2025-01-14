@@ -124,3 +124,7 @@ export interface OrderStyledProps {
   isOrder?: boolean;
 }
 
+export interface OrderLoadingStyledProps {
+  isLoading?: boolean;
+}
+

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import Link from 'next/link'
-import type { StatusStyledProps } from '@/types/types'
+import type { StatusStyledProps, OrderLoadingStyledProps } from '@/types/types'
 import { SyncOutlined } from '@ant-design/icons';
 
 export const PageWrapper = styled.div`
@@ -126,7 +126,17 @@ export const ScrolableZone = styled.div`
   }
 `
 
-export const SyncOutlinedStyled = styled(SyncOutlined)`
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const SyncOutlinedStyled = styled(SyncOutlined)<OrderLoadingStyledProps>`
   font-size: 36px;
   margin: 0 5px 10px;
   color: #4FDB40;
@@ -134,4 +144,9 @@ export const SyncOutlinedStyled = styled(SyncOutlined)`
   :hover {
     color: #F2C94C;
   }
+
+  ${({ isLoading }) => isLoading && css`
+    animation: ${rotate} 1s linear infinite;
+  `}
 `
+

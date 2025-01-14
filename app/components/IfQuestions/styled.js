@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   border: 2px solid #9F9F9F;
   border-radius: 16px 16px;
-  margin: 67px 113px;
+  margin: 67px 0;
   padding: 82px;
   background-color: #2D2D2D;
   gap: 129px;

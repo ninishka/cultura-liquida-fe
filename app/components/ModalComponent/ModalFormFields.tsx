@@ -5,7 +5,8 @@ import {
   StyledInput,
   StyledSelect,
   StyledFormItem,
-  CheckboxInput
+  CheckboxInput,
+  StyledTextarea
 } from './styled'
 import  {  Country ,  State ,  City  }   from  'country-state-city' ; 
 import { nameSurnameValidator } from '../helpers'
@@ -231,9 +232,11 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => {
       {(!isOrder || notes) && (
         <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
           label="Notas (opcional)"
-          name="notes">
-          <StyledInput.TextArea   
-            style={{ borderRadius: '16px'}} 
+          name="notes"
+          >
+          <StyledTextarea   
+            style={{ borderRadius: '16px'}}
+            disabled={isOrder}
             autoSize={{
               minRows: 2,
               maxRows: 6,

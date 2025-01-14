@@ -9,8 +9,11 @@ export const ordersAPI = createApi({
     getOrder: builder.query({
       query: (name) => `/api/orders?userId=${name}`,
     }),
+    getOrderById: builder.query({
+      query: (orderId) => `/api/orders?orderId=${orderId}`,
+    }),
   }),
 });
 
-export const { useGetOrderQuery } = ordersAPI;
+export const { useGetOrderQuery, useGetOrderByIdQuery } = ordersAPI;
 
