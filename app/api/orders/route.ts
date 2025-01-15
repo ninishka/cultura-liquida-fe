@@ -49,14 +49,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
 export async function PUT(request: NextRequest): Promise<NextResponse> {
   try {
-    const { userId, updatedData } = await request.json();
+    const { orderId, updatedData } = await request.json();
     console.log('updatedData', updatedData)
 
-    if (!userId || !updatedData) {
-      return NextResponse.json({ error: 'Missing userId or updatedData' }, { status: 400 });
+    if (!orderId || !updatedData) {
+      return NextResponse.json({ error: 'Missing orderId or updatedData' }, { status: 400 });
     }
 
-    const order = await updateOrder(userId, updatedData);
+    const order = await updateOrder(orderId, updatedData);
 
     return NextResponse.json(order, { status: 200 });
   } catch (error) {

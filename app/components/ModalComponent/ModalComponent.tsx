@@ -144,6 +144,7 @@ const ModalComponent = ({data}) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            orderId: orderData._id,
             cartItems: filteredArray,
             formValues: {
               ...mockedFormValues,

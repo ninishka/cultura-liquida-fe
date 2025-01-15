@@ -1,9 +1,9 @@
 'use client'
-import React, { FC, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 import { Form } from 'antd';
-import { useGetOrderQuery, useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
+import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/ModalForm'
 import { totalSumStyledByDot } from '@/app/components/helpers'
@@ -64,24 +64,29 @@ import { object } from 'yup';
 const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status', 'payment_type',
   'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id']
 
+const formatDate = (dateString: string): string => {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  };
+  return new Date(dateString).toLocaleDateString('es-ES', options);
+};
+
+
 const CheckoutPage: FC = () => {
   const [form] = Form.useForm();
   const searchParams = useSearchParams();
-
-  const userId = 'mockedUserId'
   const orderIdParam = searchParams?.get('order_id')
-  const isMercado = searchParams?.get('payment_id')
+  // const isMercado = searchParams?.get('external_reference')
+  const isMercado = searchParams?.get('site_id')
 
-  const { data, isLoading, error , refetch} = useGetOrderByIdQuery(orderIdParam || userId);
-  // const { data, isLoading, error , refetch} = useGetOrderQuery(orderIdParam || userId); // that for old links abowe but data not flat - instead of data. need data.[0].
+  const { data, isLoading, error , refetch} = useGetOrderByIdQuery(orderIdParam);
+  const [respStatus, setRespStatus] = useState(data?.status || '')
 
-  const handleRefetch = () => {
-    refetch()
-  };
 
   useEffect(() => {
     console.log('useEffect')
     if (isMercado) {
+      console.log('isMercado: ', isMercado);
       const fetchData = async () => {
         try {
           const mp_data = keysFromMP.reduce((acc, key) => {
@@ -89,13 +94,13 @@ const CheckoutPage: FC = () => {
             return acc;
           }, {} as Record<string, string>);         
         
-          const response = await fetch(`/api/orders`, {
+          const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              userId,
+              orderId: orderIdParam,
               updatedData: {
                 mp_data,
                 status: mp_data?.status
@@ -107,6 +112,7 @@ const CheckoutPage: FC = () => {
 
           const updatedOrder = await response.json();
           console.log('Updated Order:', updatedOrder);
+          setRespStatus(updatedOrder?.status)
         } catch (error) {
           console.error('Error updating order:', error);
         }
@@ -115,9 +121,9 @@ const CheckoutPage: FC = () => {
       // if data exist, but mp_data absent or status mismatched
       // PS I am not sure about status
       // TODO - need to check Buisness logic about status
-      if (data && Array.isArray(data)) {
-        const hasNoMercadoPagoData = !data.some((order) => order.mp_data);
-        const isStatusMismatched = data[0]?.status !== data[0]?.mp_data?.status;
+      if (data && typeof data === 'object') {
+        const hasNoMercadoPagoData = !data?.mp_data;
+        const isStatusMismatched = data.status !== data.mp_data?.status;
         
         if (hasNoMercadoPagoData || isStatusMismatched) {
           fetchData()
@@ -129,22 +135,19 @@ const CheckoutPage: FC = () => {
   // searchParams is not dynamic, so no need to put it in dependencies
 
   if (isLoading) return <div>Loading order...<SyncOutlinedStyled isLoading={isLoading} /></div>;
-  // if (error) return <div>Error loading orders: {error.message}</div>;
+  // if (error) return <div>Error loading order: {error.message}</div>;
 
-  const formatDate = (dateString: string): string => {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-    };
-    return new Date(dateString).toLocaleDateString('es-ES', options);
+  const handleRefetch = () => {
+    refetch()
   };
 
+  const formatedDate = formatDate(data?.updatedAt)
   const displayTotal = totalSumStyledByDot(data?.totalPrice, ' ')
   const beforeDelivery = totalSumStyledByDot(data?.totalPrice - enivoPrice, ' ')
 
-  // const statusPayment = searchParams?.get('status')
-  const coloring = (data.status === 'approved' && '#4FDB40') || (data.status === 'in_process' && '#F2C94C') 
-  const iconing = (data.status === 'approved' && approvedIcon) || (data.status === 'in_process' && pendingIcon) || falseIcon 
-  const wording = (data.status === 'approved' && 'pagado') || (data.status === 'in_process' && 'pendiente') || 'no pagado'
+  const coloring = (respStatus === 'approved' && '#4FDB40') || (respStatus === 'in_process' && '#F2C94C') 
+  const iconing = (respStatus === 'approved' && approvedIcon) || (respStatus === 'in_process' && pendingIcon) || falseIcon 
+  const wording = (respStatus === 'approved' && 'pagado') || (respStatus === 'in_process' && 'pendiente') || 'no pagado'
 
   return (
     <PageWrapper>
@@ -163,11 +166,11 @@ const CheckoutPage: FC = () => {
               <BankInfoBlockOrder>
                 <BankInfoText>Numero de pedido:</BankInfoText>
                 {/* <BankInfoNumber>{data?.mp_data?.payment_id}</BankInfoNumber> */}
-                <BankInfoNumber>{orderIdParam}</BankInfoNumber>
+                <BankInfoNumber>{data?._id}</BankInfoNumber>
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Fecha:</BankInfoText>
-                <BankInfoNumber>{formatDate(data?.updatedAt)}</BankInfoNumber>
+                <BankInfoNumber>{formatedDate}</BankInfoNumber>
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Total:</BankInfoText>
@@ -175,7 +178,7 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Metodos de pago:</BankInfoText>
-                <BankInfoNumber>{searchParams?.get('status') === 'MCO' ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
+                <BankInfoNumber>{isMercado ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
               </BankInfoBlockOrder>
             </MPinfoItemsWrapper>
             <ListItemsWrapper style={{ margin: '10px 20px 10px 10px'}}>
