@@ -4,12 +4,19 @@ import Image from 'next/image'
 export const HowToWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   @media (max-width: 1200px) {
+    justify-content: space-around;
     flex-wrap: wrap;
   }
+
+  /* @media (max-width: 740px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  } */
 `
 
 

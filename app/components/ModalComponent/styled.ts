@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
+import Link from 'next/link';
 import { Form, Input, Select, Checkbox } from 'antd'
 import { Modal } from 'antd';
 import { Button } from 'antd';
@@ -59,7 +60,7 @@ export const CartItemWrap = styled.div`
   width: 100%;
   /* justify-content: flex-end; */
 `
-export const CartItem = styled.div`
+export const CartItem = styled.div<OrderStyledProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -70,15 +71,25 @@ export const CartItem = styled.div`
   width: inherit;
   gap: 9px;
   font-family: var(--font-mohave);
+  min-width: 280px;
 
   @media (max-width: 850px) {
     gap: 0;
   }
 
-  @media (max-width: 622px) {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
+  ${({$isOrder}) => $isOrder ? css`
+    @media (max-width: 522px) {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  ` : css`
+    @media (max-width: 522px) {
+      margin: 10px;
+      flex-wrap: wrap;
+      /* flex-direction: column; */
+      justify-content: flex-start;
+    }
+  `}
 `
 
 export const CountAndAmountWrap = styled.div`
@@ -104,29 +115,33 @@ export const CardInfoWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-
-  /* margin-right: auto; */
-
   @media (max-width: 764px) {
     flex-direction: column;
     align-items: baseline;
   }  
-  @media (max-width: 622px) {
-    flex-direction: row;
-  }
-  @media (max-width: 454px) {
+
+  @media (max-width: 522px) {
     flex-direction: column;
+    margin: 0 auto;
   }
 `
 
-export const InfoContainer = styled.div`
+export const InfoContainer = styled.div<OrderStyledProps>`
   display: flex;
-  /* margin: auto; */
   align-items: center;
   
-  @media (max-width: 1060px) {
-    /* display: block; */
-    /* margin: auto; */
+  @media (max-width: 600px) {
+    flex-direction: column ;
+  }
+
+  @media (max-width: 522px) {
+    flex-direction: row;
+    margin: 10px;
+    ${({$isOrder}) => $isOrder ? css`
+      padding: 0 17% 0 40px;
+      justify-content: space-between;
+      width: inherit;
+    ` : ''};
   }
 ` 
 
@@ -153,6 +168,10 @@ export const InfoContainer2 = styled.div`
     flex-direction: column;
     margin: auto 20px;
   }
+
+  @media (max-width: 500px) {
+    margin: 0;
+  }
 ` 
 
 export const Title = styled.h3`
@@ -160,6 +179,7 @@ export const Title = styled.h3`
   font-weight: 500;
   color: #333333;
   margin: 0;
+  white-space: nowrap;
 
   @media (max-width: 1060px) {
     font-size: 20px;
@@ -189,7 +209,7 @@ export const StyledForm = styled(Form)`
   }
 `
 
-export const StyledInput = styled(Input)`
+const inputStyle = css`
   height: 52px;
   border-radius: 16px;
 
@@ -203,9 +223,17 @@ export const StyledInput = styled(Input)`
   }
 `
 
+export const StyledInput = styled(Input)`
+  ${inputStyle}
+`
+
+export const StyledTextarea = styled(Input.TextArea)`
+  ${inputStyle}
+`
+
 export const StyledSelect = styled(Select)<OrderStyledProps>`
   height: 52px;
-  ${({isOrder}) => isOrder && css`
+  ${({$isOrder}) => $isOrder && css`
     &.ant-select * {
       cursor: auto  !important;
       font-weight: 700;
@@ -253,7 +281,7 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
   } */
 
     
-  ${({ isOrder }) => !isOrder && css`
+  ${({ $isOrder }) => !$isOrder && css`
     .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
       content: '*'; 
       margin-inline-start: 4px; 
@@ -264,7 +292,7 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
     }`
    }
 
-  ${({ isOrder }) => isOrder && css`
+  ${({ $isOrder }) => $isOrder && css`
       .ant-form-item-label > label {
         color: white
       }`
@@ -363,7 +391,7 @@ export const BuyButton = styled.button`
   }
 `
 
-export const Price = styled.p`
+export const Price = styled.p<OrderStyledProps>`
   font-size: 36px;
   font-weight: 500;
   margin: 0;
@@ -374,7 +402,38 @@ export const Price = styled.p`
     text-align: left;
     font-size: 24px;
     /* margin-top: 20px; */
-  }  
+  }
+
+  @media (max-width: 600px) {
+    margin-top: 3px !important;
+  }
+  
+  /* @media (max-width: 522px) {
+    ${({$isOrder}) => $isOrder ? 'padding-left: 40%' : ''}    
+  } */
+
+  ${({$isOrder}) => $isOrder ? css`
+    @media (max-width: 522px) {
+      padding-left: 40%
+    }
+    @media (max-width: 470px) {
+      padding-left: 38%
+    }
+    @media (max-width: 400px) {
+      padding-left: 32%
+    }
+  ` : css`
+    @media (max-width: 522px) {
+      padding-left: 25%
+    }
+    @media (max-width: 470px) {
+      padding-left: 15%
+    }
+    @media (max-width: 400px) {
+      padding-left: 5%
+    }
+  `}    
+
 `
 
 
@@ -395,12 +454,19 @@ export const TotalWrap = styled.div`
   margin: 0 20px;
 
   @media (max-width: 850px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 `
 export const LeftSideWrap = styled.div`
   display: flex;
   flex-direction: column;
+
+  margin: 15px;
+  width: 60%;
+
+  @media (max-width: 850px) {
+    width: auto;
+  }
 `
 
 
@@ -456,6 +522,8 @@ export const ItemProductTypeText = styled.p`
 
   @media (max-width: 764px) {
     margin: 0 8vw 0 0;
+    width: auto;
+
     /* margin: auto 20px; */
   }
 `
@@ -482,6 +550,7 @@ export const BankInfoNumber = styled.p`
   margin: 0;
   color: #F2C94C;
   font-weight: 700;
+  letter-spacing: 0.5px;
 `
 
 export const BankInfoBlockOrder = styled(BankInfoBlock)`
@@ -491,4 +560,85 @@ export const BankInfoBlockOrder = styled(BankInfoBlock)`
   margin-top: 0;
   margin-bottom: 0;
   /* max-width: max-content; */
+
+  @media (max-width: 800px) {
+    margin-bottom: 10px;
+  }
+`
+
+const orderedStyle = css`
+  color: black;
+  white-space: nowrap;
+
+  @media (max-width: 522px) {
+    margin: 0;
+  }
+`
+
+export const OrderedAmount = styled.b`
+  ${orderedStyle}
+`
+
+export const OrderedX = styled.p`
+  margin: 20px 2vw;
+  ${orderedStyle}
+`
+
+export const MailLink = styled(Link)`
+  font-weight: 700;
+  margin: 10;
+  color: black;
+  letter-spacing: 0.6px;
+  text-decoration: underline;
+
+  &:hover {
+    color: black !important;
+    /* text-decoration: underline; */
+  }
+`
+
+export const MailWrapper = styled.div`
+  background-color: #F2C94C;
+  border-radius: 16px;
+  width: -webkit-fill-available;
+  margin: 10px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+  }
+`
+
+export const MailDescription = styled.p`
+  max-width: 50%;
+  margin: 10px 0;
+  line-height: 1.2;
+  @media (max-width: 650px) {
+    max-width: none;
+  }
+`
+
+export const MailLorar = styled.p`
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 10px 0 0;
+  @media (max-width: 650px) {
+    margin: 5px 0;
+  }
+`
+
+export const BankingBoxesWrapper = styled.div`
+  display: flex;
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
+`
+
+export const TransferBoxWrapper = styled.div`
+  margin: 10px;
+  @media (max-width: 850px) {
+    margin: 10px 20px;
+  }
 `

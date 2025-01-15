@@ -16,7 +16,11 @@ export const createOrder = async (
       form_data,
       // mp_data: {}
     });
-    return await newOrder.save();
+    await newOrder.save();
+
+    console.log("Created Order:", newOrder._id);
+
+    return newOrder
   } catch (error) {
     console.error('Error creating order:', error);
     throw new Error('Failed to create order');
@@ -26,7 +30,7 @@ export const createOrder = async (
 export const getOrdersByUser = async (userId: string): Promise<IOrder[]> => {
   try {
     const orders = await Order.find({ userId }).lean();
-    console.log('Fetched orders:', orders);
+    console.log('Fetched orders:', orders?.length);
     return orders;
   } catch (error) {
     console.error('Error fetching orders for user:', userId, error);
@@ -34,28 +38,40 @@ export const getOrdersByUser = async (userId: string): Promise<IOrder[]> => {
   }
 };
 
-export const updateOrderStatus = async (orderId: string, status: string): Promise<IOrder | null> => {
+
+export const getOrderById = async (orderId: string): Promise<IOrder | null> => {
   try {
-    return await Order.findByIdAndUpdate(orderId, { status, updatedAt: new Date() }, { new: true });
+    const order = await Order.findById(orderId).lean();
+    console.log('Fetched order:', order);
+    return order;
   } catch (error) {
-    console.error('Error updating order status:', error);
-    throw new Error('Failed to update order status');
+    console.error('Failed to fetch order by ID:', orderId, error);
+    throw new Error('Failed to fetch order by ID');
   }
 };
+
+// export const updateOrderStatus = async (orderId: string, status: string): Promise<IOrder | null> => {
+//   try {
+//     return await Order.findByIdAndUpdate(orderId, { status, updatedAt: new Date() }, { new: true });
+//   } catch (error) {
+//     console.error('Error updating order status:', error);
+//     throw new Error('Failed to update order status');
+//   }
+// };
 
 
 interface UpdatedData {
   [key: string]: any;
 }
 
-export const updateOrder = async (userId: string, updatedData: UpdatedData) => {
+export const updateOrder = async (orderId: string, updatedData: UpdatedData) => {
   try {
-    if (!userId || !updatedData) {
-      throw new Error('Missing userId or updatedData');
+    if (!orderId || !updatedData) {
+      throw new Error('Missing orderId or updatedData');
     }
 
-    const order = await Order.findOneAndUpdate(
-      { userId },
+    const order = await Order.findByIdAndUpdate(
+      orderId, 
       { ...updatedData, updatedAt: new Date() },
       { new: true }
     );

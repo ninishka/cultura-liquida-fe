@@ -32,15 +32,18 @@ export const nameSurnameValidator = [
   },
 ]
 
+export const enivoPrice = 15000
+
 export const init = (slug) => slug[0].includes("melena") 
   ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
   : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
 
-export const calculateTotalSum = cards => {
+ 
+export const calculateSum = (cards, enivo) => {
   const num = cards.reduce((total, card) => total + card.price * card.amount, 0);
-  const deliveryIncluded = num + 15000
-  return deliveryIncluded
-};
+  if (enivo) return num + enivo
+  return num
+}; 
 
 export const totalSumStyledByDot = (sum, spec = '.') => {
   // TODO false payment case

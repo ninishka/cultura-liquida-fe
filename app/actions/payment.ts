@@ -3,7 +3,7 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 // import Product from '@/models/Product'
 
-const createPreference = async (cartItems, formValues) => {
+const createPreference = async (orderId, cartItems, formValues) => {
     if (!cartItems || !cartItems.length) {
       throw new Error("Verbotten: Cart is empty");
     }
@@ -66,9 +66,9 @@ const createPreference = async (cartItems, formValues) => {
         currency_id: 'COP'
       }],
       back_urls: {
-        success: `${process.env.PATH_TO_API}/check-out/success`,
-        failure: `${process.env.PATH_TO_API}/check-out/failure`,
-        pending: `${process.env.PATH_TO_API}/check-out/pending`,
+        success: `${process.env.PATH_TO_API}/check-out/success?order_id=${orderId}`,
+        failure: `${process.env.PATH_TO_API}/check-out/failure?order_id=${orderId}`,
+        pending: `${process.env.PATH_TO_API}/check-out/pending?order_id=${orderId}`,
       },
       auto_return: "approved",
       payer: {
@@ -77,7 +77,11 @@ const createPreference = async (cartItems, formValues) => {
         identification: { type: 'CC', number: id_number },
         address: { street_name }
       },
-      shipments: { receiver_address: { street_name } }
+      shipments: { receiver_address: { street_name } },
+
+      external_reference: `${orderId}`, 
+      statement_descriptor: 'Cultura Líquida',
+      // notification_url: "https://www.your-site.com/ipn",
     };
   
     return await preference.create({ body: preferenceBody });

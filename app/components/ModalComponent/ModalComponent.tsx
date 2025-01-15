@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+
 import Image from 'next/image'
 import { Form } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
@@ -7,7 +9,7 @@ import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import ModalForm from './ModalForm'
-import { calculateTotalSum } from '@/app/components/helpers'
+import { calculateSum, enivoPrice } from '@/app/components/helpers'
 import {
   ModalStyled,
   ListItemsWrapper,
@@ -35,6 +37,7 @@ const ModalComponent = ({data}) => {
   const dispatch = useAppDispatch()
   const { showCart, cartItems } = useAppSelector(state => state.cart);
   const [paymentOption, setPaymentOption] = useState('')
+  const router = useRouter()
 
   const [preferenceId, setPreferenceId] = useState('') //mp
   const [loading, setLoading] = useState(false) // mp
@@ -97,7 +100,7 @@ const ModalComponent = ({data}) => {
 
 
       // CREATE NEW ORDER BD
-      const totalPrice = calculateTotalSum(cartItems);
+      const totalPrice = calculateSum(cartItems, enivoPrice);
       const filteredArray = cartItems.map(obj => ({
         title: obj.title,
         ingredient: obj.ingredient,
@@ -126,15 +129,22 @@ const ModalComponent = ({data}) => {
         return;
       }
 
-      console.log('Order created successfully');
+      const orderData = await orderResponse.json();
+      console.log('Order created successfully'/*, orderData*/);
 
+      // TRANSFER
+      if (paymentOption === 'transfer') {
+        console.log('orderResponse', orderData._id)
+        if (orderData._id) router.push(`/check-out/pending?order_id=${orderData._id}`)
+      }
 
+      // Mercado Pago
       if (paymentOption === 'mercado') {
-        // Mercado Pago
         const paymentResponse = await fetch('/api/preference', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            orderId: orderData._id,
             cartItems: filteredArray,
             formValues: {
               ...mockedFormValues,

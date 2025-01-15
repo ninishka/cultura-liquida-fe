@@ -122,5 +122,10 @@ export interface StatusStyledProps {
 
 export interface OrderStyledProps {
   isOrder?: boolean;
+  $isOrder?: boolean;
+}
+
+export interface OrderLoadingStyledProps {
+  loading?: boolean;
 }
 

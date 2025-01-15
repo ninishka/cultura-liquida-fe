@@ -18,7 +18,9 @@ import {
     Price,
     InfoContainer,
     InfoContainer2,
-    ItemProductTypeText
+    ItemProductTypeText,
+    OrderedAmount,
+    OrderedX
   } from './styled'
 
 import melenaCapsulsSrc from '@/app/icons/icon_caps_melena_cart.png'
@@ -52,7 +54,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
 
   return (
     <CartItemWrap key={type}>
-      <CartItem>
+      <CartItem $isOrder={isOrder}>
         <CartImg sizes='100vh' src={cartIcon} alt='El artículo del producto elegido'/>
         <CardInfoWrapper>
           <InfoContainer2>
@@ -63,22 +65,23 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
             {displayingType}{size ? ` ${size}` : ''}
           </ItemProductTypeText>
         </CardInfoWrapper>
-        <InfoContainer>
+        <InfoContainer $isOrder={isOrder}>
           {!isOrder ? (
               <Counter amount={tAmount} item={item} isModal />
             ) : (
-              <b style={{color: 'black', margin: '20px 40px'}}>x {tAmount}</b>)
+              <OrderedX>x <OrderedAmount>{tAmount}</OrderedAmount></OrderedX>
+            )
           }
-          <Price style={{margin: '0px 20px'}}>{styledAmount} COP</Price>
+          <Price style={{margin: '0px 20px'}} $isOrder={isOrder}>{styledAmount} COP</Price>
         </InfoContainer>
       </CartItem>
-      {!isOrder && (
+      {/* {!isOrder && (
         <DeleteButtonWrap>
           <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
             <DeleteButtonIcon sizes='100vh' src={img6} alt='Eliminar el artículo del producto seleccionado'/>
           </DeleteButtonItself>
         </DeleteButtonWrap>
-      )}
+      )} */}
     </CartItemWrap>
   )
 }
