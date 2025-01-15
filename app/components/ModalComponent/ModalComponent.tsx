@@ -147,8 +147,10 @@ const ModalComponent = ({data}) => {
             orderId: orderData._id,
             cartItems: filteredArray,
             formValues: {
-              ...mockedFormValues,
-              street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
+              // ...mockedFormValues,
+              // street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
+              ...values,
+              street_name: `${values.state}, ${values.city}, ${values.mail_address}`
             },
           }),
         });

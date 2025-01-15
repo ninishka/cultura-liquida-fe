@@ -75,13 +75,13 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
           <Price style={{margin: '0px 20px'}} $isOrder={isOrder}>{styledAmount} COP</Price>
         </InfoContainer>
       </CartItem>
-      {/* {!isOrder && (
+      {!isOrder && (
         <DeleteButtonWrap>
           <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
             <DeleteButtonIcon sizes='100vh' src={img6} alt='Eliminar el artículo del producto seleccionado'/>
           </DeleteButtonItself>
         </DeleteButtonWrap>
-      )} */}
+      )}
     </CartItemWrap>
   )
 }
