@@ -54,7 +54,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
 
   return (
     <CartItemWrap key={type}>
-      <CartItem isOrder={isOrder}>
+      <CartItem $isOrder={isOrder}>
         <CartImg sizes='100vh' src={cartIcon} alt='El artículo del producto elegido'/>
         <CardInfoWrapper>
           <InfoContainer2>
@@ -65,23 +65,23 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
             {displayingType}{size ? ` ${size}` : ''}
           </ItemProductTypeText>
         </CardInfoWrapper>
-        <InfoContainer isOrder={isOrder}>
+        <InfoContainer $isOrder={isOrder}>
           {!isOrder ? (
               <Counter amount={tAmount} item={item} isModal />
             ) : (
               <OrderedX>x <OrderedAmount>{tAmount}</OrderedAmount></OrderedX>
             )
           }
-          <Price style={{margin: '0px 20px'}} isOrder={isOrder}>{styledAmount} COP</Price>
+          <Price style={{margin: '0px 20px'}} $isOrder={isOrder}>{styledAmount} COP</Price>
         </InfoContainer>
       </CartItem>
-      {!isOrder && (
+      {/* {!isOrder && (
         <DeleteButtonWrap>
           <DeleteButtonItself onClick={() => handleDelete(id, cartItems, dispatch)}>
             <DeleteButtonIcon sizes='100vh' src={img6} alt='Eliminar el artículo del producto seleccionado'/>
           </DeleteButtonItself>
         </DeleteButtonWrap>
-      )}
+      )} */}
     </CartItemWrap>
   )
 }

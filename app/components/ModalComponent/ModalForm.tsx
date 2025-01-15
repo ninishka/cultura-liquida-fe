@@ -36,6 +36,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
   const subtotalSum = calculateSum(cartItems);
   const totalSum = calculateSum(cartItems, enivoPrice);
   const styledTotalSum = totalSumStyledByDot(totalSum)
+  const displayEnivo = totalSumStyledByDot(enivoPrice, ' ')
 
   return (
     <StyledForm 
@@ -55,7 +56,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
                 </PriceTextBox>
                 <PriceTextBox>
                   <SubtotalText>Envío: </SubtotalText>
-                  <SubtotalText>15 000 cop</SubtotalText>
+                  <SubtotalText>{displayEnivo} cop</SubtotalText>
                 </PriceTextBox>
                 <PriceTextBox style={{ marginTop: 10 }}>
                   <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>

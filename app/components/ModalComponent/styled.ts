@@ -77,7 +77,7 @@ export const CartItem = styled.div<OrderStyledProps>`
     gap: 0;
   }
 
-  ${({isOrder}) => isOrder ? css`
+  ${({$isOrder}) => $isOrder ? css`
     @media (max-width: 522px) {
       flex-wrap: wrap;
       justify-content: flex-start;
@@ -137,7 +137,7 @@ export const InfoContainer = styled.div<OrderStyledProps>`
   @media (max-width: 522px) {
     flex-direction: row;
     margin: 10px;
-    ${({isOrder}) => isOrder ? css`
+    ${({$isOrder}) => $isOrder ? css`
       padding: 0 17% 0 40px;
       justify-content: space-between;
       width: inherit;
@@ -233,7 +233,7 @@ export const StyledTextarea = styled(Input.TextArea)`
 
 export const StyledSelect = styled(Select)<OrderStyledProps>`
   height: 52px;
-  ${({isOrder}) => isOrder && css`
+  ${({$isOrder}) => $isOrder && css`
     &.ant-select * {
       cursor: auto  !important;
       font-weight: 700;
@@ -281,7 +281,7 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
   } */
 
     
-  ${({ isOrder }) => !isOrder && css`
+  ${({ $isOrder }) => !$isOrder && css`
     .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
       content: '*'; 
       margin-inline-start: 4px; 
@@ -292,7 +292,7 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
     }`
    }
 
-  ${({ isOrder }) => isOrder && css`
+  ${({ $isOrder }) => $isOrder && css`
       .ant-form-item-label > label {
         color: white
       }`
@@ -409,10 +409,10 @@ export const Price = styled.p<OrderStyledProps>`
   }
   
   /* @media (max-width: 522px) {
-    ${({isOrder}) => isOrder ? 'padding-left: 40%' : ''}    
+    ${({$isOrder}) => $isOrder ? 'padding-left: 40%' : ''}    
   } */
 
-  ${({isOrder}) => isOrder ? css`
+  ${({$isOrder}) => $isOrder ? css`
     @media (max-width: 522px) {
       padding-left: 40%
     }

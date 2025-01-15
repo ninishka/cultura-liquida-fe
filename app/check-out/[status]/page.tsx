@@ -80,11 +80,15 @@ const CheckoutPage: FC = () => {
   const isMercado = searchParams?.get('site_id')
 
   const { data, isLoading, error , refetch} = useGetOrderByIdQuery(orderIdParam);
-  const [respStatus, setRespStatus] = useState(data?.status || '')
+  const [respStatus, setRespStatus] = useState(data?.status)
+  // const [handLoading, setHandLoading] = useState(false)
 
 
   useEffect(() => {
     console.log('useEffect')
+    if(data?.status) {
+      setRespStatus(data?.status)
+    }
     if (isMercado) {
       console.log('isMercado: ', isMercado);
       const fetchData = async () => {
@@ -134,17 +138,22 @@ const CheckoutPage: FC = () => {
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies
 
-  if (isLoading) return <div>Loading order...<SyncOutlinedStyled isLoading={isLoading} /></div>;
+  if (isLoading) return <div>Loading order...</div>;
+  console.log('isLoading: ', isLoading);
   // if (error) return <div>Error loading order: {error.message}</div>;
 
   const handleRefetch = () => {
     refetch()
+    // setHandLoading(true)
   };
 
   const formatedDate = formatDate(data?.updatedAt)
+  const displayEnivo = totalSumStyledByDot(enivoPrice, ' ')
   const displayTotal = totalSumStyledByDot(data?.totalPrice, ' ')
   const beforeDelivery = totalSumStyledByDot(data?.totalPrice - enivoPrice, ' ')
 
+  console.log('respStatus: ', respStatus);
+  console.log('data?.status: ', data?.status);
   const coloring = (respStatus === 'approved' && '#4FDB40') || (respStatus === 'in_process' && '#F2C94C') 
   const iconing = (respStatus === 'approved' && approvedIcon) || (respStatus === 'in_process' && pendingIcon) || falseIcon 
   const wording = (respStatus === 'approved' && 'pagado') || (respStatus === 'in_process' && 'pendiente') || 'no pagado'
@@ -157,7 +166,9 @@ const CheckoutPage: FC = () => {
 
       <div style={{display: 'flex', alignItems: 'center', margin: '70px auto 0 15px'}}>
         <h2 style={{textTransform: 'uppercase', fontSize: 48, fontWeight: 500}}>Checkout</h2>
-        <SyncOutlinedStyled onClick={handleRefetch} isLoading={isLoading} />
+        <SyncOutlinedStyled onClick={handleRefetch} 
+        // loading={isLoading}
+         />
       </div>
       <CheckoutWrapper>
         <CheckoutWrapperContent>
@@ -213,7 +224,7 @@ const CheckoutPage: FC = () => {
             </PriceTextBox>
             <PriceTextBox>
               <SubtotalText>Envío: </SubtotalText>
-              <SubtotalText>15 000 cop</SubtotalText>
+              <SubtotalText>{displayEnivo} cop</SubtotalText>
             </PriceTextBox>
             <PriceTextBox style={{ marginTop: 10 }}>
               <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>

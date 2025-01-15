@@ -91,7 +91,7 @@ export const SubtotalText = styled.p`
   color: white;
 `
 
-export const PriceTextBox = styled.p`
+export const PriceTextBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -145,7 +145,7 @@ export const SyncOutlinedStyled = styled(SyncOutlined)<OrderLoadingStyledProps>`
     color: #F2C94C;
   }
 
-  ${({ isLoading }) => isLoading && css`
+  ${({ loading }) => loading && css`
     animation: ${rotate} 1s linear infinite;
   `}
 `
