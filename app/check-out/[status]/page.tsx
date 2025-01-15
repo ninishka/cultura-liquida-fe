@@ -157,6 +157,8 @@ const CheckoutPage: FC = () => {
   const coloring = (respStatus === 'approved' && '#4FDB40') || (respStatus === 'in_process' && '#F2C94C') 
   const iconing = (respStatus === 'approved' && approvedIcon) || (respStatus === 'in_process' && pendingIcon) || falseIcon 
   const wording = (respStatus === 'approved' && 'pagado') || (respStatus === 'in_process' && 'pendiente') || 'no pagado'
+  // need to provide status in url?
+
 
   return (
     <PageWrapper>
