@@ -69,28 +69,21 @@ export const ContactWrapper = styled.div`
   /* &:hover{
     background-color: #252525;
   } */
+
+  @media (max-width: 1100px) {
+    flex-wrap: wrap;
+    max-width: 147px;
+  }
   @media (max-width: 850px) {
     margin-right: 0;
+    max-width: none;
   }
 `
 
 export const StyledLink = styled(Link)`
-   display: block;
-  transition: all 0.3s ease;
-  padding: 15px;
-  border: 2px solid transparent;
-  border-radius: 16px 16px 16px 16px;
-  background-color: #252525;
-  color: #FFFFFF;
-  margin: 0px 20px;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 16px;
-  &:hover{
-    background-color:#333333;
-  }
+  margin: 0px 8px;
 
-  @media (max-width: 850px) {
-   margin:  3px 4px;
+  @media (max-width: 1100px) {
+   margin:  0px 4px;
   }
 `

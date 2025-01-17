@@ -1,15 +1,16 @@
 "use client"
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import type { NavigationProps } from '@/types/types'
 
-export const UlItself = styled.ul`
+export const UlItself = styled.ul<NavigationProps>`
   display: flex;
   align-items: center;
 
   @media (max-width: 850px) {
-    flex-direction: column;
+    flex-direction: ${({ $isFooter }) => $isFooter ? 'row' : 'column'};
+    padding: 0px;
   }
 `
 
@@ -20,15 +21,19 @@ export const Navigation = styled.nav<NavigationProps>`
 
   @media (max-width: 850px) {
     display: ${({$isopen}) => $isopen ? 'block' : 'none'};
-    position: fixed;
-    top: 67px;
-    background-color: #333333;
-    width: 100%;
-    right: 0;
-    height: fit-content;
-    z-index: 99999;
-    border-top: 2px solid #9F9F9F;
-    justify-content: center;
+
+    ${({ $isFooter }) => $isFooter ? css`display: flex;` 
+    : css`
+      position: fixed;
+      top: 67px;
+      background-color: #333333;
+      width: 100%;
+      right: 0;
+      height: fit-content;
+      z-index: 99999;
+      border-top: 2px solid #9F9F9F;
+      justify-content: center;
+    `}
   }
 `
 
@@ -36,7 +41,7 @@ export const LiItself = styled.li`
   list-style-type: none;
 `
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<NavigationProps>`
   display: block;
   padding: 15px;
   border: 2px solid transparent;
@@ -52,10 +57,13 @@ export const StyledLink = styled(Link)`
   transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
+    border: 2px solid #9F9F9F;
   }
  
   @media (max-width:850px) {
-    width: 268px;
+    width: ${({ $isFooter }) => $isFooter ? 'auto' : '268px'};
+
+
     margin: 12px;
     background-color: #2D2D2D;
 

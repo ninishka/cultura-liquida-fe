@@ -194,6 +194,7 @@ export const Item = styled.div`
   cursor: pointer;
   height: 54px;
   margin: 6px;
+  border: 1px solid transparent;
 
   @media (max-width: 850px) {
     /* width: 70px;
@@ -208,6 +209,7 @@ export const Item = styled.div`
   transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
+    border: 1px solid #9F9F9F;
   }
 `
 

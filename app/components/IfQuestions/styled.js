@@ -8,8 +8,8 @@ export const ContactWrapper = styled.div`
   padding:  6px 9px 6px 9px;
   margin-right: 30px;
   gap: 30px;
-  
-  @media (max-width: 850px) {
+
+  @media (max-width: 1200px) {
     margin-right: 0;
   }
 `
@@ -45,6 +45,10 @@ export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  @media (max-width: 1200px) {
+    align-items: center;
+  }
 `
 
 export const ContactText = styled.h2`
