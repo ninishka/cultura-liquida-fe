@@ -9,7 +9,7 @@ import {
   StyledTextarea
 } from './styled'
 import  {  Country ,  State ,  City  }   from  'country-state-city' ; 
-import { nameSurnameValidator } from '../helpers'
+import { nameSurnameValidator } from '../../helpers'
 // console.log( Country.getCountryByCode('CO') ) 
 // console.log( State.getStatesOfCountry('CO') ) 
 // console . log ( State . getAllStates ( ) )

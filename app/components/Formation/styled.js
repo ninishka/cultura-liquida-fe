@@ -241,8 +241,9 @@ export const AbsentProductText = styled.p`
   margin: 10px 0 0 0;
   text-align: center;
   text-transform: uppercase;
+  margin-top: 20px;
 
   @media (max-width: 850px) {
-    margin-top: 60%;
+    margin-top: 80%;
   }
 `

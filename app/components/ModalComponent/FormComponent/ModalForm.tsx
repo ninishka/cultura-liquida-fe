@@ -4,28 +4,27 @@ import { useAppSelector } from '@/lib/redux/store/hooks'
 import ModalFormFields from './ModalFormFields'
 import type { ModalFormProps } from '@/types/types'
 import { calculateSum, enivoPrice, totalSumStyledByDot } from '@/app/components/helpers'
-import BankingBox from './BankingBox'
+import BankingBox from '../BankingBox/BankingBox'
 
 import {
   StyledForm,
   StyledFormItem,
-  TotalBox,
-  TotalWrap,
   LeftSideWrap,
-  CartPayButton,
-  BankInfoText,
   MailLink,
-  BankingBoxesWrapper,
-  TransferBoxWrapper,
   MailWrapper,
   MailDescription,
-  MailLorar
+  MailLorar,
+  SubtotalText,
+  PriceTextBox,
+  BankingBoxesWrapper,
+  TransferBoxWrapper,
 } from './styled'
 
 import {
-  SubtotalText,
-  PriceTextBox,
-} from '@/app/check-out/[status]/styled'
+  TotalBox,
+  TotalWrap,
+  CartPayButton,
+} from '../styled'
 
 // TODO: Add PSE, PayU, ePayco
 // Debit, credit
@@ -36,6 +35,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
   const subtotalSum = calculateSum(cartItems);
   const totalSum = calculateSum(cartItems, enivoPrice);
   const styledTotalSum = totalSumStyledByDot(totalSum)
+  const displaySubtotal = totalSumStyledByDot(subtotalSum, ' ')
   const displayEnivo = totalSumStyledByDot(enivoPrice, ' ')
 
   return (
@@ -52,7 +52,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
               {/* <div style={{ margin: 15, width: '100%' }}> */}
                 <PriceTextBox>
                   <SubtotalText>Subtotal: </SubtotalText>
-                  <SubtotalText>{subtotalSum} cop</SubtotalText>
+                  <SubtotalText>{displaySubtotal} cop</SubtotalText>
                 </PriceTextBox>
                 <PriceTextBox>
                   <SubtotalText>Envío: </SubtotalText>
@@ -77,9 +77,9 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
           </TotalWrap>
           {paymentOption === 'transfer' && (
             <TransferBoxWrapper>
-              <BankInfoText style={{ margin: '10px 13px' }}>
+              <p style={{ margin: '10px 13px', color: 'white' }}>
                 Para completar tu pedido, puedes realizar una transferencia bancaria a cualquiera de las siguientes cuentas.
-              </BankInfoText>
+              </p>
               <BankingBoxesWrapper>
                 <BankingBox title='Bancolombia Ahorros' num='11519071497' />
                 <BankingBox title='BBVA Ahorros' num='0640002991' />
@@ -94,9 +94,9 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
                   <MailLink href='mailto:culturaliquidacol@gmail.com'>culturaliquidacol@gmail.com</MailLink>  
                 </div>
               </MailWrapper>
-              <BankInfoText style={{ margin: '18px 13px 0', fontSize: 16 }}>
+              <p style={{ margin: '18px 13px 0', fontSize: 16, color: 'white' }}>
                 Tu pedido será procesado y enviado tan pronto validemos el pago.
-              </BankInfoText>
+              </p>
             </TransferBoxWrapper>
           )}
           <StyledFormItem style={{ width: '100%' }}>
