@@ -5,6 +5,7 @@ import NavigationComponent from '@/app/components/NavigationComponent/Navigation
 import Tg from '@/app/components/IconComponents/TgIcon'
 import Wa from '@/app/components/IconComponents/WaIcon'
 import Ph from '@/app/components/IconComponents/PhIcon'
+import Inst from '@/app/components/IconComponents/InstIcon'
 import Logo from '@/app/icons/logo_full 1.svg'
 import {
   LogoFull,
@@ -13,6 +14,7 @@ import {
   HeaderLikeFooter,
   ContactWrapper,
   LastFooter,
+  StyledLink
 } from './styled'
 
 const FooterComponent = () => (
@@ -21,11 +23,12 @@ const FooterComponent = () => (
     <LogoFull href='/product/melena-de-leon-capsules'> 
       <LogoItself src={Logo} alt="El logo de Cultura Líquida" priority />
     </LogoFull>
-    <NavigationComponent />
+    <NavigationComponent isFooter />
     <ContactWrapper>
-      <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Telegram" style={{ margin: '0 8px' }}><Tg  isDark /></Link>
-      <Link href="https://wa.me/573117662419" target="_blank" aria-label="WhatsApp" style={{ margin: '0 8px' }}><Wa isDark /></Link>
-      <Link href="tel:+573117662419" target="_blank" aria-label="Teléfono" style={{ margin: '0 8px' }}><Ph isDark /></Link>
+      <StyledLink href="https://t.me/cultura_liquida" target="_blank" aria-label="Telegram"><Tg  isDark /></StyledLink>
+      <StyledLink href="https://wa.me/573117662419" target="_blank" aria-label="WhatsApp"><Wa isDark /></StyledLink>
+      <StyledLink href="https://www.instagram.com/cult.liq.co" target="_blank" aria-label="Instagram"><Inst isDark /></StyledLink>
+      <StyledLink href="tel:+573117662419" target="_blank" aria-label="Teléfono"><Ph isDark /></StyledLink>
     </ContactWrapper>
     </HeaderLikeFooter>
     <LastFooter>

@@ -8,12 +8,12 @@ import {
   StyledLink
 } from './styled'
 
-const NavigationComponent: FC<NavigationProps> = ({ isopen, setShowMenu }) => (
-  <Navigation $isopen={isopen}>
-    <UlItself> 
+const NavigationComponent: FC<NavigationProps> = ({ isopen, setShowMenu, isFooter }) => (
+  <Navigation $isopen={isopen} $isFooter={isFooter}>
+    <UlItself $isFooter={isFooter}> 
       {data.map(({ title, url, types }) => (
         <LiItself key={title} onClick={() => isopen && setShowMenu(false)}>
-          <StyledLink href={`/product/${url}-${types[0]}`}>
+          <StyledLink href={`/product/${url}-${types[0]}`} $isFooter={isFooter}>
             {title}
           </StyledLink>
         </LiItself>

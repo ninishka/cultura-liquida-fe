@@ -68,7 +68,7 @@ export const AmountItem = styled.div<ModalStyledProps2>`
 `
 
 export const ArrowButtons = styled.button`
-  padding: 8px 0 0;;
+  padding: 2px 0 0;;
   border: none;
   outline: none;
   font: inherit;

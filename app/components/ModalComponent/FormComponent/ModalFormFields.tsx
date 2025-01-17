@@ -231,9 +231,10 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => {
       {/* textarea */}
       {(!isOrder || notes) && (
         <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
-          label="Notas (opcional)"
+          label={`Notas ${!isOrder ? '(opcional)' : ''}`}
+          $isOrder={isOrder}
           name="notes"
-          >
+        >
           <StyledTextarea   
             style={{ borderRadius: '16px'}}
             disabled={isOrder}
