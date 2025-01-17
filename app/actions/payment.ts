@@ -45,9 +45,8 @@ const createPreference = async (orderId, cartItems, formValues) => {
     const preference = new Preference(client);
   
     // All form fields:
-    // name, surname, document_type, id_number
-    // country, mail_address, state, city
-    // phone_number, email, notes
+    // name, surname, document_type, id_number, country, mail_address
+    // state, city, phone_number, email, notes
   
     const {
       name, surname, email, phone_number, id_number, street_name,
@@ -66,9 +65,9 @@ const createPreference = async (orderId, cartItems, formValues) => {
         currency_id: 'COP'
       }],
       back_urls: {
-        success: `${process.env.PATH_TO_API}/check-out/success?order_id=${orderId}`,
-        failure: `${process.env.PATH_TO_API}/check-out/failure?order_id=${orderId}`,
-        pending: `${process.env.PATH_TO_API}/check-out/pending?order_id=${orderId}`,
+        success: `${process.env.PATH_TO_API}/checkout?order_id=${orderId}`,
+        failure: `${process.env.PATH_TO_API}/checkout?order_id=${orderId}`,
+        pending: `${process.env.PATH_TO_API}/checkout?order_id=${orderId}`,
       },
       auto_return: "approved",
       payer: {
@@ -79,7 +78,7 @@ const createPreference = async (orderId, cartItems, formValues) => {
       },
       shipments: { receiver_address: { street_name } },
 
-      external_reference: `${orderId}`, 
+      external_reference: `${orderId}`,
       statement_descriptor: 'Cultura Líquida',
       // notification_url: "https://www.your-site.com/ipn",
     };

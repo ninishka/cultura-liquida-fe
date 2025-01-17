@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
+import { Tooltip } from 'antd'
 import Counter from '@/app/components/Counter/Counter'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import {
@@ -42,7 +43,9 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => {
                 </Link>
               ) : (
                 <AbsentProductCheckboxWrapper>
-                  <AbsentProductText>Agotado</AbsentProductText>
+                  <Tooltip title={'Por favor, elija el método de pago'}>
+                    <AbsentProductText>Agotado</AbsentProductText>
+                  </Tooltip>
                 </AbsentProductCheckboxWrapper>
               )}
             </Fragment>

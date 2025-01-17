@@ -147,7 +147,7 @@ export const Item123 = styled.h3`
   line-height: 28.8px;
   letter-spacing: 0.02em;
   text-align: left;
-  margin: 13px 0
+  margin: 13px 0;
 `
 
 export const LearnMoreWrap = styled.div`
@@ -164,9 +164,8 @@ export const LearnMoreText = styled.p`
 `
 
  export const ArrowIcon = styled(Image)`
-  width: 15px;
-  height: auto;
-  /* color: lightgray; */
+  width: auto;
+  margin-top: 16px;
 `
 
  export const ArrowButtons = styled(Link)`

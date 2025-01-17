@@ -4,24 +4,15 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 import { Form } from 'antd';
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
-import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent'
-import ModalForm from '@/app/components/ModalComponent/ModalForm'
+import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
+import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
 import { totalSumStyledByDot } from '@/app/components/helpers'
 import approvedIcon from '@/app/icons/icon_paid_true.svg'
 import pendingIcon from '@/app/icons/icon_paid_error.svg'
 import falseIcon from '@/app/icons/icon_paid_false.svg'
 import { enivoPrice } from '@/app/components/helpers'
-import { 
-  ListItemsWrapper, 
-  ModalTitle, 
-  BankInfoBlockOrder,
-  BankInfoText,
-  BankInfoNumber
- } from '@/app/components/ModalComponent/styled'
-
 import {
   StyledLink,
-  TitleH1,
   CheckoutWrapper,
   CheckoutWrapperContent,
   RightPanel,
@@ -33,16 +24,17 @@ import {
   SyncOutlinedStyled,
   PageWrapper
 } from './styled'
-import { object } from 'yup';
 
+import { 
+  BankInfoBlockOrder,
+  BankInfoText,
+  BankInfoNumber
+ } from '@/app/components/ModalComponent/BankingBox/styled'
 
-
-
-// На этой странице должно быть:
-// - инфа о номере заказа и его содержимом.
-// - дата, сумма, метод оплаты
-// - инфа о покупателе что он сам ввел
-// - данные о платеже что тебе вернет система ////////
+ import { 
+  ListItemsWrapper, 
+  ModalTitle, 
+ } from '@/app/components/ModalComponent/styled'
 
 
 // http://localhost:3000/check-out/success?collection_id=1320658712&collection_status=approved&payment_id=1320658712&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=26357310094&preference_id=1700322474-82fa7b59-7f7e-4a8d-af3a-1b25fcf367ff&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
@@ -76,21 +68,24 @@ const CheckoutPage: FC = () => {
   const [form] = Form.useForm();
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
-  // const isMercado = searchParams?.get('external_reference')
-  const isMercado = searchParams?.get('site_id')
+  // const isInitialMercado = searchParams?.get('external_reference')
+  const isInitialMercado = searchParams?.get('site_id')
+  console.log('isInitialMercado: ', isInitialMercado);
 
   const { data, isLoading, error , refetch} = useGetOrderByIdQuery(orderIdParam);
   const [respStatus, setRespStatus] = useState(data?.status)
-  // const [handLoading, setHandLoading] = useState(false)
-
 
   useEffect(() => {
     console.log('useEffect')
     if(data?.status) {
+      console.log('data?.status UE ', data?.status);
       setRespStatus(data?.status)
     }
-    if (isMercado) {
-      console.log('isMercado: ', isMercado);
+
+    // after MP redirect back - it sends params in url
+    // this params need to be delivered in db
+    if (isInitialMercado) {
+      console.log('isInitialMercado: ', isInitialMercado);
       const fetchData = async () => {
         try {
           const mp_data = keysFromMP.reduce((acc, key) => {
@@ -154,10 +149,10 @@ const CheckoutPage: FC = () => {
 
   console.log('respStatus: ', respStatus);
   console.log('data?.status: ', data?.status);
-  const coloring = (respStatus === 'approved' && '#4FDB40') || (respStatus === 'in_process' && '#F2C94C') 
-  const iconing = (respStatus === 'approved' && approvedIcon) || (respStatus === 'in_process' && pendingIcon) || falseIcon 
-  const wording = (respStatus === 'approved' && 'pagado') || (respStatus === 'in_process' && 'pendiente') || 'no pagado'
-  // need to provide status in url?
+  const coloring = (respStatus === 'approved' && '#4FDB40') || ((respStatus === 'in_process' || respStatus === 'pending') && '#F2C94C') 
+  const iconing = (respStatus === 'approved' && approvedIcon) || ((respStatus === 'in_process' || respStatus === 'pending') && pendingIcon) || falseIcon 
+  const wording = (respStatus === 'approved' && 'pagado') || ((respStatus === 'in_process' || respStatus === 'pending') && 'pendiente') || 'no pagado'
+  // in_process is for MP payment status BUT pending is for order record status
 
 
   return (
@@ -191,7 +186,7 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Metodos de pago:</BankInfoText>
-                <BankInfoNumber>{isMercado ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
+                <BankInfoNumber>{isInitialMercado ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
               </BankInfoBlockOrder>
             </MPinfoItemsWrapper>
             <ListItemsWrapper style={{ margin: '10px 20px 10px 10px'}}>

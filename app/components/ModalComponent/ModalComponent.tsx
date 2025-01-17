@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-
 import Image from 'next/image'
 import { Form } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
-import CartItemComponent from './CartItemComponent'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import ModalForm from './ModalForm'
 import { calculateSum, enivoPrice } from '@/app/components/helpers'
+import CartItemComponent from './CartItemComponent/CartItemComponent'
+import ModalForm from './FormComponent/ModalForm'
 import {
   ModalStyled,
   ListItemsWrapper,
@@ -120,7 +119,7 @@ const ModalComponent = ({data}) => {
           totalPrice,
           products: filteredArray,
           // products: cartItems.map(({ idCart, amount }) => ({ productId: idCart, quantity: amount })),
-          form_data: mockedFormValues,
+          form_data: values,
         }),
       });
 
@@ -135,7 +134,7 @@ const ModalComponent = ({data}) => {
       // TRANSFER
       if (paymentOption === 'transfer') {
         console.log('orderResponse', orderData._id)
-        if (orderData._id) router.push(`/check-out/pending?order_id=${orderData._id}`)
+        if (orderData._id) router.push(`/checkout?order_id=${orderData._id}`)
       }
 
       // Mercado Pago
@@ -184,16 +183,17 @@ const ModalComponent = ({data}) => {
         {isEmpty ? (
           <>
             <div style={{
-              display: 'flex',
-              alignItems: 'center', 
-              justifyContent: 'center',
-              flexDirection: 'column',
+              // display: 'flex',
+              // alignItems: 'center', 
+              // justifyContent: 'center',
+              // flexDirection: 'column',
             }}>
               <Image 
                 src={img55} 
                 fill={true} 
                 alt='Imagen de fondo del carrito' 
                 priority // hight loading priority
+                sizes='100vh'
                 style={{
                   objectFit: "cover",
                   zIndex: -5
