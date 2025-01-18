@@ -1,3 +1,8 @@
+// So this data was only for navigation purpose in
+// BUT I put in db urls to every product to make all more flexible
+// BUT for that I used useGetProductQuery on not-found/checkout pages and Complex/Footer/Header/Navigation
+// for easy backroll I'll leave it for now
+
 const data = [
   {
     id: '1',

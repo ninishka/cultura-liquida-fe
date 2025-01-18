@@ -35,10 +35,16 @@ const inputStyle = css`
 
 export const StyledInput = styled(Input)`
   ${inputStyle}
+  &:hover, &:focus {
+    border: 1px #F2C94C solid; 
+  }
 `
 
 export const StyledTextarea = styled(Input.TextArea)`
   ${inputStyle}
+  &:hover, &:focus {
+    border: 1px #F2C94C solid; 
+  }
 `
 
 export const StyledSelect = styled(Select)<OrderStyledProps>`
@@ -47,6 +53,8 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
     &.ant-select * {
       cursor: auto  !important;
       font-weight: 700;
+
+
     }
 
     &.ant-select-disabled {
@@ -68,6 +76,9 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
 
   .ant-select-selector {
     border-radius: 16px;
+    &:hover, &:focus-within {
+      border-color: #F2C94C !important;
+    }
   }
 `
 
@@ -133,11 +144,12 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
 
 export const CheckboxInput = styled(Checkbox)`
   .ant-checkbox-inner {
-    border-color: #4FDB40;
+    border-color: #4FDB40 !important;
+    transition: all 0.3s ease;
   }
 
   .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #4FDB40;
+    background-color: #4FDB40 !important;
   }
 `
 

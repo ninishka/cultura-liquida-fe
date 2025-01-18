@@ -67,9 +67,9 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
               // style={{ width: '33%'}}
             >
               <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
-                <Radio value="apple" style={{ color: 'white' }} onClick={() => setPaymentOption('mercado')}> Mercado Pago </Radio>
+                <Radio value="mercado" style={{ color: 'white' }} onClick={() => setPaymentOption('mercado')}> Mercado Pago </Radio>
                 {/* <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio> */}
-                <Radio value="pear2" style={{ color: 'white' }} onClick={() => setPaymentOption('transfer')}> Transferencia a cuenta bancaria </Radio>
+                <Radio value="transfer" style={{ color: 'white' }} onClick={() => setPaymentOption('transfer')}> Transferencia a cuenta bancaria </Radio>
               </Radio.Group>
             </StyledFormItem>
           </TotalWrap>
