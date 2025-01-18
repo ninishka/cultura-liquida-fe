@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { Radio, Tooltip } from 'antd'
+import Image from 'next/image'
 import { useAppSelector } from '@/lib/redux/store/hooks'
 import ModalFormFields from './ModalFormFields'
 import type { ModalFormProps } from '@/types/types'
 import { calculateSum, enivoPrice, totalSumStyledByDot } from '@/app/components/helpers'
 import BankingBox from '../BankingBox/BankingBox'
+import payArrow from '@/app/icons/Frame 228.svg'
 
 import {
   StyledForm,
@@ -13,7 +15,7 @@ import {
   MailLink,
   MailWrapper,
   MailDescription,
-  MailLorar,
+  MailImgWrapper,
   SubtotalText,
   PriceTextBox,
   BankingBoxesWrapper,
@@ -88,7 +90,9 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
                   Después de realizar el pago, envía el comprobante junto con el número de tu pedido al correo para confirmar la transacción.
                 </MailDescription>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <MailLorar>LLORAR:</MailLorar>
+                  <MailImgWrapper>
+                    <Image src={payArrow} alt='Después del pago envíe una captura de pantalla al correo electrónico' />
+                  </MailImgWrapper>
                   <MailLink href='mailto:culturaliquidacol@gmail.com'>culturaliquidacol@gmail.com</MailLink>  
                 </div>
               </MailWrapper>

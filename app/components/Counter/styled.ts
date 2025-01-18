@@ -10,6 +10,10 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
   gap: 20px;
   align-items: center;
 
+  @media (min-width: 1700px) {
+    margin: ${({$isModal}) => $isModal && '20px 3vh'};
+  } 
+
   @media (max-width: 1200px) {
     justify-content: center;
     /* margin: 20px 1vh 20px 3vh; */
@@ -27,8 +31,13 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
         margin: 0 13%; */
   } 
 
-  @media (max-width: 700px) {
-    margin: 0;
+
+  @media (max-width: 764px) {
+    margin: 40px 7vw;
+  }
+
+  @media (max-width: 650px) {
+    margin: 10px;
   } 
 `
 

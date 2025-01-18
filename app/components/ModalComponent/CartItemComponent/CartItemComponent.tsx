@@ -72,7 +72,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
               <OrderedX>x <OrderedAmount>{tAmount}</OrderedAmount></OrderedX>
             )
           }
-          <Price style={{margin: '0px 20px'}} $isOrder={isOrder}>{styledAmount} COP</Price>
+          <Price $isOrder={isOrder}>{styledAmount} COP</Price>
         </InfoContainer>
       </CartItem>
       {!isOrder && (

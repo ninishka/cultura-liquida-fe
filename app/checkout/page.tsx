@@ -46,8 +46,8 @@ import {
 // merchant_account_id: null
 // .... addition fields https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
 
-// sucsess with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
-// sucsess without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
+// success with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
+// success without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
 // failed (I just change status in db) http://localhost:3000/checkout?order_id=67865ffc4440e5466f9bcb0d
 // pending http://localhost:3000/checkout?order_id=6787cf02353ec4d4bf6c72ad 
 
