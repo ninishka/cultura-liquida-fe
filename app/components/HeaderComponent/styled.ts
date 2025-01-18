@@ -11,6 +11,7 @@ export const HeaderFull = styled.header<NavigationProps>`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #9F9F9F;
+  min-height: 88px; 
 
   position: sticky;
   top: 0;
@@ -18,6 +19,8 @@ export const HeaderFull = styled.header<NavigationProps>`
   z-index: 10;
   
   @media (max-width: 850px) {
+    min-height: none; 
+
     ${({$isopen}) => $isopen ? css`
       border-bottom: none;
       border-radius: unset;

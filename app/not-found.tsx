@@ -6,6 +6,34 @@ import Image from 'next/image'
 import img404 from '@/app/icons/404error.svg'
 import styled from 'styled-components'
 import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
+import { useGetProductQuery } from "@/lib/redux/slices/api";
+
+const NotFound: FC = () => {
+  const { data, isLoading } = useGetProductQuery('');
+  if (isLoading) return ''
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center'}}>
+      <Wrapper>
+        <Title style={{ marginBottom: 10, textTransform: 'uppercase'}}>Página no encontrada</Title>
+        <BackLink href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
+          <ArrowPrev aria-label="Back" />
+          <p style={{ marginLeft: 10, textTransform: 'uppercase'}}>Devolver</p>
+        </BackLink>
+      </Wrapper>
+
+      <Image             
+        src={img404} 
+        alt='La imagen Página no encontrada'
+        loading="eager"
+        // sizes="(max-width: 1200px) 100vw, 50vw" 
+        priority // hight loading priority 
+      />
+    </div>
+  )
+}
+
+export default NotFound
 
 export const Title = styled.h2`
   font-size: 48px;
@@ -51,28 +79,3 @@ export const BackLink = styled(Link)`
     background-color: #F2C94C;
   }
 `
-
-const NotFound: FC = () => {
-
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center'}}>
-      <Wrapper>
-        <Title style={{ marginBottom: 10, textTransform: 'uppercase'}}>Página no encontrada</Title>
-        <BackLink href="/product/melena-de-leon-capsules">
-          <ArrowPrev aria-label="Back" />
-          <p style={{ marginLeft: 10, textTransform: 'uppercase'}}>Devolver</p>
-        </BackLink>
-      </Wrapper>
-
-      <Image             
-        src={img404} 
-        alt='La imagen Página no encontrada'
-        loading="eager"
-        // sizes="(max-width: 1200px) 100vw, 50vw" 
-        priority // hight loading priority 
-      />
-    </div>
-  )
-}
-
-export default NotFound

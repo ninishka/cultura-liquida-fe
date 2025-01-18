@@ -3,6 +3,14 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
+  "description": "Suplementos dietéticos a base de hongos para la salud del cuerpo y el espíritu.",
+  "releaseYear": "2025",
+  "author": "Yuri Drobkov maat-re@proton.me",
+  "contributors": [
+    "Nikolai Gulyaev gulyaevnikolaj78@gmail.com",
+    "Aleksei Drobkov abkommem@gmail.com",
+    "Nino Zambakhidze zambakhidzenini.740@gmail.com"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

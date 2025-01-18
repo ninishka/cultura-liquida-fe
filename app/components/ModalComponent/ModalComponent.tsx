@@ -17,19 +17,19 @@ import {
   CartPayButton
 } from './styled'
 
-  const mockedFormValues = {
-      name: "One",
-      surname: "One",
-      document_type: "id",
-      id_number: "1234",
-      mail_address: "123",
-      state: "ANT",
-      city: "Abejorral",
-      country: "Colombia",
-      phone_number: "3107883758",
-      email: "first@gmail.com",
-      notes: 'notesnotesnotesnotes'
-  }
+const mockedFormValues = {
+  name: "One",
+  surname: "One",
+  document_type: "CC",
+  id_number: "1234",
+  mail_address: "123",
+  state: "ANT",
+  city: "Abejorral",
+  country: "Colombia",
+  phone_number: "3107883758",
+  email: "first@gmail.com",
+  notes: 'notesnotesnotesnotes'
+}
 
 const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
@@ -79,8 +79,7 @@ const ModalComponent = ({data}) => {
 
   const isEmpty = !cartItems?.length
 
-  const onFinish = async (values) => {
-    console.log('values', values)
+  const onFinish = async values => {
     setLoading(true);
 
     try {

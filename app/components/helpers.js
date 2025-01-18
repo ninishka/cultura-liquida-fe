@@ -67,3 +67,7 @@ export const handleDelete = (itemId, cartItems, dispatch) => {
   const item = cartItems.filter(item => item?.id === itemId)
   dispatch(removeFromCart(...item, 0, true))
 }
+
+export const uniqueTitles = x => x?.filter((product, index, self) => 
+  index === self.findIndex(p => p.title === product.title)
+);

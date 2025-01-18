@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import data from '@/app/components/data'
 import type { NavigationProps } from '@/types/types'
+import { useGetProductQuery } from "@/lib/redux/slices/api";
+import { uniqueTitles } from '@/app/components/helpers'
 import {
   Navigation,
   UlItself,
@@ -8,18 +9,24 @@ import {
   StyledLink
 } from './styled'
 
-const NavigationComponent: FC<NavigationProps> = ({ isopen, setShowMenu, isFooter }) => (
-  <Navigation $isopen={isopen} $isFooter={isFooter}>
-    <UlItself $isFooter={isFooter}> 
-      {data.map(({ title, url, types }) => (
-        <LiItself key={title} onClick={() => isopen && setShowMenu(false)}>
-          <StyledLink href={`/product/${url}-${types[0]}`} $isFooter={isFooter}>
-            {title}
-          </StyledLink>
-        </LiItself>
-      ))} 
-    </UlItself>
-  </Navigation>
-)
+const NavigationComponent: FC<NavigationProps> = ({ isopen, setShowMenu, isFooter }) => {
+  const { data, isLoading } = useGetProductQuery('');
+  if (isLoading) return ''
+
+  const uni = uniqueTitles(data)
+  return (
+    <Navigation $isopen={isopen} $isFooter={isFooter}>
+      <UlItself $isFooter={isFooter}> 
+        {uni?.map(({ title, slug }) => (
+          <LiItself key={title} onClick={() => isopen && setShowMenu(false)}>
+            <StyledLink href={`/product/${slug}`} $isFooter={isFooter}>
+              {title}
+            </StyledLink>
+          </LiItself>
+        ))} 
+      </UlItself>
+    </Navigation>
+  )
+}
 
 export default NavigationComponent

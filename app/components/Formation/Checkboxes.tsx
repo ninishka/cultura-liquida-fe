@@ -3,25 +3,23 @@ import Link from 'next/link'
 import { Tooltip } from 'antd'
 import Counter from '@/app/components/Counter/Counter'
 import {
-    CheckBoxGroup,
-    Item,
-    Icon,
-    TextDesc,
-    RadioButton,
-    LabelContent,
-    AbsentProductCheckboxWrapper,
-    AbsentProductText
-  } from './styled'
+  CheckBoxGroup,
+  Item,
+  Icon,
+  TextDesc,
+  RadioButton,
+  LabelContent,
+  AbsentProductCheckboxWrapper,
+  AbsentProductText
+} from './styled'
 
 const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
   <>
     <CheckBoxGroup>
-      {formationData.map(({type, displayingType, icon, id, url, size, price, availableStock}) => {
-        const hrefLogic = `/product/${url}-${type}${size ? `-${size}` : ''}`;
-        return (
-          <Fragment key={hrefLogic}>
+      {formationData.map(({type, displayingType, icon, id, slug, size, availableStock}) => (
+          <Fragment key={slug}>
             {!!availableStock ? (
-              <Link key={id} href={hrefLogic} style={{textDecoration: 'none', color: '#fff', zIndex: !availableStock && -99 }}>
+              <Link key={id} href={slug} style={{textDecoration: 'none', color: '#fff', zIndex: !availableStock && -99 }}>
                 <Item aria-label='Elección del tamaño del producto'> 
                   <label htmlFor={id} aria-label='Elección del tamaño del producto'>
                     <RadioButton
@@ -45,7 +43,7 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
               </AbsentProductCheckboxWrapper>
             )}
           </Fragment>
-        )})
+        ))
       }
     </CheckBoxGroup>
     <Counter filterdContent={filterdContent} preObj={preObj} />

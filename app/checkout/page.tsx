@@ -12,6 +12,7 @@ import approvedIcon from '@/app/icons/icon_paid_true.svg'
 import pendingIcon from '@/app/icons/icon_paid_error.svg'
 import falseIcon from '@/app/icons/icon_paid_false.svg'
 import { enivoPrice } from '@/app/components/helpers'
+import { useGetProductQuery } from "@/lib/redux/slices/api"
 import {
   StyledLink,
   CheckoutWrapper,
@@ -75,8 +76,9 @@ const CheckoutPage: FC = () => {
   // isFetching for every req if using refetch()
   // status also can be usefull here
   const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery(orderIdParam);
-  // console.log('status: ', status);
   const [respStatus, setRespStatus] = useState(data?.status)
+
+  const { data: productData, isLoading: isLoadingProduct } = useGetProductQuery('');
 
   useEffect(() => {
     console.log('useEffect')
@@ -121,8 +123,6 @@ const CheckoutPage: FC = () => {
       };
       
       // if data exist, but mp_data absent or status mismatched
-      // PS I am not sure about status
-      // TODO - need to check Buisness logic about status
       if (data && typeof data === 'object') {
         const hasNoMercadoPagoData = !data?.mp_data;
         const isStatusMismatched = data.status !== data.mp_data?.status;
@@ -136,7 +136,7 @@ const CheckoutPage: FC = () => {
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies
 
-  if (isLoading) return <div>Loading order...</div>;
+  if (isLoading || isLoadingProduct) return <div>Loading order...</div>;
   // if (error) return <div>Error loading order: {error.message}</div>;
 
   const handleRefetch = () => {
@@ -160,7 +160,7 @@ const CheckoutPage: FC = () => {
 
   return (
     <PageWrapper>
-      <StyledLink href="/product/melena-de-leon-capsules" aria-label="Volver a la página principal" style={{ margin: '10px auto 0 15px' }}>
+      <StyledLink href={productData?.[0]?.slug ? `/product/${productData?.[0]?.slug}` : '/'} aria-label="Volver a la página principal" style={{ margin: '10px auto 0 15px' }}>
         <p> ← volver a la página principal </p>
       </StyledLink>
 
