@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { Form, Select, Button } from 'antd'
 import styled from 'styled-components'
@@ -12,28 +12,37 @@ const Adm: FC = () => {
   const [form] = Form.useForm()
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id');
-  const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery(orderIdParam);
+  const { data, isLoading, refetch, isFetching } = useGetOrderByIdQuery(orderIdParam);
 
+  const [updating, setUpdating] = useState(false)
   if (isLoading) return <div>Loading order...</div>;
 
   const onFinish = async ({status}) => {
-    const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        orderId: orderIdParam,
-        updatedData: {
-          status
+    setUpdating(true)
+    try {
+      const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      }),
-    });
-
-    if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
-
-    const updatedOrder = await response.json();
-    console.log('Updated Order:', updatedOrder);
+        body: JSON.stringify({
+          orderId: orderIdParam,
+          updatedData: {
+            status
+          },
+        }),
+      });
+  
+      if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
+  
+      const updatedOrder = await response.json();
+      console.log('Updated Order:', updatedOrder);
+    } catch (error) {
+      console.error('Error updating order:', error);
+      throw new Error('Failed to update order');
+    } finally {
+      setUpdating(false)
+    }
   }
 
   const handleRefetch = () => {
@@ -68,7 +77,7 @@ const Adm: FC = () => {
               placeholder="Elige una opción..."
               options={[
                 { value: 'pending', label: 'Pending' },
-                { value: 'success', label: 'Success' },
+                { value: 'approved', label: 'Approved' },
                 { value: 'failed', label: 'Failed' },
               ]}
               style={{ marginLeft: 70, width: '80%'}}
@@ -83,7 +92,7 @@ const Adm: FC = () => {
             <p>Updated at:</p>
             <p>{updatedAt}</p>
           </InfoField>
-          <Button htmlType="submit"> UPDATE </Button>
+          <Button htmlType="submit" loading={updating}> UPDATE </Button>
         </StyledForm>
       )
       })}
