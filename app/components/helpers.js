@@ -68,6 +68,9 @@ export const handleDelete = (itemId, cartItems, dispatch) => {
   dispatch(removeFromCart(...item, 0, true))
 }
 
+// so here reseived all products and returns only uniques 3 of them
+// this how I created Nav logic for Header, Footer and Complex
+// if Ull change order in db something can change be carefull 
 export const uniqueTitles = x => x?.filter((product, index, self) => 
   index === self.findIndex(p => p.title === product.title)
 );
