@@ -1,13 +1,13 @@
 import { productContentComponents } from '@/app/data'
 
 export const getActiveComponent = (layoutData, slug) => {
-    const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
-    const filtredServerData = layoutData?.filter(i => i?.title === staticData?.formationData?.[0]?.title)
-  
-    const newFormationData = staticData?.formationData?.map((fItem, index) => {
-      return { ...fItem, ...filtredServerData?.[index] };
-    });
-  
+  const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
+  const filtredServerData = layoutData?.filter(i => i?.title === staticData?.formationData?.[0]?.title)
+
+  const newFormationData = staticData?.formationData?.map((fItem, index) => {
+    return { ...fItem, ...filtredServerData?.[index] };
+  });
+
   return { ...staticData, formationData: newFormationData }
 }
 
@@ -67,3 +67,7 @@ export const handleDelete = (itemId, cartItems, dispatch) => {
   const item = cartItems.filter(item => item?.id === itemId)
   dispatch(removeFromCart(...item, 0, true))
 }
+
+export const uniqueTitles = x => x?.filter((product, index, self) => 
+  index === self.findIndex(p => p.title === product.title)
+);

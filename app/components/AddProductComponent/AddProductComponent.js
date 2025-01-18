@@ -40,6 +40,10 @@ const AddProductComponent = () => {
                     <label>availableStock</label>
                     <input name='availableStock' type='number' />
                 </div>
+                <div>
+                    <label>slug</label>
+                    <input name='slug' type='string' />
+                </div>
                 <button>Submit</button>
             </form>
         </>

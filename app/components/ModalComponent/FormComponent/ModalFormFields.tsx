@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { Checkbox } from 'antd'
 import { CaretDownOutlined } from '@ant-design/icons';
 import {
   StyledInput,

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense, FC } from 'react'
+import React, { FC } from 'react'
 import { useParams } from 'next/navigation';
 import type { FormationProps } from '@/types/types'
 import { init } from '@/app/components/helpers'
@@ -14,7 +14,6 @@ import {
   TitleH1,
   Description,
   Release,
-
 } from './styled'
 import Checkboxes from './Checkboxes'
 
@@ -22,12 +21,9 @@ const Formation: FC<FormationProps> = ({ formationData, error }) => {
   const { slug } = useParams();
   const rInit = init(slug)
   const filterdContent = formationData?.filter(({ id }) => id === rInit)
-  // const filterdContent2 = formationData?.find(({ id }) => id === rInit)
-  // TODO need to do something better with ids
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.type + (filterdContent?.[0]?.type === "extracts" ? filterdContent?.[0]?.size : '')
   const preObj = {idCart , ...filterdContent?.[0]}
   const source = filterdContent?.[0]?.src || ''
-
 
   // if (error) return <div>Error: {error?.message}</div>;
 
@@ -54,11 +50,6 @@ const Formation: FC<FormationProps> = ({ formationData, error }) => {
         </ImageWrapperMobile>
         <Release>Seleccione la presentación del producto:</Release>
         <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} />
-        {/* <div>
-          <Release>Seleccione la presentación del producto:</Release>
-          <Checkboxes rInit={rInit} formationData={formationData} filterdContent={filterdContent} preObj={preObj} data={formationData} />
-          <Counter filterdContent={filterdContent} preObj={preObj} />
-        </div> */}
       </ContentWrapper>
       <ImageWrapperDesktop key={source}>
         <ImageStyled 

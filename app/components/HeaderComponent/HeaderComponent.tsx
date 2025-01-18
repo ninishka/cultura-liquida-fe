@@ -10,6 +10,7 @@ import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
 import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
+import { useGetProductQuery } from "@/lib/redux/slices/api";
 
 import {
   LogoFull,
@@ -26,12 +27,13 @@ import {
 const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useAppDispatch()
   const { cartItems } = useAppSelector(state => state.cart);
+  const { data } = useGetProductQuery('');
   const [ showMenu, setShowMenu ] = useState(false)
   const totalAmount = cartItems.reduce((sum, item) => sum + item.amount, 0);
   
   return (
   <HeaderFull $isopen={showMenu ? true : false}>
-    <LogoFull href='/product/melena-de-leon-capsules'>
+    <LogoFull href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
       <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
     </LogoFull>
     

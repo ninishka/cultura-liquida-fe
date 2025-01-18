@@ -9,9 +9,10 @@ export interface IProduct { // extends Document
   displayingType: string;
   size?: string;
   price: number;
-  totalStock: number,
-  reservedStock: number,
-  availableStock: number,
+  totalStock: number;
+  reservedStock: number;
+  availableStock: number;
+  slug: string;
 }
 
 const productSchema = new mongoose.Schema<IProduct>({
@@ -25,6 +26,7 @@ const productSchema = new mongoose.Schema<IProduct>({
   totalStock: { type: Number, required: true },
   reservedStock: { type: Number, default: 0 },
   availableStock: { type: Number, required: true },
+  slug: { type: String, required: true },
 });
 
 const Product: Model<IProduct> = mongoose.models.Product || mongoose.model<IProduct>('Product', productSchema);

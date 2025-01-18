@@ -49,20 +49,18 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
         <TotalBox>
           <TotalWrap>
             <LeftSideWrap>
-              {/* <div style={{ margin: 15, width: '100%' }}> */}
-                <PriceTextBox>
-                  <SubtotalText>Subtotal: </SubtotalText>
-                  <SubtotalText>{displaySubtotal} cop</SubtotalText>
-                </PriceTextBox>
-                <PriceTextBox>
-                  <SubtotalText>Envío: </SubtotalText>
-                  <SubtotalText>{displayEnivo} cop</SubtotalText>
-                </PriceTextBox>
-                <PriceTextBox style={{ marginTop: 10 }}>
-                  <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
-                  <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{styledTotalSum} COP</p>
-                </PriceTextBox>
-              {/* </div> */}
+              <PriceTextBox>
+                <SubtotalText>Subtotal: </SubtotalText>
+                <SubtotalText>{displaySubtotal} cop</SubtotalText>
+              </PriceTextBox>
+              <PriceTextBox>
+                <SubtotalText>Envío: </SubtotalText>
+                <SubtotalText>{displayEnivo} cop</SubtotalText>
+              </PriceTextBox>
+              <PriceTextBox style={{ marginTop: 10 }}>
+                <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
+                <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{styledTotalSum} COP</p>
+              </PriceTextBox>
             </LeftSideWrap>  
             <StyledFormItem 
               label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
