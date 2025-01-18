@@ -201,24 +201,24 @@ export const CartPayButton = styled(Button)`
 export const MailLink = styled(Link)`
   font-weight: 700;
   margin: 10;
-  color: black;
+  color: #F2C94C;
   letter-spacing: 0.6px;
   text-decoration: underline;
 
   &:hover {
-    color: black !important;
+    color: #F2C94C !important;
     /* text-decoration: underline; */
   }
 `
 
 export const MailWrapper = styled.div`
-  background-color: #F2C94C;
+  border: 1px solid #F2C94C;
   border-radius: 16px;
   width: -webkit-fill-available;
   margin: 10px;
   padding: 0 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   @media (max-width: 850px) {
     flex-direction: column;
@@ -226,20 +226,19 @@ export const MailWrapper = styled.div`
 `
 
 export const MailDescription = styled.p`
+  color: white;
   max-width: 50%;
   margin: 10px 0;
   line-height: 1.2;
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     max-width: none;
   }
 `
 
-export const MailLorar = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0 10px 0 0;
-  @media (max-width: 650px) {
-    margin: 5px 0;
+export const MailImgWrapper = styled.p`
+  margin: 6px 30% 0;
+  @media (max-width: 850px) {
+    margin: 0;
   }
 `
 

@@ -100,7 +100,7 @@ export const InfoContainer2 = styled.div`
   align-items: flex-start;
   min-width: 13vw;
 
-  @media (max-width: 2200px) {
+  /* @media (max-width: 2200px) {
     min-width: 15vw;
   }
 
@@ -116,7 +116,7 @@ export const InfoContainer2 = styled.div`
     min-width: 22vw;
     flex-direction: column;
     margin: auto 20px;
-  }
+  } */
 
   @media (max-width: 500px) {
     margin: 0;
@@ -175,8 +175,15 @@ export const Price = styled.p<OrderStyledProps>`
   margin: 0;
   color: black;
   white-space: nowrap;
+  margin: 0 3% 0 0;
+  
+  @media (max-width: 1600px) {
+    margin: 0px 1%;
+  }
 
   @media (max-width: 850px) {
+    /* margin: 0px 20px; */
+
     text-align: left;
     font-size: 24px;
     /* margin-top: 20px; */
@@ -220,6 +227,11 @@ export const ItemProductTypeText = styled.p`
   text-align: center;
   width: 90px;
   font-size: 16px;
+  margin-left: 3vw;
+
+  @media (min-width: 1700px) {
+    margin-left: auto
+  } 
 
   @media (max-width: 764px) {
     margin: 0 8vw 0 0;
@@ -243,4 +255,11 @@ export const OrderedAmount = styled.b`
 export const OrderedX = styled.p`
   margin: 20px 2vw;
   ${orderedStyle}
+
+  @media (max-width: 1060px) {
+    margin: 20px 6vw;
+  }
+  @media (max-width: 600px) {
+    margin: 20px 2vw;
+  }
 `
