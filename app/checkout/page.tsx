@@ -2,7 +2,8 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
-import { Form } from 'antd';
+import Link from 'next/link';
+import { Form, Tooltip } from 'antd';
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
@@ -22,7 +23,9 @@ import {
   PriceTextBox,
   ScrolableZone,
   SyncOutlinedStyled,
-  PageWrapper
+  PageWrapper,
+  ModalTitleCheckout,
+  ListItemsWrapperCheckout 
 } from './styled'
 
 import { 
@@ -31,13 +34,6 @@ import {
   BankInfoNumber
  } from '@/app/components/ModalComponent/BankingBox/styled'
 
- import { 
-  ListItemsWrapper, 
-  ModalTitle, 
- } from '@/app/components/ModalComponent/styled'
-
-
-// http://localhost:3000/check-out/success?collection_id=1320658712&collection_status=approved&payment_id=1320658712&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=26357310094&preference_id=1700322474-82fa7b59-7f7e-4a8d-af3a-1b25fcf367ff&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
 // collection_status: approved
 // payment_id: 1328778667
 // status: approved   
@@ -47,14 +43,17 @@ import {
 // site_id: MCO
 // processing_mode: aggregator
 // merchant_account_id: null
+// .... addition fields https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
 
-// s http://localhost:3000/check-out/success?collection_id=1320658712&collection_status=approved&payment_id=1320658712&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=26357310094&preference_id=1700322474-82fa7b59-7f7e-4a8d-af3a-1b25fcf367ff&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
-// f http://localhost:3000/check-out/pending?collection_id=1329051277&collection_status=in_process&payment_id=1329051277&status=null&external_reference=null&payment_type=credit_card&merchant_order_id=26362077576&preference_id=1700322474-979af48d-fa96-4380-ad4a-6b5551ba674f&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
-// p http://localhost:3000/check-out/pending?collection_id=1329051277&collection_status=in_process&payment_id=1329051277&status=in_process&external_reference=null&payment_type=credit_card&merchant_order_id=26362077576&preference_id=1700322474-979af48d-fa96-4380-ad4a-6b5551ba674f&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
- 
+// sucsess with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
+// sucsess without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
+// failed (I just change status in db) http://localhost:3000/checkout?order_id=67865ffc4440e5466f9bcb0d
+// pending http://localhost:3000/checkout?order_id=6787cf02353ec4d4bf6c72ad 
 
 const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status', 'payment_type',
-  'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id']
+  'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id', 
+  'external_reference' // - additional field
+]
 
 const formatDate = (dateString: string): string => {
   const options: Intl.DateTimeFormatOptions = {
@@ -72,7 +71,11 @@ const CheckoutPage: FC = () => {
   const isInitialMercado = searchParams?.get('site_id')
   console.log('isInitialMercado: ', isInitialMercado);
 
-  const { data, isLoading, error , refetch} = useGetOrderByIdQuery(orderIdParam);
+  // isLoading only for first req
+  // isFetching for every req if using refetch()
+  // status also can be usefull here
+  const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery(orderIdParam);
+  // console.log('status: ', status);
   const [respStatus, setRespStatus] = useState(data?.status)
 
   useEffect(() => {
@@ -92,7 +95,7 @@ const CheckoutPage: FC = () => {
             acc[key] = searchParams?.get(key) || "Not provided";
             return acc;
           }, {} as Record<string, string>);         
-        
+
           const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
             method: 'PUT',
             headers: {
@@ -134,7 +137,6 @@ const CheckoutPage: FC = () => {
   // searchParams is not dynamic, so no need to put it in dependencies
 
   if (isLoading) return <div>Loading order...</div>;
-  console.log('isLoading: ', isLoading);
   // if (error) return <div>Error loading order: {error.message}</div>;
 
   const handleRefetch = () => {
@@ -147,13 +149,14 @@ const CheckoutPage: FC = () => {
   const displayTotal = totalSumStyledByDot(data?.totalPrice, ' ')
   const beforeDelivery = totalSumStyledByDot(data?.totalPrice - enivoPrice, ' ')
 
-  console.log('respStatus: ', respStatus);
-  console.log('data?.status: ', data?.status);
-  const coloring = (respStatus === 'approved' && '#4FDB40') || ((respStatus === 'in_process' || respStatus === 'pending') && '#F2C94C') 
-  const iconing = (respStatus === 'approved' && approvedIcon) || ((respStatus === 'in_process' || respStatus === 'pending') && pendingIcon) || falseIcon 
-  const wording = (respStatus === 'approved' && 'pagado') || ((respStatus === 'in_process' || respStatus === 'pending') && 'pendiente') || 'no pagado'
-  // in_process is for MP payment status BUT pending is for order record status
+  // in_process - is for MP payment status BUT pending - is for order record status
+  const isPending = (respStatus === 'in_process' || respStatus === 'pending')
 
+  const coloring = (respStatus === 'approved' && '#4FDB40') || (isPending && '#F2C94C') 
+  const iconing = (respStatus === 'approved' && approvedIcon) || (isPending && pendingIcon) || falseIcon 
+  const wording = (respStatus === 'approved' && 'pagado') || (isPending && 'pendiente') || 'no pagado'
+
+  const hasMercadoPagoData = data?.mp_data;
 
   return (
     <PageWrapper>
@@ -163,9 +166,7 @@ const CheckoutPage: FC = () => {
 
       <div style={{display: 'flex', alignItems: 'center', margin: '70px auto 0 15px'}}>
         <h2 style={{textTransform: 'uppercase', fontSize: 48, fontWeight: 500}}>Checkout</h2>
-        <SyncOutlinedStyled onClick={handleRefetch} 
-        // loading={isLoading}
-         />
+        <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} />
       </div>
       <CheckoutWrapper>
         <CheckoutWrapperContent>
@@ -186,34 +187,49 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Metodos de pago:</BankInfoText>
-                <BankInfoNumber>{isInitialMercado ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
+                <BankInfoNumber>{hasMercadoPagoData ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
               </BankInfoBlockOrder>
             </MPinfoItemsWrapper>
-            <ListItemsWrapper style={{ margin: '10px 20px 10px 10px'}}>
+            <ListItemsWrapperCheckout style={{ margin: '10px 20px 10px 10px'}}>
               {data?.products?.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
-            </ListItemsWrapper>
+            </ListItemsWrapperCheckout>
             <>
-              <ModalTitle style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
+              <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitleCheckout>
               <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} initialValues={data?.form_data} isOrder />
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>
         <RightPanel>
-          <StatusPanel $status={coloring}>
-            <div style={{display: 'flex', padding: 27}}>
-              <Image
-                sizes="100vw"
-                src={iconing}
-                alt="El pago fue exitoso"
-                width={40}
-                height={40}
-              />
-              <div style={{margin: '0 15px'}}>
-                <p style={{margin: 0, fontWeight: 400}}>Estado de pago:</p>
-                <p style={{margin: 0, fontWeight: 700}}>{wording}</p>
+          <Tooltip
+            title={
+              (isPending && !hasMercadoPagoData) ? (
+                <div style={{ textAlign: 'center'}}>
+                  Por favor, asegúrese de haber enviado el comprobante de pago al correo electrónico{' '}
+                  <Link style={{ color: '#F2C94C'}} href="mailto:culturaliquidacol@gmail.com">
+                    culturaliquidacol@gmail.com
+                  </Link>
+                </div>
+              ) : (
+                ''
+              )
+            }
+          >
+            <StatusPanel $status={coloring}>
+              <div style={{display: 'flex', padding: 27}}>
+                <Image
+                  sizes="100vw"
+                  src={iconing}
+                  alt="El pago fue exitoso"
+                  width={40}
+                  height={40}
+                />
+                <div style={{margin: '0 15px'}}>
+                  <p style={{margin: 0, fontWeight: 400}}>Estado de pago:</p>
+                  <p style={{margin: 0, fontWeight: 700}}>{wording}</p>
+                </div>
               </div>
-            </div>
-          </StatusPanel>
+            </StatusPanel>
+          </Tooltip>
           <div style={{ margin: 15 }}>
             <PriceTextBox>
               <SubtotalText>Subtotal: </SubtotalText>
@@ -228,7 +244,6 @@ const CheckoutPage: FC = () => {
               <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{displayTotal} COP</p>
             </PriceTextBox>
           </div>
-          
         </RightPanel>
       </CheckoutWrapper>
     </PageWrapper>

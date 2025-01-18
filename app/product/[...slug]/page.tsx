@@ -37,4 +37,3 @@ const ProductSections: FC = () => {
 };
 
 export default ProductSections;
-// export const dynamic = 'force-dynamic'

@@ -42,10 +42,6 @@ const editProduct = async (id: string, updatedData: UpdateProductData): Promise<
   } catch (error) {
     console.error('Error updating product:', error);
     throw new Error('Failed to update product');
-  } finally {
-    // console.log('finally')
-    // revalidatePath('/product/[slug]', 'page')
-    // revalidateTag('/product/[slug]')
   }
 }
 
@@ -66,42 +62,6 @@ const addProduct = async post => {
 }
 
 export { addProduct, getProduct, editProduct }
-
-
-// const deletePost = async id => {
-//     return Post.findByIdAndDelete(id)
-// }
-
-// const editProduct = async (id, updatedData) => {
-//   // REV 3  
-//   // revalidateTag('products')
-//     // revalidateTag('product')
-//     return Post.findByIdAndUpdate(id, updatedData
-//       // , { new: true }
-//     )
-// }
-
-
-
-// ==========
-
-// const editProductWithPayment = async (id: string, data: any): Promise<Product | null> => {
-//   try {
-//     // data should me cartItems
-//     const queryArray = req.body.map(({ id }) => id)
-//   const findedPost = await Post.find({itemId: { $in: data}});
-
-  
-//   return findedPost;
-// } catch (error) {
-//   console.error('Error updating product:', error);
-//   throw new Error('Failed to update product');
-// } finally {
-//   // console.log('finally')
-//   // revalidatePath('/product/[slug]', 'page')
-//   // revalidateTag('/product/[slug]')
-// }
-// }
 
 
 

@@ -138,7 +138,7 @@ const rotate = keyframes`
 
 export const SyncOutlinedStyled = styled(SyncOutlined)<OrderLoadingStyledProps>`
   font-size: 36px;
-  margin: 0 5px 10px;
+  margin: 0 10px 10px;
   color: #4FDB40;
 
   :hover {
@@ -150,3 +150,23 @@ export const SyncOutlinedStyled = styled(SyncOutlined)<OrderLoadingStyledProps>`
   `}
 `
 
+
+
+// those two are duplicated from ModalComponent/styled.js
+export const ListItemsWrapperCheckout = styled.div`
+  width: -webkit-fill-available;
+  margin: 10px;
+`
+export const ModalTitleCheckout = styled.h2`
+  font-weight: 600;
+  line-height: 57.6px;
+  font-size: 48px;
+  color: black;
+  text-align: center;
+  text-transform: uppercase;
+  
+  @media (max-width: 850px) {
+    font-size: 30px;
+  }
+  font-family: var(--font-mohave);
+`

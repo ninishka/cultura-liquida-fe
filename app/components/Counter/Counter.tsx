@@ -21,10 +21,7 @@ const Counter = ({
 }) => {
   const dispatch = useAppDispatch()
   const [ count, setCount ] = useState(amount || 1)
-  // TODO
-  // const displayTotal = filterdContent?.[0]?.price && totalSumStyledByDot(filterdContent?.[0]?.originalPrice, ' ')
-  // console.log('displayTotal', totalSumStyledByDot(filterdContent?.[0]?.originalPrice, ' '))
-  // Warning: Cannot update a component (`HotReload`) while rendering a different component (`Counter`). To locate the bad setState() call inside `Counter`, follow the stack trace as described in
+
   return (                             
     <CounterWrapper $isModal={isModal}>
       <AmountItem $isModal={isModal}>

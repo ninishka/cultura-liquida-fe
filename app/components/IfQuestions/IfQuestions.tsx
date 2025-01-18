@@ -17,7 +17,6 @@ const IfQuestions: FC = () => (
       <TextWrapper>
         <ContactText>¿Tienes preguntas?</ContactText>
         <Text>Contáctanos en Telegram o WhatsApp y te responderemos rápidamente.</Text>
-        {/* TODO add whatsapp link and icon */}
       </TextWrapper>
       <ContactWrapper>
         <Link href="https://t.me/cultura_liquida" target="_blank" aria-label="Telegram"><Tg /></Link>

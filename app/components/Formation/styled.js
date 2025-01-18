@@ -147,35 +147,6 @@ export const TextDesc = styled.h4`
 `
 
 export const RadioButton = styled(Radio)`
-  /* appearance: none;
-  display: inline-block;
-  width: 1.3em;
-  height: 1.3em;
-  background: transparent;
-  border-radius: 50%;
-  border: 0.5px solid #ddd;
-  cursor: pointer;
-  position: relative;
-  margin-left: 20px;
-
-  @media (max-width: 850px) {
-    margin-left: 0;
-  }
-
-  &:checked::after {
-    content: "";
-    display: block;
-    width: 0.7em; 
-    height: 0.7em;
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  } */
-
 display: flex;
 align-items: center;
     margin-left: 20px;

@@ -110,6 +110,8 @@ const ModalComponent = ({data}) => {
         idCart: obj.idCart,
         id: obj.idCart, //mb remove?
         size: obj.size,
+        description: obj.description,
+        icon: obj.icon
       }));
       const orderResponse = await fetch('/api/orders', {
         method: 'POST',
@@ -118,7 +120,6 @@ const ModalComponent = ({data}) => {
           userId: 'mockedUserId',
           totalPrice,
           products: filteredArray,
-          // products: cartItems.map(({ idCart, amount }) => ({ productId: idCart, quantity: amount })),
           form_data: values,
         }),
       });
@@ -183,10 +184,10 @@ const ModalComponent = ({data}) => {
         {isEmpty ? (
           <>
             <div style={{
-              // display: 'flex',
-              // alignItems: 'center', 
-              // justifyContent: 'center',
-              // flexDirection: 'column',
+              display: 'flex',
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexDirection: 'column',
             }}>
               <Image 
                 src={img55} 

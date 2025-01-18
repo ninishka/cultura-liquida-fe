@@ -18,7 +18,6 @@ export const HeaderFull = styled.header<NavigationProps>`
   z-index: 10;
   
   @media (max-width: 850px) {
-    border-radius: 0 16px 16px;
     ${({$isopen}) => $isopen ? css`
       border-bottom: none;
       border-radius: unset;
@@ -51,16 +50,18 @@ export const Cart = styled(Image)`
 export const CartWrap = styled.div`
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
-  padding:  6px 9px 6px 9px;
+  padding:  6px;
   margin-right: 30px;
   position: relative;
   cursor: pointer;
+  border: 1px solid transparent;
 
   /* box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); */
 
   transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
+    border: 1px solid #9F9F9F;
   }
 
   @media (max-width: 850px) {
@@ -86,11 +87,14 @@ export const CounterCartWrap = styled.div`
 export const BurgerWrap = styled.div`
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
-  padding:  6px 9px 6px 9px;
+  padding:  6px;
   margin-right: 30px;
   position: relative;
+  border: 1px solid transparent;
+ 
   &:hover{
     background-color: #252525;
+    border: 1px solid #9F9F9F;
   }
   display: none;
   @media (max-width: 850px) {

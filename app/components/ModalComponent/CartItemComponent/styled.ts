@@ -219,24 +219,11 @@ export const ItemProductTypeText = styled.p`
   color: red;
   text-align: center;
   width: 90px;
-  /* margin: 0 20px 2px 2vw; */
   font-size: 16px;
-  /* margin: 0 6vh 0 8vh;
-  
-
-  @media (max-width: 1650px) {
-    margin: 0 5vh 0 7vh;
-  }
-
-  @media (max-width: 940px) {
-    margin: 0 0.5vh 0 1.5vh;
-  } */
 
   @media (max-width: 764px) {
     margin: 0 8vw 0 0;
     width: auto;
-
-    /* margin: auto 20px; */
   }
 `
 

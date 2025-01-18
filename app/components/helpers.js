@@ -1,13 +1,13 @@
 import { productContentComponents } from '@/app/data'
 
 export const getActiveComponent = (layoutData, slug) => {
-    const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
-    const filtredServerData = layoutData?.filter(i => i?.title === staticData?.formationData?.[0]?.title)
-  
-    const newFormationData = staticData?.formationData?.map((fItem, index) => {
-      return { ...fItem, ...filtredServerData?.[index] };
-    });
-  
+  const staticData = productContentComponents?.find(({ itemUrl }) => slug[0]?.includes(itemUrl))
+  const filtredServerData = layoutData?.filter(i => i?.title === staticData?.formationData?.[0]?.title)
+
+  const newFormationData = staticData?.formationData?.map((fItem, index) => {
+    return { ...fItem, ...filtredServerData?.[index] };
+  });
+
   return { ...staticData, formationData: newFormationData }
 }
 
