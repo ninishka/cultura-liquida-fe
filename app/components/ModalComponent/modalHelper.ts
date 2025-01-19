@@ -31,6 +31,7 @@ export const updateExistingProduct = async (cartItems, data) => {
 export const createNewOrder = async (cartItems, enivoPrice, values) => {
   const totalPrice = calculateSum(cartItems, enivoPrice);
   const filteredArray = cartItems.map(obj => ({
+    _id: obj._id,
     title: obj.title,
     ingredient: obj.ingredient,
     type: obj.type,
