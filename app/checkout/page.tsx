@@ -22,7 +22,7 @@ import {
   StatusPanel,
   MPinfoItemsWrapper,
   SubtotalText,
-  PriceTextBox,
+  PriceTextBoxCheckout,
   ScrolableZone,
   SyncOutlinedStyled,
   PageWrapper,
@@ -223,18 +223,18 @@ const CheckoutPage: FC = () => {
             </StatusPanel>
           </Tooltip>
           <div style={{ margin: 15 }}>
-            <PriceTextBox>
+            <PriceTextBoxCheckout>
               <SubtotalText>Subtotal: </SubtotalText>
               <SubtotalText>{beforeDelivery} cop</SubtotalText>
-            </PriceTextBox>
-            <PriceTextBox>
+            </PriceTextBoxCheckout>
+            <PriceTextBoxCheckout>
               <SubtotalText>Envío: </SubtotalText>
               <SubtotalText>{displayEnivo} cop</SubtotalText>
-            </PriceTextBox>
-            <PriceTextBox style={{ marginTop: 10 }}>
+            </PriceTextBoxCheckout>
+            <PriceTextBoxCheckout style={{ marginTop: 10 }}>
               <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
               <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{displayTotal} COP</p>
-            </PriceTextBox>
+            </PriceTextBoxCheckout>
           </div>
         </RightPanel>
       </CheckoutWrapper>

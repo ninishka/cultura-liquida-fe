@@ -91,7 +91,7 @@ export const SubtotalText = styled.p`
   color: white;
 `
 
-export const PriceTextBox = styled.div`
+export const PriceTextBoxCheckout = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0;

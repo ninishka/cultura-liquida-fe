@@ -37,17 +37,3 @@ export const BankInfoBlockOrder = styled(BankInfoBlock)`
     margin-bottom: 10px;
   }
 `
-
-export const BankingBoxesWrapper = styled.div`
-  display: flex;
-  @media (max-width: 650px) {
-    flex-direction: column;
-  }
-`
-
-export const TransferBoxWrapper = styled.div`
-  margin: 10px;
-  @media (max-width: 850px) {
-    margin: 10px 20px;
-  }
-`

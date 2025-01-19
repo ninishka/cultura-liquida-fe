@@ -49,9 +49,10 @@ const ModalComponent = ({data}) => {
       await payment(orderData, filteredArray, values, paymentOption, router, setPreferenceId)
     } catch (error) {
       console.error('Error processing:', error);
-    } finally {
-      setLoading(false);
-    }
+    } 
+    // finally {              // TODO? it is stoping to early
+    //   setLoading(false);
+    // }
   };
 
   const isEmpty = !cartItems?.length

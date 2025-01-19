@@ -46,6 +46,10 @@ export const TotalWrap = styled.div`
   @media (max-width: 850px) {
     flex-direction: column;
   }
+
+  @media (max-width: 522px) {
+    margin: 0 5px;
+  }
 `
 
 export const TotalBox = styled.div`
@@ -57,6 +61,10 @@ export const TotalBox = styled.div`
   margin: 20px;
   padding: 5px;
   font-family: var(--font-mohave);
+
+  @media (max-width: 522px) {
+    margin: 10px;
+  }
 `
 
 export const CartPayButton = styled(Button)`
