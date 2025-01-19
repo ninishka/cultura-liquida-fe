@@ -7,6 +7,7 @@ const createPreference = async (orderId, cartItems, formValues) => {
       throw new Error("Verbotten: Cart is empty");
     }
     const queryArray = cartItems.map(({
+      _id,
       idCart,
       id,
       title,
@@ -17,6 +18,7 @@ const createPreference = async (orderId, cartItems, formValues) => {
       ingredient,
       description,
     }) => ({
+      _id,
       idCart,
       id,
       title,
@@ -27,12 +29,12 @@ const createPreference = async (orderId, cartItems, formValues) => {
       ingredient,
       description,
     }));
-    console.log('queryArray: ', queryArray);
   
     const client = new MercadoPagoConfig({
-      accessToken: process.env.ACCESSTOKEN_TEST,
-      // accessToken: process.env.ACCESSTOKEN,
-      options: { timeout: 5000, idempotencyKey: 'abc' } // TODO idempotencyKey
+      // accessToken: process.env.ACCESSTOKEN_TEST,
+      // options: { timeout: 5000, idempotencyKey: 'abc' } // TODO idempotencyKey
+      accessToken: process.env.ACCESSTOKEN,
+      options: { timeout: 5000, idempotencyKey: queryArray?.[0]?._id }
     });
     const preference = new Preference(client);
   

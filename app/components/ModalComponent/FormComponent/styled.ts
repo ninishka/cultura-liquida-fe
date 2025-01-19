@@ -245,6 +245,9 @@ export const TransferBoxWrapper = styled.div`
   @media (max-width: 850px) {
     margin: 10px 20px;
   }
+  @media (max-width: 522px) {
+    margin: 5px;
+  }
 `
 
 export const SubtotalText = styled.p`
@@ -253,8 +256,19 @@ export const SubtotalText = styled.p`
   color: white;
 `
 
-export const PriceTextBox = styled.div`
+interface PriceTextBoxStyledProps {
+  $isTotal?: string;
+}
+
+export const PriceTextBox = styled.div<PriceTextBoxStyledProps>`
   display: flex;
   justify-content: space-between;
   margin: 0;
+
+  ${({ $isTotal }) => $isTotal ? css`
+    @media (max-width: 435px) {
+      flex-direction: column;    
+      align-items: center;
+    }
+  ` : ''}
 `

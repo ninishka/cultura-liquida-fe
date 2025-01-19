@@ -129,8 +129,10 @@ export const Title = styled.h3`
   color: #333333;
   margin: 0;
   white-space: nowrap;
+  width: 220px;
 
   @media (max-width: 1060px) {
+    width: auto;
     font-size: 20px;
   }
 `
@@ -155,6 +157,10 @@ export const DeleteButtonItself = styled.button`
   background: none;
   cursor: pointer;
   margin: 5px -12px;
+
+  @media (max-width: 522px) {
+    margin: 5px -20px;
+  }
 `
 export const DeleteButtonIcon = styled(Image)`
   width: auto;

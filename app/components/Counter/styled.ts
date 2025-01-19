@@ -39,6 +39,9 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
   @media (max-width: 650px) {
     margin: 10px;
   } 
+  @media (max-width: 522px) {
+    margin: 0 10px 0 0;
+  } 
 `
 
 export const AmountWrapper = styled.div`

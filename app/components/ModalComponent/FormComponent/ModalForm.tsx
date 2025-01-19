@@ -61,7 +61,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
                 <SubtotalText>Envío: </SubtotalText>
                 <SubtotalText>{displayEnivo} cop</SubtotalText>
               </PriceTextBox>
-              <PriceTextBox style={{ marginTop: 10 }}>
+              <PriceTextBox style={{ marginTop: 10 }} $isTotal='total'>
                 <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
                 <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{styledTotalSum} COP</p>
               </PriceTextBox>
