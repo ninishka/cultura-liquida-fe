@@ -30,7 +30,7 @@ export const RightPanel = styled.div`
     min-width: min-content;
     white-space: nowrap;
     margin: 0 auto 40px auto;
-    max-width: 900px;
+    max-width: 865px;
   }
 `
 

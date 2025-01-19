@@ -51,50 +51,50 @@ const Adm: FC = () => {
 
   return (
     <>
-    {[data].map(order => { 
-      const { _id, status, totalPrice, updatedAt, form_data: { name, surname } } = order
-      return (
-        <StyledForm key={status} form={form} initialValues={{ status }} onFinish={onFinish}>
-          <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
-          <InfoField>
-            <p>Order№</p>
-            <p>{_id}</p>
-          </InfoField>
-          <InfoField>
-            <p>Name:</p>
-            <p>{name}</p>
-          </InfoField>
-          <InfoField>
-            <p>Surname:</p>
-            <p>{surname}</p>
-          </InfoField>
-          <Form.Item
-            label={<p style={{ color: 'white'}}>Status :</p>} 
-            name="status"
-            style={{ marginLeft: 5}}
-          >
-            <Select
-              placeholder="Elige una opción..."
-              options={[
-                { value: 'pending', label: 'Pending' },
-                { value: 'approved', label: 'Approved' },
-                { value: 'failed', label: 'Failed' },
-              ]}
-              style={{ marginLeft: 70, width: '80%'}}
+      {[data].map(order => { 
+        const { _id, status, totalPrice, updatedAt, form_data: { name, surname } } = order;
 
-            />
-          </Form.Item>
-          <InfoField>
-            <p>Total:</p>
-            <p>{totalPrice}</p>
-          </InfoField>
-          <InfoField>
-            <p>Updated at:</p>
-            <p>{updatedAt}</p>
-          </InfoField>
-          <Button htmlType="submit" loading={updating}> UPDATE </Button>
-        </StyledForm>
-      )
+        return (
+          <StyledForm key={status} form={form} initialValues={{ status }} onFinish={onFinish}>
+            <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
+            <InfoField>
+              <p>Order№</p>
+              <p>{_id}</p>
+            </InfoField>
+            <InfoField>
+              <p>Name:</p>
+              <p>{name}</p>
+            </InfoField>
+            <InfoField>
+              <p>Surname:</p>
+              <p>{surname}</p>
+            </InfoField>
+            <Form.Item
+              label={<p style={{ color: 'white'}}>Status :</p>} 
+              name="status"
+              style={{ marginLeft: 5}}
+            >
+              <Select
+                placeholder="Elige una opción..."
+                style={{ marginLeft: 70, width: '80%'}}
+                options={[
+                  { value: 'pending', label: 'Pending' },
+                  { value: 'approved', label: 'Approved' },
+                  { value: 'failed', label: 'Failed' },
+                ]}
+              />
+            </Form.Item>
+            <InfoField>
+              <p>Total:</p>
+              <p>{totalPrice}</p>
+            </InfoField>
+            <InfoField>
+              <p>Updated at:</p>
+              <p>{updatedAt}</p>
+            </InfoField>
+            <Button htmlType="submit" loading={updating}> UPDATE </Button>
+          </StyledForm>
+        )
       })}
     </>
   );
