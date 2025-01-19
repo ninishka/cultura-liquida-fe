@@ -6,9 +6,11 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { calculateSum, enivoPrice } from '@/app/components/helpers'
+import { enivoPrice } from '@/app/components/helpers'
 import CartItemComponent from './CartItemComponent/CartItemComponent'
 import ModalForm from './FormComponent/ModalForm'
+import { updateExistingProduct, createNewOrder, payment } from './modalHelper'
+
 import {
   ModalStyled,
   ListItemsWrapper,
@@ -17,27 +19,15 @@ import {
   CartPayButton
 } from './styled'
 
-const mockedFormValues = {
-  name: "One",
-  surname: "One",
-  document_type: "CC",
-  id_number: "1234",
-  mail_address: "123",
-  state: "ANT",
-  city: "Abejorral",
-  country: "Colombia",
-  phone_number: "3107883758",
-  email: "first@gmail.com",
-  notes: 'notesnotesnotesnotes'
-}
 
 const ModalComponent = ({data}) => {
   const [form] = Form.useForm();
-  const dispatch = useAppDispatch()
-  const { showCart, cartItems } = useAppSelector(state => state.cart);
-  const [paymentOption, setPaymentOption] = useState('')
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
+  const { showCart, cartItems } = useAppSelector(state => state.cart);
+
+  const [paymentOption, setPaymentOption] = useState('')
   const [preferenceId, setPreferenceId] = useState('') //mp
   const [loading, setLoading] = useState(false) // mp
 
@@ -46,128 +36,25 @@ const ModalComponent = ({data}) => {
     initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
   }, [])
 
-
-  // TODO: separate from here maybe?
-  const productsToUpdate = cartItems.map(({ size, ingredient, amount }) => {
-    const matchingItem = data?.length && data.find(dataItem => 
-      dataItem?.size === size && 
-      dataItem?.ingredient === ingredient
-    );
-
-    if (matchingItem) {
-      const { _id, ...restOfValues } = matchingItem; 
-      return {
-          id: _id,          // id from data
-          amount,  // amount from cartItems
-          ...restOfValues,
-      };
-    }
-
-    return null
-  });
-
-  const validPostsToUpdate = productsToUpdate.filter(item => item !== null);
-  const updatedProductsData = validPostsToUpdate.map(({ id, amount, availableStock, reservedStock, ...restOfItem }) => {
-    const updatedData = {
-      availableStock: availableStock - amount,
-      reservedStock: reservedStock + amount,
-      ...restOfItem,
-    };
-
-    return { id, updatedData };
-  });
-
-  const isEmpty = !cartItems?.length
-
   const onFinish = async values => {
     setLoading(true);
-
     try {
-      // UPDATE EXISTING PRODUCT BD
-      const response = await fetch('/api/products', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ updates: updatedProductsData }),
-      });
-  
-      if (!response.ok) {
-        console.error('Error updating products');
-      }
+      // 1. UPDATE EXISTING PRODUCT BD
+      await updateExistingProduct(cartItems, data)
 
+      // 2. CREATE NEW ORDER BD
+      const {orderData, filteredArray} = await createNewOrder(cartItems, enivoPrice, values)
 
-      // CREATE NEW ORDER BD
-      const totalPrice = calculateSum(cartItems, enivoPrice);
-      const filteredArray = cartItems.map(obj => ({
-        title: obj.title,
-        ingredient: obj.ingredient,
-        type: obj.type,
-        displayingType: obj.displayingType,
-        amount: obj.amount,
-        price: obj.price,
-        idCart: obj.idCart,
-        id: obj.idCart, //mb remove?
-        size: obj.size,
-        description: obj.description,
-        icon: obj.icon
-      }));
-      const orderResponse = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: 'mockedUserId',
-          totalPrice,
-          products: filteredArray,
-          form_data: values,
-        }),
-      });
-
-      if (!orderResponse.ok) {
-        console.error('Error creating order');
-        return;
-      }
-
-      const orderData = await orderResponse.json();
-      console.log('Order created successfully'/*, orderData*/);
-
-      // TRANSFER
-      if (paymentOption === 'transfer') {
-        console.log('orderResponse', orderData._id)
-        if (orderData._id) router.push(`/checkout?order_id=${orderData._id}`)
-      }
-
-      // Mercado Pago
-      if (paymentOption === 'mercado') {
-        const paymentResponse = await fetch('/api/preference', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            orderId: orderData._id,
-            cartItems: filteredArray,
-            formValues: {
-              // ...mockedFormValues,
-              // street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
-              ...values,
-              street_name: `${values.state}, ${values.city}, ${values.mail_address}`
-            },
-          }),
-        });
-
-        if (!paymentResponse.ok) {
-          console.error('Error creating MercadoPago preference');
-          return;
-        }
-
-        const { preferenceId } = await paymentResponse.json();
-        setPreferenceId(preferenceId);
-      }
+      // 3. PAYMENT
+      await payment(orderData, filteredArray, values, paymentOption, router, setPreferenceId)
     } catch (error) {
-      console.error('Error processing order:', error);
+      console.error('Error processing:', error);
     } finally {
       setLoading(false);
     }
   };
+
+  const isEmpty = !cartItems?.length
 
   return (
     <main style={{ backgroundColor: '#F2C94CCC' }}>
@@ -214,10 +101,11 @@ const ModalComponent = ({data}) => {
           </>
         ) : (
           <>
+            <div>
               <Image 
                 src={img55} 
-                fill={true} 
-                alt='the modal background image' 
+                fill={true}
+                alt='la imagen de fondo modal' 
                 style={{
                   objectFit: "cover",
                   zIndex: -5,
@@ -225,6 +113,7 @@ const ModalComponent = ({data}) => {
                 }} 
                 priority // hight loading priority
               />
+            </div>
             <>
               <ModalTitle>{'Tu carrito de la compra '.toUpperCase()}</ModalTitle>
               <ListItemsWrapper>

@@ -72,6 +72,14 @@ export const StyledLink = styled(Link)<NavigationProps>`
     }
   }
 
+  @media (max-width: 412px) {
+    ${({ $isFooter }) => $isFooter ? css`
+      height: 45px;
+      display: flex;;
+      align-items: center;
+    ` : ''}; 
+  }
+
   &:hover{
     /* color: #000000; */
     background-color: #252525;

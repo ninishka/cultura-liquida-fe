@@ -37,6 +37,7 @@ export const StyledInput = styled(Input)`
   ${inputStyle}
   &:hover, &:focus {
     border: 1px #F2C94C solid; 
+    box-shadow: 0 0 0 1.5px rgba(255, 0, 0, 0.1) !important
   }
 `
 
@@ -44,6 +45,7 @@ export const StyledTextarea = styled(Input.TextArea)`
   ${inputStyle}
   &:hover, &:focus {
     border: 1px #F2C94C solid; 
+    box-shadow: 0 0 0 1.5px rgba(255, 0, 0, 0.1) !important
   }
 `
 
@@ -53,8 +55,6 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
     &.ant-select * {
       cursor: auto  !important;
       font-weight: 700;
-
-
     }
 
     &.ant-select-disabled {
@@ -78,6 +78,7 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
     border-radius: 16px;
     &:hover, &:focus-within {
       border-color: #F2C94C !important;
+      box-shadow: 0 0 0 1.5px rgba(255, 0, 0, 0.1) !important
     }
   }
 `
@@ -92,16 +93,6 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
     background-color: #4FDB40; /* Inner dot color for checked radio */
   }
 
-  /* TODO BORDER HOVER COLOR */
-  /* .ant-radio-checked .ant-radio-inner::after {
-    border: 1px solid #4FDB40 !important
-  } */
-
-  /* :hover {
-    border: 1px solid #4FDB40 !important
-  } */
-
-    
   ${({ $isOrder }) => !$isOrder && css`
     .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
       content: '*'; 

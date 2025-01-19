@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Radio, Tooltip } from 'antd'
 import Image from 'next/image'
 import { useAppSelector } from '@/lib/redux/store/hooks'
@@ -34,6 +34,8 @@ import {
 
 const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrder, paymentOption, setPaymentOption }) => {
   const { cartItems } = useAppSelector(state => state.cart);
+  const [isAgree, setIsAgree] = useState(false);
+
   const subtotalSum = calculateSum(cartItems);
   const totalSum = calculateSum(cartItems, enivoPrice);
   const styledTotalSum = totalSumStyledByDot(totalSum)
@@ -46,7 +48,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
       onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
       initialValues={initialValues}
     >
-      <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} />
+      <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} isAgree={isAgree} setIsAgree={setIsAgree} />
       {!isOrder && (
         <TotalBox>
           <TotalWrap>
@@ -104,7 +106,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
           <StyledFormItem style={{ width: '100%' }}>
             <Tooltip title={!paymentOption ? 'Por favor, elija el método de pago' : ''}>
               <>
-                <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption}>
+                <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption || !isAgree}>
                   Comprar
                 </CartPayButton>
               </>

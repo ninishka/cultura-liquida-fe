@@ -1,5 +1,14 @@
 import React, { FC, useState } from 'react';
 import { CaretDownOutlined } from '@ant-design/icons';
+import { 
+  states,
+  cities,
+  nameSurnameValidator,
+  IdNumberValidator,
+  phoneNumberValidator,
+  termsAndCondidtionsValidator
+} from './formHelpers'
+
 import {
   StyledInput,
   StyledSelect,
@@ -7,29 +16,15 @@ import {
   CheckboxInput,
   StyledTextarea
 } from './styled'
-import  {  Country ,  State ,  City  }   from  'country-state-city' ; 
-import { nameSurnameValidator } from '../../helpers'
-// console.log( Country.getCountryByCode('CO') ) 
-// console.log( State.getStatesOfCountry('CO') ) 
-// console . log ( State . getAllStates ( ) )
-
-const states = State.getStatesOfCountry('CO')?.map(({name, isoCode}) => ({
-  value: isoCode,
-  label: name
-}))
-
-  
-const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => ({
-  value: name,
-  label: name
-})); // now if state and cityes choosen and u change state - we need to clear choosen city
 
 export interface ModalFormFieldsProps {
   isOrder?: boolean;
-  notes?: string
+  notes?: string;
+  isAgree: boolean;
+  setIsAgree: (value: boolean) => void;
 }
 
-const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => { 
+const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, setIsAgree }) => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
 
   return (
@@ -81,25 +76,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => {
         label="Número de documento"
         name="id_number"
         $isOrder={isOrder}
-        rules={[
-          {
-            required: true,
-            message: 'Por favor, ingrese un número de identificación.',
-          },
-          {
-            validator: (rule, value) => {
-            const numberRegex = /^\d*$/;
-
-              if (!numberRegex.test(value)) {
-                return Promise.reject(
-                  new Error('Solo se permiten números enteros sin decimales.')
-                );
-              }
-
-              return Promise.resolve();
-            },
-          }
-        ]}
+        rules={IdNumberValidator}
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
@@ -171,40 +148,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => {
         label="Celular / Teléfono"
         name="phone_number"
         $isOrder={isOrder}
-        rules={[
-          {
-            required: true,
-            message: 'Por favor, ingrese un número de teléfono.',
-          },
-          {
-            validator: (rule, value) => {
-              const cleanedValue = value.replace(/\s+/g, '') // remove spaces
-              .replace(/[+\-]/g, '') // remove all + and -
-
-              if (!/^\d*$/.test(cleanedValue)) {
-                return Promise.reject(
-                  new Error('Solo se permiten números enteros sin decimales.')
-                );
-              }
-
-              if (cleanedValue.length < 10 || cleanedValue.length > 12) {
-                console.log('if')
-                // valid variands: 
-                // 3107217798
-                // 03107217798
-                // +573107217798
-                // + 573107217798
-                // + 57 310 7217 798
-                // + 57-310-7217-798
-                return Promise.reject(
-                  new Error('El número de identificación debe tener entre 10 y 12 caracteres.')
-                );
-              }
-
-              return Promise.resolve();
-            },
-          }
-        ]}
+        rules={phoneNumberValidator}
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
@@ -250,18 +194,9 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes }) => {
           name="remember" 
           valuePropName="checked"
           style={{ width: '100%'}}
-          rules={[
-            {
-              validator: (_, value) => {
-                if (!value) {
-                  return Promise.reject('Debes aceptar los términos y condiciones');
-                }
-                return Promise.resolve();
-              },
-            },
-          ]}
+          rules={termsAndCondidtionsValidator}
         >
-          <CheckboxInput>
+          <CheckboxInput onClick={() => setIsAgree(!isAgree)}>
             Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
           </CheckboxInput>
         </StyledFormItem>

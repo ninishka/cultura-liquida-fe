@@ -13,6 +13,7 @@ import pendingIcon from '@/app/icons/icon_paid_error.svg'
 import falseIcon from '@/app/icons/icon_paid_false.svg'
 import { enivoPrice } from '@/app/components/helpers'
 import { useGetProductQuery } from "@/lib/redux/slices/api"
+import { formatDate } from '@/app/components/helpers'
 import {
   StyledLink,
   CheckoutWrapper,
@@ -44,7 +45,7 @@ import {
 // site_id: MCO
 // processing_mode: aggregator
 // merchant_account_id: null
-// .... addition fields https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
+// .... HOW TO MAKE addition fields MP https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
 
 // success with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
 // success without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
@@ -56,25 +57,18 @@ const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status'
   'external_reference' // - additional field
 ]
 
-const formatDate = (dateString: string): string => {
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-  };
-  return new Date(dateString).toLocaleDateString('es-ES', options);
-};
-
-
 const CheckoutPage: FC = () => {
   const [form] = Form.useForm();
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
-  // const isInitialMercado = searchParams?.get('external_reference')
+  // const isInitialMercado = searchParams?.get('external_reference') 
+  // just any param from MP show us that user was redirected from MP or he maybe copied link and used it again but it is ok
   const isInitialMercado = searchParams?.get('site_id')
   console.log('isInitialMercado: ', isInitialMercado);
 
-  // isLoading only for first req
-  // isFetching for every req if using refetch()
-  // status also can be usefull here
+  // isLoading only for first request
+  // isFetching for every request if using refetch()
+  // status also can be usefull here - shows refetch stages
   const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery(orderIdParam);
   const [respStatus, setRespStatus] = useState(data?.status)
 
@@ -141,17 +135,15 @@ const CheckoutPage: FC = () => {
 
   const handleRefetch = () => {
     refetch()
-    // setHandLoading(true)
   };
 
-  const formatedDate = formatDate(data?.updatedAt)
+  const formatedDate = formatDate(data?.updatedAt, 'es-ES')
   const displayEnivo = totalSumStyledByDot(enivoPrice, ' ')
   const displayTotal = totalSumStyledByDot(data?.totalPrice, ' ')
   const beforeDelivery = totalSumStyledByDot(data?.totalPrice - enivoPrice, ' ')
 
   // in_process - is for MP payment status BUT pending - is for order record status
   const isPending = (respStatus === 'in_process' || respStatus === 'pending')
-
   const coloring = (respStatus === 'approved' && '#4FDB40') || (isPending && '#F2C94C') 
   const iconing = (respStatus === 'approved' && approvedIcon) || (isPending && pendingIcon) || falseIcon 
   const wording = (respStatus === 'approved' && 'pagado') || (isPending && 'pendiente') || 'no pagado'
@@ -251,10 +243,3 @@ const CheckoutPage: FC = () => {
 }
 
 export default CheckoutPage
-
-
-  {/* {Object.entries(params).map(([key, value]) => (
-    <p key={key}>
-      {key}: {value}
-    </p>
-  ))} */}
