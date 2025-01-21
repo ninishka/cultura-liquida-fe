@@ -17,7 +17,7 @@ export const metadata = {
   title: "Cultura Líquida",
   description: "Potencia tu salud con hongos medicinales",
   author: "Cultura Líquida Team",
-  copyright: "© 2024 Cultura Líquida. All rights reserved.",
+  copyright: "© 2025 Cultura Líquida. All rights reserved.",
   robots: {
     index: true,
     follow: true, 

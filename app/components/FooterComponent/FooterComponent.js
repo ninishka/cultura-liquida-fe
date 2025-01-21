@@ -35,7 +35,7 @@ const FooterComponent = () => {
       </ContactWrapper>
       </HeaderLikeFooter>
       <LastFooter>
-        <p>2024 año. Cultura Liquida. Todos los derechos reservados.</p>
+        <p>2025 año. Cultura Liquida. Todos los derechos reservados.</p>
         <p>Designed by Energy Lynx</p>
       </LastFooter>
     </FooterFull>
