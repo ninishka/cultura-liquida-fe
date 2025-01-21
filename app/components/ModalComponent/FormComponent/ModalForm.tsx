@@ -9,6 +9,10 @@ import BankingBox from '../BankingBox/BankingBox'
 import payArrow from '@/app/icons/Frame 228.svg'
 
 import {
+  termsAndCondidtionsValidator
+} from './formHelpers'
+
+import {
   StyledForm,
   StyledFormItem,
   LeftSideWrap,
@@ -20,6 +24,7 @@ import {
   PriceTextBox,
   BankingBoxesWrapper,
   TransferBoxWrapper,
+  CheckboxInput,
 } from './styled'
 
 import {
@@ -35,6 +40,7 @@ import {
 const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrder, paymentOption, setPaymentOption }) => {
   const { cartItems } = useAppSelector(state => state.cart);
   const [isAgree, setIsAgree] = useState(false);
+  const [form] = StyledForm.useForm()
 
   const subtotalSum = calculateSum(cartItems);
   const totalSum = calculateSum(cartItems, enivoPrice);
@@ -44,11 +50,26 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
 
   return (
     <StyledForm 
+      form={form}
       onFinish={onFinish} 
       onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
       initialValues={initialValues}
     >
-      <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} isAgree={isAgree} setIsAgree={setIsAgree} />
+      <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} form={form} />
+      {/* checkbox */}
+      {!isOrder && (
+        <StyledFormItem
+          name="remember" 
+          valuePropName="checked"
+          style={{ width: '100%'}}
+          rules={termsAndCondidtionsValidator}
+        >
+          <CheckboxInput onClick={() => setIsAgree(!isAgree)}>
+            Tus datos personales serán usados para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
+          </CheckboxInput>
+        </StyledFormItem>
+      )}
+
       {!isOrder && (
         <TotalBox>
           <TotalWrap>
@@ -65,14 +86,12 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
                 <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
                 <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{styledTotalSum} COP</p>
               </PriceTextBox>
-            </LeftSideWrap>  
-            <StyledFormItem 
-              label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>} 
-              // style={{ width: '33%'}}
+            </LeftSideWrap>
+            <StyledFormItem
+              label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>}
             >
               <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
                 <Radio value="mercado" style={{ color: 'white' }} onClick={() => setPaymentOption('mercado')}> Mercado Pago </Radio>
-                {/* <Radio value="pear" style={{ color: 'white'}}> Mercado Pago - Tarjeta de Crédito, PSE y otros medios de pago </Radio> */}
                 <Radio value="transfer" style={{ color: 'white' }} onClick={() => setPaymentOption('transfer')}> Transferencia a cuenta bancaria </Radio>
               </Radio.Group>
             </StyledFormItem>
@@ -103,6 +122,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
               </p>
             </TransferBoxWrapper>
           )}
+
           <StyledFormItem style={{ width: '100%' }}>
             <Tooltip title={!paymentOption ? 'Por favor, elija el método de pago' : ''}>
               <>

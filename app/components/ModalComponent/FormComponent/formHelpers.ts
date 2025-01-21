@@ -1,20 +1,14 @@
-import  {  Country ,  State ,  City  }   from  'country-state-city' ; 
-// console.log( Country.getCountryByCode('CO') ) 
-// console.log( State.getStatesOfCountry('CO') ) 
-// console . log ( State . getAllStates ( ) )
-
+import { Country, State, City } from 'country-state-city';
 
 export const states = State.getStatesOfCountry('CO')?.map(({name, isoCode}) => ({
     value: isoCode,
     label: name
   }))
-  
-    
+
 export const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => ({
 value: name,
 label: name
-})); // now if state and cityes choosen and u change state - we need to clear choosen city
-  
+}));
 
 export const nameSurnameValidator = [
   {
@@ -22,7 +16,6 @@ export const nameSurnameValidator = [
     message: 'Este campo es obligatorio',
   },
   {
-    // allows only letters and spaces
     validator: (rule, value) => { 
       const letterAndSpaceRegex = /^[a-zA-Z\s]+$/;
       

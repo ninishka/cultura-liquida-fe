@@ -5,31 +5,34 @@ import {
   cities,
   nameSurnameValidator,
   IdNumberValidator,
-  phoneNumberValidator,
-  termsAndCondidtionsValidator
+  phoneNumberValidator
 } from './formHelpers'
 
 import {
   StyledInput,
   StyledSelect,
   StyledFormItem,
-  CheckboxInput,
   StyledTextarea
 } from './styled'
 
 export interface ModalFormFieldsProps {
   isOrder?: boolean;
   notes?: string;
-  isAgree: boolean;
-  setIsAgree: (value: boolean) => void;
+  form?: {
+    setFieldValue: Function
+  };
 }
 
-const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, setIsAgree }) => { 
+const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
+  
+  const onDepartmentChange = (value: string): void => {
+    setSelectedDepartment(value);
+    form.setFieldValue('city', undefined);
+  }
 
   return (
     <>
-      {/* Nombres*/}
       <StyledFormItem
         label="Nombres"
         name="name"
@@ -38,7 +41,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
-      {/* Apellidos*/}
+      
       <StyledFormItem
         label="Apellidos"
         name="surname"
@@ -47,7 +50,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
-      {/* Tipo de documento select*/}
+      
       <StyledFormItem
         label="Tipo de documento"
         name="document_type"
@@ -56,7 +59,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          // onChange={(v: any) => setSelectedDocumento(v)}
           allowClear
           disabled={isOrder}
           $isOrder={isOrder}
@@ -71,7 +73,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
 
         />
       </StyledFormItem>
-      {/* Número de documento*/}
+      
       <StyledFormItem
         label="Número de documento"
         name="id_number"
@@ -80,7 +82,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
-      {/*Country*/}
+      
       <StyledFormItem
         label="País"
         name="country"
@@ -94,7 +96,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
           disabled
         />
       </StyledFormItem>
-      {/* Dirección de envío*/}
+      
       <StyledFormItem
         label="Dirección de envío"
         name="mail_address"
@@ -108,7 +110,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
-      {/* Departamento select*/}
+
       <StyledFormItem
         label="Departamento"
         name="state"
@@ -117,7 +119,8 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          onChange={(v: any) => setSelectedDepartment(v)}
+          showSearch
+          onChange={(v: string) => onDepartmentChange(v)}
           allowClear 
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}       
           options={states}
@@ -126,7 +129,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
         />
 
       </StyledFormItem>
-      {/* Ciudad / Municipio * select*/}
+      
       <StyledFormItem
         label="Ciudad / Municipio"
         name="city"
@@ -135,7 +138,8 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          allowClear 
+          showSearch
+          allowClear
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={cities(selectedDepartment)}
           disabled={isOrder || !selectedDepartment}
@@ -143,7 +147,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
         />
 
       </StyledFormItem>
-      {/*Celular / Teléfono */}
+      
       <StyledFormItem
         label="Celular / Teléfono"
         name="phone_number"
@@ -153,7 +157,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
 
-      {/* EMAIL */}
       <StyledFormItem
         label="Correo electrónico"
         name="email"
@@ -171,7 +174,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
       >
         <StyledInput disabled={isOrder} />
       </StyledFormItem>
-      {/* textarea */}
+      
       {(!isOrder || notes) && (
         <StyledFormItem style={{ width: '100%', marginTop: 15, borderRadius: '16px'}}
           label={`Notas ${!isOrder ? '(opcional)' : ''}`}
@@ -188,19 +191,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, isAgree, se
           />
         </StyledFormItem>
       )}
-      {/* checkbox */}
-      {!isOrder && (
-        <StyledFormItem      
-          name="remember" 
-          valuePropName="checked"
-          style={{ width: '100%'}}
-          rules={termsAndCondidtionsValidator}
-        >
-          <CheckboxInput onClick={() => setIsAgree(!isAgree)}>
-            Tus datos personales serán usados ​​para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
-          </CheckboxInput>
-        </StyledFormItem>
-      )}
+
     </>
   );
 };
