@@ -17,6 +17,10 @@ export const StyledForm = styled(Form)`
     text-align: left;
     font-weight: 500;
   }
+
+  .ant-select-clear {
+    inset-inline-end: 30px;
+  }
 `
 
 const inputStyle = css`
@@ -198,7 +202,6 @@ export const MailLink = styled(Link)`
 
   &:hover {
     color: #F2C94C !important;
-    /* text-decoration: underline; */
   }
 `
 
