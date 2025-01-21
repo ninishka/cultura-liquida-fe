@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /api
+Disallow: /adm
 Allow: /
 
 Sitemap: https://www.cultura-liquida.com/sitemap.xml

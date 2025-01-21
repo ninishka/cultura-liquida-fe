@@ -58,7 +58,7 @@ const Adm: FC = () => {
           <StyledForm key={status} form={form} initialValues={{ status }} onFinish={onFinish}>
             <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
             <InfoField>
-              <p>Order№</p>
+              <p>Order №</p>
               <p>{_id}</p>
             </InfoField>
             <InfoField>

@@ -81,7 +81,9 @@ export const uniqueTitles = x => x?.filter((product, index, self) =>
 
 export const formatDate = (dateString: string, lang: string): string => {
   const options: Intl.DateTimeFormatOptions = {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
   };
   return new Date(dateString).toLocaleDateString(lang, options);
 };

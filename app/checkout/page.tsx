@@ -175,7 +175,7 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Total:</BankInfoText>
-                <BankInfoNumber>{displayTotal} cop</BankInfoNumber>
+                <BankInfoNumber style={{ textTransform: 'uppercase' }}>{displayTotal} cop</BankInfoNumber>
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Metodos de pago:</BankInfoText>
