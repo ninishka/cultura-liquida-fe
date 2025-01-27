@@ -1,6 +1,11 @@
 'use server'
 
 import Order, { IOrder } from '@/models/Order';
+import OrderConfirmationEmail from "@/emails/OrderConfirmationEmail";
+import dayjs from 'dayjs';
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const createOrder = async (
   userId: string,
@@ -17,8 +22,40 @@ export const createOrder = async (
       // mp_data: {}
     });
     await newOrder.save();
+    const {
+      name = 'Dear',
+      surname = 'Customer',
+      email,
 
-    console.log("Created Order:", newOrder._id);
+    } = form_data
+
+    const orderProps = {
+      customerName: `${name} ${surname}`,
+      orderId: newOrder._id.toString(),
+      items: Array.from(products),
+      total: totalPrice,
+      orderDate: dayjs(newOrder.createdAt).format('YYYY-MM-DD HH:mm')
+    }
+
+    console.log('email', email)
+
+    console.log("Created Order:", newOrder);
+    console.log("orderProps", orderProps);
+
+    const { data, error } = await resend.emails.send({
+      from: 'Cultura Liquida <mailer@cultura-liquida.com>',
+      to: email, // 'culturaliquidacol@gmail.com',
+      subject: "Confirmación de pedido",
+      react: OrderConfirmationEmail(orderProps),
+    });
+
+    // if (error) {
+    //   throw new Error('Failed to send email');
+    // }
+
+    console.log('=====================')
+    console.log('data, error', data, error)
+
 
     return newOrder
   } catch (error) {
