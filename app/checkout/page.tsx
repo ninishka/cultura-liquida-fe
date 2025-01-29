@@ -142,7 +142,7 @@ const CheckoutPage: FC = () => {
   const formatedDate = formatDate(data?.updatedAt, 'es-ES')
   const displayShippingCost = formatPrice(shippingCost, ' ')
   const displayTotal = formatPrice(data?.totalCost, ' ')
-  const beforeDelivery = formatPrice(data.totalCost - displayShippingCost, ' ')
+  const beforeDelivery = formatPrice(data.totalCost - shippingCost, ' ')
 
   // in_process - is for MP payment status BUT pending - is for order record status
   const isPending = (respStatus === 'in_process' || respStatus === 'pending')

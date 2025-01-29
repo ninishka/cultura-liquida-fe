@@ -12,34 +12,6 @@ export const getActiveComponent = (layoutData, slug) => {
   return { ...staticData, formationData: newFormationData }
 }
 
-export const getUpdatedProductsData = (cartItems, data) => {
-  if (!Array.isArray(cartItems) || !Array.isArray(data)) {
-    throw new Error("Both cartItems and data should be arrays.");
-  }
-
-  return cartItems.reduce((acc, { size, ingredient, amount }) => {
-    const matchingItem = data.find(dataItem => 
-      dataItem?.size === size && 
-      dataItem?.ingredient === ingredient
-    );
-
-    if (matchingItem) {
-      const { _id: id, availableStock, reservedStock, ...restOfValues } = matchingItem;
-
-      acc.push({
-        id,
-        updatedData: {
-          ...restOfValues,
-          availableStock: availableStock - amount,
-          reservedStock: reservedStock + amount,
-        }
-      });
-    }
-
-    return acc;
-  }, []);
-};
-
 export const init = (slug) => slug[0].includes("melena") 
   ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
   : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
