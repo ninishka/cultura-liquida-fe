@@ -6,10 +6,9 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { enivoPrice } from '@/app/components/helpers'
+import { updateExistingProduct, createNewOrder, payment } from '@/helpers/data';
 import CartItemComponent from './CartItemComponent/CartItemComponent'
 import ModalForm from './FormComponent/ModalForm'
-import { updateExistingProduct, createNewOrder, payment } from './modalHelper'
 
 import {
   ModalStyled,
@@ -43,7 +42,7 @@ const ModalComponent = ({data}) => {
       await updateExistingProduct(cartItems, data)
 
       // 2. CREATE NEW ORDER BD
-      const {orderData, filteredArray} = await createNewOrder(cartItems, enivoPrice, values)
+      const {orderData, filteredArray} = await createNewOrder(cartItems, values)
 
       // 3. PAYMENT
       await payment(orderData, filteredArray, values, paymentOption, router, setPreferenceId)

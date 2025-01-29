@@ -4,16 +4,16 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 import Link from 'next/link';
 import { Form, Tooltip } from 'antd';
+import { useGetProductQuery } from "@/lib/redux/slices/api"
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
-import { totalSumStyledByDot } from '@/app/components/helpers'
+import { formatPrice } from '@/helpers/formats'
 import approvedIcon from '@/app/icons/icon_paid_true.svg'
 import pendingIcon from '@/app/icons/icon_paid_error.svg'
 import falseIcon from '@/app/icons/icon_paid_false.svg'
-import { enivoPrice } from '@/app/components/helpers'
-import { useGetProductQuery } from "@/lib/redux/slices/api"
-import { formatDate } from '@/app/components/helpers'
+import { shippingCost } from '@/helpers/constants'
+import { formatDate } from '@/helpers/formats'
 import {
   StyledLink,
   CheckoutWrapper,
@@ -137,10 +137,12 @@ const CheckoutPage: FC = () => {
     refetch()
   };
 
+  // SHIPPING COST FROM ORDER
+
   const formatedDate = formatDate(data?.updatedAt, 'es-ES')
-  const displayEnivo = totalSumStyledByDot(enivoPrice, ' ')
-  const displayTotal = totalSumStyledByDot(data?.totalPrice, ' ')
-  const beforeDelivery = totalSumStyledByDot(data?.totalPrice - enivoPrice, ' ')
+  const displayShippingCost = formatPrice(shippingCost, ' ')
+  const displayTotal = formatPrice(data?.totalCost, ' ')
+  const beforeDelivery = formatPrice(data.totalCost - shippingCost, ' ')
 
   // in_process - is for MP payment status BUT pending - is for order record status
   const isPending = (respStatus === 'in_process' || respStatus === 'pending')
@@ -187,7 +189,7 @@ const CheckoutPage: FC = () => {
             </ListItemsWrapperCheckout>
             <>
               <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitleCheckout>
-              <ModalForm form={form} onFinish={async () => console.log('k')} loading={false} initialValues={data?.form_data} isOrder />
+              <ModalForm form={form} loading={false} initialValues={data?.form_data} isOrder />
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>
@@ -229,7 +231,7 @@ const CheckoutPage: FC = () => {
             </PriceTextBoxCheckout>
             <PriceTextBoxCheckout>
               <SubtotalText>Envío: </SubtotalText>
-              <SubtotalText>{displayEnivo} cop</SubtotalText>
+              <SubtotalText>{displayShippingCost} cop</SubtotalText>
             </PriceTextBoxCheckout>
             <PriceTextBoxCheckout style={{ marginTop: 10 }}>
               <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>

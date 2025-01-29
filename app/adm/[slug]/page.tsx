@@ -52,7 +52,7 @@ const Adm: FC = () => {
   return (
     <>
       {[data].map(order => { 
-        const { _id, status, totalPrice, updatedAt, form_data: { name, surname } } = order;
+        const { _id, status, totalCost, updatedAt, form_data: { name, surname } } = order;
 
         return (
           <StyledForm key={status} form={form} initialValues={{ status }} onFinish={onFinish}>
@@ -86,7 +86,7 @@ const Adm: FC = () => {
             </Form.Item>
             <InfoField>
               <p>Total:</p>
-              <p>{totalPrice}</p>
+              <p>{totalCost}</p>
             </InfoField>
             <InfoField>
               <p>Updated at:</p>

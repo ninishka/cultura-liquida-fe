@@ -4,7 +4,9 @@ import Image from 'next/image'
 import { useAppSelector } from '@/lib/redux/store/hooks'
 import ModalFormFields from './ModalFormFields'
 import type { ModalFormProps } from '@/types/types'
-import { calculateSum, enivoPrice, totalSumStyledByDot } from '@/app/components/helpers'
+import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing'
+import { formatPrice } from '@/helpers/formats'
+
 import BankingBox from '../BankingBox/BankingBox'
 import payArrow from '@/app/icons/Frame 228.svg'
 
@@ -42,11 +44,13 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
   const [isAgree, setIsAgree] = useState(false);
   const [form] = StyledForm.useForm()
 
-  const subtotalSum = calculateSum(cartItems);
-  const totalSum = calculateSum(cartItems, enivoPrice);
-  const styledTotalSum = totalSumStyledByDot(totalSum)
-  const displaySubtotal = totalSumStyledByDot(subtotalSum, ' ')
-  const displayEnivo = totalSumStyledByDot(enivoPrice, ' ')
+  const productCost = getProductCost(cartItems);
+  const shippingCost = getShippingCost(productCost)
+  const totalCost = getTotalCost(cartItems);
+
+  const styledTotalCost = formatPrice(totalCost)
+  const displayProductCost = formatPrice(productCost, ' ')
+  const displayShippingCost = formatPrice(shippingCost, ' ')
 
   return (
     <StyledForm 
@@ -76,15 +80,15 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
             <LeftSideWrap>
               <PriceTextBox>
                 <SubtotalText>Subtotal: </SubtotalText>
-                <SubtotalText>{displaySubtotal} cop</SubtotalText>
+                <SubtotalText>{displayProductCost} cop</SubtotalText>
               </PriceTextBox>
               <PriceTextBox>
                 <SubtotalText>Envío: </SubtotalText>
-                <SubtotalText>{displayEnivo} cop</SubtotalText>
+                <SubtotalText>{displayShippingCost} cop</SubtotalText>
               </PriceTextBox>
               <PriceTextBox style={{ marginTop: 10 }} $isTotal='total'>
                 <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
-                <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{styledTotalSum} COP</p>
+                <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{styledTotalCost} COP</p>
               </PriceTextBox>
             </LeftSideWrap>
             <StyledFormItem

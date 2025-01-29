@@ -1,24 +1,84 @@
 'use server'
 
 import Order, { IOrder } from '@/models/Order';
+import OrderConfirmationEmail from "@/emails/OrderConfirmationEmail";
+import dayjs from 'dayjs';
+import { Resend } from "resend";
+import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing'
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const createOrder = async (
   userId: string,
   products: IOrder['products'],
-  totalPrice: number,
   form_data: Record<string, string>
 ): Promise<IOrder> => {
   try {
+    console.log('products ****************************', products)
+    const totalCost = getTotalCost(products)
+    const productCost = getProductCost(products)
+    const shippingCost = getShippingCost(productCost)
+
     const newOrder = new Order({
       userId,
       products,
-      totalPrice,
+      totalCost,
+      shippingCost,
       form_data,
       // mp_data: {}
     });
     await newOrder.save();
+    const {
+      name = 'Dear',
+      surname = 'Customer',
+      email,
+      document_type,
+      id_number,
+      mail_address,
+      state,
+      city,
+      phone_number
+    } = form_data
 
-    console.log("Created Order:", newOrder._id);
+    const orderProps = {
+      customerName: `${name} ${surname}`,
+      orderId: newOrder._id.toString(),
+      items: Array.from(products),
+      totalCost,
+      shippingCost,
+      orderDate: dayjs(newOrder.createdAt).format('YYYY-MM-DD HH:mm')
+    }
+
+    console.log('email', email)
+
+    console.log("Created Order:", newOrder);
+    console.log("orderProps", orderProps);
+
+    const { data: clientData, error: clientError } = await resend.emails.send({
+      from: 'Cultura Liquida <mailer@cultura-liquida.com>',
+      to: email, // 'culturaliquidacol@gmail.com',
+      subject: "Confirmación de pedido",
+      react: OrderConfirmationEmail(orderProps),
+    });
+
+    // if (error) {
+    //   throw new Error('Failed to send email');
+    // }
+
+    console.log('CLIENT =====================')
+    console.log('data, error', clientData, clientError)
+
+
+    const { data: vendorData, error: vendorError } = await resend.emails.send({
+      from: 'Cultura Liquida <mailer@cultura-liquida.com>',
+      to: 'culturaliquidacol@gmail.com',
+      subject: "Nuevo pedido",
+      react: OrderConfirmationEmail(orderProps),
+    });
+
+    console.log('Vendor =====================')
+    console.log('data, error', vendorData, vendorError)
+
 
     return newOrder
   } catch (error) {

@@ -1,26 +1,32 @@
-import { getUpdatedProductsData } from '@/app/components/helpers'
-import { calculateSum } from '@/app/components/helpers'
+import { fetcher } from '@/helpers/network'
 
-export const fetcher = async (method, path, body, action) => {
-    try {
-      const response = await fetch(path, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body,
+const getUpdatedProductsData = (cartItems, data) => {
+  if (!Array.isArray(cartItems) || !Array.isArray(data)) {
+    throw new Error("Both cartItems and data should be arrays.");
+  }
+
+  return cartItems.reduce((acc, { size, ingredient, amount }) => {
+    const matchingItem = data.find(dataItem => 
+      dataItem?.size === size && 
+      dataItem?.ingredient === ingredient
+    );
+
+    if (matchingItem) {
+      const { _id: id, availableStock, reservedStock, ...restOfValues } = matchingItem;
+
+      acc.push({
+        id,
+        updatedData: {
+          ...restOfValues,
+          availableStock: availableStock - amount,
+          reservedStock: reservedStock + amount,
+        }
       });
-  
-      if (!response.ok) {
-        console.error(`Error to ${action}`);
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      console.log(`Success to ${action}`/*, response*/);
-      return response;
-    } catch (err) {
-      console.error(`Error during fetch ( ${action} ): ${err.message}`);
-      throw err;
     }
-  };
+
+    return acc;
+  }, []);
+};
 
 export const updateExistingProduct = async (cartItems, data) => {
   const updatedProductsData = getUpdatedProductsData(cartItems, data)
@@ -28,8 +34,7 @@ export const updateExistingProduct = async (cartItems, data) => {
   await fetcher('PUT', '/api/products', updatedProductsBody, 'update products')
 }
 
-export const createNewOrder = async (cartItems, enivoPrice, values) => {
-  const totalPrice = calculateSum(cartItems, enivoPrice);
+export const createNewOrder = async (cartItems, values) => {
   const filteredArray = cartItems.map(obj => ({
     _id: obj._id,
     title: obj.title,
@@ -44,7 +49,7 @@ export const createNewOrder = async (cartItems, enivoPrice, values) => {
     description: obj.description,
     icon: obj.icon
   }));
-  const createOrderBody = JSON.stringify({ userId: 'mockedUserId', totalPrice, products: filteredArray, form_data: values });
+  const createOrderBody = JSON.stringify({ userId: 'mockedUserId', products: filteredArray, form_data: values });
   const orderResponse = await fetcher('POST', '/api/orders', createOrderBody, 'create order')
   const orderData = await orderResponse.json();
   return {orderData, filteredArray}
@@ -70,16 +75,16 @@ export const payment = async (orderData, filteredArray, values, paymentOption, r
   }
 }
 
-const mockedFormValues = {
-  name: "One",
-  surname: "One",
-  document_type: "CC",
-  id_number: "1234",
-  mail_address: "123",
-  state: "ANT",
-  city: "Abejorral",
-  country: "Colombia",
-  phone_number: "3107883758",
-  email: "first@gmail.com",
-  notes: 'notesnotesnotesnotes'
-}
+// const mockedFormValues = {
+//   name: "One",
+//   surname: "One",
+//   document_type: "CC",
+//   id_number: "1234",
+//   mail_address: "123",
+//   state: "ANT",
+//   city: "Abejorral",
+//   country: "Colombia",
+//   phone_number: "3107883758",
+//   email: "first@gmail.com",
+//   notes: 'notesnotesnotesnotes'
+// }
