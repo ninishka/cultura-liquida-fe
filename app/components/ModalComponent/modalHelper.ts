@@ -1,5 +1,5 @@
 import { getUpdatedProductsData } from '@/app/components/helpers'
-import { calculateSum } from '@/app/components/helpers'
+import { getTotalCost } from '@/helpers/pricing'
 
 export const fetcher = async (method, path, body, action) => {
     try {
@@ -28,8 +28,7 @@ export const updateExistingProduct = async (cartItems, data) => {
   await fetcher('PUT', '/api/products', updatedProductsBody, 'update products')
 }
 
-export const createNewOrder = async (cartItems, enivoPrice, values) => {
-  const totalPrice = calculateSum(cartItems, enivoPrice);
+export const createNewOrder = async (cartItems, values) => {
   const filteredArray = cartItems.map(obj => ({
     _id: obj._id,
     title: obj.title,
@@ -44,7 +43,7 @@ export const createNewOrder = async (cartItems, enivoPrice, values) => {
     description: obj.description,
     icon: obj.icon
   }));
-  const createOrderBody = JSON.stringify({ userId: 'mockedUserId', totalPrice, products: filteredArray, form_data: values });
+  const createOrderBody = JSON.stringify({ userId: 'mockedUserId', products: filteredArray, form_data: values });
   const orderResponse = await fetcher('POST', '/api/orders', createOrderBody, 'create order')
   const orderData = await orderResponse.json();
   return {orderData, filteredArray}

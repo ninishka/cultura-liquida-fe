@@ -3,7 +3,7 @@
 import React, { FC, useState } from 'react'
 import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
-import { formatDate } from '@/app/components/helpers'
+import { formatDate } from '@/helpers/formats'
 import { handleSort, getSortIndicator, sortedData, fieldsForRender } from './admHelpers'
 import {
   AdmWrapper,
@@ -42,7 +42,7 @@ const Adm: FC = () => {
         </thead>
         <tbody>
           {displayingData.map(order => {
-            const { _id, status, totalPrice, updatedAt, form_data: { name, surname } } = order
+            const { _id, status, totalCost, updatedAt, form_data: { name, surname } } = order
             const formatedDate = formatDate(updatedAt, 'en-EN')
 
             return (
@@ -55,7 +55,7 @@ const Adm: FC = () => {
                 <TableData>{name}</TableData>
                 <TableData>{surname}</TableData>
                 <TableData>{status}</TableData>
-                <TableData>{totalPrice}</TableData>
+                <TableData>{totalCost}</TableData>
                 <TableData>{formatedDate}</TableData>
               </TableRow>
             )

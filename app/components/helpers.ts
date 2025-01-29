@@ -43,19 +43,7 @@ export const getUpdatedProductsData = (cartItems, data) => {
 export const init = (slug) => slug[0].includes("melena") 
   ? ((slug[0].includes('capsules') && "1") || (slug[0].includes('100ml') && "2") || (slug[0].includes('30ml') && "3")) 
   : (((slug[0].includes('100ml') && "1") || (slug[0].includes('30ml') && "2")))
- 
-export const calculateSum = (cards, enivo = 0) => {
-  const num = cards.reduce((total, card) => total + card.price * card.amount, 0);
-  if (enivo) return num + enivo
-  return num
-}; 
 
-export const totalSumStyledByDot = (sum, spec = '.') => {
-  // TODO false payment case
-  let parts = sum?.toString().split(spec);
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, spec);
-  return parts.join(spec);
-}
 
 export const decrease = (count, setCount, isModal, dispatch, addToCart, item) => {
   if (count > 1) setCount(count - 1)
@@ -79,13 +67,3 @@ export const uniqueTitles = x => x?.filter((product, index, self) =>
   index === self.findIndex(p => p.title === product.title)
 );
 
-export const formatDate = (dateString: string, lang: string): string => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  };
-  return new Date(dateString).toLocaleDateString(lang, options);
-};
-
-export const enivoPrice = 15000

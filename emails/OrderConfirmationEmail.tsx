@@ -15,10 +15,19 @@ import {
 
 const OrderConfirmationEmail = ({
   customerName = 'Dear Customer',
-  orderId,
-  items = [],
-  total,
-  orderDate
+  orderId = 'ID',
+  items = [{
+    title: 'Test item',
+    amount: 3,
+    price: 100000
+  }, {
+    title: 'Test item 2',
+    amount: 8,
+    price: 50000
+  }],
+  totalCost = 150000,
+  shippingCost = 15000,
+  orderDate = '2025-01-01 00:00'
 }) => (
   <Html>
     <Head />
@@ -52,7 +61,12 @@ const OrderConfirmationEmail = ({
         <Hr style={hrStyle} />
         <Section style={sectionStyle}>
           <Text style={textStyle}>
-            <strong>Total:</strong> ${total}
+            <strong>Envío:</strong> ${shippingCost}
+          </Text>
+        </Section>
+        <Section style={sectionStyle}>
+          <Text style={textStyle}>
+            <strong>Total:</strong> ${totalCost}
           </Text>
         </Section>
         <Button

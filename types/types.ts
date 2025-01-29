@@ -40,7 +40,7 @@ export interface CartItemType {
   _id: string;
   url: string;
   __v: number;
-  amount?: number;
+  amount: number;
   idCart?: string;
 
   isOrder?: boolean

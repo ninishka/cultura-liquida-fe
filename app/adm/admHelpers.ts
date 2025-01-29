@@ -51,6 +51,6 @@ export const handleSort = (key, sortConfig, setSortConfig) => {
     {value: 'name', label: 'Name'},
     {value: 'surname', label: 'Surname'},
     {value: 'status', label: 'Status'},
-    {value: 'totalPrice', label: 'Total Price'},
+    {value: 'totalCost', label: 'Total Price'},
     {value: 'updatedAt', label: 'Updated at'}
   ]

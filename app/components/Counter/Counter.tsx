@@ -4,7 +4,7 @@ import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
 import { addToCart } from '@/lib/redux/slices/cartSlice'
 import { useAppDispatch } from '@/lib/redux/store/hooks'
 import { decrease, increase } from '@/app/components/helpers'
-import { totalSumStyledByDot } from '@/app/components/helpers'
+
 import {
   CounterWrapper,
   AmountItem,

@@ -4,7 +4,7 @@ import img6 from '@/app/icons/delete_good_from_cart.svg'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { removeFromCart } from '@/lib/redux/slices/cartSlice'
 import type { CartItemType } from '@/types/types'
-import { totalSumStyledByDot } from '@/app/components/helpers'
+import { formatPrice } from '@/helpers/formats'
 import {
     CartItem,
     CartItemWrap,
@@ -45,7 +45,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
   const cartIcon = isCapsulesMelena || isExtractsMelena || isReishi || isCola || isComplex
 
   const totalSum = price * tAmount
-  const styledAmount = totalSumStyledByDot(totalSum, ' ')
+  const styledAmount = formatPrice(totalSum, ' ')
 
   const handleDelete = (itemId, cartItems, dispatch) => {
     const item = cartItems.filter(item => item?.id === itemId)

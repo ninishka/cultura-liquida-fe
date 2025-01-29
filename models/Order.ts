@@ -16,7 +16,8 @@ export interface IOrder {
   //   idCart: string;
   //   size?: string;
   // }>;
-  totalPrice: number;
+  shippingCost: number;
+  totalCost: number;
   status: string;
   createdAt: Date;
   updatedAt: Date;
@@ -47,7 +48,8 @@ const orderSchema = new mongoose.Schema<IOrder>({
   //     size: { type: String, required: false },
   //   },
   // ],
-  totalPrice: { type: Number, required: true },
+  shippingCost: { type: Number, required: true },
+  totalCost: { type: Number, required: true },
   status: { type: String, default: 'pending' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

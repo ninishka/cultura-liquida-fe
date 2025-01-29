@@ -3,8 +3,8 @@ import { createOrder, getOrdersByUser, getOrderById, updateOrder } from '@/app/a
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const { userId, products, totalPrice, form_data } = await request.json();
-    const newOrder = await createOrder(userId, products, totalPrice, form_data);
+    const { userId, products, form_data } = await request.json();
+    const newOrder = await createOrder(userId, products, form_data);
     console.log('Order newOrder', newOrder);
 
     return NextResponse.json(newOrder, { status: 201 });
