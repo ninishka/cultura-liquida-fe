@@ -90,7 +90,9 @@ const CheckoutPage: FC = () => {
           const mp_data = keysFromMP.reduce((acc, key) => {
             acc[key] = searchParams?.get(key) || "Not provided";
             return acc;
-          }, {} as Record<string, string>);         
+          }, {} as Record<string, string>);     
+          
+          console.log('mp_data', mp_data)
 
           const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
             method: 'PUT',

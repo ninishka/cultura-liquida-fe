@@ -59,7 +59,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
       onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
       initialValues={initialValues}
     >
-      {/* <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} form={form} /> */}
+      <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} form={form} />
       {/* checkbox */}
       {!isOrder && (
         <StyledFormItem

@@ -10,10 +10,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const createOrder = async (
   userId: string,
   products: IOrder['products'],
-  form_data: Record<string, string>
+  form_data: { [key: string]: string }
 ): Promise<IOrder> => {
   try {
-    console.log('products ****************************', products)
     const totalCost = getTotalCost(products)
     const productCost = getProductCost(products)
     const shippingCost = getShippingCost(productCost)
@@ -32,7 +31,8 @@ export const createOrder = async (
 
     console.log("Created Order:", order);
 
-    const { data: clientData, error: clientError } = await resend.emails.send({
+    // const { data: clientData, error: clientError } = 
+    await resend.emails.send({
       from: 'Cultura Liquida <mailer@cultura-liquida.com>',
       to: email, // 'culturaliquidacol@gmail.com',
       subject: "Confirmación de pedido",
@@ -40,19 +40,20 @@ export const createOrder = async (
     });
 
 
-    console.log('CLIENT =====================')
-    console.log('data, error', clientData, clientError)
+    // console.log('CLIENT =====================')
+    // console.log('data, error', clientData, clientError)
 
 
-    const { data: vendorData, error: vendorError } = await resend.emails.send({
+    // const { data: vendorData, error: vendorError } = 
+    await resend.emails.send({
       from: 'Cultura Liquida <mailer@cultura-liquida.com>',
       to: 'culturaliquidacol@gmail.com',
       subject: "Nuevo pedido",
       react: OrderConfirmationEmail({ order }),
     });
 
-    console.log('Vendor =====================')
-    console.log('data, error', vendorData, vendorError)
+    // console.log('Vendor =====================')
+    // console.log('data, error', vendorData, vendorError)
 
 
     return order

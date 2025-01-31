@@ -8,7 +8,6 @@ export interface ProductG {
   size?: string;
   price: number;
   totalStock: number;
-  reservedStock: number;
   availableStock: number;
   slug: string;
   [key: string]: any; // TODO
@@ -26,7 +25,6 @@ export interface CartItemType {
   ingredient: string;
   price: number;
   totalStock: number;
-  reservedStock: number;
   availableStock: number;
   size?: string;
   slug: string;

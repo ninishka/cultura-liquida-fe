@@ -12,14 +12,13 @@ const getUpdatedProductsData = (cartItems, data) => {
     );
 
     if (matchingItem) {
-      const { _id: id, availableStock, reservedStock, ...restOfValues } = matchingItem;
+      const { _id: id, availableStock, ...restOfValues } = matchingItem;
 
       acc.push({
         id,
         updatedData: {
           ...restOfValues,
           availableStock: availableStock - quantity,
-          reservedStock: reservedStock + quantity,
         }
       });
     }
