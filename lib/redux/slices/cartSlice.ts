@@ -15,26 +15,26 @@ const cartSlice = createSlice({
       state.showCart = action.payload;
     },
     addToCart(state, action: PayloadAction<ExtendedPayload>) {
-      const amount =  action?.payload?.amount || 1
+      const quantity =  action?.payload?.quantity || 1
       const existingItem = state.cartItems.find(i => i.idCart === action.payload.idCart)
 
       if (existingItem) {
-        if (action?.payload?.isModal) existingItem.amount = amount // edit existing item from modal
-        else existingItem.amount += amount // edit existing item from Formation -> Couneter
+        if (action?.payload?.isModal) existingItem.quantity = quantity // edit existing item from modal
+        else existingItem.quantity += quantity // edit existing item from Formation -> Couneter
       
       } else {
         console.log('new item')
-        state.cartItems.push({ ...action.payload, amount })
+        state.cartItems.push({ ...action.payload, quantity })
       }
     },
     removeFromCart(state, action: PayloadAction<ExtendedPayload>) {
-      const { idCart, amount = 1, removeAll = false } = action.payload
+      const { idCart, quantity = 1, removeAll = false } = action.payload
       const itemIndex = state.cartItems.findIndex(i => i.idCart === idCart)
       if (itemIndex >= 0) {
-        if (removeAll || state.cartItems[itemIndex].amount <= amount) {
+        if (removeAll || state.cartItems[itemIndex].quantity <= quantity) {
           state.cartItems.splice(itemIndex, 1)
         } else {
-          state.cartItems[itemIndex].amount -= amount
+          state.cartItems[itemIndex].quantity -= quantity
         }
       }
     },

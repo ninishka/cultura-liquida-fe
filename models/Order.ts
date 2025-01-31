@@ -10,7 +10,7 @@ export interface IOrder {
   //   ingredient: string;
   //   type: string;
   //   displayingType: string;
-  //   amount: number;
+  //   quantity: number;
   //   price: number;
   //   id: string;
   //   idCart: string;
@@ -41,7 +41,7 @@ const orderSchema = new mongoose.Schema<IOrder>({
   //     ingredient: { type: String, required: true },
   //     type: { type: String, required: true },
   //     displayingType: { type: String, required: true },
-  //     amount: { type: Number, required: true },
+  //     quantity: { type: Number, required: true },
   //     price: { type: Number, required: true },
   //     id: { type: String, required: true },
   //     idCart: { type: String, required: true },

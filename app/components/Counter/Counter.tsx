@@ -16,11 +16,11 @@ import {
 } from'./styled'
 
 const Counter = ({ 
-  amount = undefined, isModal = false, filterdContent = [], 
+  quantity = undefined, isModal = false, filterdContent = [], 
   preObj = undefined, isComplex = false, item = undefined 
 }) => {
   const dispatch = useAppDispatch()
-  const [ count, setCount ] = useState(amount || 1)
+  const [ count, setCount ] = useState(quantity || 1)
 
   return (                             
     <CounterWrapper $isModal={isModal}>
@@ -48,7 +48,7 @@ const Counter = ({
       {!isModal && 
         <BuyButton 
           aria-label="botón añadir al carrito" 
-          onClick={() => dispatch(addToCart({...preObj, amount: count}))}
+          onClick={() => dispatch(addToCart({...preObj, quantity: count}))}
         >
           Comprar
         </BuyButton>

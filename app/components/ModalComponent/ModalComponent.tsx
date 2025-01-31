@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { updateExistingProduct, createNewOrder, payment } from '@/helpers/data';
+import { updateExistingProduct, createNewOrder, handlePayment } from '@/helpers/data';
 import CartItemComponent from './CartItemComponent/CartItemComponent'
 import ModalForm from './FormComponent/ModalForm'
 
@@ -35,17 +35,22 @@ const ModalComponent = ({data}) => {
     initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
   }, [])
 
-  const onFinish = async values => {
+  const onFinish = async formValues => {
     setLoading(true);
     try {
       // 1. UPDATE EXISTING PRODUCT BD
       await updateExistingProduct(cartItems, data)
 
       // 2. CREATE NEW ORDER BD
-      const {orderData, filteredArray} = await createNewOrder(cartItems, values)
+      const {orderData, filteredArray} = await createNewOrder(cartItems, formValues)
+
+      console.log('formValues', formValues)
+      console.log('cartItems', cartItems)
+      console.log('orderData', orderData)
+      console.log('filteredArray', filteredArray)
 
       // 3. PAYMENT
-      await payment(orderData, filteredArray, values, paymentOption, router, setPreferenceId)
+      await handlePayment(orderData, filteredArray, formValues, paymentOption, router, setPreferenceId)
     } catch (error) {
       console.error('Error processing:', error);
     } finally {

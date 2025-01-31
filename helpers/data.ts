@@ -5,7 +5,7 @@ const getUpdatedProductsData = (cartItems, data) => {
     throw new Error("Both cartItems and data should be arrays.");
   }
 
-  return cartItems.reduce((acc, { size, ingredient, amount }) => {
+  return cartItems.reduce((acc, { size, ingredient, quantity }) => {
     const matchingItem = data.find(dataItem => 
       dataItem?.size === size && 
       dataItem?.ingredient === ingredient
@@ -18,8 +18,8 @@ const getUpdatedProductsData = (cartItems, data) => {
         id,
         updatedData: {
           ...restOfValues,
-          availableStock: availableStock - amount,
-          reservedStock: reservedStock + amount,
+          availableStock: availableStock - quantity,
+          reservedStock: reservedStock + quantity,
         }
       });
     }
@@ -34,14 +34,14 @@ export const updateExistingProduct = async (cartItems, data) => {
   await fetcher('PUT', '/api/products', updatedProductsBody, 'update products')
 }
 
-export const createNewOrder = async (cartItems, values) => {
+export const createNewOrder = async (cartItems, form_data) => {
   const filteredArray = cartItems.map(obj => ({
     _id: obj._id,
     title: obj.title,
     ingredient: obj.ingredient,
     type: obj.type,
     displayingType: obj.displayingType,
-    amount: obj.amount,
+    quantity: obj.quantity,
     price: obj.price,
     idCart: obj.idCart,
     id: obj.idCart, //mb remove?
@@ -49,27 +49,33 @@ export const createNewOrder = async (cartItems, values) => {
     description: obj.description,
     icon: obj.icon
   }));
-  const createOrderBody = JSON.stringify({ userId: 'mockedUserId', products: filteredArray, form_data: values });
+  const createOrderBody = JSON.stringify({ userId: 'mockedUserId', products: filteredArray, form_data });
   const orderResponse = await fetcher('POST', '/api/orders', createOrderBody, 'create order')
   const orderData = await orderResponse.json();
   return {orderData, filteredArray}
 }
 
-export const payment = async (orderData, filteredArray, values, paymentOption, router, setPreferenceId)  => {
-  if (paymentOption === 'transfer' && orderData._id) router.push(`/checkout?order_id=${orderData._id}`)
+export const handlePayment = async (orderData, cartItems, values, paymentOption, router, setPreferenceId)  => {
+  const { _id: orderId, shippingCost } = orderData
+
+
+  if (paymentOption === 'transfer' && orderId) router.push(`/checkout?order_id=${orderData._id}`)
 
   if (paymentOption === 'mercado') {
-    const paymentBody = JSON.stringify({
-      orderId: orderData._id,
-      cartItems: filteredArray,
+    const paymentBody = {
+      orderId,
+      shippingCost,
+      cartItems,
       formValues: {
         // ...mockedFormValues,
         // street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
         ...values,
         street_name: `${values.state}, ${values.city}, ${values.mail_address}`
       },
-    })
-    const paymentResponse = await fetcher('POST', '/api/preference', paymentBody, 'create MercadoPago preference')
+    }
+
+    console.log('paymentBody', paymentBody)
+    const paymentResponse = await fetcher('POST', '/api/preference', JSON.stringify(paymentBody), 'create MercadoPago preference')
     const { preferenceId } = await paymentResponse.json();
     setPreferenceId(preferenceId);
   }

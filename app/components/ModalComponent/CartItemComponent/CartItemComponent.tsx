@@ -32,7 +32,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector(state => state.cart.cartItems)
   
-  const { title, ingredient, type, displayingType, amount: tAmount, id, price, size, idCart, isOrder } = item
+  const { title, ingredient, type, displayingType, quantity: tAmount, id, price, size, idCart, isOrder } = item
 
   const isMelena = title === 'Melena de León'
   const isCapsulesMelena = isMelena && idCart?.includes('capsules') && melenaCapsulsSrc
@@ -67,7 +67,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
         </CardInfoWrapper>
         <InfoContainer $isOrder={isOrder}>
           {!isOrder ? (
-              <Counter amount={tAmount} item={item} isModal />
+              <Counter quantity={tAmount} item={item} isModal />
             ) : (
               <OrderedX>x <OrderedAmount>{tAmount}</OrderedAmount></OrderedX>
             )
