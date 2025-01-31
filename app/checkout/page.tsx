@@ -191,7 +191,7 @@ const CheckoutPage: FC = () => {
             </ListItemsWrapperCheckout>
             <>
               <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitleCheckout>
-              <ModalForm form={form} loading={false} initialValues={data?.form_data} isOrder />
+              <ModalForm onFinish={async () => console.log('k')} loading={false} initialValues={data?.form_data} isOrder />
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>

@@ -3,13 +3,13 @@ import mongoose, { Model } from 'mongoose';
 export interface IOrder {
   _id: string;
   userId: string;
-  products: Array<{ [key: string]: string }>;
+  products: Array<{ [key: string]: string | number}>;
   shippingCost: number;
   totalCost: number;
   status: string;
   createdAt: Date;
   updatedAt: Date;
-  form_data: { [key: string]: string };
+  form_data: Record<string, string>;
   mp_data?: Record<string, string>;
 }
 
@@ -28,7 +28,7 @@ const orderSchema = new mongoose.Schema<IOrder>({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   form_data: {
-    type: Object,
+    type: mongoose.Schema.Types.Mixed,
     required: true,
   },
   mp_data: {

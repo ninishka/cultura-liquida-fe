@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Form } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
@@ -20,7 +19,6 @@ import {
 
 
 const ModalComponent = ({data}) => {
-  const [form] = Form.useForm();
   const router = useRouter()
   const dispatch = useAppDispatch()
 
@@ -127,8 +125,7 @@ const ModalComponent = ({data}) => {
             </>
             <>
               <ModalTitle>{'Detalles de facturación'.toUpperCase()}</ModalTitle>
-              <ModalForm 
-                form={form} 
+              <ModalForm
                 onFinish={onFinish} 
                 loading={loading} 
                 initialValues={{ country: 'colombia' }} 
