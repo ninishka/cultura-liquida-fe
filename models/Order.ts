@@ -4,6 +4,15 @@ export interface IOrder {
   _id: string;
   userId: string;
   products: Array<Record<string, any>>;
+  shippingCost: number;
+  totalCost: number;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+  form_data: Record<string, string>;
+  mp_data?: Record<string, string>;
+}
+
   // products: Array<{
   //   productId: string;
   //   title: string;
@@ -16,14 +25,6 @@ export interface IOrder {
   //   idCart: string;
   //   size?: string;
   // }>;
-  shippingCost: number;
-  totalCost: number;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-  form_data: Record<string, string>;
-  mp_data?: Record<string, string>;
-}
 
 const orderSchema = new mongoose.Schema<IOrder>({
   userId: { type: String, required: true },

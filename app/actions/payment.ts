@@ -15,8 +15,8 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
   });
   const preference = new Preference(client);
 
-  // All form fields: name, surname, document_type, id_number, country, mail_address, state, city, phone_number, email, notes
-  const { name, surname, email, phone_number, id_number, street_name } = formValues
+  // All form fields: name, surname, document_type, id_number, country, address, state, city, phone, email, notes
+  const { name, surname, email, phone, id_number, street_name } = formValues
   const now = new Date()
 
   const items = cartItems.map(i => ({
@@ -40,9 +40,9 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
     auto_return: "approved",
     payer: {
       name, surname, email, date_created: now.toISOString(),
-      phone: { area_code: '57', number: phone_number },
+      phone: { area_code: '57', number: phone },
       identification: { type: 'CC', number: id_number },
-      address: { street_name }
+      // address: { street_name }
     },
     shipments: {
       // mode: 'custom',

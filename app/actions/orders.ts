@@ -2,7 +2,6 @@
 
 import Order, { IOrder } from '@/models/Order';
 import OrderConfirmationEmail from "@/emails/OrderConfirmationEmail";
-import dayjs from 'dayjs';
 import { Resend } from "resend";
 import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing'
 
@@ -19,51 +18,27 @@ export const createOrder = async (
     const productCost = getProductCost(products)
     const shippingCost = getShippingCost(productCost)
 
-    const newOrder = new Order({
+    const order = new Order({
       userId,
       products,
       totalCost,
       shippingCost,
       form_data,
-      // mp_data: {}
     });
-    await newOrder.save();
-    const {
-      name = 'Dear',
-      surname = 'Customer',
-      email,
-      document_type,
-      id_number,
-      mail_address,
-      state,
-      city,
-      phone_number
-    } = form_data
-
-    const orderProps = {
-      customerName: `${name} ${surname}`,
-      orderId: newOrder._id.toString(),
-      items: Array.from(products),
-      totalCost,
-      shippingCost,
-      orderDate: dayjs(newOrder.createdAt).format('YYYY-MM-DD HH:mm')
-    }
+    await order.save();
+    const { email } = form_data
 
     console.log('email', email)
 
-    console.log("Created Order:", newOrder);
-    console.log("orderProps", orderProps);
+    console.log("Created Order:", order);
 
     const { data: clientData, error: clientError } = await resend.emails.send({
       from: 'Cultura Liquida <mailer@cultura-liquida.com>',
       to: email, // 'culturaliquidacol@gmail.com',
       subject: "Confirmación de pedido",
-      react: OrderConfirmationEmail(orderProps),
+      react: OrderConfirmationEmail({ order }),
     });
 
-    // if (error) {
-    //   throw new Error('Failed to send email');
-    // }
 
     console.log('CLIENT =====================')
     console.log('data, error', clientData, clientError)
@@ -73,14 +48,14 @@ export const createOrder = async (
       from: 'Cultura Liquida <mailer@cultura-liquida.com>',
       to: 'culturaliquidacol@gmail.com',
       subject: "Nuevo pedido",
-      react: OrderConfirmationEmail(orderProps),
+      react: OrderConfirmationEmail({ order }),
     });
 
     console.log('Vendor =====================')
     console.log('data, error', vendorData, vendorError)
 
 
-    return newOrder
+    return order
   } catch (error) {
     console.error('Error creating order:', error);
     throw new Error('Failed to create order');

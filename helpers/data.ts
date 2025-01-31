@@ -67,10 +67,8 @@ export const handlePayment = async (orderData, cartItems, values, paymentOption,
       shippingCost,
       cartItems,
       formValues: {
-        // ...mockedFormValues,
-        // street_name: `${mockedFormValues.state}, ${mockedFormValues.city}, ${mockedFormValues.mail_address}`,
         ...values,
-        street_name: `${values.state}, ${values.city}, ${values.mail_address}`
+        street_name: `${values.state}, ${values.city}, ${values.address}`
       },
     }
 
@@ -86,11 +84,11 @@ export const handlePayment = async (orderData, cartItems, values, paymentOption,
 //   surname: "One",
 //   document_type: "CC",
 //   id_number: "1234",
-//   mail_address: "123",
+//   address: "123",
 //   state: "ANT",
 //   city: "Abejorral",
 //   country: "Colombia",
-//   phone_number: "3107883758",
+//   phone: "3107883758",
 //   email: "first@gmail.com",
 //   notes: 'notesnotesnotesnotes'
 // }
