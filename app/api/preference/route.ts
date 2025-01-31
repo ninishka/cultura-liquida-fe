@@ -3,8 +3,8 @@ import { createPreference } from '@/app/actions/payment';
 
 export async function POST(request) {
   try {
-    const { orderId, cartItems, formValues } = await request.json();
-    const preferenceResult = await createPreference(orderId, cartItems, formValues);
+    const { orderId, shippingCost, cartItems, formValues } = await request.json();
+    const preferenceResult = await createPreference(orderId, shippingCost, cartItems, formValues);
 
     return NextResponse.json({ preferenceId: preferenceResult.id });
   } catch (error) {

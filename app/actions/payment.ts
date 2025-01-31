@@ -2,39 +2,16 @@
 
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-export const createPreference = async (orderId, cartItems, formValues) => {
+// This is where the actual MP query is formed
+export const createPreference = async (orderId, shippingCost, cartItems, formValues) => {
   if (!cartItems || !cartItems.length) {
     throw new Error("Verbotten: Cart is empty");
   }
-  const queryArray = cartItems.map(({
-    _id,
-    idCart,
-    id,
-    title,
-    type,
-    icon,
-    price,
-    amount,
-    ingredient,
-    description,
-  }) => ({
-    _id,
-    idCart,
-    id,
-    title,
-    type,
-    icon,
-    price,
-    amount,
-    ingredient,
-    description,
-  }));
 
   const client = new MercadoPagoConfig({
     // accessToken: process.env.ACCESSTOKEN_TEST,
-    // options: { timeout: 5000, idempotencyKey: 'abc' } // TODO idempotencyKey
     accessToken: process.env.ACCESSTOKEN,
-    options: { timeout: 5000, idempotencyKey: queryArray?.[0]?._id }
+    options: { timeout: 5000, idempotencyKey: orderId }
   });
   const preference = new Preference(client);
 
@@ -42,18 +19,19 @@ export const createPreference = async (orderId, cartItems, formValues) => {
   const { name, surname, email, phone_number, id_number, street_name } = formValues
   const now = new Date()
 
+  const items = cartItems.map(i => ({
+    id: i.idCart, // Here just product name + type(if extract)
+    title: i.title,
+    description: i.description,
+    quantity: i.quantity,
+    unit_price: i.price,
+    category_id: i.type, // i do not see that in MP, maybe payer in his acc can
+    picture_url: i.icon?.src, // i do not see that in MP, maybe payer in his acc can
+    currency_id: "COP", // In the sandbox its always shows $, on production using mb should display it correctly
+  }))
+
   const preferenceBody = {
-    items: [{
-      // id: queryArray[0]._id,
-      id: queryArray[0].idCart, // Here just product name + type(if extract)
-      title: queryArray?.[0]?.title,
-      description: queryArray?.[0]?.description,
-      quantity: queryArray?.[0]?.amount,
-      unit_price: queryArray?.[0]?.price,
-      category_id: queryArray?.[0]?.type, // i do not see that in MP, maybe payer in his acc can
-      picture_url: queryArray?.[0]?.icon?.src, // i do not see that in MP, maybe payer in his acc can
-      currency_id: "COP", // In the sandbox its always shows $, on production using mb should display it correctly
-    }],
+    items,
     back_urls: {
       success: `${process.env.PATH_TO_API}/checkout?order_id=${orderId}`,
       failure: `${process.env.PATH_TO_API}/checkout?order_id=${orderId}`,
@@ -66,11 +44,16 @@ export const createPreference = async (orderId, cartItems, formValues) => {
       identification: { type: 'CC', number: id_number },
       address: { street_name }
     },
-    shipments: { receiver_address: { street_name } },
+    shipments: {
+      // mode: 'custom',
+      cost: shippingCost,
+    },
     external_reference: `${orderId}`,
     statement_descriptor: 'Cultura Líquida',  // i do not see that in MP, maybe payer in his acc can
     // notification_url: "https://www.your-site.com/ipn",
   };
+
+  console.log('preferenceBody', preferenceBody)
 
   return await preference.create({ body: preferenceBody });
 };

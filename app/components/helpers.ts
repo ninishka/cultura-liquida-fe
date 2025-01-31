@@ -19,12 +19,12 @@ export const init = (slug) => slug[0].includes("melena")
 
 export const decrease = (count, setCount, isModal, dispatch, addToCart, item) => {
   if (count > 1) setCount(count - 1)
-  if (isModal) dispatch(addToCart({...item, amount: count - 1, isModal: true}))
+  if (isModal) dispatch(addToCart({...item, quantity: count - 1, isModal: true}))
 }
 
 export const increase = (count, setCount, isModal, dispatch, addToCart, item) => {
   setCount(count + 1)
-  if (isModal) dispatch(addToCart({...item, amount: count + 1, isModal: true}))
+  if (isModal) dispatch(addToCart({...item, quantity: count + 1, isModal: true}))
 }
 
 export const handleDelete = (itemId, cartItems, dispatch) => {

@@ -29,7 +29,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const { cartItems } = useAppSelector(state => state.cart);
   const { data } = useGetProductQuery('');
   const [ showMenu, setShowMenu ] = useState(false)
-  const totalAmount = cartItems.reduce((sum, item) => sum + item.amount, 0);
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   
   return (
   <HeaderFull $isopen={showMenu ? true : false}>
