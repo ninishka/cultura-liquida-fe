@@ -99,7 +99,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
       
       <StyledFormItem
         label="Dirección de envío"
-        name="mail_address"
+        name="address"
         $isOrder={isOrder}
         rules={[
           {
@@ -150,7 +150,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
       
       <StyledFormItem
         label="Celular / Teléfono"
-        name="phone_number"
+        name="phone"
         $isOrder={isOrder}
         rules={phoneNumberValidator}
       >

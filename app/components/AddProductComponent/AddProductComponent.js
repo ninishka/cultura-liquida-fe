@@ -33,10 +33,6 @@ const AddProductComponent = () => {
                     <input name='totalStock' type='number' />
                 </div>
                 <div>
-                    <label>reservedStock</label>
-                    <input name='reservedStock' type='number' />
-                </div>
-                <div>
                     <label>availableStock</label>
                     <input name='availableStock' type='number' />
                 </div>

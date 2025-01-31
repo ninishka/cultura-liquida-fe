@@ -3,7 +3,47 @@ import mongoose, { Model } from 'mongoose';
 export interface IOrder {
   _id: string;
   userId: string;
-  products: Array<Record<string, any>>;
+  products: Array<{ [key: string]: string }>;
+  shippingCost: number;
+  totalCost: number;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+  form_data: { [key: string]: string };
+  mp_data?: Record<string, string>;
+}
+
+
+const orderSchema = new mongoose.Schema<IOrder>({
+  userId: { type: String, required: true },
+  products: [
+    {
+      type: mongoose.Schema.Types.Mixed,
+      required: true,
+    },
+  ],
+  shippingCost: { type: Number, required: true },
+  totalCost: { type: Number, required: true },
+  status: { type: String, default: 'pending' },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  form_data: {
+    type: Object,
+    required: true,
+  },
+  mp_data: {
+    type: Map,
+    of: String,
+    required: false,
+  },
+});
+
+const Order: Model<IOrder> = mongoose.models.Order || mongoose.model<IOrder>('Order', orderSchema);
+
+export default Order;
+
+
+
   // products: Array<{
   //   productId: string;
   //   title: string;
@@ -16,25 +56,8 @@ export interface IOrder {
   //   idCart: string;
   //   size?: string;
   // }>;
-  shippingCost: number;
-  totalCost: number;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-  form_data: Record<string, string>;
-  mp_data?: Record<string, string>;
-}
 
-const orderSchema = new mongoose.Schema<IOrder>({
-  userId: { type: String, required: true },
-  products: [
-    {
-      type: Map,
-      of: mongoose.Schema.Types.Mixed,
-      required: true,
-    },
-  ],
-  // products: [
+    // products: [
   //   {
   //     productId: { type: String, required: true },
   //     title: { type: String, required: true },
@@ -48,23 +71,3 @@ const orderSchema = new mongoose.Schema<IOrder>({
   //     size: { type: String, required: false },
   //   },
   // ],
-  shippingCost: { type: Number, required: true },
-  totalCost: { type: Number, required: true },
-  status: { type: String, default: 'pending' },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-  form_data: {
-    type: Map,
-    of: String,
-    required: true,
-  },
-  mp_data: {
-    type: Map,
-    of: String,
-    required: false,
-  },
-});
-
-const Order: Model<IOrder> = mongoose.models.Order || mongoose.model<IOrder>('Order', orderSchema);
-
-export default Order;
