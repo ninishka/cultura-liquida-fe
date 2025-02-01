@@ -23,6 +23,14 @@ export interface ModalFormFieldsProps {
   };
 }
 
+const documentOptions = [
+  { label: 'CC', value: 'cc' },
+  { label: 'CE', value: 'ce' },
+  { label: 'NIT', value: 'nit' },
+  { label: 'Pasaporte', value: 'passport' },
+  { label: 'Otro', value: 'other' },
+]
+
 const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
   
@@ -63,14 +71,8 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
           disabled={isOrder}
           $isOrder={isOrder}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
-          options={[
-            { label: 'CC', value: 'cc' },
-            { label: 'CE', value: 'ce' },
-            { label: 'NIT', value: 'nit' },
-            { label: 'Pasaporte', value: 'passport' },
-            { label: 'Otro', value: 'other' },
-          ]}
-
+          options={documentOptions}
+          defaultValue='ce'
         />
       </StyledFormItem>
       

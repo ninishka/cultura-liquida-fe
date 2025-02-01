@@ -1,8 +1,8 @@
 import icon1 from './icons/icon_caps.svg'
 import icon2 from './icons/icon_ex100.svg'
 import icon3 from './icons/icon_ex30.svg'
-import melenacaps from './icons/Frame_878.png'
-import melenaextract from './icons/Frame_87.png'
+import melenacaps from './icons/image_melena_caps.png'
+import melenaextract from './icons/image_melena_extract.png'
 
 import img1 from './icons/icon_LM1.svg'
 import img2 from './icons/icon_LM7.svg'
@@ -15,13 +15,13 @@ import indicationsMelena from './icons/icon_indications_for_the_use.png'
 import indicationsReishi from './icons/icon_indications_for_the_use_R.png'
 import indicationsCola from './icons/icon_indications_for_the_use_C.png'
 
-import reishiextract from './icons/Frame_87R.png'
+import reishiextract from './icons/image_reishi_extract.png'
 import imgR1 from './icons/icon_LR1.svg'
 import imgR3 from './icons/icon_LR2.svg'
 import imgR4 from './icons/icon_LR3.svg'
 import imgR6 from './icons/icon_LR4.svg'
 
-import colaextract from './icons/Frame_87C.png'
+import colaextract from './icons/image_cola_extract.png'
 import imgC1 from './icons/icon_LC1.svg'
 import imgC2 from './icons/icon_LC2.svg'
 import imgC4 from './icons/icon_LC5.svg'
@@ -42,90 +42,6 @@ import colaSrc from './icons/icon_cola_cart.png'
 import reishiSrc from './icons/icon_reishi_cart.png'
 
 
-// [
-//   {
-//       "_id": "67061ea1dea30f1fed0e5cc9",
-//       "title": "MELENA DE LEON",
-//       "description": "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
-//       "type": "capsules",
-//       "price": 12000,
-//       "stock": 20,
-//       "__v": 0,
-//       "ingredient": "Hericium erinaceus"
-//   },
-//   {
-//       "_id": "67066324b61982c75ddce096",
-//       "title": "MELENA DE LEON",
-//       "description": "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
-//       "ingredient": "Hericium erinaceus",
-//       "type": "extracts",
-//       "price": 10000,
-//       "stock": 39,
-//       "__v": 0,
-//       "size": "100ml" @
-//   },
-//   {
-//       "_id": "67066324b61982c75ddce096",
-//       "title": "MELENA DE LEON",
-//       "description": "Cuerpo fructífero de hongos y micelio de Hericium erinaceus.",
-//       "ingredient": "Hericium erinaceus",
-//       "type": "extracts",
-//       "price": 8000,
-//       "stock": 88,
-//       "__v": 0,
-//       "size": "30ml" @
-//   }
-// ]
-
-// [
-//   {
-//       "_id": "67066324b61982c75ddce096",
-//       "title": "REISHI",
-//       "description": "Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.", @@
-//       "ingredient": "Ganoderma lucidum", @@
-//       "type": "extracts",
-//       "price": 11000,
-//       "stock": 77,
-//       "__v": 0,
-//       "size": "100ml" @
-//   },
-//   {
-//       "_id": "67066324b61982c75ddce096",
-//       "title": "REISHI",
-//       "description": "Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.", @@
-//       "ingredient": "Ganoderma lucidum", @@
-//       "type": "extracts",
-//       "price": 7000,
-//       "stock": 66,
-//       "__v": 0,
-//       "size": "30ml" @
-//   }
-// ]
-
-// [
-//   {
-//       "_id": "67066324b61982c75ddce096",
-//       "title": "COLA",
-//       "description": "Cuerpo fructífero de hongos y micelio de Trametes Versicolor.", @@
-//       "ingredient": "Trametes Versicolor", @@
-//       "type": "extracts",
-//       "price": 9000,
-//       "stock": 55,
-//       "__v": 0,
-//       "size": "100ml" @
-//   },
-//   {
-//       "_id": "67066324b61982c75ddce096",
-//       "title": "COLA",
-//       "description": "Cuerpo fructífero de hongos y micelio de Trametes Versicolor.", @@
-//       "ingredient": "Trametes Versicolor", @@
-//       "type": "extracts",
-//       "price": 6000, @@@
-//       "stock": 44, @@@
-//       "__v": 0,
-//       "size": "30ml" @
-//   }
-// ]
 
 const melenaFormationData = [
   {
@@ -429,32 +345,3 @@ export const complexData2: ComplexData[] = [
     originalPrice: 105000
   },
 ]
-
-
-
-// =============================== //
-// form
-
-// TODO: Remove unused
-
-export const formDataSet = [
-  { label: 'Nombres', name: 'name', type: 'text' },
-  { label: 'Apellidos', name: 'surname', type: 'text' },
-  { label: 'Tipo de documento', name: 'documentType', type: 'select', options: [
-      { label: 'CC', value: 'cc' },
-      { label: 'CE', value: 'ce' },
-      { label: 'NIT', value: 'nit' },
-      { label: 'Pasaporte', value: 'passport' },
-      { label: 'Otro', value: 'other' },
-    ]
-  },
-  { label: 'Número de documento', name: 'documentNumber', type: 'text' },
-  { label: 'Dirección de envío', name: 'shippingAddress', type: 'textarea' },
-  { label: 'Departamento', name: 'department', type: 'select', options: []
-  },
-  { label: 'Ciudad / Municipio', name: 'cityMunicipality', type: 'select', options: []
-  },
-  { label: 'Celular / Teléfono', name: 'telephone', type: 'tel' },
-  { label: 'Correo electrónico', name: 'email', type: 'email' },
-  { label: 'I agree to the terms and conditions', name: 'agree', type: 'checkbox' } 
-];

@@ -1,7 +1,52 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import { Radio } from 'antd'
+import Link from 'next/link'
+import type { ProductItemProps } from '@/types/types'
 
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #fff;
+`
+
+export const StyledItem = styled.div<ProductItemProps>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 16px 16px 16px 16px;
+  background-color: #2D2D2D;
+  margin-right: 20px;
+  cursor: pointer;
+  width: 216px;
+  height: 62px;
+  border: 1px solid transparent;
+
+  @media (max-width: 850px) {
+    width: 50px;
+    height: 105px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 20px;
+    text-align: center;
+    margin-right: 15px;
+    margin: 10px 1vh;
+  }
+
+  transition: all 0.3s ease;
+
+  ${({checked}) => checked && css`
+    border: 1px solid #9F9F9F;
+  `}
+
+  &:hover{
+    background-color: #252525;
+
+    ${({soldOut}) => soldOut && css`
+      background-color: #F2654C;
+    `}
+  }
+
+`
 
 export const FormationSection = styled.section`
   display: flex;
@@ -95,35 +140,6 @@ export const CheckBoxGroup = styled.div`
     justify-content: center
   }
 `
-export const Item = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-radius: 16px 16px 16px 16px;
-  background-color: #2D2D2D;
-  margin-right: 20px;
-  cursor: pointer;
-  width: 216px;
-  height: 62px;
-  border: 1px solid transparent;
-
-  @media (max-width: 850px) {
-    width: 50px;
-    height: 105px;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 20px;
-    text-align: center;
-    margin-right: 15px;
-    margin: 10px 1vh;
-  }
-
-  transition: all 0.3s ease;
-  &:hover{
-    background-color: #252525;
-    border: 1px solid #9F9F9F;
-  }
-`
 
 export const Icon = styled(Image)`
   width: 50px;
@@ -186,37 +202,5 @@ export const LabelContent = styled.div`
 
  @media (max-width: 850px) {
     flex-direction: column;
-  }
-`
-
-export const AbsentProductCheckboxWrapper = styled.div`
-  border-radius: 16px 16px 16px 16px;
-  background-color: #2D2D2D;
-  margin-right: 20px;
-  width: 216px;
-  height: 62px;
-  text-align: center;
-  background-color: #F2654C;
-
-  @media (max-width: 850px) {
-    width: 50px;
-    height: 105px;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 20px;
-    text-align: center;
-    margin-right: 15px;
-    margin: 10px 1vh;
-  }
-`
-
-export const AbsentProductText = styled.p`
-  margin: 10px 0 0 0;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 20px;
-
-  @media (max-width: 850px) {
-    margin-top: 80%;
   }
 `

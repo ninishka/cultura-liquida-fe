@@ -12,7 +12,7 @@ const Adm: FC = () => {
   const [form] = Form.useForm()
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id');
-  const { data, isLoading, refetch, isFetching } = useGetOrderByIdQuery(orderIdParam);
+  const { data, isLoading, refetch, isFetching } = useGetOrderByIdQuery({ orderId: orderIdParam });
 
   const [updating, setUpdating] = useState(false)
   if (isLoading) return <div>Loading order...</div>;

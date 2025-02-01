@@ -15,6 +15,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const userId = request.nextUrl.searchParams.get('userId');
+  const page = parseInt(request.nextUrl.searchParams.get('page'));
+  const pageSize = parseInt(request.nextUrl.searchParams.get('pageSize'));
   const orderId = request.nextUrl.searchParams.get('orderId');
 
   if (!userId && !orderId) {
@@ -23,7 +25,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   try {
     if (orderId) {
-      const order = await getOrderById(orderId);
+      const order = await getOrderById({orderId});
       if (!order) {
         return NextResponse.json({ message: 'Order not found' }, { status: 404 });
       }
@@ -33,7 +35,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     } 
 
     if (userId) {
-      const orders = await getOrdersByUser(userId);
+      const orders = await getOrdersByUser(userId, page, pageSize);
       if (orders.length === 0) {
         return NextResponse.json({ message: 'No orders found for user' }, { status: 404 });
       }

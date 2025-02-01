@@ -69,7 +69,7 @@ const CheckoutPage: FC = () => {
   // isLoading only for first request
   // isFetching for every request if using refetch()
   // status also can be usefull here - shows refetch stages
-  const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery(orderIdParam);
+  const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery({ orderId: orderIdParam });
   const [respStatus, setRespStatus] = useState(data?.status)
 
   const { data: productData, isLoading: isLoadingProduct } = useGetProductQuery('');
@@ -191,7 +191,7 @@ const CheckoutPage: FC = () => {
             </ListItemsWrapperCheckout>
             <>
               <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitleCheckout>
-              <ModalForm onFinish={async () => console.log('k')} loading={false} initialValues={data?.form_data} isOrder />
+              <ModalForm loading={false} initialValues={data?.form_data} isOrder />
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>
@@ -229,11 +229,11 @@ const CheckoutPage: FC = () => {
           <div style={{ margin: 15 }}>
             <PriceTextBoxCheckout>
               <SubtotalText>Subtotal: </SubtotalText>
-              <SubtotalText>{beforeDelivery} cop</SubtotalText>
+              <SubtotalText>{beforeDelivery}</SubtotalText>
             </PriceTextBoxCheckout>
             <PriceTextBoxCheckout>
               <SubtotalText>Envío: </SubtotalText>
-              <SubtotalText>{displayShippingCost} cop</SubtotalText>
+              <SubtotalText>{displayShippingCost}</SubtotalText>
             </PriceTextBoxCheckout>
             <PriceTextBoxCheckout style={{ marginTop: 10 }}>
               <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>

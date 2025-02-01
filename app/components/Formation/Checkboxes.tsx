@@ -1,27 +1,27 @@
 import React, { Fragment } from 'react'
-import Link from 'next/link'
 import { Tooltip } from 'antd'
 import Counter from '@/app/components/Counter/Counter'
 import {
   CheckBoxGroup,
-  Item,
+  StyledItem,
   Icon,
   TextDesc,
   RadioButton,
   LabelContent,
-  AbsentProductCheckboxWrapper,
-  AbsentProductText
+  StyledLink
 } from './styled'
+
+const soldOutText = 'Este producto no está disponible de inmediato, pero aún puedes comprarlo y lo enviaremos tan pronto como podamos.'
 
 const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
   <>
     <CheckBoxGroup>
       {formationData.map(({type, displayingType, icon, id, slug, size, availableStock}) => (
           <Fragment key={slug}>
-            {!!availableStock ? (
-              <Link key={id} href={slug} style={{textDecoration: 'none', color: '#fff', zIndex: !availableStock && -99 }}>
-                <Item aria-label='Elección del tamaño del producto'> 
-                  <label htmlFor={id} aria-label='Elección del tamaño del producto'>
+            <StyledLink key={id} href={slug}>
+              <Tooltip title={!availableStock && soldOutText}>
+                <StyledItem soldOut={!availableStock} checked={id === rInit} aria-label='Elección de la presentación del producto'> 
+                  <label htmlFor={id} aria-label='Elección de la presentación del producto'>
                     <RadioButton
                       id={id}
                       type="radio"
@@ -33,15 +33,9 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
                     <Icon src={icon} alt={type}/>
                     <TextDesc>{displayingType}{size ? ` ${size}` : ''}</TextDesc>
                   </LabelContent>
-                </Item>
-              </Link>
-            ) : (
-              <AbsentProductCheckboxWrapper>
-                <Tooltip title={'Por favor, elija el método de pago'}>
-                  <AbsentProductText>Agotado</AbsentProductText>
-                </Tooltip>
-              </AbsentProductCheckboxWrapper>
-            )}
+                </StyledItem>
+              </Tooltip>
+            </StyledLink>
           </Fragment>
         ))
       }

@@ -80,20 +80,22 @@ export const AmountItem = styled.div<ModalStyledProps2>`
 `
 
 export const ArrowButtons = styled.button`
-  padding: 2px 0 0;;
+  padding: 0;
   border: none;
   outline: none;
   font: inherit;
   color: inherit;
   background: none;
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
 `
 
 export const Number = styled.h1`
-  /* margin: 11px 18px 8px; */
+  margin: 3px 0 0 0;
   font-size: 16px;
   font-weight: 700;
-  line-height: 17.6px;
   text-align: left;
 `
 export const BuyButton = styled.button`

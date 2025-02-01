@@ -1,5 +1,3 @@
-import { FormInstance } from 'antd'
-
 export interface ProductG {
   title: string;
   description: string;
@@ -58,7 +56,7 @@ export type ExtendedPayload = CartItemType & {
 export interface ModalFormProps {
   loading: boolean;
   isOrder?: boolean;
-  onFinish: (values: any) => Promise<void>;
+  onFinish?: (values: any) => Promise<void>;
   initialValues?: any
   [key: string]: any; // TODO
 }
@@ -127,5 +125,10 @@ export interface OrderStyledProps {
 
 export interface OrderLoadingStyledProps {
   loading?: boolean;
+}
+
+export interface ProductItemProps {
+  soldOut?: boolean;
+  checked?: boolean;
 }
 

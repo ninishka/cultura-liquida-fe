@@ -8,7 +8,7 @@ import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing
 import { formatPrice } from '@/helpers/formats'
 
 import BankingBox from '../BankingBox/BankingBox'
-import payArrow from '@/app/icons/Frame 228.svg'
+import payArrow from '@/app/icons/icon_arrow_email.svg'
 
 import {
   termsAndCondidtionsValidator
@@ -80,11 +80,11 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
             <LeftSideWrap>
               <PriceTextBox>
                 <SubtotalText>Subtotal: </SubtotalText>
-                <SubtotalText>{displayProductCost} cop</SubtotalText>
+                <SubtotalText>{displayProductCost}</SubtotalText>
               </PriceTextBox>
               <PriceTextBox>
                 <SubtotalText>Envío: </SubtotalText>
-                <SubtotalText>{displayShippingCost} cop</SubtotalText>
+                <SubtotalText>{displayShippingCost}</SubtotalText>
               </PriceTextBox>
               <PriceTextBox style={{ marginTop: 10 }} $isTotal='total'>
                 <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>

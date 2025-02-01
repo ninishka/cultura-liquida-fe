@@ -7,6 +7,12 @@ export const AdmWrapper = styled.div`
   align-items: center;
 `
 
+export const Pagination = styled.div`
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+`
+
 export const OrderItem = styled(Link)`
   display: flex;
   justify-content: space-around;
