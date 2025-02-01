@@ -8,7 +8,7 @@ import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing
 import { formatPrice } from '@/helpers/formats'
 
 import BankingBox from '../BankingBox/BankingBox'
-import payArrow from '@/app/icons/Frame 228.svg'
+import payArrow from '@/app/icons/icon_arrow_email.svg'
 
 import {
   termsAndCondidtionsValidator
