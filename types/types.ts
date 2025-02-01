@@ -1,5 +1,3 @@
-import { FormInstance } from 'antd'
-
 export interface ProductG {
   title: string;
   description: string;
@@ -127,5 +125,10 @@ export interface OrderStyledProps {
 
 export interface OrderLoadingStyledProps {
   loading?: boolean;
+}
+
+export interface ProductItemProps {
+  soldOut?: boolean;
+  checked?: boolean;
 }
 
