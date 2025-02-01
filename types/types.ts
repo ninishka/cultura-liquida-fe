@@ -58,7 +58,7 @@ export type ExtendedPayload = CartItemType & {
 export interface ModalFormProps {
   loading: boolean;
   isOrder?: boolean;
-  onFinish: (values: any) => Promise<void>;
+  onFinish?: (values: any) => Promise<void>;
   initialValues?: any
   [key: string]: any; // TODO
 }

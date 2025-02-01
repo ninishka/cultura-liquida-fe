@@ -1,12 +1,14 @@
 'use client'
 
 import React, { FC, useState } from 'react'
+import { Select } from 'antd'
 import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
 import { formatDate } from '@/helpers/formats'
 import { handleSort, getSortIndicator, sortedData, fieldsForRender } from './admHelpers'
 import {
   AdmWrapper,
+  Pagination,
   OrderItem,
   Table,
   TableHeader,
@@ -17,8 +19,11 @@ import {
 
 
 const Adm: FC = () => {
-  const { data, isLoading, refetch, isFetching } = useGetOrderQuery('mockedUserId');
   const [sortConfig, setSortConfig] = useState({ key: 'updatedAt', direction: 'desc' });
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
+
+  const { data, isLoading, refetch, isFetching } = useGetOrderQuery({name: 'mockedUserId', page, pageSize});
 
   if (isLoading) return 'Loading adm'
 
@@ -62,6 +67,37 @@ const Adm: FC = () => {
           })}
         </tbody>
       </Table>
+      <Pagination>
+        <div>
+          Page
+          <Select
+            placeholder="Page number"
+            options={[
+              {value: 1, label: '1'},
+              {value: 2, label: '2'},
+              {value: 3, label: '3'},
+              {value: 4, label: '4'},
+              {value: 5, label: '5'},
+            ]}
+            onChange={v => setPage(v)}
+            value={page}
+          />
+        </div>
+        <div>
+          Per page
+          <Select
+            placeholder="Page size"
+            options={[
+              {value: 2, label: '2'},
+              {value: 10, label: '10'},
+              {value: 25, label: '25'},
+              {value: 50, label: '50'},
+            ]}
+            onChange={v => setPageSize(v)}
+            value={pageSize}
+          />
+        </div>
+      </Pagination>
     </AdmWrapper>
   );
 }

@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, []);
 
   const handleLogin = () => {
-    if (password === 'mySecretPassword') {
+    if (password === process.env.RESEND_API_KEY) {
       setIsAuthenticated(true);
       localStorage.setItem('isAuthenticated', 'true');
     } else {

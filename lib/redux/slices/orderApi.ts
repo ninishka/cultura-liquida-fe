@@ -7,10 +7,10 @@ export const ordersAPI = createApi({
   }),
   endpoints: (builder) => ({
     getOrder: builder.query({
-      query: (name) => `/api/orders?userId=${name}`,
+      query: ({name, page, pageSize}) => `/api/orders?userId=${name}&page=${page}&pageSize=${pageSize}`,
     }),
     getOrderById: builder.query({
-      query: (orderId) => `/api/orders?orderId=${orderId}`,
+      query: ({orderId}) => `/api/orders?orderId=${orderId}`,
     }),
   }),
 });

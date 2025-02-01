@@ -20,12 +20,8 @@ const nextConfig = {
     ACCESSTOKEN: process.env.ACCESSTOKEN,
     PUBLIC_KEY_BTN: process.env.PUBLIC_KEY_BTN,
     PATH_TO_API: process.env.PATH_TO_API,
-
-    PAYU_API_KEY: process.env.PAYU_API_KEY,
-    PAYU_API_MERCHANT: process.env.PAYU_API_MERCHANT,
-    PAYU_ACCOUNT_ID: process.env.PAYU_ACCOUNT_ID,
-
-    SIGNATURE_MELENA_CAPSULA_1AMOUNT: process.env.SIGNATURE_MELENA_CAPSULA_1AMOUNT,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    ADMIN_PWD: process.env.ADMIN_PWD,
   },
 
   async redirects() {

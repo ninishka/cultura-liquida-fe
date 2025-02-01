@@ -63,9 +63,17 @@ export const createOrder = async (
   }
 };
 
-export const getOrdersByUser = async (userId: string): Promise<IOrder[]> => {
+export const getOrdersByUser = async (userId: string, page: number, pageSize: number): Promise<IOrder[]> => {
   try {
-    const orders = await Order.find({ userId }).lean();
+    const skip = (page - 1) * pageSize;
+    
+    const orders = await Order
+      .find({ userId })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(pageSize)
+      .lean();
+
     console.log('Fetched orders:', orders?.length);
     return orders;
   } catch (error) {
@@ -75,7 +83,7 @@ export const getOrdersByUser = async (userId: string): Promise<IOrder[]> => {
 };
 
 
-export const getOrderById = async (orderId: string): Promise<IOrder | null> => {
+export const getOrderById = async ({ orderId }: { orderId: string }): Promise<IOrder | null> => {
   try {
     const order = await Order.findById(orderId).lean();
     console.log('Fetched order:', order);

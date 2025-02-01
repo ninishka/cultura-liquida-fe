@@ -429,32 +429,3 @@ export const complexData2: ComplexData[] = [
     originalPrice: 105000
   },
 ]
-
-
-
-// =============================== //
-// form
-
-// TODO: Remove unused
-
-export const formDataSet = [
-  { label: 'Nombres', name: 'name', type: 'text' },
-  { label: 'Apellidos', name: 'surname', type: 'text' },
-  { label: 'Tipo de documento', name: 'documentType', type: 'select', options: [
-      { label: 'CC', value: 'cc' },
-      { label: 'CE', value: 'ce' },
-      { label: 'NIT', value: 'nit' },
-      { label: 'Pasaporte', value: 'passport' },
-      { label: 'Otro', value: 'other' },
-    ]
-  },
-  { label: 'Número de documento', name: 'documentNumber', type: 'text' },
-  { label: 'Dirección de envío', name: 'shippingAddress', type: 'textarea' },
-  { label: 'Departamento', name: 'department', type: 'select', options: []
-  },
-  { label: 'Ciudad / Municipio', name: 'cityMunicipality', type: 'select', options: []
-  },
-  { label: 'Celular / Teléfono', name: 'telephone', type: 'tel' },
-  { label: 'Correo electrónico', name: 'email', type: 'email' },
-  { label: 'I agree to the terms and conditions', name: 'agree', type: 'checkbox' } 
-];
