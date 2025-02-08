@@ -5,7 +5,7 @@ import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import type { NavigationProps } from '@/types/types'
 
-import NavigationComponent from '@/app/components/NavigationComponent/NavigationComponent'
+import NavigationComponent from '@/app/components/NavigationComponent'
 import Logo from '@/app/icons/logo_full 1.svg'
 import CartIcon from '@/app/icons/icon_cart.svg'
 import BurgerIcon from '@/app/icons/icon_burger.svg'
@@ -19,8 +19,7 @@ import {
   Cart,
   CartWrap,
   CounterCartWrap,
-  BurgerWrap,
-  BurgerImage,
+  Counter
 } from './styled'
 
 
@@ -28,31 +27,31 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useAppDispatch()
   const { cartItems } = useAppSelector(state => state.cart);
   const { data } = useGetProductQuery('');
-  const [ showMenu, setShowMenu ] = useState(false)
   const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   
   return (
-  <HeaderFull $isopen={showMenu ? true : false}>
+  <HeaderFull>
     <LogoFull href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
       <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
     </LogoFull>
-    
-    <NavigationComponent isopen={showMenu ? true : false} setShowMenu={setShowMenu} />
-    <div style={{ display: 'flex'}}>
-    <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
-      <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
-    </BurgerWrap>
 
+    <NavigationComponent isopen={false} />
+    
     <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
-      <CounterCartWrap>
-        <p style={{color: 'black', fontSize: 14, fontWeight: 500 }}>
-          {totalAmount}
-        </p>
-      </CounterCartWrap>
       <Cart src={CartIcon} alt="El icono del carrito" />
+      <CounterCartWrap>
+        <Counter>
+          {totalAmount}
+        </Counter>
+      </CounterCartWrap>
     </CartWrap>
-    </div>
   </HeaderFull>
 )}
+
+{/*  />
+
+<BurgerWrap onClick={() => setShowMenu(!showMenu)}>
+<BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
+</BurgerWrap> */}
 
 export default HeaderComponent;

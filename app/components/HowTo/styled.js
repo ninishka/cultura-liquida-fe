@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 
+export const HowToSection = styled.div`
+  border-bottom: 2px solid #9F9F9F;
+`
+
 export const HowToWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -11,14 +15,7 @@ export const HowToWrapper = styled.div`
     justify-content: space-around;
     flex-wrap: wrap;
   }
-
-  /* @media (max-width: 740px) {
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  } */
 `
-
 
 
 export const TextForHeader = styled.h2`
@@ -65,7 +62,6 @@ export const DescWrapper = styled.div`
 `
 
 export const HowToDesc = styled.p`
-  /* margin: 10px 5px; */
   font-size: 16px;
   font-weight: 400;
   text-align: left;

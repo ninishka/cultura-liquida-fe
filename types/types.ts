@@ -91,11 +91,8 @@ export interface IconProps {
 }
 
 export interface NavigationProps {
-  isopen?: boolean;
-  $isopen?: boolean;
   isFooter?: boolean;
-  $isFooter?: boolean;
-  setShowMenu?: (value: boolean) => void;
+  isSelected?: boolean;
 }
 
 export interface ModalStyledProps {

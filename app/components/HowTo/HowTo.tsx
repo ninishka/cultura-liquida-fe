@@ -1,7 +1,10 @@
 import React, { Fragment, FC } from 'react'
 import { howToCardsData } from '@/app/data'
+import Image from 'next/image'
+import arrowNext from '@/app/icons/arrow_next.svg'
 
 import {
+  HowToSection,
   HowToWrapper,
   TextForHeader,
   CardsWrapper,
@@ -14,10 +17,10 @@ import {
 } from './styled'
 
 const HowTo: FC = () => (
-  <section style={{borderBottom: ' 2px solid #9F9F9F ', margin: '10px 15px'}}>
+  <HowToSection>
     <TextForHeader>cómo recibir un pedido</TextForHeader>
     <HowToWrapper>
-    {howToCardsData.map(({img1, description, description2, arrow }, index) => (
+    {howToCardsData.map(({img1, description, description2 }, index) => (
       <Fragment key={description}>
         <CardsWrapper>
           <HowToImage src={img1} alt={`Paso-${index + 1} del pedido`}/>
@@ -26,6 +29,11 @@ const HowTo: FC = () => (
             <SecondDesc>{description2}</SecondDesc>
           </DescWrapper>
         </CardsWrapper>
+        {index < howToCardsData.length - 1 && (
+          <div>
+            <Image src={arrowNext} alt='Luego' />
+          </div>
+        )}
       </Fragment> 
     ))}
     </HowToWrapper>
@@ -34,7 +42,7 @@ const HowTo: FC = () => (
         Deje una reseña y obtenga un 10% de descuento adicional en su próximo pedido
       </ReviewText>
     </LeaveReview>
-  </section>
+  </HowToSection>
 )
 
 export default HowTo

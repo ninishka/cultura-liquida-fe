@@ -14,7 +14,6 @@ export const HeaderBenefitsWrapper = styled.div`
  flex-direction: row;
  align-items: center;
  justify-content: space-between;
- margin: 40px 12px 10px;
  
  @media (max-width: 850px) {
     flex-direction: column;
@@ -67,36 +66,35 @@ export const DescriptionCard = styled.p`
 `
 
 export const BenefitsCards = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: center;
+  align-items: stretch;
   
-  @media (max-width: 1200px) {
-    justify-content: space-around;
-    flex-wrap: wrap;
+  @media (max-width: 1500px) {
+    grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns */
   }
 
-
   @media (max-width: 850px) {
-    justify-content: space-evenly;
+    grid-template-columns: repeat(2, 1fr); /* Ensure 2 columns */
   }
 `
 
 export const Card = styled.div`
+  min-width: 180px;
+  padding: 20px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 204px;
-  width: 204px;
-  margin: 15px;
   border-radius: 16px;
   background-color: #2D2D2D;
   text-align: center;
 
   @media (max-width: 850px) {
-    /* height: 400px; */
-    /* width: 195px; */
     height: 166px;
     width: 195px;
   }

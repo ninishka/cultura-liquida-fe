@@ -31,7 +31,6 @@ import HowTo from './icons/icon_step1.svg'
 import imgC6 from './icons/icon_step2.svg'
 import imgC7 from './icons/icon_step3.svg'
 import imgC8 from './icons/icon_step4.svg'
-import imgC9 from './icons/arrow_next.svg'
 
 import imgC10 from './icons/icon_ex30.svg'
 import imgC11 from './icons/icon_ex100.svg'
@@ -289,20 +288,17 @@ export const productContentComponents = [
 export const howToCardsData = [
   {
     img1: HowTo,
-    description: 'Añade los productos que te gusten a tu carrito.',
-    arrow: imgC9
+    description: 'Añade los productos que te gusten a tu carrito.'
   },
   {
     img1: imgC6,
     description: 'Elige tu método de pago preferido y completa tu compra',
-    description2: 'Aceptamos pago vía Mercado Pago',
-    arrow: imgC9
+    description2: 'Aceptamos pago vía Mercado Pago'
   },
   {
     img1: imgC7,
     description: 'En un plazo de 24 horas recogeremos tu pedido y te lo enviaremos.',
-    description2: 'Para pedidos superiores a 200.000 COP el envío es gratuito.',
-    arrow: imgC9
+    description2: 'Para pedidos superiores a 200.000 COP el envío es gratuito.'
   },
   {
     img1: imgC8,

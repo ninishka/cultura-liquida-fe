@@ -39,7 +39,7 @@ export const metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={`${mohave.variable}`} style={{ margin: '0 10px 0' }}>
+      <body className={`${mohave.variable}`} style={{ margin: '0 20px' }}>
          <StyledRegistry>
            <GlobalStyle />
              <ReduxProvider>

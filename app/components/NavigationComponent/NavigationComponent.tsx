@@ -1,28 +1,38 @@
 import React, { FC } from 'react'
+import { usePathname } from "next/navigation";
+
 import type { NavigationProps } from '@/types/types'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { uniqueTitles } from '@/app/components/helpers'
 import {
   Navigation,
   UlItself,
-  LiItself,
   StyledLink
 } from './styled'
 
-const NavigationComponent: FC<NavigationProps> = ({ isopen, setShowMenu, isFooter }) => {
+const pathPrefix = '/product/'
+
+const NavigationComponent: FC<NavigationProps> = ({ isFooter }) => {
+  const pathname = usePathname();
   const { data, isLoading } = useGetProductQuery('');
   if (isLoading) return ''
 
   const uni = uniqueTitles(data)
+  const productSlug = pathname.replace(pathPrefix, '')
+  const product = productSlug.split('-')
+  
   return (
-    <Navigation $isopen={isopen} $isFooter={isFooter}>
-      <UlItself $isFooter={isFooter}> 
+    <Navigation isFooter={isFooter}>
+      <UlItself isFooter={isFooter}> 
         {uni?.map(({ title, slug }) => (
-          <LiItself key={title} onClick={() => isopen && setShowMenu(false)}>
-            <StyledLink href={`/product/${slug}`} $isFooter={isFooter}>
-              {title}
-            </StyledLink>
-          </LiItself>
+          <StyledLink
+            key={title}
+            href={`${pathPrefix}${slug}`}
+            isSelected={slug.includes(product[0])}
+            isFooter={isFooter}
+          >
+            {title}
+          </StyledLink>
         ))} 
       </UlItself>
     </Navigation>
