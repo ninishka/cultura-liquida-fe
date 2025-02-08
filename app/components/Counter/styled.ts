@@ -57,7 +57,6 @@ export const AmountItem = styled.div<ModalStyledProps2>`
   justify-content: center;
   align-items: center;
   border-radius: 16px 16px 16px 16px;
-  /* background-color: #2D2D2D; */
   background-color: ${({$isModal}) => $isModal ? 'white' : '#2D2D2D'};
   border: ${({$isModal}) => $isModal ? '1.5px solid black' : '1.5px solid white'};
   color: ${({$isModal}) => $isModal && 'black'};

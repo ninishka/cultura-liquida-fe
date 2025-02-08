@@ -9,7 +9,7 @@ export const UlItself = styled.ul<NavigationProps>`
   align-items: center;
 
   @media (max-width: 850px) {
-    flex-direction: ${({ $isFooter }) => $isFooter ? 'row' : 'column'};
+    flex-direction: ${({ isFooter }) => isFooter ? 'row' : 'column'};
     padding: 0px;
   }
 `
@@ -20,9 +20,7 @@ export const Navigation = styled.nav<NavigationProps>`
   flex-direction: row;
 
   @media (max-width: 850px) {
-    display: ${({$isopen}) => $isopen ? 'block' : 'none'};
-
-    ${({ $isFooter }) => $isFooter ? css`display: flex;` 
+    ${({ isFooter }) => isFooter ? css`display: flex;` 
     : css`
       position: fixed;
       top: 67px;
@@ -35,10 +33,6 @@ export const Navigation = styled.nav<NavigationProps>`
       justify-content: center;
     `}
   }
-`
-
-export const LiItself = styled.li`
-  list-style-type: none;
 `
 
 export const StyledLink = styled(Link)<NavigationProps>`
@@ -59,9 +53,13 @@ export const StyledLink = styled(Link)<NavigationProps>`
     background-color: #252525;
     border: 2px solid #9F9F9F;
   }
+
+  ${({ isSelected }) => isSelected && css`
+    background-color: #252525;
+  `}; 
  
   @media (max-width:850px) {
-    width: ${({ $isFooter }) => $isFooter ? 'auto' : '268px'};
+    width: ${({ isFooter }) => isFooter ? 'auto' : '268px'};
 
 
     margin: 12px;
@@ -73,7 +71,7 @@ export const StyledLink = styled(Link)<NavigationProps>`
   }
 
   @media (max-width: 412px) {
-    ${({ $isFooter }) => $isFooter ? css`
+    ${({ isFooter }) => isFooter ? css`
       height: 45px;
       display: flex;;
       align-items: center;
@@ -81,7 +79,6 @@ export const StyledLink = styled(Link)<NavigationProps>`
   }
 
   &:hover{
-    /* color: #000000; */
     background-color: #252525;
   }
 `

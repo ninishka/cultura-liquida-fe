@@ -51,7 +51,6 @@ export const StyledItem = styled.div<ProductItemProps>`
 export const FormationSection = styled.section`
   display: flex;
   flex-direction: row;
-  margin: 10px 15px;
   border-bottom: 2px solid #9F9F9F;
 
   @media (max-width: 1200px) {
