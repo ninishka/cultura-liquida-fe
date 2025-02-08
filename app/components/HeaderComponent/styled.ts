@@ -21,7 +21,7 @@ export const HeaderFull = styled.header<NavigationProps>`
   @media (max-width: 850px) {
     min-height: none; 
 
-    ${({$isopen}) => $isopen ? css`
+    ${({isopen}) => isopen ? css`
       border-bottom: none;
       border-radius: unset;
     ` : ''};

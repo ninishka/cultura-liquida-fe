@@ -91,6 +91,7 @@ export interface IconProps {
 }
 
 export interface NavigationProps {
+  isopen?: boolean;
   isFooter?: boolean;
   isSelected?: boolean;
 }
