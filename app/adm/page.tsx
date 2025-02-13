@@ -5,7 +5,7 @@ import { Select } from 'antd'
 import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
 import { formatDate } from '@/helpers/formats'
-import { handleSort, getSortIndicator, sortedData, fieldsForRender } from './admHelpers'
+import { handleSort, getSortIndicator, getSortingData, fieldsForRender } from './admHelpers'
 import {
   AdmWrapper,
   Pagination,
@@ -27,7 +27,7 @@ const Adm: FC = () => {
 
   if (isLoading) return 'Loading adm'
 
-  const displayingData = sortedData(data, sortConfig)
+  const displayingData = getSortingData(data, sortConfig)
   const handleRefetch = () => {
     refetch()
   };
