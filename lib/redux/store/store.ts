@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import cartReducer from '@/lib/redux/slices/cartSlice'
 import { productsAPI } from "@/lib/redux/slices/api";
 import { ordersAPI } from "@/lib/redux/slices/orderApi";
+import { authAPI } from '@/lib/redux/slices/authApi';
 
 const loggerMiddleware = (storeAPI) => (next) => (action) => {
   console.log('Dispatching:', action);
@@ -17,11 +18,13 @@ export const makeStore = () => {
       cart: cartReducer,
       [ordersAPI.reducerPath]: ordersAPI.reducer,
       [productsAPI.reducerPath]: productsAPI.reducer,
+      [authAPI.reducerPath]: authAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
         productsAPI.middleware,
         ordersAPI.middleware,
+        authAPI.middleware,
         loggerMiddleware
       ),
   });

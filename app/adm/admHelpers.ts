@@ -15,7 +15,7 @@ export const handleSort = (key, sortConfig, setSortConfig) => {
     return '↓';
   };
   
-  export const sortedData = (data, sortConfig): any[] => {
+  export const getSortingData = (data, sortConfig): any[] => {
     return [...data].sort((a, b) => {
       if (sortConfig.key) {
         console.log('sortConfig.key: ', sortConfig.key);
