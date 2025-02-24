@@ -72,7 +72,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
           $isOrder={isOrder}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={documentOptions}
-          defaultValue='ce'
         />
       </StyledFormItem>
       
