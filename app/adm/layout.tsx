@@ -1,29 +1,17 @@
 'use client';
 
-import React, { ReactNode, useState, useEffect } from 'react';
-import { Suspense } from 'react';
+import { useState } from 'react';
+import { useLoginMutation } from '@/lib/redux/slices/authApi';
 
-export default function Layout({ children }: { children: ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated');
-    if (authStatus === 'true') {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  const handleLogin = () => {
-    if (password === process.env.RESEND_API_KEY) {
-      setIsAuthenticated(true);
-      localStorage.setItem('isAuthenticated', 'true');
-    } else {
-      alert('Wrong password');
-    }
+  const [login, { isLoading, isError, isSuccess }] = useLoginMutation();
+  
+  const handleLogin = async () => {
+    await login(password);
   };
 
-  if (!isAuthenticated) {
+  if (!isSuccess) {
     return (
       <div style={{ margin: '20px' }}>
         <h1>Password</h1>
@@ -32,12 +20,13 @@ export default function Layout({ children }: { children: ReactNode }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleLogin} style={{ margin: '20px' }}>
-          Login
+        <button onClick={handleLogin} disabled={isLoading} style={{ margin: '20px' }}>
+          {isLoading ? 'Logging in...' : 'Login'}
         </button>
+        {isError && <p style={{ color: 'red' }}>Invalid password</p>}
       </div>
     );
   }
 
-  return <Suspense>{children}</Suspense>;
+  return <>{children}</>;
 }

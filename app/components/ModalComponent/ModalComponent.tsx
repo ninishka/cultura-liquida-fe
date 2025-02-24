@@ -42,11 +42,6 @@ const ModalComponent = ({data}) => {
       // 2. CREATE NEW ORDER BD
       const {orderData, filteredArray} = await createNewOrder(cartItems, formValues)
 
-      console.log('formValues', formValues)
-      console.log('cartItems', cartItems)
-      console.log('orderData', orderData)
-      console.log('filteredArray', filteredArray)
-
       // 3. PAYMENT
       await handlePayment(orderData, filteredArray, formValues, paymentOption, router, setPreferenceId)
     } catch (error) {
@@ -128,7 +123,7 @@ const ModalComponent = ({data}) => {
               <ModalForm
                 onFinish={onFinish} 
                 loading={loading} 
-                initialValues={{ country: 'colombia' }} 
+                initialValues={{ country: 'colombia', document_type: 'cc' }} 
                 paymentOption={paymentOption}
                 setPaymentOption={setPaymentOption}
               />
