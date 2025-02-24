@@ -1,9 +1,10 @@
 'use client'
+
 import React, { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 import Link from 'next/link';
-import { Form, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { useGetProductQuery } from "@/lib/redux/slices/api"
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
@@ -58,7 +59,6 @@ const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status'
 ]
 
 const CheckoutPage: FC = () => {
-  const [form] = Form.useForm();
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
   // const isInitialMercado = searchParams?.get('external_reference') 

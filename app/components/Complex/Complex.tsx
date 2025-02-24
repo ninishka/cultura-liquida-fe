@@ -59,7 +59,7 @@ const Complex: FC = () => {
     <section>
       <AllWrap>
         <ImgDesctopWrapper>
-          <Image sizes='100vw' src={imgC9} alt='El complejo de imágenes de los productos'/>
+          <Image sizes='100vw' src={imgC9} priority alt='El complejo de imágenes de los productos'/>
         </ImgDesctopWrapper>
         <RightContentWrap>
             <TitleWrap>
@@ -71,7 +71,7 @@ const Complex: FC = () => {
               </DiscountText>
             </TitleWrap>
             <ImgMobileWrapper> 
-              <ImgMobile sizes='100vw' src={imgC10} alt='El complejo de imágenes de los productos' />
+              <ImgMobile sizes='100vw' src={imgC10} priority alt='El complejo de imágenes de los productos' />
             </ImgMobileWrapper>
             <TwoCardwrap>
               <ComplexItemsWrap>
