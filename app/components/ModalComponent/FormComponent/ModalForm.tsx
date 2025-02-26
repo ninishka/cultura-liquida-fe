@@ -93,6 +93,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
             </LeftSideWrap>
             <StyledFormItem
               label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>}
+              name="payment_method"
             >
               <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
                 <Radio value="mercado" style={{ color: 'white' }} onClick={() => setPaymentOption('mercado')}> Mercado Pago </Radio>

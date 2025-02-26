@@ -77,7 +77,7 @@ const Complex: FC = () => {
               <ComplexItemsWrap>
                 <LeftSide>
                   <LeftTitle>El complejo consta de:</LeftTitle>
-                  {uni.map(({ slug, title }, index) => (
+                  {uni?.length && uni.map(({ slug, title }, index) => (
                     <ThreeItemsWrap key={title}>
                       <InsideItemWrap>
                         <Item123>{title}</Item123>
