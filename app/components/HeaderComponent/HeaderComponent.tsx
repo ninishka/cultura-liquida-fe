@@ -19,7 +19,9 @@ import {
   Cart,
   CartWrap,
   CounterCartWrap,
-  Counter
+  Counter,
+  BurgerWrap,
+  BurgerImage,
 } from './styled'
 
 
@@ -28,30 +30,33 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const { cartItems } = useAppSelector(state => state.cart);
   const { data } = useGetProductQuery('');
   const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  
+  const [ showMenu, setShowMenu ] = useState(false)
+
   return (
   <HeaderFull>
     <LogoFull href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
       <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
     </LogoFull>
 
-    <NavigationComponent isopen={false} />
-    
-    <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
-      <Cart src={CartIcon} alt="El icono del carrito" />
-      <CounterCartWrap>
-        <Counter>
-          {totalAmount}
-        </Counter>
-      </CounterCartWrap>
-    </CartWrap>
+    <NavigationComponent isopen={showMenu} />
+
+    <div style={{ display: 'flex'}}>
+      <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
+        <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
+      </BurgerWrap>
+      
+      <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
+        <Cart src={CartIcon} alt="El icono del carrito" />
+        <CounterCartWrap>
+          <Counter>
+            {totalAmount}
+          </Counter>
+        </CounterCartWrap>
+      </CartWrap>
+    </div>
   </HeaderFull>
 )}
 
-{/*  />
 
-<BurgerWrap onClick={() => setShowMenu(!showMenu)}>
-<BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
-</BurgerWrap> */}
 
 export default HeaderComponent;

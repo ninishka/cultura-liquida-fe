@@ -41,7 +41,7 @@ export const StyledItem = styled.div<ProductItemProps>`
   &:hover{
     background-color: #252525;
 
-    ${({soldOut}) => soldOut && css`
+    ${({soldout}) => soldout && css`
       background-color: #F2654C;
     `}
   }

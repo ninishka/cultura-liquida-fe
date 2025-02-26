@@ -194,8 +194,12 @@ const CheckoutPage: FC = () => {
   // // searchParams is not dynamic, so no need to put it in dependencies
 
 
-  const hui = () => {
-    console.log('hui: ');
+  const handleChangePayment = async () => {
+    await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
+  }
+
+  const changePaymentMethod = () => {
+    console.log('changePaymentMethod: ');
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
@@ -220,10 +224,6 @@ const CheckoutPage: FC = () => {
       }
     };
 
-    const handleChangePayment = async () => {
-      await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
-    }
-    
     if (data && typeof data === 'object') {
       if (data?.form_data?.payment_method !== paymentOption) {
         fetchData()
@@ -355,7 +355,7 @@ const CheckoutPage: FC = () => {
                 <Radio value="mercado" style={{ color: 'white' }}> Mercado Pago </Radio>
                 <Radio value="transfer" style={{ color: 'white' }}> Transferencia a cuenta bancaria </Radio>
               </Radio.Group>
-              {changePaymentOption && <button onClick={hui}>Comprar</button>}
+              {changePaymentOption && <button onClick={changePaymentMethod}>Comprar</button>}
             </>
             }
             {preferenceId && (

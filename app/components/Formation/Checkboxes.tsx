@@ -11,7 +11,7 @@ import {
   StyledLink
 } from './styled'
 
-const soldOutText = 'Este producto no está disponible de inmediato, pero aún puedes comprarlo y lo enviaremos tan pronto como podamos.'
+const soldoutText = 'Este producto no está disponible de inmediato, pero aún puedes comprarlo y lo enviaremos tan pronto como podamos.'
 
 const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
   <>
@@ -19,8 +19,8 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
       {formationData.map(({type, displayingType, icon, id, slug, size, availableStock}) => (
           <Fragment key={slug}>
             <StyledLink key={id} href={slug}>
-              <Tooltip title={!availableStock && soldOutText}>
-                <StyledItem soldOut={!availableStock} checked={id === rInit} aria-label='Elección de la presentación del producto'> 
+              <Tooltip title={!availableStock && soldoutText}>
+                <StyledItem {...(!availableStock && { soldout: true })} checked={id === rInit} aria-label='Elección de la presentación del producto'> 
                   <label htmlFor={id} aria-label='Elección de la presentación del producto'>
                     <RadioButton
                       id={id}

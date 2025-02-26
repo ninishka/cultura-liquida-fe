@@ -21,7 +21,7 @@ export const HeaderFull = styled.header<NavigationProps>`
   @media (max-width: 850px) {
     min-height: none; 
 
-    ${({$isopen}) => $isopen ? css`
+    ${({isopen}) => isopen ? css`
       border-bottom: none;
       border-radius: unset;
     ` : ''};
@@ -92,6 +92,7 @@ export const Counter = styled.p`
 `
 
 export const BurgerWrap = styled.div`
+  display: none;
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
   padding:  6px;
