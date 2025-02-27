@@ -194,53 +194,53 @@ const CheckoutPage: FC = () => {
   // // searchParams is not dynamic, so no need to put it in dependencies
 
 
-  const handleChangePayment = async () => {
-    await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
-  }
+  // const handleChangePayment = async () => {
+  //   await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
+  // }
 
-  const changePaymentMethod = () => {
-    console.log('changePaymentMethod: ');
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            orderId: orderIdParam,
-            updatedData: {
-              form_data: {
-                ...data?.form_data,
-                payment_method: paymentOption
-              },
-            },
-          }),
-        });
+  // const changePaymentMethod = () => {
+  //   console.log('changePaymentMethod: ');
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
+  //         method: 'PUT',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           orderId: orderIdParam,
+  //           updatedData: {
+  //             form_data: {
+  //               ...data?.form_data,
+  //               payment_method: paymentOption
+  //             },
+  //           },
+  //         }),
+  //       });
 
-        if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
-      } catch (error) {
-        console.error('Error updating order payment_method:', error);
-      }
-    };
+  //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
+  //     } catch (error) {
+  //       console.error('Error updating order payment_method:', error);
+  //     }
+  //   };
 
-    if (data && typeof data === 'object') {
-      if (data?.form_data?.payment_method !== paymentOption) {
-        fetchData()
+  //   if (data && typeof data === 'object') {
+  //     if (data?.form_data?.payment_method !== paymentOption) {
+  //       fetchData()
 
-        if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
-        else if (paymentOption === 'transfer') setPreferenceId('')
+  //       if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
+  //       else if (paymentOption === 'transfer') setPreferenceId('')
 
-        handleChangePayment()
-      }
-    }
-  }; 
+  //       handleChangePayment()
+  //     }
+  //   }
+  // }; 
 
-  const changePaymentOptionHandler = (type) => {
-    console.log('changePaymentOption: ', changePaymentOption);
-    setChangePaymentOption(true)
-    setPaymentOption(type)
-  }
+  // const changePaymentOptionHandler = (type) => {
+  //   console.log('changePaymentOption: ', changePaymentOption);
+  //   setChangePaymentOption(true)
+  //   setPaymentOption(type)
+  // }
 
 
   if (isLoading || isLoadingProduct) return <div>Loading order...</div>;
@@ -344,7 +344,7 @@ const CheckoutPage: FC = () => {
             </StatusPanel>
           </Tooltip>
           <div style={{ margin: 15 }}>
-          {respStatus !== 'approved' && 
+          {/* {respStatus !== 'approved' && 
             <>
               <p>Or change payment method</p>
               <Radio.Group 
@@ -357,7 +357,7 @@ const CheckoutPage: FC = () => {
               </Radio.Group>
               {changePaymentOption && <button onClick={changePaymentMethod}>Comprar</button>}
             </>
-            }
+            } */}
             {preferenceId && (
               <Wallet
                 key={process.env.PUBLIC_KEY_BTN}
