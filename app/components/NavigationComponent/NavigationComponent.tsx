@@ -28,7 +28,7 @@ const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter }) => {
           <StyledLink
             key={title}
             href={`${pathPrefix}${slug}`}
-            isselected={slug.includes(product[0]).toString()}
+            isselected={slug.includes(product[0]) ? 'selected' : ''}
             {...(isfooter && { isfooter })}
           >
             {title}

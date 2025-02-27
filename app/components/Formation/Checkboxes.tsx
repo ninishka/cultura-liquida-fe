@@ -19,8 +19,8 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
       {formationData.map(({type, displayingType, icon, id, slug, size, availableStock}) => (
           <Fragment key={slug}>
             <StyledLink key={id} href={slug}>
-              <Tooltip title={!availableStock && soldoutText}>
-                <StyledItem {...(!availableStock && { soldout: true })} checked={id === rInit} aria-label='Elección de la presentación del producto'> 
+              <Tooltip title={availableStock <= 0 && soldoutText}>
+                <StyledItem {...(availableStock <= 0 && { soldout: true })} checked={id === rInit} aria-label='Elección de la presentación del producto'> 
                   <label htmlFor={id} aria-label='Elección de la presentación del producto'>
                     <RadioButton
                       id={id}
