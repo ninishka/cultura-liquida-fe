@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 
-export const IndicationsSection = styled.section`
+export const IndicationsContent = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row-reverse;
   border-radius: 16px;
   border: 1px solid #9F9F9F;
-  margin: 70px 50px;
+  margin: 70px 0;
   background-color: #2D2D2D;
   line-height: 17.6px;
 
@@ -62,9 +62,13 @@ export const Title = styled.h2`
 export const IndicationsWrapper = styled.div`
   display: flex;
 
-  @media (max-width: 850px) {
-    margin: 0 20px;
+  @media (max-width: 1100px) {
     flex-direction: column;
+  }
+
+  @media (max-width: 850px) {
+    width: -webkit-fill-available;
+    margin: 0 20px;
   }
 `
 

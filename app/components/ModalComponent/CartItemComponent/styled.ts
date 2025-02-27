@@ -229,7 +229,6 @@ export const Price = styled.p<OrderStyledProps>`
 
 
 export const ItemProductTypeText = styled.p`
-  color: red;
   text-align: center;
   width: 90px;
   font-size: 16px;

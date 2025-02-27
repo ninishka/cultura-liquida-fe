@@ -16,6 +16,7 @@ export const ModalTitle = styled.h2`
   }
   font-family: var(--font-mohave);
 
+  margin: 40px auto 10px;
 `
 
 export const ModalStyled = styled(Modal)<ModalStyledProps>`

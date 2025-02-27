@@ -79,7 +79,10 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
   `}
 
   .ant-select-selector {
+    color: black !important;
     border-radius: 16px;
+    border-color:rgb(236, 202, 97) !important;
+
     &:hover, &:focus-within {
       border-color: #F2C94C !important;
       box-shadow: 0 0 0 1.5px rgba(255, 0, 0, 0.1) !important
@@ -139,12 +142,12 @@ export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`
 
 export const CheckboxInput = styled(Checkbox)`
   .ant-checkbox-inner {
-    border-color: #4FDB40 !important;
+    border-color: black !important;
     transition: all 0.3s ease;
   }
 
   .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #4FDB40 !important;
+    background-color: black !important;
   }
 `
 

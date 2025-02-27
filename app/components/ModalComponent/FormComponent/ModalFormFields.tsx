@@ -67,7 +67,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          allowClear
           disabled={isOrder}
           $isOrder={isOrder}
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
@@ -91,7 +90,7 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
       >
         <StyledSelect
           placeholder="Elige una opción..."
-          suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
+          suffixIcon={<></>}
           options={[{ value: 'colombia', label: 'Colombia' }]}
           $isOrder={isOrder}
           disabled
@@ -122,7 +121,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
           placeholder="Elige una opción..."
           showSearch
           onChange={(v: string) => onDepartmentChange(v)}
-          allowClear 
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}       
           options={states}
           disabled={isOrder}
@@ -140,7 +138,6 @@ const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => 
         <StyledSelect
           placeholder="Elige una opción..."
           showSearch
-          allowClear
           suffixIcon={<CaretDownOutlined style={{fontSize:'20px', color:'black'}} />}
           options={cities(selectedDepartment)}
           disabled={isOrder || !selectedDepartment}

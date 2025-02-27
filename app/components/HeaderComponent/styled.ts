@@ -11,9 +11,10 @@ export const HeaderFull = styled.header<NavigationProps>`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #9F9F9F;
-  height: 100px; 
+  height: 100px;
+  margin: 0 20px;
 
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   background-color: #333;
   z-index: 10;
@@ -26,7 +27,6 @@ export const HeaderFull = styled.header<NavigationProps>`
       border-radius: unset;
     ` : ''};
   }
-  
 `
 
 export const LogoFull = styled(Link)`
@@ -62,6 +62,7 @@ export const CartWrap = styled.div`
   position: relative;
   cursor: pointer;
   border: 1px solid transparent;
+  /* position: fixed !important; */
 
   transition: all 0.3s ease;
   &:hover{
@@ -95,7 +96,7 @@ export const BurgerWrap = styled.div`
   display: none;
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
-  padding:  6px;
+  padding:  10px;
   margin-right: 30px;
   position: relative;
   border: 1px solid transparent;
@@ -110,8 +111,23 @@ export const BurgerWrap = styled.div`
     width: 33px;
     height: 33px;
   }
-
 `
 export const BurgerImage = styled(Image)`
    ${reusedStyles}
+`
+
+interface StickyWrapperStyled {
+  $isSticky?: boolean
+}
+
+export const StickyWrapper = styled.div<StickyWrapperStyled>`
+  display: flex;
+  
+  ${({ $isSticky }) => $isSticky && css`
+    position: fixed;
+    top: 15px;
+    /* right: 20px; */
+    right: 0px;
+    z-index: 1000;
+  `}; 
 `

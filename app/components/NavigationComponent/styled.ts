@@ -39,7 +39,7 @@ export const Navigation = styled.nav<NavigationProps>`
 export const StyledLink = styled(Link)<NavigationProps>`
   display: block;
   padding: 15px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: 16px 16px 16px 16px;
   background-color: #333333;
   color: #FFFFFF;
@@ -52,12 +52,17 @@ export const StyledLink = styled(Link)<NavigationProps>`
   transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
-    border: 2px solid #9F9F9F;
+    border: 1px solid #9F9F9F;
   }
 
   ${({ isselected }) => isselected && css`
     background-color: #252525;
   `}; 
+
+  @media (min-width:1000px) {
+    margin: 0 20px;
+  }
+
  
   @media (max-width:850px) {
     width: ${({ isfooter }) => isfooter ? 'auto' : '268px'};
