@@ -57,7 +57,6 @@ export const createNewOrder = async (cartItems, form_data) => {
 export const handlePayment = async (orderData, cartItems, values, paymentOption, router, setPreferenceId)  => {
   const { _id: orderId, shippingCost } = orderData
 
-
   if (paymentOption === 'transfer' && orderId) router.push(`/checkout?order_id=${orderData._id}`)
 
   if (paymentOption === 'mercado') {
@@ -71,7 +70,6 @@ export const handlePayment = async (orderData, cartItems, values, paymentOption,
       },
     }
 
-    console.log('paymentBody', paymentBody)
     const paymentResponse = await fetcher('POST', '/api/preference', JSON.stringify(paymentBody), 'create MercadoPago preference')
     const { preferenceId } = await paymentResponse.json();
     setPreferenceId(preferenceId);

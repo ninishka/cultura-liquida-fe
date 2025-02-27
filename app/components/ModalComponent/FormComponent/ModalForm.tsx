@@ -1,14 +1,11 @@
 import React, { FC, useState } from 'react';
 import { Radio, Tooltip } from 'antd'
-import Image from 'next/image'
 import { useAppSelector } from '@/lib/redux/store/hooks'
 import ModalFormFields from './ModalFormFields'
+import TransferBox from './TransferBox'
 import type { ModalFormProps } from '@/types/types'
 import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing'
 import { formatPrice } from '@/helpers/formats'
-
-import BankingBox from '../BankingBox/BankingBox'
-import payArrow from '@/app/icons/icon_arrow_email.svg'
 
 import {
   termsAndCondidtionsValidator
@@ -18,14 +15,8 @@ import {
   StyledForm,
   StyledFormItem,
   LeftSideWrap,
-  MailLink,
-  MailWrapper,
-  MailDescription,
-  MailImgWrapper,
   SubtotalText,
   PriceTextBox,
-  BankingBoxesWrapper,
-  TransferBoxWrapper,
   CheckboxInput,
 } from './styled'
 
@@ -101,33 +92,7 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
               </Radio.Group>
             </StyledFormItem>
           </TotalWrap>
-          {paymentOption === 'transfer' && (
-            <TransferBoxWrapper>
-              <p style={{ margin: '10px 13px', color: 'white' }}>
-                Para completar tu pedido, puedes realizar una transferencia bancaria a cualquiera de las siguientes cuentas.
-              </p>
-              <BankingBoxesWrapper>
-                <BankingBox title='Bancolombia Ahorros' num='11519071497' />
-                <BankingBox title='BBVA Ahorros' num='0640002991' />
-                <BankingBox title='Nequi' num='3218669199' />
-              </BankingBoxesWrapper>
-              <MailWrapper>
-                <MailDescription>
-                  Después de realizar el pago, envía el comprobante junto con el número de tu pedido al correo para confirmar la transacción.
-                </MailDescription>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <MailImgWrapper>
-                    <Image src={payArrow} alt='Después del pago envíe una captura de pantalla al correo electrónico' />
-                  </MailImgWrapper>
-                  <MailLink href='mailto:culturaliquidacol@gmail.com'>culturaliquidacol@gmail.com</MailLink>  
-                </div>
-              </MailWrapper>
-              <p style={{ margin: '18px 13px 0', fontSize: 16, color: 'white' }}>
-                Tu pedido será procesado y enviado tan pronto validemos el pago.
-              </p>
-            </TransferBoxWrapper>
-          )}
-
+          {paymentOption === 'transfer' && <TransferBox />}
           <StyledFormItem style={{ width: '100%' }}>
             <Tooltip title={!paymentOption ? 'Por favor, elija el método de pago' : ''}>
               <>

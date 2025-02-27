@@ -1,11 +1,15 @@
 import styled, { css } from 'styled-components'
 
-export const BankInfoBlock = styled.div`
+interface BankingBoxStyledProps {
+  $isOrder?: boolean;
+}
+
+export const BankInfoBlock = styled.div<BankingBoxStyledProps>`
   background-color: #2D2D2D;
   border-radius: 16px;
   padding: 10px 20px;
   width: -webkit-fill-available;
-  margin: 10px;
+  margin: ${({ $isOrder }) => $isOrder ? '10px 0px': '10px'}
 `
 
 export const BankInfoText = styled.p`

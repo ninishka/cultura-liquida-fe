@@ -93,7 +93,7 @@ export interface IconProps {
 export interface NavigationProps {
   isopen?: boolean;
   isfooter?: boolean;
-  isselected?: boolean;
+  isselected?: boolean | string;
 }
 
 export interface ModalStyledProps {

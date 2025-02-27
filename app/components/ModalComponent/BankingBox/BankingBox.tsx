@@ -12,9 +12,10 @@ import {
 export interface BankingBoxProps {
   title: string;
   num: string | number;
+  isOrder?: boolean;
 }
 
-const BankingBox: FC<BankingBoxProps> = ({ title, num }) => {
+const BankingBox: FC<BankingBoxProps> = ({ title, num, isOrder }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const numberRef = useRef(null);
 
@@ -31,7 +32,13 @@ const BankingBox: FC<BankingBoxProps> = ({ title, num }) => {
   };
 
   return (
-    <BankInfoBlock>
+    <BankInfoBlock 
+      $isOrder={isOrder}
+      onClick={copyToClipboard}
+      aria-label="Copiar número de cuenta icono"
+      style={{ cursor: 'pointer' }}
+      tabIndex={0} // keyboard nav
+    >
       <BankInfoText>{title}</BankInfoText>
       <BankNumberBlock>
         <BankInfoNumber ref={numberRef} aria-label={`Número de cuenta: ${num}`}>{num}</BankInfoNumber>
@@ -43,13 +50,9 @@ const BankingBox: FC<BankingBoxProps> = ({ title, num }) => {
           <Image
             sizes="100vw"
             src={copyBtn}
-            alt="Número de copia"
+            alt="Número de copia icon"
             width={18}
             height={18}
-            onClick={copyToClipboard}
-            aria-label="Copiar número de cuenta icono"
-            style={{ cursor: 'pointer' }}
-            tabIndex={0} // keyboard nav
           />
         </Tooltip>
       </BankNumberBlock>
