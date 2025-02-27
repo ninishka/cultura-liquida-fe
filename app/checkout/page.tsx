@@ -2,29 +2,20 @@
 
 import React, { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import Link from 'next/link';
-import { Radio, Tooltip } from 'antd'
 import { useGetProductQuery } from "@/lib/redux/slices/api"
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
 import { formatPrice } from '@/helpers/formats'
-import approvedIcon from '@/app/icons/icon_paid_true.svg'
-import pendingIcon from '@/app/icons/icon_paid_error.svg'
-import falseIcon from '@/app/icons/icon_paid_false.svg'
-import { shippingCost } from '@/helpers/constants'
 import { formatDate } from '@/helpers/formats'
+
+import RightPanelComponent from './RightPanelComponent'
+
 import {
   StyledLink,
   CheckoutWrapper,
   CheckoutWrapperContent,
-  RightPanel,
-  StatusPanel,
   MPinfoItemsWrapper,
-  SubtotalText,
-  PriceTextBoxCheckout,
   ScrolableZone,
   SyncOutlinedStyled,
   PageWrapper,
@@ -38,31 +29,6 @@ import {
   BankInfoNumber
  } from '@/app/components/ModalComponent/BankingBox/styled'
 
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { handlePayment } from '@/helpers/data';
-
-import {
-  CartPayButton
-} from '@/app/components/ModalComponent/styled'
-
-
-
-// collection_status: approved
-// payment_id: 1328778667
-// status: approved   
-// payment_type: prepaid_card
-// merchant_order_id: 25920426760
-// preference_id: 1700322474-0c961e86-e450-4eb7-ab35-0c93834e5ba0
-// site_id: MCO
-// processing_mode: aggregator
-// merchant_account_id: null
-// .... HOW TO MAKE addition fields MP https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
-
-// success with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
-// success without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
-// failed (I just change status in db) http://localhost:3000/checkout?order_id=67865ffc4440e5466f9bcb0d
-// pending http://localhost:3000/checkout?order_id=6787cf02353ec4d4bf6c72ad 
-
 const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status', 'payment_type',
   'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id', 
   'external_reference' // - additional field
@@ -71,26 +37,23 @@ const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status'
 const CheckoutPage: FC = () => {
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
-  const router = useRouter()
   // const isInitialMercado = searchParams?.get('external_reference') 
   // just any param from MP show us that user was redirected from MP or he maybe copied link and used it again but it is ok
   const isInitialMercado = searchParams?.get('site_id')
-  console.log('isInitialMercado: ', isInitialMercado);
 
   // isLoading only for first request
   // isFetching for every request if using refetch()
   // status also can be usefull here - shows refetch stages
   const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery({ orderId: orderIdParam });
   const [respStatus, setRespStatus] = useState(data?.status)
-
-  const [changePaymentOption, setChangePaymentOption] = useState(false)
-  const [paymentOption, setPaymentOption] = useState('')
-  const [preferenceId, setPreferenceId] = useState('') //mp
-
+  
+  // const [paymentOption, setPaymentOption] = useState('') // TODO avoid stupid isInitialMercado const
+  // const isInitialMercado2 = paymentOption === 'mercado' && !data?.mp_data // TODO avoid stupid isInitialMercado const
 
   const { data: productData, isLoading: isLoadingProduct } = useGetProductQuery('');
 
   useEffect(() => {
+    // setPaymentOption(data?.form_data?.payment_method) // TODO avoid stupid isInitialMercado const
     console.log('useEffect')
     if(data?.status) {
       console.log('data?.status UE ', data?.status);
@@ -107,8 +70,6 @@ const CheckoutPage: FC = () => {
             acc[key] = searchParams?.get(key) || "Not provided";
             return acc;
           }, {} as Record<string, string>);     
-          
-          console.log('mp_data', mp_data)
 
           const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
             method: 'PUT',
@@ -127,7 +88,6 @@ const CheckoutPage: FC = () => {
           if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
 
           const updatedOrder = await response.json();
-          console.log('Updated Order:', updatedOrder);
           setRespStatus(updatedOrder?.status)
         } catch (error) {
           console.error('Error updating order:', error);
@@ -148,101 +108,6 @@ const CheckoutPage: FC = () => {
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies
 
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-  //         method: 'PUT',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({
-  //           orderId: orderIdParam,
-  //           updatedData: {
-  //             form_data: {
-  //               ...data?.form_data,
-  //               payment_method: paymentOption
-  //             },
-  //           },
-  //         }),
-  //       });
-
-  //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
-  //     } catch (error) {
-  //       console.error('Error updating order payment_method:', error);
-  //     }
-  //   };
-
-  //   const handleChangePayment = async () => {
-  //     await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
-  //   }
-    
-  //   if (data && typeof data === 'object') {
-  //     if (data?.form_data?.payment_method !== paymentOption) {
-  //       fetchData()
-
-  //       console.log('paymentOption: ', paymentOption);
-  //       if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
-  //       else if (paymentOption === 'transfer') setPreferenceId('')
-
-  //       handleChangePayment()
-  //     }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [data, paymentOption]); 
-  // // searchParams is not dynamic, so no need to put it in dependencies
-
-
-  // const handleChangePayment = async () => {
-  //   await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
-  // }
-
-  // const changePaymentMethod = () => {
-  //   console.log('changePaymentMethod: ');
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-  //         method: 'PUT',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({
-  //           orderId: orderIdParam,
-  //           updatedData: {
-  //             form_data: {
-  //               ...data?.form_data,
-  //               payment_method: paymentOption
-  //             },
-  //           },
-  //         }),
-  //       });
-
-  //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
-  //     } catch (error) {
-  //       console.error('Error updating order payment_method:', error);
-  //     }
-  //   };
-
-  //   if (data && typeof data === 'object') {
-  //     if (data?.form_data?.payment_method !== paymentOption) {
-  //       fetchData()
-
-  //       if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
-  //       else if (paymentOption === 'transfer') setPreferenceId('')
-
-  //       handleChangePayment()
-  //     }
-  //   }
-  // }; 
-
-  // const changePaymentOptionHandler = (type) => {
-  //   console.log('changePaymentOption: ', changePaymentOption);
-  //   setChangePaymentOption(true)
-  //   setPaymentOption(type)
-  // }
-
-
   if (isLoading || isLoadingProduct) return <div>Loading order...</div>;
   // if (error) return <div>Error loading order: {error.message}</div>;
 
@@ -253,23 +118,11 @@ const CheckoutPage: FC = () => {
   // SHIPPING COST FROM ORDER
 
   const formatedDate = formatDate(data?.updatedAt, 'es-ES')
-  const displayShippingCost = formatPrice(shippingCost, ' ')
   const displayTotal = formatPrice(data?.totalCost, ' ')
-  const beforeDelivery = formatPrice(data.totalCost - shippingCost, ' ')
 
-  // in_process - is for MP payment status BUT pending - is for order record status
-  const isPending = (respStatus === 'in_process' || respStatus === 'pending')
-  const coloring = (respStatus === 'approved' && '#4FDB40') || (isPending && '#F2C94C') 
-  const iconing = (respStatus === 'approved' && approvedIcon) || (isPending && pendingIcon) || falseIcon 
-  const wording = (respStatus === 'approved' && 'pagado') || (isPending && 'pendiente') || 'no pagado'
-
-  const hasMercadoPagoData = !!data?.mp_data;
   const formData = data?.form_data;
   const t  = formData?.payment_method === 'transfer' && 'Transferencia a cuenta bancaria' 
   const m  = formData?.payment_method === 'mercado' && 'Mercado Pago' 
-
-  console.log('preferenceId: ', preferenceId);
-
 
   return (
     <PageWrapper>
@@ -312,78 +165,28 @@ const CheckoutPage: FC = () => {
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>
-        <RightPanel>
-          <Tooltip
-            title={
-              (isPending && !hasMercadoPagoData) ? (
-                <div style={{ textAlign: 'center'}}>
-                  Por favor, asegúrese de haber enviado el comprobante de pago al correo electrónico{' '}
-                  <Link style={{ color: '#F2C94C'}} href="mailto:culturaliquidacol@gmail.com">
-                    culturaliquidacol@gmail.com
-                  </Link>
-                </div>
-              ) : (
-                ''
-              )
-            }
-          >
-            <StatusPanel $status={coloring}>
-              <div style={{display: 'flex', padding: 27}}>
-                <Image
-                  sizes="100vw"
-                  src={iconing}
-                  alt="El pago fue exitoso"
-                  width={40}
-                  height={40}
-                />
-                <div style={{margin: '0 15px'}}>
-                  <p style={{margin: 0, fontWeight: 400}}>Estado de pago:</p>
-                  <p style={{margin: 0, fontWeight: 700}}>{wording}</p>
-                </div>
-              </div>
-            </StatusPanel>
-          </Tooltip>
-          <div style={{ margin: 15 }}>
-          {/* {respStatus !== 'approved' && 
-            <>
-              <p>Or change payment method</p>
-              <Radio.Group 
-                style={{ display: 'flex', flexDirection: 'column', color: 'white'}}
-                defaultValue={data?.form_data?.payment_method}
-                onChange={(e) => changePaymentOptionHandler(e.target.value)}
-              >
-                <Radio value="mercado" style={{ color: 'white' }}> Mercado Pago </Radio>
-                <Radio value="transfer" style={{ color: 'white' }}> Transferencia a cuenta bancaria </Radio>
-              </Radio.Group>
-              {changePaymentOption && <button onClick={changePaymentMethod}>Comprar</button>}
-            </>
-            } */}
-            {preferenceId && (
-              <Wallet
-                key={process.env.PUBLIC_KEY_BTN}
-                initialization={{ preferenceId }}
-                customization={{ texts:{ valueProp: 'smart_option'}}} 
-              />
-            )}
-          </div>
-          <div style={{ margin: 15 }}>
-            <PriceTextBoxCheckout>
-              <SubtotalText>Subtotal: </SubtotalText>
-              <SubtotalText>{beforeDelivery}</SubtotalText>
-            </PriceTextBoxCheckout>
-            <PriceTextBoxCheckout>
-              <SubtotalText>Envío: </SubtotalText>
-              <SubtotalText>{displayShippingCost}</SubtotalText>
-            </PriceTextBoxCheckout>
-            <PriceTextBoxCheckout style={{ marginTop: 10 }}>
-              <p style={{ fontSize: 36, margin: 0, color: '#4FDB40' }}>TOTAL: </p>
-              <p style={{ fontSize: 36, margin: '0 0 0 15px', color: '#4FDB40' }}>{displayTotal} COP</p>
-            </PriceTextBoxCheckout>
-          </div>
-        </RightPanel>
+        <RightPanelComponent data={data} respStatus={respStatus} refetch={refetch} />
       </CheckoutWrapper>
     </PageWrapper>
   );
 }
 
 export default CheckoutPage
+
+
+
+// collection_status: approved
+// payment_id: 1328778667
+// status: approved   
+// payment_type: prepaid_card
+// merchant_order_id: 25920426760
+// preference_id: 1700322474-0c961e86-e450-4eb7-ab35-0c93834e5ba0
+// site_id: MCO
+// processing_mode: aggregator
+// merchant_account_id: null
+// .... HOW TO MAKE addition fields MP https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
+
+// success with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
+// success without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
+// failed (I just change status in db) http://localhost:3000/checkout?order_id=67865ffc4440e5466f9bcb0d
+// pending http://localhost:3000/checkout?order_id=6787cf02353ec4d4bf6c72ad 

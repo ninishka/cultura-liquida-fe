@@ -25,6 +25,7 @@ export const RightPanel = styled.div`
   width: 100%;
   max-width: 380px;
   margin: 0 0 20px 20px;
+  height: fit-content;
 
   @media (max-width: 1200px) {
     min-width: min-content;
@@ -102,24 +103,6 @@ export const ScrolableZone = styled.div`
   overflow: auto;
   height: 100%;
   margin-bottom: 20px;
-
-  &::-webkit-scrollbar {
-    width: 8px !important;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #F2C94C !important;
-    border-radius: 4px !important;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #F2C94C !important;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #252525 !important;
-    border-radius: 4px;
-  }
 
   @media (max-width: 1200px) {
     margin: 0 auto;

@@ -21,6 +21,24 @@ export const GlobalStyle = createGlobalStyle`
     .using-mouse:focus {
       outline: none !important;
     } */
+
+    &::-webkit-scrollbar {
+      width: 8px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #F2C94C !important;
+      border-radius: 4px !important;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #F2C94C !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #252525 !important;
+      border-radius: 4px;
+    }
   }
 
   main {
