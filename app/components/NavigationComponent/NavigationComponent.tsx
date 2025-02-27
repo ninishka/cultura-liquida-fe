@@ -12,7 +12,7 @@ import {
 
 const pathPrefix = '/product/'
 
-const NavigationComponent: FC<NavigationProps> = ({ isFooter }) => {
+const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter }) => {
   const pathname = usePathname();
   const { data, isLoading } = useGetProductQuery('');
   if (isLoading) return ''
@@ -22,14 +22,14 @@ const NavigationComponent: FC<NavigationProps> = ({ isFooter }) => {
   const product = productSlug.split('-')
   
   return (
-    <Navigation isFooter={isFooter}>
-      <UlItself isFooter={isFooter}> 
+    <Navigation {...(isfooter && { isfooter })} {...(isopen && { isopen })}>
+      <UlItself {...(isfooter && { isfooter })} {...(isopen && { isopen })}> 
         {uni?.map(({ title, slug }) => (
           <StyledLink
             key={title}
             href={`${pathPrefix}${slug}`}
-            isSelected={slug.includes(product[0])}
-            isFooter={isFooter}
+            isselected={slug.includes(product[0]).toString()}
+            {...(isfooter && { isfooter })}
           >
             {title}
           </StyledLink>

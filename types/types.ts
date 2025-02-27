@@ -91,8 +91,9 @@ export interface IconProps {
 }
 
 export interface NavigationProps {
-  isFooter?: boolean;
-  isSelected?: boolean;
+  isopen?: boolean;
+  isfooter?: boolean;
+  isselected?: boolean;
 }
 
 export interface ModalStyledProps {
@@ -125,7 +126,7 @@ export interface OrderLoadingStyledProps {
 }
 
 export interface ProductItemProps {
-  soldOut?: boolean;
+  soldout?: boolean;
   checked?: boolean;
 }
 

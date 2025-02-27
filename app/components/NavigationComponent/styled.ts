@@ -9,7 +9,8 @@ export const UlItself = styled.ul<NavigationProps>`
   align-items: center;
 
   @media (max-width: 850px) {
-    flex-direction: ${({ isFooter }) => isFooter ? 'row' : 'column'};
+    display: ${({isopen}) => isopen ? 'block' : 'none'};
+    flex-direction: ${({ isfooter }) => isfooter ? 'row' : 'column'};
     padding: 0px;
   }
 `
@@ -20,17 +21,17 @@ export const Navigation = styled.nav<NavigationProps>`
   flex-direction: row;
 
   @media (max-width: 850px) {
-    ${({ isFooter }) => isFooter ? css`display: flex;` 
+    ${({ isfooter, isopen }) => isfooter ? css`display: flex;` 
     : css`
-      position: fixed;
-      top: 67px;
+      position: absolute;
+      top: 75px;
       background-color: #333333;
       width: 100%;
       right: 0;
       height: fit-content;
       z-index: 99999;
-      border-top: 2px solid #9F9F9F;
       justify-content: center;
+      border-bottom: ${isopen ? '2px solid #9F9F9F' : 'none'};
     `}
   }
 `
@@ -54,12 +55,12 @@ export const StyledLink = styled(Link)<NavigationProps>`
     border: 2px solid #9F9F9F;
   }
 
-  ${({ isSelected }) => isSelected && css`
+  ${({ isselected }) => isselected && css`
     background-color: #252525;
   `}; 
  
   @media (max-width:850px) {
-    width: ${({ isFooter }) => isFooter ? 'auto' : '268px'};
+    width: ${({ isfooter }) => isfooter ? 'auto' : '268px'};
 
 
     margin: 12px;
@@ -71,7 +72,7 @@ export const StyledLink = styled(Link)<NavigationProps>`
   }
 
   @media (max-width: 412px) {
-    ${({ isFooter }) => isFooter ? css`
+    ${({ isfooter }) => isfooter ? css`
       height: 45px;
       display: flex;;
       align-items: center;

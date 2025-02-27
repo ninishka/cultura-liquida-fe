@@ -2,9 +2,10 @@
 
 import React, { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link';
-import { Tooltip } from 'antd';
+import { Radio, Tooltip } from 'antd'
 import { useGetProductQuery } from "@/lib/redux/slices/api"
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
@@ -37,6 +38,15 @@ import {
   BankInfoNumber
  } from '@/app/components/ModalComponent/BankingBox/styled'
 
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { handlePayment } from '@/helpers/data';
+
+import {
+  CartPayButton
+} from '@/app/components/ModalComponent/styled'
+
+
+
 // collection_status: approved
 // payment_id: 1328778667
 // status: approved   
@@ -61,6 +71,7 @@ const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status'
 const CheckoutPage: FC = () => {
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
+  const router = useRouter()
   // const isInitialMercado = searchParams?.get('external_reference') 
   // just any param from MP show us that user was redirected from MP or he maybe copied link and used it again but it is ok
   const isInitialMercado = searchParams?.get('site_id')
@@ -71,6 +82,11 @@ const CheckoutPage: FC = () => {
   // status also can be usefull here - shows refetch stages
   const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery({ orderId: orderIdParam });
   const [respStatus, setRespStatus] = useState(data?.status)
+
+  const [changePaymentOption, setChangePaymentOption] = useState(false)
+  const [paymentOption, setPaymentOption] = useState('')
+  const [preferenceId, setPreferenceId] = useState('') //mp
+
 
   const { data: productData, isLoading: isLoadingProduct } = useGetProductQuery('');
 
@@ -132,6 +148,101 @@ const CheckoutPage: FC = () => {
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies
 
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
+  //         method: 'PUT',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           orderId: orderIdParam,
+  //           updatedData: {
+  //             form_data: {
+  //               ...data?.form_data,
+  //               payment_method: paymentOption
+  //             },
+  //           },
+  //         }),
+  //       });
+
+  //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
+  //     } catch (error) {
+  //       console.error('Error updating order payment_method:', error);
+  //     }
+  //   };
+
+  //   const handleChangePayment = async () => {
+  //     await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
+  //   }
+    
+  //   if (data && typeof data === 'object') {
+  //     if (data?.form_data?.payment_method !== paymentOption) {
+  //       fetchData()
+
+  //       console.log('paymentOption: ', paymentOption);
+  //       if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
+  //       else if (paymentOption === 'transfer') setPreferenceId('')
+
+  //       handleChangePayment()
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [data, paymentOption]); 
+  // // searchParams is not dynamic, so no need to put it in dependencies
+
+
+  // const handleChangePayment = async () => {
+  //   await handlePayment(data, data?.products, data?.form_data, paymentOption, router, setPreferenceId)
+  // }
+
+  // const changePaymentMethod = () => {
+  //   console.log('changePaymentMethod: ');
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
+  //         method: 'PUT',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           orderId: orderIdParam,
+  //           updatedData: {
+  //             form_data: {
+  //               ...data?.form_data,
+  //               payment_method: paymentOption
+  //             },
+  //           },
+  //         }),
+  //       });
+
+  //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
+  //     } catch (error) {
+  //       console.error('Error updating order payment_method:', error);
+  //     }
+  //   };
+
+  //   if (data && typeof data === 'object') {
+  //     if (data?.form_data?.payment_method !== paymentOption) {
+  //       fetchData()
+
+  //       if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
+  //       else if (paymentOption === 'transfer') setPreferenceId('')
+
+  //       handleChangePayment()
+  //     }
+  //   }
+  // }; 
+
+  // const changePaymentOptionHandler = (type) => {
+  //   console.log('changePaymentOption: ', changePaymentOption);
+  //   setChangePaymentOption(true)
+  //   setPaymentOption(type)
+  // }
+
+
   if (isLoading || isLoadingProduct) return <div>Loading order...</div>;
   // if (error) return <div>Error loading order: {error.message}</div>;
 
@@ -152,7 +263,13 @@ const CheckoutPage: FC = () => {
   const iconing = (respStatus === 'approved' && approvedIcon) || (isPending && pendingIcon) || falseIcon 
   const wording = (respStatus === 'approved' && 'pagado') || (isPending && 'pendiente') || 'no pagado'
 
-  const hasMercadoPagoData = data?.mp_data;
+  const hasMercadoPagoData = !!data?.mp_data;
+  const formData = data?.form_data;
+  const t  = formData?.payment_method === 'transfer' && 'Transferencia a cuenta bancaria' 
+  const m  = formData?.payment_method === 'mercado' && 'Mercado Pago' 
+
+  console.log('preferenceId: ', preferenceId);
+
 
   return (
     <PageWrapper>
@@ -183,7 +300,7 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
                 <BankInfoText>Metodos de pago:</BankInfoText>
-                <BankInfoNumber>{hasMercadoPagoData ? 'Mercado Pago' : 'Transferencia a cuenta bancaria'}</BankInfoNumber>
+                <BankInfoNumber>{t || m || ''}</BankInfoNumber>
               </BankInfoBlockOrder>
             </MPinfoItemsWrapper>
             <ListItemsWrapperCheckout style={{ margin: '10px 20px 10px 10px'}}>
@@ -191,7 +308,7 @@ const CheckoutPage: FC = () => {
             </ListItemsWrapperCheckout>
             <>
               <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitleCheckout>
-              <ModalForm loading={false} initialValues={data?.form_data} isOrder />
+              <ModalForm loading={false} initialValues={formData} isOrder />
             </>
           </ScrolableZone>
         </CheckoutWrapperContent>
@@ -226,6 +343,29 @@ const CheckoutPage: FC = () => {
               </div>
             </StatusPanel>
           </Tooltip>
+          <div style={{ margin: 15 }}>
+          {/* {respStatus !== 'approved' && 
+            <>
+              <p>Or change payment method</p>
+              <Radio.Group 
+                style={{ display: 'flex', flexDirection: 'column', color: 'white'}}
+                defaultValue={data?.form_data?.payment_method}
+                onChange={(e) => changePaymentOptionHandler(e.target.value)}
+              >
+                <Radio value="mercado" style={{ color: 'white' }}> Mercado Pago </Radio>
+                <Radio value="transfer" style={{ color: 'white' }}> Transferencia a cuenta bancaria </Radio>
+              </Radio.Group>
+              {changePaymentOption && <button onClick={changePaymentMethod}>Comprar</button>}
+            </>
+            } */}
+            {preferenceId && (
+              <Wallet
+                key={process.env.PUBLIC_KEY_BTN}
+                initialization={{ preferenceId }}
+                customization={{ texts:{ valueProp: 'smart_option'}}} 
+              />
+            )}
+          </div>
           <div style={{ margin: 15 }}>
             <PriceTextBoxCheckout>
               <SubtotalText>Subtotal: </SubtotalText>
