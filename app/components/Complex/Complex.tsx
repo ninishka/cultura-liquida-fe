@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { complexData2 } from '@/app/data'
-import { useState } from 'react';
 import Counter from '../Counter/Counter'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { uniqueTitles } from '@/app/components/helpers'
@@ -10,6 +10,7 @@ import imgC9 from '@/app/icons/CL-703.png'
 import imgC10 from '@/app/icons/CL-71M.png'
 import imgC from '@/app/icons/arrow_next.svg'
 import {
+  ComplexSection,
   AllWrap,
   ImgMobileWrapper,
   ImgDesctopWrapper,
@@ -21,8 +22,7 @@ import {
   LeftSide,
   LeftTitle,
   ThreeItemsWrap,
-  InsideItemWrap,
-  Item123,
+  Title,
   LearnMoreWrap,
   LearnMoreText,
   ArrowIcon,
@@ -37,26 +37,32 @@ import {
   FormationWrap,
   Selecting,
   PriceCounterWrap,
-  ImgMobile
+  ImgMobile,
+  ButtonsWrapper
 } from './styled'
 
 const Complex: FC = () => {
   const [ checkedState, setCheckedState ] = useState<string>('1')
   const { data, isLoading } = useGetProductQuery('');
+  const router = useRouter()
+  
   if (isLoading) return ''
+
+  const filterdContent = complexData2.filter(({ id }) => id === checkedState)
+  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
+  const preObj = {idCart , ...filterdContent?.[0]}
+  const uni = uniqueTitles(data)
 
   const rechecking = (id: string) => {
     if(checkedState !== id) setCheckedState(id)
   }
 
-  const filterdContent = complexData2.filter(({ id }) => id === checkedState)
-  const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id
-  const preObj = {idCart , ...filterdContent?.[0]}
-
-  const uni = uniqueTitles(data)
+  const handleRedirect = (slug) => {
+    router.push(`/product/${slug}`)
+  }
 
   return (
-    <section>
+    <ComplexSection>
       <AllWrap>
         <ImgDesctopWrapper>
           <Image sizes='100vw' src={imgC9} priority alt='El complejo de imágenes de los productos'/>
@@ -79,10 +85,8 @@ const Complex: FC = () => {
                   <LeftTitle>El complejo consta de:</LeftTitle>
                   {uni?.length && uni.map(({ slug, title }, index) => (
                     <ThreeItemsWrap key={title}>
-                      <InsideItemWrap>
-                        <Item123>{title}</Item123>
-                      </InsideItemWrap>
-                      <ArrowButtons href={`/product/${slug}`} aria-label={`Obtenga más información sobre ${title}`}>
+                      <ArrowButtons onClick={() => handleRedirect(slug)} aria-label={`Obtenga más información sobre ${title}`}>
+                        <Title>{title}</Title>
                         <LearnMoreWrap key={title + `${index + 1}`.toString()}>
                           <LearnMoreText>Leer más</LearnMoreText>
                           <ArrowIcon src={imgC} alt='La imagen del botón' />
@@ -95,23 +99,25 @@ const Complex: FC = () => {
               <FormationWrap>
                 <CheckBoxGroup>
                   <Selecting>Seleccione la presentación del producto:</Selecting>
-                  {complexData2.map(({type, icon, id}) => (
-                    <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
-                      <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
-                        <RadioButton 
-                          type="radio" 
-                          id={`${id}+${type}`}
-                          name="group1" 
-                          checked={id === checkedState}
-                          onChange={() => rechecking(id)}
-                        />
-                      </label>
-                      <LabelContent>
-                        <Icon src={icon} alt={type}/>
-                        <TextDesc>{type}</TextDesc>
-                      </LabelContent>
-                    </Item>
-                    ))}
+                  <ButtonsWrapper >
+                    {complexData2.map(({type, icon, id}) => (
+                      <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
+                        <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
+                          <RadioButton 
+                            type="radio" 
+                            id={`${id}+${type}`}
+                            name="group1" 
+                            checked={id === checkedState}
+                            onChange={() => rechecking(id)}
+                          />
+                        </label>
+                        <LabelContent>
+                          <Icon src={icon} alt={type}/>
+                          <TextDesc>{type}</TextDesc>
+                        </LabelContent>
+                      </Item>
+                      ))}
+                    </ButtonsWrapper>
                 </CheckBoxGroup>
               </FormationWrap>
             </TwoCardwrap>
@@ -120,7 +126,7 @@ const Complex: FC = () => {
             </PriceCounterWrap>
         </RightContentWrap>
       </AllWrap>
-    </section>
+    </ComplexSection>
   )
 }
 

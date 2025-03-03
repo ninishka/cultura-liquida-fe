@@ -4,13 +4,10 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 export const BenefitsSection = styled.section`
-  min-height: 80vh;
-  margin: 20vh 0 0;
-
-  @media (max-width: 1200px) {
-    min-height: 96vh;
-    margin: 4vh 0;
-  }
+  min-height: 70vh;
+  /* margin: 20vh 0 0; */
+  padding: 20vw 0 5vw;
+  border-top: 2px solid #9F9F9F;
 `
 
 export const HeaderBenefitsWrapper = styled.div`

@@ -12,7 +12,7 @@ import {
 } from './styled'
 
 const IfQuestions: FC = () => (
-  <section style={{ minHeight: '50vh', margin: '10vh 0'}}>
+  <section style={{ minHeight: '50vh', margin: '10vh 0 0'}}>
     <Wrapper>
       <TextWrapper>
         <ContactText>¿Tienes preguntas?</ContactText>

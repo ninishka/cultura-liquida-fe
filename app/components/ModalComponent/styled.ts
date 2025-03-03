@@ -59,7 +59,7 @@ export const TotalBox = styled.div`
   flex-direction: column;
   background-color: #252525;
   border-radius: 16px;
-  margin: 20px;
+  margin: 15px;
   padding: 5px;
   font-family: var(--font-mohave);
 

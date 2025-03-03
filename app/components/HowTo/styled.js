@@ -3,9 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const HowToSection = styled.section`
-  border-bottom: 2px solid #9F9F9F;
-  min-height: 80vh;
-  margin: 0 0 10vh;
+  margin: 40vh 0; 
+
+  @media (max-width: 1100px) {
+    margin: 30vh 0 20vh ; 
+  }
 `
 
 export const HowToWrapper = styled.div`

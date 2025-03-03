@@ -15,7 +15,7 @@ import {
 } from './styled'
 
 const Indications: FC<IndicationsProps> = ({ indicationsImg }) => (
-  <section style={{ minHeight: '80vh'}}>
+  <section>
     <IndicationsContent>
       <ContentWrapper>
         <Title>INDICACIONES DE USO:</Title>

@@ -7,17 +7,16 @@ export const IndicationsContent = styled.div`
   flex-direction: row-reverse;
   border-radius: 16px;
   border: 1px solid #9F9F9F;
-  margin: 70px 0;
+  margin: 10vw 0 20vw;
+
   background-color: #2D2D2D;
   line-height: 17.6px;
 
   @media (max-width: 850px) {
     flex-direction: column;
     align-items: center;
+    margin-top: 30vw;
   }
-  /* @media (min-width: 2000px) {
-    justify-content: center;
-  } */
 `
 
 export const IconWrapper = styled.div`
@@ -53,9 +52,6 @@ export const Title = styled.h2`
   font-size: 36px;
   font-weight: 500;
   line-height: 45px;
-  /* @media (max-width:850px) {
-    font-size:30px
-  } */
 `
 
 

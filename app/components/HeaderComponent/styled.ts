@@ -14,6 +14,9 @@ export const HeaderFull = styled.header<NavigationProps>`
   height: 100px;
   margin: 0 20px;
 
+  max-width: 1920px;
+  margin: 0 auto;
+
   /* position: sticky; */
   top: 0;
   background-color: #333;
@@ -126,8 +129,8 @@ export const StickyWrapper = styled.div<StickyWrapperStyled>`
   ${({ $isSticky }) => $isSticky && css`
     position: fixed;
     top: 15px;
-    /* right: 20px; */
-    right: 0px;
+    right: -20px;
+    /* right: 0px; */
     z-index: 1000;
   `}; 
 `
