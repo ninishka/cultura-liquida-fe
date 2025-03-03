@@ -7,7 +7,7 @@ export const ContactWrapper = styled.div`
   border-radius: 16px 16px 16px 16px;
   padding:  6px 9px 6px 9px;
   margin-right: 30px;
-  gap: 30px;
+  gap: 20px;
 
   @media (max-width: 1200px) {
     margin-right: 0;

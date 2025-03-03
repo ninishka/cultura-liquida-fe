@@ -13,7 +13,9 @@ import {
   HowToDesc,
   SecondDesc,
   LeaveReview,
-  ReviewText
+  First,
+  Second,
+  ReviewLink
 } from './styled'
 
 const HowTo: FC = () => (
@@ -30,17 +32,22 @@ const HowTo: FC = () => (
           </DescWrapper>
         </CardsWrapper>
         {index < howToCardsData.length - 1 && (
-          <div>
+          <First>
             <Image src={arrowNext} alt='Luego' />
-          </div>
+          </First>
+        )}
+        {index < howToCardsData.length - 1 && index !== 1 && (
+          <Second>
+            <Image src={arrowNext} alt='Luego' />
+          </Second>
         )}
       </Fragment> 
     ))}
     </HowToWrapper>
     <LeaveReview>
-      <ReviewText>
+      <ReviewLink href="https://www.instagram.com/cult.liq.co" target="_blank" aria-label="Instagram">
         Deje una reseña y obtenga un 10% de descuento adicional en su próximo pedido
-      </ReviewText>
+      </ReviewLink>
     </LeaveReview>
   </HowToSection>
 )

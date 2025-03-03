@@ -4,9 +4,10 @@ import { useAppSelector } from '@/lib/redux/store/hooks'
 import ModalFormFields from './ModalFormFields'
 import TransferBox from './TransferBox'
 import type { ModalFormProps } from '@/types/types'
-import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing'
+import { getProductCost, getTotalCost } from '@/helpers/pricing'
 import { formatPrice } from '@/helpers/formats'
-
+import { Wallet } from '@mercadopago/sdk-react'
+import { shippingCost } from '@/helpers/constants'
 import {
   termsAndCondidtionsValidator
 } from './formHelpers'
@@ -30,28 +31,37 @@ import {
 // Debit, credit
 // Allow crypto?
 
-const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrder, paymentOption, setPaymentOption }) => {
+const ModalForm: FC<ModalFormProps> = ({ 
+  onFinish, loading, initialValues, isOrder, paymentOption,
+  setPaymentOption, preferenceId, shouldShowBuyButton
+}) => {
+  const [form] = StyledForm.useForm()
   const { cartItems } = useAppSelector(state => state.cart);
   const [isAgree, setIsAgree] = useState(false);
-  const [form] = StyledForm.useForm()
+  const [isTransfer, setTransfer] = useState(false);
 
   const productCost = getProductCost(cartItems);
-  const shippingCost = getShippingCost(productCost)
+  // const shippingCost = getShippingCost(productCost)
   const totalCost = getTotalCost(cartItems);
 
   const styledTotalCost = formatPrice(totalCost)
   const displayProductCost = formatPrice(productCost, ' ')
   const displayShippingCost = formatPrice(shippingCost, ' ')
 
+  const handleChange = (type) => {
+    setPaymentOption(type)
+    if (type === 'transfer') setTransfer(true)
+    else setTransfer(false)
+  }
+
   return (
     <StyledForm 
       form={form}
       onFinish={onFinish} 
-      onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
       initialValues={initialValues}
+      onFinishFailed={(errorInfo) => console.log('Form failed:', errorInfo)}
     >
       <ModalFormFields isOrder={isOrder} notes={initialValues?.notes || ''} form={form} />
-      {/* checkbox */}
       {!isOrder && (
         <StyledFormItem
           name="remember" 
@@ -87,8 +97,8 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
               name="payment_method"
             >
               <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
-                <Radio value="mercado" style={{ color: 'white' }} onClick={() => setPaymentOption('mercado')}> Mercado Pago </Radio>
-                <Radio value="transfer" style={{ color: 'white' }} onClick={() => setPaymentOption('transfer')}> Transferencia a cuenta bancaria </Radio>
+                <Radio value="mercado" style={{ color: 'white' }} onClick={() => handleChange('mercado')}> Mercado Pago </Radio>
+                <Radio value="transfer" style={{ color: 'white' }} onClick={() => handleChange('transfer')}> Transferencia a cuenta bancaria </Radio>
               </Radio.Group>
             </StyledFormItem>
           </TotalWrap>
@@ -96,9 +106,18 @@ const ModalForm: FC<ModalFormProps> = ({ onFinish, loading, initialValues, isOrd
           <StyledFormItem style={{ width: '100%' }}>
             <Tooltip title={!paymentOption ? 'Por favor, elija el método de pago' : ''}>
               <>
-                <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption || !isAgree}>
-                  Comprar
-                </CartPayButton>
+                {(shouldShowBuyButton || isTransfer) && (
+                  <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption || !isAgree}>
+                    Comprar
+                  </CartPayButton>
+                )}
+                {(preferenceId && paymentOption === 'mercado') && (
+                  <Wallet
+                    key={process.env.PUBLIC_KEY_BTN}
+                    initialization={{ preferenceId }}
+                    customization={{ texts:{ valueProp: 'smart_option'}}} 
+                  />
+                )}
               </>
             </Tooltip>
           </StyledFormItem>

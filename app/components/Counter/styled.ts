@@ -14,7 +14,9 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
     margin: ${({$isModal}) => $isModal && '20px 3vh'};
   } 
 
-  @media (max-width: 1200px) {
+  /* temp */
+  /* @media (max-width: 1200px) { */
+  @media (max-width: 945px) {
     justify-content: center;
     /* margin: 20px 1vh 20px 3vh; */
     margin: ${({$isModal}) => !$isModal && '20px 1vh 20px 3vh'};
@@ -33,7 +35,8 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
 
 
   @media (max-width: 764px) {
-    margin: 40px 7vw;
+    /* temp */
+    /* margin: 40px 7vw; */
   }
 
   @media (max-width: 650px) {
@@ -118,7 +121,8 @@ export const BuyButton = styled.button`
   text-transform: uppercase;
 
   @media (max-width: 1200px) {
-    width: 216px;
+    /* temp */
+    /* width: 216px; */
   } 
 
   @media (max-width: 850px) {
@@ -149,8 +153,10 @@ export const PriceWithoutDiscount = styled(Price)`
   text-decoration: line-through;
   font-size: 24px;
   color: #9F9F9F;
+  margin-bottom: 10px;
 
   @media (max-width: 850px) {
     font-size: 18px;
+    margin: 0 0 35px 0;
   }  
 `

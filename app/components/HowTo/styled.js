@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 import Image from 'next/image'
+import Link from 'next/link'
 
-export const HowToSection = styled.div`
-  border-bottom: 2px solid #9F9F9F;
+export const HowToSection = styled.section`
+  margin: 40vh 0; 
+
+  @media (max-width: 1100px) {
+    margin: 30vh 0 20vh ; 
+  }
 `
 
 export const HowToWrapper = styled.div`
@@ -15,8 +20,11 @@ export const HowToWrapper = styled.div`
     justify-content: space-around;
     flex-wrap: wrap;
   }
-`
 
+  @media (max-width: 630px) {
+    flex-direction: column;
+  }
+`
 
 export const TextForHeader = styled.h2`
  font-size: 48px;
@@ -39,7 +47,9 @@ export const CardsWrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 326px;
-  width: 285px;
+  /* width: 285px; */
+  width: 22vw;
+
   border-radius: 16px;
   background-color: #2D2D2D;
   text-align: center;
@@ -47,10 +57,48 @@ export const CardsWrapper = styled.div`
 
   margin: 20px;
 
-  @media (max-width: 850px) {
+  @media (min-width: 1201px) {
+    &:first-child {
+      margin-left: 0;
+    }
 
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    margin: 20px 5vw;
+    width: 35vw
+  }
+
+  @media (max-width: 630px) {
+    width: -webkit-fill-available;
   }
 `
+
+export const First = styled.div`
+  display: block;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
+  @media (max-width: 630px) {
+    display: block;
+    transform: rotate(90deg);
+  }
+`
+
+export const Second = styled.div`
+  display: none;
+  @media (max-width: 1200px) {
+    display: block;
+  }
+  @media (max-width: 630px) {
+    display: none;
+  }
+`
+
 
 export const HowToImage = styled(Image)`
   width: 160px;
@@ -58,7 +106,7 @@ export const HowToImage = styled(Image)`
 `
 
 export const DescWrapper = styled.div`
-  margin: 0px 15px;
+  margin: 0px 20px 20px;
 `
 
 export const HowToDesc = styled.p`
@@ -81,13 +129,30 @@ export const SecondDesc = styled.p`
 export const LeaveReview = styled.div`
   border-radius: 16px;
   max-width: 100%;
-  margin: 0px 19px;
   height: auto;
   background-color: #2D2D2D;
+
+  @media (max-width: 1200px) {
+    margin: 0px 5.4vw;
+  }
 `
 
 export const ReviewText = styled.p`
  color: #F2C94C;
  text-align: center;
  padding: 20px;
+
+`
+
+export const ReviewLink = styled(Link)`
+  color: #F2C94C;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 1200px) {
+    margin-bottom: 40px;
+  }
 `

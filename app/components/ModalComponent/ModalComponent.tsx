@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { initMercadoPago } from '@mercadopago/sdk-react'
 import { updateExistingProduct, createNewOrder, handlePayment } from '@/helpers/data';
 import CartItemComponent from './CartItemComponent/CartItemComponent'
 import ModalForm from './FormComponent/ModalForm'
@@ -21,18 +21,19 @@ import {
 const ModalComponent = ({data}) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
-
   const { showCart, cartItems } = useAppSelector(state => state.cart);
 
   const [paymentOption, setPaymentOption] = useState('')
   const [preferenceId, setPreferenceId] = useState('') //mp
   const [loading, setLoading] = useState(false) // mp
+  const [shouldShowBuyButton, setShouldShowBuyButton] = useState(true)
 
   useEffect(() => {
     console.log('initMercadoPago')
     initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
   }, [])
 
+  // TODO check is everything encopsulated here
   const onFinish = async formValues => {
     setLoading(true);
     try {
@@ -48,6 +49,7 @@ const ModalComponent = ({data}) => {
       console.error('Error processing:', error);
     } finally {
       setLoading(false);
+      setShouldShowBuyButton(false)
     }
   };
 
@@ -123,19 +125,13 @@ const ModalComponent = ({data}) => {
               <ModalForm
                 onFinish={onFinish} 
                 loading={loading} 
-                initialValues={{ country: 'colombia', document_type: 'cc' }} 
+                preferenceId={preferenceId}
                 paymentOption={paymentOption}
                 setPaymentOption={setPaymentOption}
+                shouldShowBuyButton={shouldShowBuyButton}
+                initialValues={{ country: 'colombia', document_type: 'cc' }} 
               />
             </>
-              {/* Public key */}
-              {preferenceId && (
-                <Wallet
-                  key={process.env.PUBLIC_KEY_BTN}
-                  initialization={{ preferenceId }}
-                  customization={{ texts:{ valueProp: 'smart_option'}}} 
-                />
-              )}
           </>
         )}
       </ModalStyled>

@@ -3,10 +3,11 @@ import Image from 'next/image'
 
 import styled from 'styled-components'
 
-export const BenefitsSection = styled.div`
-   @media (max-width: 1200px) {
-    margin: 0 4vh;
-  }
+export const BenefitsSection = styled.section`
+  min-height: 70vh;
+  /* margin: 20vh 0 0; */
+  padding: 20vw 0 5vw;
+  border-top: 2px solid #9F9F9F;
 `
 
 export const HeaderBenefitsWrapper = styled.div`
@@ -30,6 +31,7 @@ export const TextForBenefits = styled.h2`
  line-height: 57.6px;
  margin-right: 6vh;
  margin-bottom: 20px;
+ min-width: 340px;
 
  @media (max-width: 1200px) {
     font-size: 40px;
@@ -96,7 +98,11 @@ export const Card = styled.div`
 
   @media (max-width: 850px) {
     height: 166px;
-    width: 195px;
+    /* width: 195px; */
+  }
+
+  @media (max-width: 500px) {
+    padding: 20px 0;
   }
 `
 export const BenefitIcon = styled(Image)`

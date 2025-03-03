@@ -1,8 +1,8 @@
 import icon1 from './icons/icon_caps.svg'
 import icon2 from './icons/icon_ex100.svg'
 import icon3 from './icons/icon_ex30.svg'
-import melenacaps from './icons/image_melena_caps.png'
-import melenaextract from './icons/image_melena_extract.png'
+import melenacaps from './icons/main-mc.png'
+import melenaextract from './icons/main-me.png'
 
 import img1 from './icons/icon_LM1.svg'
 import img2 from './icons/icon_LM7.svg'
@@ -15,13 +15,13 @@ import indicationsMelena from './icons/icon_indications_for_the_use.png'
 import indicationsReishi from './icons/icon_indications_for_the_use_R.png'
 import indicationsCola from './icons/icon_indications_for_the_use_C.png'
 
-import reishiextract from './icons/image_reishi_extract.png'
+import reishiextract from './icons/main-r.png'
 import imgR1 from './icons/icon_LR1.svg'
 import imgR3 from './icons/icon_LR2.svg'
 import imgR4 from './icons/icon_LR3.svg'
 import imgR6 from './icons/icon_LR4.svg'
 
-import colaextract from './icons/image_cola_extract.png'
+import colaextract from './icons/main-c.png'
 import imgC1 from './icons/icon_LC1.svg'
 import imgC2 from './icons/icon_LC2.svg'
 import imgC4 from './icons/icon_LC5.svg'
@@ -34,13 +34,6 @@ import imgC8 from './icons/icon_step4.svg'
 
 import imgC10 from './icons/icon_ex30.svg'
 import imgC11 from './icons/icon_ex100.svg'
-
-import melenaCapsulsSrc from './icons/icon_caps_melena_cart.png'
-import melenaExtractSrc from'./icons/icon_melena_cart.png'
-import colaSrc from './icons/icon_cola_cart.png'
-import reishiSrc from './icons/icon_reishi_cart.png'
-
-
 
 const melenaFormationData = [
   {

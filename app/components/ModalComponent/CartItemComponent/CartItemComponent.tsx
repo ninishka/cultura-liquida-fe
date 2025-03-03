@@ -27,6 +27,8 @@ import melenaCapsulsSrc from '@/app/icons/icon_caps_melena_cart.png'
 import melenaExtractSrc from'@/app/icons/icon_melena_cart.png'
 import colaSrc from '@/app/icons/icon_cola_cart.png'
 import reishiSrc from '@/app/icons/icon_reishi_cart.png'
+import complexSrc from '@/app/icons/icon_complejo_cart.png'
+
 
 const CartItemComponent: FC<CartItemType> = ( item ) => {
   const dispatch = useAppDispatch()
@@ -39,8 +41,7 @@ const CartItemComponent: FC<CartItemType> = ( item ) => {
   const isExtractsMelena = isMelena && idCart?.includes('extracts') && melenaExtractSrc
   const isReishi = title === 'Reishi' && reishiSrc
   const isCola = title === 'Cola de Pavo' && colaSrc
-  const isComplex = title?.includes('complejo') && colaSrc
-  // TODO complex cart icon
+  const isComplex = title?.includes('complejo') && complexSrc
 
   const cartIcon = isCapsulesMelena || isExtractsMelena || isReishi || isCola || isComplex
 

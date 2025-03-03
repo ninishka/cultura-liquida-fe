@@ -1,10 +1,19 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Radio } from 'antd'
-import Link from 'next/link'
+
+export const ComplexSection = styled.section`
+  padding: 40vh 0 20vh;
+  border-top: 2px solid #9F9F9F;  
+  
+  @media (max-width: 1100px) {
+    padding: 20vh 0 10vh;
+  }
+`
 
 export const AllWrap = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: row;
   margin: 29px;
   
@@ -15,7 +24,11 @@ export const AllWrap = styled.div`
   @media (min-width: 2000px) {
     justify-content: center;
   }
+  @media (max-width: 1200px) {
+    margin: 0;
+  }
 `
+
 export const ImgMobileWrapper = styled.div`
   display: none;
   @media (max-width: 1200px) {
@@ -26,6 +39,7 @@ export const ImgMobileWrapper = styled.div`
     margin: 40px;
   }
 `
+
 export const ImgDesctopWrapper = styled.div`
   display: block;
   @media (max-width: 1200px) {
@@ -41,6 +55,9 @@ export const ImgMobile = styled(Image)`
     height: auto;
     margin: 0px 10vw;
   }
+  @media (max-width: 850px) {
+    margin: 0px;
+  }
 `
 
 export const RightContentWrap = styled.div`
@@ -53,10 +70,10 @@ export const RightContentWrap = styled.div`
     margin: 0 4vw;
   }
 `
+
 export const TitleWrap = styled.div`
  display: flex;
  flex-direction: column;
- /* margin-left: 20px; */
 
  @media (max-width: 1200px) {
     align-items: center;
@@ -70,12 +87,20 @@ export const Benefits = styled.h2`
   text-align: left;
   margin-bottom: 0;
 
+  @media (max-width: 1150px) {
+    text-align: center;
+  }
+
   @media (max-width: 850px) {
     font-size: 32px;
     line-height: 40px;
   }
 
+  @media (max-width: 800px) {
+    text-align: left;
+  }
 `
+
 export const DiscountText = styled.p`
   font-size: 24px;
   font-weight: 400;
@@ -83,6 +108,15 @@ export const DiscountText = styled.p`
   letter-spacing: 0.02em;
   text-align: left;
   color: #F2C94C;
+  
+  @media (max-width: 950px) {
+    text-align: center;
+  }
+
+  @media (max-width: 800px) {
+    text-align: left;
+  }
+
 `
 
 export const ComplexItemsWrap = styled.div`
@@ -91,15 +125,15 @@ export const ComplexItemsWrap = styled.div`
   background-color: #2D2D2D;
   padding: 6px 25px;
   border-radius: 16px;
-  /* margin: 0px 21px; */
   width: 50%;
 
   @media (max-width: 1200px) {
-    margin: 40px;
+    margin: 40px 0 40px 0;
   }
+
   @media (max-width: 850px) {
     width: auto;
-    margin: auto 40px;
+    margin: 20px 0 40px;
   }
 `
 
@@ -109,12 +143,11 @@ export const TwoCardwrap = styled.div`
   
   @media (max-width: 1200px) {
     gap: 10px;
-
   }
   @media (max-width: 850px) {
     flex-direction: column; 
+    width: -webkit-fill-available;
   }
-
 `
 
 export const LeftSide = styled.div`
@@ -123,25 +156,27 @@ export const LeftSide = styled.div`
   width: -webkit-fill-available;
 `
 
-export const RightSide = styled.div`
+export const RightSide = styled.div``
 
-`
 export const LeftTitle = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 17.6px;
   text-align: left;
 `
+
 export const ThreeItemsWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `
+
 export const InsideItemWrap = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const Item123 = styled.h3`
+
+export const Title = styled.h3`
   font-size: 24px;
   font-weight: 400;
   line-height: 28.8px;
@@ -155,6 +190,7 @@ export const LearnMoreWrap = styled.div`
   flex-direction: row;
   gap: 15px;
 `
+
 export const LearnMoreText = styled.p`
   font-size: 16px;
   font-weight: 400;
@@ -163,14 +199,28 @@ export const LearnMoreText = styled.p`
   color:#9F9F9F;
 `
 
- export const ArrowIcon = styled(Image)`
+export const ArrowIcon = styled(Image)`
   width: auto;
   margin-top: 16px;
 `
 
- export const ArrowButtons = styled(Link)`
+export const ArrowButtons = styled.div`
+  width: 100%; 
   cursor: pointer;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover ${LearnMoreWrap} {
+    transform: translateX(-10px);
+    transition: transform 0.1s ease-in-out;
+    color: white;
+  }
+
+  &:hover ${LearnMoreText} {
+    color: white;
+  }
 `
 
 export const CheckBoxGroup = styled.div`
@@ -185,6 +235,7 @@ export const CheckBoxGroup = styled.div`
     align-items: center;
   }
 `
+
 export const Item = styled.div`
   display: flex;
   flex-direction: row;
@@ -197,13 +248,17 @@ export const Item = styled.div`
   border: 1px solid transparent;
 
   @media (max-width: 850px) {
-    /* width: 70px;
-    height: 125px; */
-    /* flex-direction: column; */
     padding: 10px 20px;
     text-align: center;
     margin-right: 15px;
     margin: 10px 1vh;
+    width: 33vw;
+    padding: 10px 20px 10px 0;
+  }
+
+  @media (max-width: 700px) {
+    width: -webkit-fill-available;
+    padding: 10px 20px;
   }
 
   transition: all 0.3s ease;
@@ -217,12 +272,10 @@ export const Icon = styled(Image)`
   width: 50px;
   height: auto;
   margin-left: 10px;
-
-  @media (max-width: 850px) {
-    margin-left: 0;
-  }
 `
+
 export const TextDesc = styled.h4`
+  white-space: nowrap;
   font-weight: 400;
   font-size: 16px;
   padding-right: 10px;
@@ -282,7 +335,12 @@ export const FormationWrap = styled.div`
 
   @media (max-width: 1200px) {
     margin: 40px;
-    width: auto
+  }
+
+  @media (max-width: 850px) {
+    margin: 0;
+    width: auto;
+
   }
 `
 
@@ -294,6 +352,7 @@ export const Selecting = styled.p`
   color: #9F9F9F;
   margin: 13px 16px;
 `
+
 export const PriceCounterWrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -301,5 +360,12 @@ export const PriceCounterWrap = styled.div`
 
   @media (max-width: 850px) {
     flex-direction: column;
+  }
+`
+
+export const ButtonsWrapper = styled.div`
+  @media (max-width: 850px) {
+    display: flex;
+    flex-wrap: wrap;
   }
 `

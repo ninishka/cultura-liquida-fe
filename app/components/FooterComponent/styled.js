@@ -8,6 +8,8 @@ export const FooterFull = styled.footer`
   display: flex;
   flex-direction: column;
   background-color: #252525;
+  max-width: 1920px;
+  margin: 0 auto;
 `
 export const HeaderLikeFooter = styled.div`
   display: flex;

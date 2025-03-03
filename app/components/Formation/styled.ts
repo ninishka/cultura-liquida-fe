@@ -16,6 +16,7 @@ export const StyledItem = styled.div<ProductItemProps>`
   border-radius: 16px 16px 16px 16px;
   background-color: #2D2D2D;
   margin-right: 20px;
+  margin-bottom: 10px;
   cursor: pointer;
   width: 216px;
   height: 62px;
@@ -51,50 +52,79 @@ export const StyledItem = styled.div<ProductItemProps>`
 export const FormationSection = styled.section`
   display: flex;
   flex-direction: row;
-  border-bottom: 2px solid #9F9F9F;
+  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
 
-  @media (max-width: 1200px) {
-    flex-direction: column;
+  @media (max-width: 945px) {
     align-items: center;
     text-align: center;
   }
 
-  /* @media (min-width: 2000px) {
-    justify-content: center;
-  } */
+  @media (max-width: 945px) {
+    flex-direction: column;
+  }
 `
 
 export const ContentWrapper = styled.div`
-  width: 65%;
-  margin-top: 50px;
-
-  @media (max-width: 1200px) {
+  @media (max-width: 945px) {
     width: auto;
     margin-top: 0;
   }
 `
 
 export const ImageWrapperDesktop = styled.div`
+  width: 45%;
+  height: 45%;
+
   @media (max-width: 1200px) {
+    margin: 2vw;
+    width: 60%;
+    height: 60%;
+  }
+
+  @media (max-width: 945px) {
     display: none;
   }
 `
-
 export const ImageWrapperMobile = styled.div`
+  width: 45%;
   display: none;
-  @media (max-width: 1200px) {
+
+  @media (max-width: 945px) {
     display: flex;
     justify-content: center;
+    width: auto;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 850px) {
+    width: auto;
+    display: flex;
   }
 `
 
 export const ImageStyled = styled(Image)`
-    height: 470px;
-    width: auto 
+  object-fit: contain;
+  height: max-content;
+  max-height: 88vh;
+  width: -webkit-fill-available;
+  max-width: 750px;
+  margin-bottom: 6vw;
+
+  @media (max-width: 945px) {
+    margin-bottom: auto;
+    height: 57vh;
+  }
 `
 
 export const TitleFrame = styled.div`
   margin-top: 40px;
+
+  @media (max-width: 945px) {
+    margin-top: 25px;
+  }
 `
 export const TitleH1 = styled.h1`
   font-size: 72px;
@@ -102,8 +132,8 @@ export const TitleH1 = styled.h1`
   letter-spacing: 2%;
   font-weight: 600;
 
-  @media (max-width: 850px) {
-    font-size: 40px;
+  @media (max-width: 945px) {
+    font-size: 64px;
   }
 `
 export const Description = styled.h2`
@@ -112,7 +142,7 @@ export const Description = styled.h2`
   letter-spacing: 2%;
   margin: 0;
 
-  @media (max-width: 850px) {
+  @media (max-width: 945px) {
     font-size: 18px;
   }
 `
@@ -125,8 +155,13 @@ export const Release = styled.h3`
   margin-bottom: 40px;
   margin-top: 40px;
 
+  @media (max-width: 945px) {
+    font-size: 18px;
+    margin: 15px 0 30px;
+  }
+
   @media (max-width: 850px) {
-    font-size: 14px;
+    /* font-size: 14px; */
     margin-bottom: 20px;
   }
 `
@@ -136,7 +171,27 @@ export const CheckBoxGroup = styled.div`
  flex-direction: row;
 
  @media (max-width: 1200px) {
-    justify-content: center
+    flex-wrap: wrap;
+    min-width: 480px;
+  }
+
+  @media (max-width: 945px) {
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+`
+
+export const CheckBoxGroupInner = styled.div`
+ display: flex;
+ flex-direction: row;
+
+ @media (max-width: 1200px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 945px) {
+    justify-content: center;
+    flex-wrap: nowrap;
   }
 `
 

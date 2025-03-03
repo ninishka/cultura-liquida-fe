@@ -53,6 +53,8 @@ export const CartImg = styled(Image)`
   width: revert-layer;
   height: auto;
   margin: 20px;
+  max-width: 100px;
+
   @media (max-width: 850px) {
     margin: 10px;
   }
@@ -229,7 +231,6 @@ export const Price = styled.p<OrderStyledProps>`
 
 
 export const ItemProductTypeText = styled.p`
-  color: red;
   text-align: center;
   width: 90px;
   font-size: 16px;
