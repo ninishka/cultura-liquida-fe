@@ -46,6 +46,7 @@ export interface CartState {
   cartItems: CartItemType[];
   count: number;
   showCart: boolean;
+  isMercadoInit: boolean;
 }
 
 export type ExtendedPayload = CartItemType & {

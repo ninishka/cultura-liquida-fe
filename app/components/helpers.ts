@@ -37,5 +37,5 @@ export const handleDelete = (itemId, cartItems, dispatch) => {
 // if Ull change products order in db something can change be carefull 
 export const uniqueTitles = x => x?.filter((product, index, self) => 
   index === self.findIndex(p => p.title === product.title)
-);
+).slice(0, 3);
 

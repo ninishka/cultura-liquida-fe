@@ -114,6 +114,7 @@ const ModalForm: FC<ModalFormProps> = ({
                 {(preferenceId && paymentOption === 'mercado') && (
                   <Wallet
                     key={process.env.PUBLIC_KEY_BTN}
+                    c={console.log('showWallet MMM', preferenceId)}
                     initialization={{ preferenceId }}
                     customization={{ texts:{ valueProp: 'smart_option'}}} 
                   />

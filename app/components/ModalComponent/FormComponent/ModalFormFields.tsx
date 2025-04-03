@@ -34,6 +34,7 @@ const documentOptions = [
 const ModalFormFields: FC<ModalFormFieldsProps> = ({ isOrder, notes, form }) => { 
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
   
+  // TODO Warning: There may be circular references
   const onDepartmentChange = (value: string): void => {
     setSelectedDepartment(value);
     form.setFieldValue('city', undefined);

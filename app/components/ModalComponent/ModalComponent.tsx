@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
-import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
+import { toggleShowCart, toggleSetMercado } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago } from '@mercadopago/sdk-react'
 import { updateExistingProduct, createNewOrder, handlePayment } from '@/helpers/data';
@@ -21,7 +21,7 @@ import {
 const ModalComponent = ({data}) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { showCart, cartItems } = useAppSelector(state => state.cart);
+  const { showCart, cartItems, isMercadoInit } = useAppSelector(state => state.cart);
 
   const [paymentOption, setPaymentOption] = useState('')
   const [preferenceId, setPreferenceId] = useState('') //mp
@@ -29,8 +29,13 @@ const ModalComponent = ({data}) => {
   const [shouldShowBuyButton, setShouldShowBuyButton] = useState(true)
 
   useEffect(() => {
-    console.log('initMercadoPago')
-    initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
+    if (paymentOption === 'mercado') {
+      if(!isMercadoInit) {
+          console.log('initMercadoPago RRR')
+          toggleSetMercado(true)
+          initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
+        }
+    }   
   }, [])
 
   // TODO check is everything encopsulated here

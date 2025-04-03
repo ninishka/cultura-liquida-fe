@@ -16,6 +16,9 @@ import { shippingCost } from '@/helpers/constants'
 import { fetcher } from '@/helpers/network'
 import { handlePayment } from '@/helpers/data';
 
+import { useAppSelector } from '@/lib/redux/store/hooks'
+import { toggleSetMercado } from '@/lib/redux/slices/cartSlice'
+
 import {
   RightPanel,
   StatusPanel,
@@ -35,6 +38,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
   const router = useRouter()
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
+  const { isMercadoInit } = useAppSelector(state => state.cart);
   
   const [preferenceId, setPreferenceId] = useState('') //mp
   const [paymentOption, setPaymentOption] = useState('')
@@ -98,7 +102,13 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
       if (data?.form_data?.payment_method !== paymentOption) {
         updateOrderPaymentMethod()
 
-        if (paymentOption === 'mercado') initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key  
+        if (paymentOption === 'mercado') {
+          if(!isMercadoInit) {
+              console.log('initMercadoPago RRR')
+              toggleSetMercado(true)
+              initMercadoPago(process.env.PUBLIC_KEY_BTN)
+            } // Public key
+        }  
         else if (paymentOption === 'transfer') {
           setPreferenceId('')
           setLoading(false)
@@ -180,6 +190,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
             {showWallet && (
               <Wallet
                 key={process.env.PUBLIC_KEY_BTN}
+                c={console.log('showWallet RRR', preferenceId)}
                 initialization={{ preferenceId }}
                 customization={{ texts:{ valueProp: 'smart_option'}}} 
               />

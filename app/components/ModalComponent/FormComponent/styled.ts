@@ -55,7 +55,7 @@ export const StyledTextarea = styled(Input.TextArea)`
 
 export const StyledSelect = styled(Select)<OrderStyledProps>`
   height: 52px;
-  ${({$isOrder}) => $isOrder && css`
+  ${({$isOrder}) => $isOrder ? css`
     &.ant-select * {
       cursor: auto  !important;
       font-weight: 700;
@@ -76,18 +76,18 @@ export const StyledSelect = styled(Select)<OrderStyledProps>`
         display: none;  
       }
     }
-  `}
+  `: css`
+    .ant-select-selector {
+      color: black !important;
+      border-radius: 16px;
+      border-color:rgb(236, 202, 97) !important;
 
-  .ant-select-selector {
-    color: black !important;
-    border-radius: 16px;
-    border-color:rgb(236, 202, 97) !important;
-
-    &:hover, &:focus-within {
-      border-color: #F2C94C !important;
-      box-shadow: 0 0 0 1.5px rgba(255, 0, 0, 0.1) !important
+      &:hover, &:focus-within {
+        border-color: #F2C94C !important;
+        box-shadow: 0 0 0 1.5px rgba(255, 0, 0, 0.1) !important
+      }
     }
-  }
+  `} 
 `
 
 export const StyledFormItem = styled(Form.Item)<OrderStyledProps>`

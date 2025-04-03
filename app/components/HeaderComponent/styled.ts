@@ -60,7 +60,7 @@ export const CartWrap = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 16px 16px 16px 16px;
-  background-color: #2D2D2D;
+  background-color: #252525;
   margin-right: 30px;
   position: relative;
   cursor: pointer;
@@ -98,7 +98,7 @@ export const Counter = styled.p`
 export const BurgerWrap = styled.div`
   display: none;
   border-radius: 16px 16px 16px 16px;
-  background-color: #2D2D2D;
+  background-color: #252525;
   padding:  10px;
   margin-right: 30px;
   position: relative;
