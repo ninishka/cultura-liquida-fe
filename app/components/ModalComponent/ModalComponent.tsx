@@ -28,20 +28,17 @@ const ModalComponent = ({data}) => {
   const [loading, setLoading] = useState(false) // mp
   const [shouldShowBuyButton, setShouldShowBuyButton] = useState(true)
 
-  useEffect(() => {
-    if (paymentOption === 'mercado') {
-      if(!isMercadoInit) {
-          console.log('initMercadoPago RRR')
-          toggleSetMercado(true)
-          initMercadoPago(process.env.PUBLIC_KEY_BTN) // Public key
-        }
-    }   
-  }, [])
-
   // TODO check is everything encopsulated here
   const onFinish = async formValues => {
     setLoading(true);
     try {
+      // Инициализируем Mercado Pago при нажатии кнопки
+      if (paymentOption === 'mercado' && !isMercadoInit) {
+        console.log('initMercadoPago MMM on button click')
+        dispatch(toggleSetMercado(true))
+        initMercadoPago(process.env.PUBLIC_KEY_BTN || '')
+      }
+
       // 1. UPDATE EXISTING PRODUCT BD
       await updateExistingProduct(cartItems, data)
 

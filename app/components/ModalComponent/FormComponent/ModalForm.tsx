@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { Radio, Tooltip } from 'antd'
+import React, { FC, useState, useEffect, useRef } from 'react';
+import { Radio, Tooltip, Button } from 'antd'
 import { useAppSelector } from '@/lib/redux/store/hooks'
 import ModalFormFields from './ModalFormFields'
 import TransferBox from './TransferBox'
@@ -27,6 +27,35 @@ import {
   CartPayButton,
 } from '../styled'
 
+// Компонент-обертка для контроля над Mercado Pago Wallet
+const ControlledWallet = ({ preferenceId, walletContainerRef }) => {
+  const [render, setRender] = useState(false);
+  const instanceKey = useRef(Date.now().toString());
+
+  // Задержка для гарантии корректного рендеринга
+  useEffect(() => {
+    // Безопасная очистка контейнера - просто устанавливаем флаг рендеринга
+    const timer = setTimeout(() => {
+      setRender(true);
+    }, 200);
+    
+    return () => {
+      clearTimeout(timer);
+      setRender(false);
+    };
+  }, [preferenceId]);
+
+  if (!render) return null;
+
+  return (
+    <Wallet
+      key={`mp-wallet-${instanceKey.current}-${preferenceId}`}
+      initialization={{ preferenceId: preferenceId }}
+      customization={{ texts:{ valueProp: 'smart_option'}}} 
+    />
+  );
+};
+
 // TODO: Add PSE, PayU, ePayco
 // Debit, credit
 // Allow crypto?
@@ -39,6 +68,12 @@ const ModalForm: FC<ModalFormProps> = ({
   const { cartItems } = useAppSelector(state => state.cart);
   const [isAgree, setIsAgree] = useState(false);
   const [isTransfer, setTransfer] = useState(false);
+  const [showWallet, setShowWallet] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+  const [localPreferenceId, setLocalPreferenceId] = useState(preferenceId);
+  
+  const walletContainerRef = useRef(null);
+  const switchingRef = useRef(false);
 
   const productCost = getProductCost(cartItems);
   // const shippingCost = getShippingCost(productCost)
@@ -48,11 +83,93 @@ const ModalForm: FC<ModalFormProps> = ({
   const displayProductCost = formatPrice(productCost, ' ')
   const displayShippingCost = formatPrice(shippingCost, ' ')
 
+  // Инициализация при монтировании компонента
+  useEffect(() => {
+    // Устанавливаем initialValues в форму, если они предоставлены
+    if (initialValues) {
+      form.setFieldsValue(initialValues);
+      
+      // Если начальный метод оплаты - mercado, устанавливаем соответствующее состояние
+      if (initialValues.payment_method === 'mercado') {
+        setTransfer(false);
+      } else if (initialValues.payment_method === 'transfer') {
+        setTransfer(true);
+      }
+    }
+    
+    setInitialized(true);
+  }, []);
+
+  // Обработка новых preferenceId из пропсов
+  useEffect(() => {
+    if (preferenceId) {
+      setLocalPreferenceId(preferenceId);
+    }
+  }, [preferenceId]);
+
+  // Обработка начального состояния и автоматического получения preferenceId
+  useEffect(() => {
+    // Автоматически запускаем onFinish только если:
+    // 1. Выбран Mercado Pago
+    // 2. Еще нет preferenceId
+    // 3. Не показывается кнопка "Comprar"
+    // 4. Не идет загрузка
+    // 5. Пользователь согласился с условиями (для новых заказов)
+    // 6. Компонент полностью инициализирован
+    if (paymentOption === 'mercado' && !preferenceId && !shouldShowBuyButton && !loading && 
+        (isAgree || isOrder) && initialized && !switchingRef.current) {
+      // Получаем текущие значения формы для передачи в onFinish
+      const formValues = form.getFieldsValue();
+      onFinish(formValues);
+    }
+  }, [paymentOption, preferenceId, shouldShowBuyButton, isAgree, isOrder, initialized]);
+
+  // Отображаем Wallet когда получили preferenceId
+  useEffect(() => {
+    if (localPreferenceId && paymentOption === 'mercado') {
+      // Небольшая задержка для избежания конфликтов
+      if (!switchingRef.current) {
+        setTimeout(() => {
+          setShowWallet(true);
+        }, 300);
+      }
+    } else {
+      setShowWallet(false);
+    }
+  }, [localPreferenceId, paymentOption]);
+
   const handleChange = (type) => {
-    setPaymentOption(type)
-    if (type === 'transfer') setTransfer(true)
-    else setTransfer(false)
+    if (type === paymentOption || loading) return;
+    
+    // Устанавливаем флаг переключения и скрываем текущий wallet
+    switchingRef.current = true;
+    setShowWallet(false);
+    
+    // Сбрасываем localPreferenceId, чтобы гарантировать размонтирование компонента
+    setLocalPreferenceId('');
+    
+    // Сбрасываем состояние загрузки
+    form.setFieldsValue({ payment_method: type });
+    
+    // Обновляем состояние с небольшой задержкой
+    setTimeout(() => {
+      setPaymentOption(type);
+      
+      if (type === 'transfer') setTransfer(true)
+      else setTransfer(false);
+      
+      // Сбрасываем флаг переключения через небольшую задержку
+      setTimeout(() => {
+        switchingRef.current = false;
+      }, 300);
+    }, 100);
   }
+
+  // Проверка, следует ли показывать стандартную кнопку Comprar
+  const showComprarButton = shouldShowBuyButton || isTransfer || (paymentOption === 'mercado' && !localPreferenceId);
+  
+  // Проверка, следует ли показывать Wallet
+  const showMercadoWallet = !shouldShowBuyButton && paymentOption === 'mercado' && localPreferenceId;
 
   return (
     <StyledForm 
@@ -96,9 +213,13 @@ const ModalForm: FC<ModalFormProps> = ({
               label={<p style={{ color: '#F2C94C'}}>Seleccione un método de pago:</p>}
               name="payment_method"
             >
-              <Radio.Group style={{ display: 'flex', flexDirection: 'column', color: 'white'}}>
-                <Radio value="mercado" style={{ color: 'white' }} onClick={() => handleChange('mercado')}> Mercado Pago </Radio>
-                <Radio value="transfer" style={{ color: 'white' }} onClick={() => handleChange('transfer')}> Transferencia a cuenta bancaria </Radio>
+              <Radio.Group 
+                style={{ display: 'flex', flexDirection: 'column', color: 'white'}}
+                value={paymentOption}
+                onChange={(e) => handleChange(e.target.value)}
+              >
+                <Radio value="mercado" style={{ color: 'white' }}> Mercado Pago </Radio>
+                <Radio value="transfer" style={{ color: 'white' }}> Transferencia a cuenta bancaria </Radio>
               </Radio.Group>
             </StyledFormItem>
           </TotalWrap>
@@ -106,18 +227,30 @@ const ModalForm: FC<ModalFormProps> = ({
           <StyledFormItem style={{ width: '100%' }}>
             <Tooltip title={!paymentOption ? 'Por favor, elija el método de pago' : ''}>
               <>
-                {(shouldShowBuyButton || isTransfer) && (
+                {/* Стандартная кнопка Comprar */}
+                {showComprarButton && (
                   <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption || !isAgree}>
                     Comprar
                   </CartPayButton>
                 )}
-                {(preferenceId && paymentOption === 'mercado') && (
-                  <Wallet
-                    key={process.env.PUBLIC_KEY_BTN}
-                    c={console.log('showWallet MMM', preferenceId)}
-                    initialization={{ preferenceId }}
-                    customization={{ texts:{ valueProp: 'smart_option'}}} 
-                  />
+                
+                {/* Контейнер для Wallet компонента Mercado Pago */}
+                {showMercadoWallet && (
+                  <div 
+                    ref={walletContainerRef} 
+                    style={{ 
+                      minHeight: '80px', 
+                      marginTop: '10px',
+                      position: 'relative'
+                    }}
+                  >
+                    {showWallet && localPreferenceId && (
+                      <ControlledWallet 
+                        preferenceId={localPreferenceId} 
+                        walletContainerRef={walletContainerRef} 
+                      />
+                    )}
+                  </div>
                 )}
               </>
             </Tooltip>
