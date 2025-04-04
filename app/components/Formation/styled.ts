@@ -23,6 +23,10 @@ export const StyledItem = styled.div<ProductItemProps>`
   border: 1px solid transparent;
 
   @media (max-width: 850px) {
+    width: 168px;
+  }
+
+  @media (max-width: 620px) {
     width: 50px;
     height: 105px;
     flex-direction: column;
@@ -32,6 +36,7 @@ export const StyledItem = styled.div<ProductItemProps>`
     margin-right: 15px;
     margin: 10px 1vh;
   }
+
 
   transition: all 0.3s ease;
 
@@ -52,17 +57,17 @@ export const StyledItem = styled.div<ProductItemProps>`
 export const FormationSection = styled.section`
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
   justify-content: space-between;
   align-items: center;
 
   @media (max-width: 945px) {
     align-items: center;
     text-align: center;
+    flex-direction: column;
   }
 
-  @media (max-width: 945px) {
-    flex-direction: column;
+  @media (max-width: 2560px) {
+    min-height: 100vh;
   }
 `
 
@@ -116,6 +121,18 @@ export const ImageStyled = styled(Image)`
   @media (max-width: 945px) {
     margin-bottom: auto;
     height: 57vh;
+  }
+
+  @media (max-width: 850px) {
+    margin-bottom: auto;
+  }
+
+  @media (max-width: 620px) {
+    height: 47vh;
+  }
+
+  @media (max-width: 520px) {
+    height: 40vh;
   }
 `
 
@@ -254,7 +271,7 @@ export const LabelContent = styled.div`
  flex-direction: row;
  align-items: center;
 
- @media (max-width: 850px) {
+ @media (max-width: 620px) {
     flex-direction: column;
   }
 `

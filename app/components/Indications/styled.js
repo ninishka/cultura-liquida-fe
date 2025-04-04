@@ -1,16 +1,23 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 
-export const IndicationsContent = styled.div`
+export const IndicationsSection = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: row-reverse;
   border-radius: 16px;
   border: 1px solid #9F9F9F;
-  margin: 10vw 0 20vw;
 
   background-color: #2D2D2D;
   line-height: 17.6px;
+
+  @media (min-width: 2561px) {
+    margin: 0 0 300px;
+  }
+
+  @media (max-width: 2560px) {
+    margin: 5vw 0 20vw;
+  }
 
   @media (max-width: 850px) {
     flex-direction: column;

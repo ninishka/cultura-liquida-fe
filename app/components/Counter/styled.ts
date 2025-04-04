@@ -4,21 +4,17 @@ import type { ModalStyledProps2 } from '@/types/types'
 export const CounterWrapper = styled.div<ModalStyledProps2>`
   display: flex;
   flex-direction: row;
+  align-items: center;
   flex-wrap: wrap;
-  /* margin:40px 0px; */
   margin: ${({$isModal}) => $isModal ? '40px 3vw' : '40px 0px'};
   gap: 20px;
-  align-items: center;
 
   @media (min-width: 1700px) {
     margin: ${({$isModal}) => $isModal && '20px 3vh'};
   } 
 
-  /* temp */
-  /* @media (max-width: 1200px) { */
   @media (max-width: 945px) {
     justify-content: center;
-    /* margin: 20px 1vh 20px 3vh; */
     margin: ${({$isModal}) => !$isModal && '20px 1vh 20px 3vh'};
   } 
   
@@ -26,25 +22,31 @@ export const CounterWrapper = styled.div<ModalStyledProps2>`
     justify-content: center;
     align-items: center;
     gap: 0px;
+    margin: ${({$isModal}) => !$isModal && '0 1vh 20px 3vh'};
+   
     /* margin: 0; */
-    max-width: 400px;
+    /* max-width: 400px; */
 
     /* justify-content: flex-start;
         margin: 0 13%; */
   } 
 
-
-  @media (max-width: 764px) {
-    /* temp */
-    /* margin: 40px 7vw; */
+  @media (max-width: 620px) {
+    max-width: 400px;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 600px) {
+    margin: ${({$isModal}) => $isModal && '10px 0'};
+  }
+
+
+
+  /* @media (max-width: 650px) {
     margin: 10px;
-  } 
-  @media (max-width: 522px) {
+  }  */
+  /* @media (max-width: 522px) {
     margin: 0 10px 0 0;
-  } 
+  }  */
 `
 
 export const AmountWrapper = styled.div`
@@ -143,8 +145,13 @@ export const Price = styled.p<ModalStyledProps2>`
 
   @media (max-width: 850px) {
     text-align: left;
-    font-size: 24px;
+    /* font-size: 24px; */
     margin: 25px;
+    /* margin-top: ${({$isModal}) => !$isModal && 0}; */
+  }  
+
+  @media (max-width: 620px) {
+    /* font-size: 24px; */
     margin-top: ${({$isModal}) => !$isModal && 0};
   }  
 `

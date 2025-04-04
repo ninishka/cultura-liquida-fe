@@ -3,9 +3,18 @@ import Image from 'next/image'
 import { Radio } from 'antd'
 
 export const ComplexSection = styled.section`
-  padding: 40vh 0 20vh;
   border-top: 2px solid #9F9F9F;  
-  
+
+  @media (min-width: 2561px) {
+    padding: 200px;
+  }
+
+  @media (max-width: 2560px) {
+    padding: 10vh 0 20vh;
+  }
+  @media (max-width: 1920px) {
+    padding: 15vw 0;
+  }
   @media (max-width: 1100px) {
     padding: 20vh 0 10vh;
   }

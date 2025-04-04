@@ -4,15 +4,16 @@ import Tg from '@/app/components/IconComponents/TgIcon'
 import Wa from '@/app/components/IconComponents/WaIcon'
 import Inst from '@/app/components/IconComponents/InstIcon'
 import {
-  ContactWrapper,
+  IfQuestionsSection,
   Wrapper,
+  ContactWrapper,
   TextWrapper,
   ContactText,
   Text
 } from './styled'
 
 const IfQuestions: FC = () => (
-  <section style={{ minHeight: '50vh', margin: '10vh 0 0'}}>
+  <IfQuestionsSection>
     <Wrapper>
       <TextWrapper>
         <ContactText>¿Tienes preguntas?</ContactText>
@@ -24,7 +25,7 @@ const IfQuestions: FC = () => (
         <Link href="https://www.instagram.com/cult.liq.co" target="_blank" aria-label="Instagram"><Inst /></Link>
       </ContactWrapper>   
     </Wrapper>
-  </section>
+  </IfQuestionsSection>
 )
 
 export default IfQuestions

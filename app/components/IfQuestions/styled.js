@@ -1,6 +1,39 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 
+export const IfQuestionsSection = styled.section`
+  @media (min-width: 2561px) {
+    margin: 0 0 200px;
+  }
+
+  @media (max-width: 2560px) {
+    min-height: 10vh 0 20vh;
+    margin: 10vh 0 20vh;
+  }
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #9F9F9F;
+  border-radius: 16px 16px;
+  padding: 82px;
+  background-color: #2D2D2D;
+  gap: 129px;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    gap: 50px;
+    margin: 41px 41px;
+  }
+
+  @media (max-width: 850px) {
+    margin: 41px auto;
+  }
+`
+
 export const ContactWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,29 +49,6 @@ export const ContactWrapper = styled.div`
 
 export const Contacts = styled(Image)`
   margin: 6px;
-`
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #9F9F9F;
-  border-radius: 16px 16px;
-  margin: 67px 0;
-  padding: 82px;
-  background-color: #2D2D2D;
-  gap: 129px;
-
-  @media (max-width: 1200px) {
-    flex-direction: column;
-    gap: 50px;
-    margin: 41px 41px;
-  }
-
-  @media (max-width: 850px) {
-    margin: 41px auto;
-  }
 `
 
 export const TextWrapper = styled.div`

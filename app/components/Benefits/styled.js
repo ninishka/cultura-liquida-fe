@@ -1,13 +1,24 @@
 "use client"
-import Image from 'next/image'
 
+import Image from 'next/image'
 import styled from 'styled-components'
 
 export const BenefitsSection = styled.section`
-  min-height: 70vh;
-  /* margin: 20vh 0 0; */
-  padding: 20vw 0 5vw;
   border-top: 2px solid #9F9F9F;
+    
+  @media (min-width: 2561px) {
+    padding: 300px 0;
+  }
+
+  @media (max-width: 2560px) {
+    min-height: 60vh;
+    padding: 15vw 0 0;
+  }
+
+  @media (max-width: 1920px) {
+    min-height: 100vh;
+    padding: 15vw 0 0;
+  }
 `
 
 export const HeaderBenefitsWrapper = styled.div`

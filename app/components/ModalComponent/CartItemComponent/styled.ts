@@ -69,6 +69,7 @@ export const CardInfoWrapper = styled.div`
   @media (max-width: 764px) {
     flex-direction: column;
     align-items: baseline;
+    width: 23vw;
   }  
 
   @media (max-width: 522px) {

@@ -3,7 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const HowToSection = styled.section`
-  margin: 40vh 0; 
+
+  @media (min-width: 2561px) {
+    margin: 0 0 300px;
+  }
+
+  @media (max-width: 2560px) {
+    margin: 40vh 0;
+  }
 
   @media (max-width: 1100px) {
     margin: 30vh 0 20vh ; 
