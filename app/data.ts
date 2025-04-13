@@ -320,8 +320,8 @@ export const complexData2: ComplexData[] = [
     size: '3x 100ml',
     // iconSrc: colaSrc,
     icon: imgC10,
-    price: 240000,
-    originalPrice: 300000
+    price: 216000,
+    originalPrice: 270000
   },
   {
     title:'complejo',
