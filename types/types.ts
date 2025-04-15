@@ -99,15 +99,7 @@ export interface NavigationProps {
   isselected?: boolean | string;
   isSticky?: boolean;
   setShowMenu?: any;
-  
-  $position?: string;
-  $top?: string;
-  $right?: string;
-  $width?: string;
-  $backgroundColor?: string;
-  $borderRadius?: string;
-  $maxHeight?: string;
-  $overflowY?: string;
+  style?: Record<string, string>;
 }
 
 export interface ModalStyledProps {

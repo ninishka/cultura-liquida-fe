@@ -23,18 +23,10 @@ export const Navigation = styled.nav<NavigationProps>`
   @media (max-width: 850px) {
     ${({ isfooter, isopen }) => isfooter ? css`display: flex;` 
     : css`
-      position: ${({$position}) => $position || 'absolute'};
-      top: ${({$top}) => $top || '80px'};
-      background-color: ${({$backgroundColor}) => $backgroundColor || '#333333'};
-      width: ${({$width}) => $width || '100%'};
-      right: ${({$right}) => $right || '0'};
       height: fit-content;
       z-index: 99999;
       justify-content: center;
       border-bottom: ${isopen ? '2px solid #9F9F9F' : 'none'};
-      border-radius: ${({$borderRadius}) => $borderRadius || '0'};
-      max-height: ${({$maxHeight}) => $maxHeight || 'auto'};
-      overflow-y: ${({$overflowY}) => $overflowY || 'visible'};
     `}
   }
 `

@@ -15,21 +15,21 @@ const pathPrefix = '/product/'
 const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter, isSticky, setShowMenu }) => {
   const pathname = usePathname();
   const { data, isLoading } = useGetProductQuery('');
-  const [menuProps, setMenuProps] = useState<Partial<NavigationProps>>({});
+  const [menuStyle, setMenuStyle] = useState<Record<string, string>>({});
   
   useEffect(() => {
     if (isopen && isSticky) {
-      setMenuProps({
-        $position: 'fixed',
-        $top: '0',
-        $right: '0',
-        $width: '100%',
-        $maxHeight: 'calc(100vh - 150px)',
-        $overflowY: 'auto',
-        $backgroundColor: '#333333',
+      setMenuStyle({
+        position: 'fixed',
+        top: '0',
+        right: '0',
+        width: '100%',
+        maxHeight: 'calc(100vh - 150px)',
+        overflowY: 'auto',
+        backgroundColor: '#333333',
       });
     } else if (isopen && !isSticky) {
-      setMenuProps({});
+      setMenuStyle({});
     }
 
     return () => isopen && setShowMenu(false);
@@ -45,7 +45,7 @@ const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter, isSticky, 
     <Navigation
       {...(isfooter && { isfooter })}
       {...(isopen && { isopen })}
-      {...menuProps}
+      style={menuStyle}
     >
       <UlItself {...(isfooter && { isfooter })} {...(isopen && { isopen })}> 
         {uni?.map(({ title, slug }) => (
