@@ -99,6 +99,7 @@ export interface NavigationProps {
   isselected?: boolean | string;
   isSticky?: boolean;
   setShowMenu?: any;
+  style?: React.CSSProperties;
 }
 
 export interface ModalStyledProps {
