@@ -23,18 +23,18 @@ export const Navigation = styled.nav<NavigationProps>`
   @media (max-width: 850px) {
     ${({ isfooter, isopen }) => isfooter ? css`display: flex;` 
     : css`
-      position: ${props => props.style?.position || 'absolute'};
-      top: ${props => props.style?.top || '80px'};
-      background-color: ${props => props.style?.backgroundColor || '#333333'};
-      width: ${props => props.style?.width || '100%'};
-      right: ${props => props.style?.right || '0'};
+      position: ${({$position}) => $position || 'absolute'};
+      top: ${({$top}) => $top || '80px'};
+      background-color: ${({$backgroundColor}) => $backgroundColor || '#333333'};
+      width: ${({$width}) => $width || '100%'};
+      right: ${({$right}) => $right || '0'};
       height: fit-content;
       z-index: 99999;
       justify-content: center;
       border-bottom: ${isopen ? '2px solid #9F9F9F' : 'none'};
-      border-radius: ${props => props.style?.borderRadius || '0'};
-      max-height: ${props => props.style?.maxHeight || 'auto'};
-      overflow-y: ${props => props.style?.overflowY || 'visible'};
+      border-radius: ${({$borderRadius}) => $borderRadius || '0'};
+      max-height: ${({$maxHeight}) => $maxHeight || 'auto'};
+      overflow-y: ${({$overflowY}) => $overflowY || 'visible'};
     `}
   }
 `
