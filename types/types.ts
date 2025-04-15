@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface ProductG {
   title: string;
   description: string;
@@ -95,6 +97,9 @@ export interface NavigationProps {
   isopen?: boolean;
   isfooter?: boolean;
   isselected?: boolean | string;
+  isSticky?: boolean;
+  burgerRef?: React.RefObject<HTMLDivElement>;
+  setShowMenu?: () => void
 }
 
 export interface ModalStyledProps {

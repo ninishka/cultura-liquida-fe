@@ -22,9 +22,8 @@ import {
   Counter,
   BurgerWrap,
   BurgerImage,
-  StickyWrapper
+  StickyWrapper,
 } from './styled'
-
 
 const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useAppDispatch()
@@ -32,12 +31,10 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const { data } = useGetProductQuery('');
   const [ showMenu, setShowMenu ] = useState(false)
   const [isSticky, setIsSticky] = useState(false);
+  const burgerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > window.innerHeight); // Если прокрутили больше 100vh, делаем fixed
-    };
-
+    const handleScroll = () => setIsSticky(window.scrollY > window.innerHeight); // Если прокрутили больше 100vh, делаем fixed
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -49,9 +46,11 @@ const HeaderComponent: FC<NavigationProps> = () => {
       <LogoFull href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
         <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
       </LogoFull>
-      <NavigationComponent isopen={showMenu} />
+      
+      <NavigationComponent isopen={showMenu} setShowMenu={setShowMenu} isSticky={showMenu && isSticky} burgerRef={showMenu && burgerRef} />
+      
       <StickyWrapper $isSticky={isSticky}>
-        <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
+        <BurgerWrap ref={burgerRef} onClick={() => setShowMenu(!showMenu)}>
           <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
         </BurgerWrap>
         
@@ -64,9 +63,8 @@ const HeaderComponent: FC<NavigationProps> = () => {
           </CounterCartWrap>
         </CartWrap>
       </StickyWrapper>
+      
     </HeaderFull>
 )}
-
-
 
 export default HeaderComponent;

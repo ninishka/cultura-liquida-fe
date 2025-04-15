@@ -12,10 +12,10 @@ export const HeaderFull = styled.header<NavigationProps>`
   align-items: center;
   border-bottom: 2px solid #9F9F9F;
   height: 100px;
-  margin: 0 20px;
 
   max-width: 1920px;
   margin: 0 auto;
+  padding: 0 20px;
 
   /* position: sticky; */
   top: 0;
@@ -61,7 +61,7 @@ export const CartWrap = styled.div`
   justify-content: center;
   border-radius: 16px 16px 16px 16px;
   background-color: #252525;
-  margin-right: 30px;
+  margin-right: 45px;
   position: relative;
   cursor: pointer;
   border: 1px solid transparent;
@@ -130,7 +130,6 @@ export const StickyWrapper = styled.div<StickyWrapperStyled>`
     position: fixed;
     top: 15px;
     right: -20px;
-    /* right: 0px; */
-    z-index: 1000;
+    z-index: 2000;
   `}; 
 `
