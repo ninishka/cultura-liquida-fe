@@ -31,7 +31,6 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const { data } = useGetProductQuery('');
   const [ showMenu, setShowMenu ] = useState(false)
   const [isSticky, setIsSticky] = useState(false);
-  const burgerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const handleScroll = () => setIsSticky(window.scrollY > window.innerHeight); // Если прокрутили больше 100vh, делаем fixed
@@ -47,10 +46,10 @@ const HeaderComponent: FC<NavigationProps> = () => {
         <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
       </LogoFull>
       
-      <NavigationComponent isopen={showMenu} setShowMenu={setShowMenu} isSticky={showMenu && isSticky} burgerRef={showMenu && burgerRef} />
+      <NavigationComponent isopen={showMenu} setShowMenu={setShowMenu} isSticky={showMenu && isSticky} />
       
       <StickyWrapper $isSticky={isSticky}>
-        <BurgerWrap ref={burgerRef} onClick={() => setShowMenu(!showMenu)}>
+        <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
           <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
         </BurgerWrap>
         

@@ -12,14 +12,13 @@ import {
 
 const pathPrefix = '/product/'
 
-const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter, isSticky, burgerRef, setShowMenu }) => {
+const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter, isSticky, setShowMenu }) => {
   const pathname = usePathname();
   const { data, isLoading } = useGetProductQuery('');
   const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
   
   useEffect(() => {
-    if (isopen && burgerRef?.current && isSticky) {
-      // const burgerRect = burgerRef.current.getBoundingClientRect();
+    if (isopen && isSticky) {
       setMenuStyle({
         position: 'fixed',
         top: 0,
@@ -33,7 +32,7 @@ const NavigationComponent: FC<NavigationProps> = ({ isopen, isfooter, isSticky, 
     } else if (isopen && !isSticky) setMenuStyle({});
 
     return () => isopen && setShowMenu(false);
-  }, [isopen, burgerRef, isSticky]);
+  }, [isopen, isSticky]);
 
   if (isLoading) return ''
 

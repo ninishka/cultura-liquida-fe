@@ -98,8 +98,7 @@ export interface NavigationProps {
   isfooter?: boolean;
   isselected?: boolean | string;
   isSticky?: boolean;
-  burgerRef?: React.RefObject<HTMLDivElement>;
-  setShowMenu?: () => void
+  setShowMenu?: any;
 }
 
 export interface ModalStyledProps {
