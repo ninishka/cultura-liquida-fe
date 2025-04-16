@@ -20,7 +20,10 @@ const ProductSections: FC = () => {
   const { data, isLoading, error } = useGetProductQuery('');
  
   useEffect(() => {
-    return () => void (showMenu && dispatch(toggleShowMenu(false)))
+    // return () => void (showMenu && dispatch(toggleShowMenu(false))) // <-- TODO - need to fix - работает через раз ТОЛЬКО НА ПРОДЕ ОШИБКА
+    return () => {
+      if (showMenu) dispatch(toggleShowMenu(false));
+    };
   }, [])
 
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))

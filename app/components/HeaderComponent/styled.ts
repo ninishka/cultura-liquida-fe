@@ -125,7 +125,7 @@ export const StickyWrapper = styled.div<StickyWrapperStyled>`
     position: fixed;
     top: 15px;
     right: 20px;
-    z-index: 2000;
+    z-index: 999;
     
     @media (min-width: 1920px) {
       right: calc(50% - 960px + 20px);

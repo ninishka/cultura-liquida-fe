@@ -1,29 +1,43 @@
 import React, { FC, useEffect, useState } from 'react'
 import { usePathname } from "next/navigation";
-import { useAppSelector } from '@/lib/redux/store/hooks'
+import { useAppSelector, useAppDispatch } from '@/lib/redux/store/hooks'
+import { toggleShowMenu } from '@/lib/redux/slices/cartSlice'
+import { useGetProductQuery } from "@/lib/redux/slices/api";
 
 import type { NavigationProps } from '@/types/types'
-import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { uniqueTitles } from '@/app/components/helpers'
+import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
+
 import {
   Navigation,
   UlItself,
-  StyledLink
+  StyledLink,
+  CloseIconNav
 } from './styled'
 
 const pathPrefix = '/product/'
 
 const NavigationComponent: FC<NavigationProps> = ({ isfooter, isSticky }) => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch()
+  
   const { data, isLoading } = useGetProductQuery('');
   const [menuStyle, setMenuStyle] = useState<Record<string, string>>({});
   const { showMenu } = useAppSelector(state => state.cart);
-  
   
   useEffect(() => {
     if (showMenu && isSticky) setMenuStyle({ position: 'fixed', top: '0', right: '0' });
     else if (showMenu && !isSticky) setMenuStyle({});
   }, [showMenu, isSticky]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showMenu) dispatch(toggleShowMenu(false));
+    };
+  
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showMenu, dispatch]);
 
   if (isLoading) return ''
 
@@ -37,6 +51,14 @@ const NavigationComponent: FC<NavigationProps> = ({ isfooter, isSticky }) => {
       {...(showMenu && { showMenu })}
       style={menuStyle}
     >
+      {(showMenu && isSticky) && (
+        <CloseIconNav 
+          sizes='20vh' 
+          src={CloseBurgerIcon} 
+          onClick={() => dispatch(toggleShowMenu(false))} 
+          alt="Сerrar menú"
+        />
+      )}
       <UlItself {...(isfooter && { isfooter })} {...(showMenu && { showMenu })}> 
         {uni?.map(({ title, slug }) => (
           <StyledLink
