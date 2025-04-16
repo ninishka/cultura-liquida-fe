@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { NavigationProps } from '@/types/types'
 
 export const UlItself = styled.ul<NavigationProps>`
@@ -13,6 +14,13 @@ export const UlItself = styled.ul<NavigationProps>`
     flex-direction: ${({ isfooter }) => isfooter ? 'row' : 'column'};
     padding: 0px;
   }
+`
+
+export const CloseIconNav = styled(Image)`
+  width: 25px;
+  position: fixed;
+  top: -5px;
+  right: 12px
 `
 
 export const Navigation = styled.nav<NavigationProps>`

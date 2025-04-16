@@ -49,7 +49,11 @@ const HeaderComponent: FC<NavigationProps> = () => {
       
       <StickyWrapper $isSticky={isSticky}>
         <BurgerWrap onClick={() => dispatch(toggleShowMenu(!showMenu))}>
-          <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
+          <BurgerImage 
+            sizes='50vh' 
+            src={showMenu ? CloseBurgerIcon : BurgerIcon} 
+            alt={`El icono del menú - ${showMenu ? "cerrar" : "abrir"}`}
+          />
         </BurgerWrap>
         
         <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
@@ -61,7 +65,6 @@ const HeaderComponent: FC<NavigationProps> = () => {
           </CounterCartWrap>
         </CartWrap>
       </StickyWrapper>
-      
     </HeaderFull>
 )}
 
