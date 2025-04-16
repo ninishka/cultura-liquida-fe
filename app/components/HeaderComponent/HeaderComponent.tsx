@@ -1,7 +1,7 @@
 "use client"
 
 import React, { FC, useState, useEffect, useRef } from 'react'
-import { toggleShowCart } from '@/lib/redux/slices/cartSlice'
+import { toggleShowCart, toggleShowMenu } from '@/lib/redux/slices/cartSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import type { NavigationProps } from '@/types/types'
@@ -27,9 +27,8 @@ import {
 
 const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useAppDispatch()
-  const { cartItems } = useAppSelector(state => state.cart);
+  const { cartItems, showMenu } = useAppSelector(state => state.cart);
   const { data } = useGetProductQuery('');
-  const [ showMenu, setShowMenu ] = useState(false)
   const [isSticky, setIsSticky] = useState(false);
   
   useEffect(() => {
@@ -46,10 +45,10 @@ const HeaderComponent: FC<NavigationProps> = () => {
         <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
       </LogoFull>
       
-      <NavigationComponent isopen={showMenu} setShowMenu={setShowMenu} isSticky={showMenu && isSticky} />
+      <NavigationComponent isSticky={isSticky} />
       
       <StickyWrapper $isSticky={isSticky}>
-        <BurgerWrap onClick={() => setShowMenu(!showMenu)}>
+        <BurgerWrap onClick={() => dispatch(toggleShowMenu(!showMenu))}>
           <BurgerImage sizes='50vh' src={showMenu ? CloseBurgerIcon : BurgerIcon} alt="El icono del menú" />
         </BurgerWrap>
         

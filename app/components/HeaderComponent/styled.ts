@@ -24,11 +24,6 @@ export const HeaderFull = styled.header<NavigationProps>`
   
   @media (max-width: 850px) {
     min-height: none; 
-
-    ${({isopen}) => isopen ? css`
-      border-bottom: none;
-      border-radius: unset;
-    ` : ''};
   }
 `
 
@@ -61,7 +56,7 @@ export const CartWrap = styled.div`
   justify-content: center;
   border-radius: 16px 16px 16px 16px;
   background-color: #252525;
-  margin-right: 45px;
+  margin-right: 30px;
   position: relative;
   cursor: pointer;
   border: 1px solid transparent;
@@ -129,7 +124,11 @@ export const StickyWrapper = styled.div<StickyWrapperStyled>`
   ${({ $isSticky }) => $isSticky && css`
     position: fixed;
     top: 15px;
-    right: -20px;
+    right: 20px;
     z-index: 2000;
+    
+    @media (min-width: 1920px) {
+      right: calc(50% - 960px + 20px);
+    }
   `}; 
 `

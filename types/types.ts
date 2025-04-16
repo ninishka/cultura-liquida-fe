@@ -48,6 +48,7 @@ export interface CartState {
   cartItems: CartItemType[];
   count: number;
   showCart: boolean;
+  showMenu: boolean;
   isMercadoInit: boolean;
 }
 
@@ -94,11 +95,10 @@ export interface IconProps {
 }
 
 export interface NavigationProps {
-  isopen?: boolean;
+  showMenu?: boolean;
   isfooter?: boolean;
   isselected?: boolean | string;
   isSticky?: boolean;
-  setShowMenu?: any;
   style?: Record<string, string>;
 }
 

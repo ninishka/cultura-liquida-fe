@@ -60,6 +60,12 @@ export const LastFooter = styled.div`
   color:#FFFFFF;
 `
 
+export const StyledLastText = styled.p`
+  @media (max-width: 500px) {
+    margin-right: 15px;
+  }
+`
+
 export const ContactWrapper = styled.div`
   display: flex;
   flex-direction: row;

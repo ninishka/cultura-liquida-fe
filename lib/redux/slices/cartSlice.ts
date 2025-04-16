@@ -5,6 +5,7 @@ const initialState: CartState = {
   cartItems: [],
   count: 1,
   showCart: false,
+  showMenu: false,
   isMercadoInit: false,
 };
 
@@ -12,6 +13,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    toggleShowMenu: (state, action: PayloadAction<boolean>) => {
+      state.showMenu = action.payload;
+    },
     toggleShowCart: (state, action: PayloadAction<boolean>) => {
       state.showCart = action.payload;
     },
@@ -45,5 +49,5 @@ const cartSlice = createSlice({
   },
 })
 
-export const { addToCart, removeFromCart, toggleShowCart, toggleSetMercado } = cartSlice.actions
+export const { addToCart, removeFromCart, toggleShowCart, toggleShowMenu, toggleSetMercado } = cartSlice.actions
 export default cartSlice.reducer

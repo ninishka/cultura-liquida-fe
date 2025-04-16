@@ -9,7 +9,7 @@ export const UlItself = styled.ul<NavigationProps>`
   align-items: center;
 
   @media (max-width: 850px) {
-    display: ${({isopen}) => isopen ? 'block' : 'none'};
+    display: ${({showMenu}) => showMenu ? 'block' : 'none'};
     flex-direction: ${({ isfooter }) => isfooter ? 'row' : 'column'};
     padding: 0px;
   }
@@ -21,12 +21,18 @@ export const Navigation = styled.nav<NavigationProps>`
   flex-direction: row;
 
   @media (max-width: 850px) {
-    ${({ isfooter, isopen }) => isfooter ? css`display: flex;` 
+    ${({ isfooter, showMenu }) => isfooter ? css`display: flex;` 
     : css`
+      position: absolute;
+      top: 80px;
+      background-color: #333333;
+      width: 100%;
+      right: 0;
+
       height: fit-content;
-      z-index: 99999;
+      z-index: 1000;
       justify-content: center;
-      border-bottom: ${isopen ? '2px solid #9F9F9F' : 'none'};
+      border-bottom: ${showMenu ? '2px solid #9F9F9F' : 'none'};
     `}
   }
 `
