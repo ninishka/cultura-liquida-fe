@@ -19,6 +19,10 @@ export const BenefitsSection = styled.section`
     min-height: 100vh;
     padding: 15vw 0 0;
   }
+
+  @media (max-width: 800px) {
+    min-height: 80vh;
+  }
 `
 
 export const HeaderBenefitsWrapper = styled.div`
@@ -48,6 +52,9 @@ export const TextForBenefits = styled.h2`
     font-size: 40px;
     line-height: 45px;
     margin-bottom: 10px;
+  }
+  @media (max-width: 500px) {
+    min-width: auto;
   }
 `
 export const DescrWrapper = styled.div`
@@ -114,6 +121,7 @@ export const Card = styled.div`
 
   @media (max-width: 500px) {
     padding: 20px 0;
+    min-width: auto;
   }
 `
 export const BenefitIcon = styled(Image)`

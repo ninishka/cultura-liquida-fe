@@ -195,6 +195,7 @@ export const CheckBoxGroup = styled.div`
   @media (max-width: 945px) {
     justify-content: center;
     flex-wrap: nowrap;
+    min-width: auto;
   }
 `
 

@@ -14,7 +14,8 @@ import {
   HeaderLikeFooter,
   ContactWrapper,
   LastFooter,
-  StyledLink
+  StyledLink,
+  StyledLastText
 } from './styled'
 
 const FooterComponent = () => {
@@ -35,7 +36,7 @@ const FooterComponent = () => {
       </ContactWrapper>
       </HeaderLikeFooter>
       <LastFooter>
-        <p>2025 año. Cultura Liquida. Todos los derechos reservados.</p>
+        <StyledLastText>2025 año. Cultura Liquida. Todos los derechos reservados.</StyledLastText>
         <p>Designed by Energy Lynx</p>
       </LastFooter>
     </FooterFull>
