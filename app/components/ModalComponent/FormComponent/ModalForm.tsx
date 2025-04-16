@@ -98,7 +98,7 @@ const ModalForm: FC<ModalFormProps> = ({
     }
     
     setInitialized(true);
-  }, []);
+  }, []);  // 101:6 TODO  Warning: React Hook useEffect has missing dependencies: 'form' and 'initialValues'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
 
   // Обработка новых preferenceId из пропсов
   useEffect(() => {
@@ -123,6 +123,8 @@ const ModalForm: FC<ModalFormProps> = ({
       onFinish(formValues);
     }
   }, [paymentOption, preferenceId, shouldShowBuyButton, isAgree, isOrder, initialized]);
+  // 125:6 TODO  Warning: React Hook useEffect has missing dependencies: 'form', 'loading', and 'onFinish'. Either include them or remove the dependency array. If 'onFinish' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+
 
   // Отображаем Wallet когда получили preferenceId
   useEffect(() => {

@@ -105,6 +105,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
       }
     }
   }, [data, initializing]);
+  // 107:6 TODO  Warning: React Hook useEffect has missing dependencies: 'dispatch', 'handleMercadoPayment', 'isMercadoInit', and 'respStatus'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
 
   // Отображаем Wallet при получении preferenceId
   useEffect(() => {
