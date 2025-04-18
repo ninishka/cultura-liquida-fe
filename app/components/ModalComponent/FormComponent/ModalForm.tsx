@@ -116,8 +116,7 @@ const ModalForm: FC<ModalFormProps> = ({
     // 4. Не идет загрузка
     // 5. Пользователь согласился с условиями (для новых заказов)
     // 6. Компонент полностью инициализирован
-    if (paymentOption === 'mercado' && !preferenceId && !shouldShowBuyButton && !loading && 
-        (isAgree || isOrder) && initialized && !switchingRef.current) {
+    if (paymentOption === 'mercado' && !preferenceId && !shouldShowBuyButton && !loading && (isAgree || isOrder) && initialized && !switchingRef.current) {
       // Получаем текущие значения формы для передачи в onFinish
       const formValues = form.getFieldsValue();
       onFinish(formValues);
@@ -188,7 +187,7 @@ const ModalForm: FC<ModalFormProps> = ({
           style={{ width: '100%'}}
           rules={termsAndCondidtionsValidator}
         >
-          <CheckboxInput onClick={() => setIsAgree(!isAgree)}>
+          <CheckboxInput disabled={isAgree} onClick={() => !isAgree && setIsAgree(true)}>
             Tus datos personales serán usados para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
           </CheckboxInput>
         </StyledFormItem>
@@ -231,7 +230,7 @@ const ModalForm: FC<ModalFormProps> = ({
               <>
                 {/* Стандартная кнопка Comprar */}
                 {showComprarButton && (
-                  <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption || !isAgree}>
+                  <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption}>
                     Comprar
                   </CartPayButton>
                 )}

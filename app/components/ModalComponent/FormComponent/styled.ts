@@ -148,6 +148,26 @@ export const CheckboxInput = styled(Checkbox)`
 
   .ant-checkbox-checked .ant-checkbox-inner {
     background-color: black !important;
+
+    &.ant-checkbox-wrapper-disabled::after {
+      border-color: red !important
+    }
+  }
+
+  &.ant-checkbox-wrapper-disabled {
+    cursor: default !important;
+
+    .ant-checkbox-disabled+span {
+      color: black !important;
+    }
+
+    .ant-checkbox-inner {
+      background-color: black !important;
+    }
+  }
+
+  .ant-checkbox-disabled .ant-checkbox-inner:after {
+    border-color: rgb(255 255 255 / 100%) !important;
   }
 `
 
