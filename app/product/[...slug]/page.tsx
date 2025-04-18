@@ -24,7 +24,8 @@ const ProductSections: FC = () => {
     return () => {
       if (showMenu) dispatch(toggleShowMenu(false));
     };
-  }, [])
+  }, []) 
+  // 27:6 TODO Warning: React Hook useEffect has missing dependencies: 'dispatch' and 'showMenu'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
 
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
 

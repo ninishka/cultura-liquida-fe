@@ -98,7 +98,7 @@ const ModalForm: FC<ModalFormProps> = ({
     }
     
     setInitialized(true);
-  }, []);
+  }, []);  // 101:6 TODO  Warning: React Hook useEffect has missing dependencies: 'form' and 'initialValues'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
 
   // Обработка новых preferenceId из пропсов
   useEffect(() => {
@@ -116,13 +116,14 @@ const ModalForm: FC<ModalFormProps> = ({
     // 4. Не идет загрузка
     // 5. Пользователь согласился с условиями (для новых заказов)
     // 6. Компонент полностью инициализирован
-    if (paymentOption === 'mercado' && !preferenceId && !shouldShowBuyButton && !loading && 
-        (isAgree || isOrder) && initialized && !switchingRef.current) {
+    if (paymentOption === 'mercado' && !preferenceId && !shouldShowBuyButton && !loading && (isAgree || isOrder) && initialized && !switchingRef.current) {
       // Получаем текущие значения формы для передачи в onFinish
       const formValues = form.getFieldsValue();
       onFinish(formValues);
     }
   }, [paymentOption, preferenceId, shouldShowBuyButton, isAgree, isOrder, initialized]);
+  // 125:6 TODO  Warning: React Hook useEffect has missing dependencies: 'form', 'loading', and 'onFinish'. Either include them or remove the dependency array. If 'onFinish' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+
 
   // Отображаем Wallet когда получили preferenceId
   useEffect(() => {
@@ -186,7 +187,7 @@ const ModalForm: FC<ModalFormProps> = ({
           style={{ width: '100%'}}
           rules={termsAndCondidtionsValidator}
         >
-          <CheckboxInput onClick={() => setIsAgree(!isAgree)}>
+          <CheckboxInput disabled={isAgree} onClick={() => !isAgree && setIsAgree(true)}>
             Tus datos personales serán usados para procesar tu pedido, mejorar tu experiencia en nuestra tienda, y para otros propósitos descritos en nuestra politica de privacidad.
           </CheckboxInput>
         </StyledFormItem>
@@ -229,7 +230,7 @@ const ModalForm: FC<ModalFormProps> = ({
               <>
                 {/* Стандартная кнопка Comprar */}
                 {showComprarButton && (
-                  <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption || !isAgree}>
+                  <CartPayButton htmlType="submit" loading={loading} disabled={!paymentOption}>
                     Comprar
                   </CartPayButton>
                 )}

@@ -25,7 +25,7 @@ export const makeStore = () => {
         productsAPI.middleware,
         ordersAPI.middleware,
         authAPI.middleware,
-        loggerMiddleware
+        // loggerMiddleware
       ),
   });
 
