@@ -22,8 +22,8 @@ const TransferBox: FC<OrderStyledProps> = ({ isOrder }) => (
     )}
     <BankingBoxesWrapper $isOrder={isOrder}>
       <BankingBox title='Bancolombia Ahorros' num='11519071497' isOrder={isOrder}/>
-      <BankingBox title='BBVA Ahorros' num='0640002991' isOrder={isOrder}/>
-      <BankingBox title='Nequi' num='3218669199' isOrder={isOrder}/>
+      <BankingBox title='Davivienda Ahorros' num='086100233278' isOrder={isOrder}/>
+      <BankingBox title='Nequi, Daviplata y Transfiya' num='3218669199' isOrder={isOrder}/>
     </BankingBoxesWrapper>
     {!isOrder && (
       <>
