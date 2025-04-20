@@ -9,8 +9,8 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
   }
 
   const client = new MercadoPagoConfig({
-    accessToken: process.env.ACCESSTOKEN_TEST,
-    // accessToken: process.env.ACCESSTOKEN,
+    // accessToken: process.env.ACCESSTOKEN_TEST,
+    accessToken: process.env.ACCESSTOKEN,
     options: { timeout: 5000, idempotencyKey: orderId }
   });
   const preference = new Preference(client);
