@@ -254,6 +254,9 @@ export const MailDescription = styled.p`
 
 export const MailImgWrapper = styled.p`
   margin: 6px 30% 0;
+  @media (max-width: 1000px) {
+    margin: 6px 20% 0;
+  }
   @media (max-width: 850px) {
     margin: 0;
   }
@@ -300,4 +303,16 @@ export const PriceTextBox = styled.div<PriceTextBoxStyledProps>`
       align-items: center;
     }
   ` : ''}
+`
+
+export const StyledLink = styled(Link)`
+  margin: 5px 20px 0;
+
+  @media (max-width: 1000px) {
+    margin: 5px 10px 0;
+  }
+
+  @media (max-width: 850px) {
+   margin:  0px 4px;
+  }
 `

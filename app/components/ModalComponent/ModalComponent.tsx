@@ -34,7 +34,6 @@ const ModalComponent = ({data}) => {
     try {
       // Инициализируем Mercado Pago при нажатии кнопки
       if (paymentOption === 'mercado' && !isMercadoInit) {
-        console.log('initMercadoPago MMM on button click')
         dispatch(toggleSetMercado(true))
         initMercadoPago(process.env.PUBLIC_KEY_BTN || '')
       }
