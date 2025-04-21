@@ -21,6 +21,8 @@ export interface ModalFormFieldsProps {
   form?: {
     setFieldValue: Function
   };
+  selectedDepartment: string;
+  onDepartmentChange: (value: string) => void;
 }
 
 const documentOptions = [
