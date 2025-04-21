@@ -25,6 +25,7 @@ export const createOrder = async (
       form_data,
     });
     await order.save();
+
     const { email } = form_data
 
     console.log('email', email)
@@ -32,7 +33,7 @@ export const createOrder = async (
     console.log("Created Order:", order);
 
     // const { data: clientData, error: clientError } = 
-    await resend.emails.send({
+    resend.emails.send({
       from: 'Cultura Liquida <mailer@cultura-liquida.com>',
       to: email, // 'culturaliquidacol@gmail.com',
       subject: "Confirmación de pedido",
@@ -40,19 +41,20 @@ export const createOrder = async (
     });
 
 
-    // console.log('CLIENT =====================')
+    console.log('1st resend.emails')
     // console.log('data, error', clientData, clientError)
 
 
     // const { data: vendorData, error: vendorError } = 
-    await resend.emails.send({
+    resend.emails.send({
       from: 'Cultura Liquida <mailer@cultura-liquida.com>',
       to: 'culturaliquidacol@gmail.com',
       subject: "Nuevo pedido",
       react: OrderConfirmationEmail({ order }),
     });
 
-    // console.log('Vendor =====================')
+    console.log('2nd resend.emails')
+
     // console.log('data, error', vendorData, vendorError)
 
 
