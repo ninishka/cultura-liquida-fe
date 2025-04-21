@@ -92,6 +92,8 @@ export  interface ErrorProps {
 export interface IconProps {
   color?: string;
   isDark?: boolean;
+  width?: number;
+  height?: number;
 }
 
 export interface NavigationProps {
