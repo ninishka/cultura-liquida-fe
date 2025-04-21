@@ -17,7 +17,7 @@ export const nameSurnameValidator = [
   },
   {
     validator: (rule, value) => { 
-      const letterAndSpaceRegex = /^[a-zA-Z\s]+$/;
+      const letterAndSpaceRegex = /^[a-zA-ZñÑ\s]+$/;
       
       if (!letterAndSpaceRegex.test(value)) {
         return Promise.reject(

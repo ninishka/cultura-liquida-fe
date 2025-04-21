@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { StyledSVGT } from './styled'
 import type { IconProps } from '@/types/types'
 
-const Wa: FC<IconProps> = ({ isDark }) => (
+const Wa: FC<IconProps> = ({ isDark, width = '52', height = '53' }) => (
   <StyledSVGT
     $isDark={isDark}
-    width="52"
-    height="53"
+    width={width}
+    height={height}
     viewBox="0 0 52 53"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
