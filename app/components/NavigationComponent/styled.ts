@@ -20,7 +20,8 @@ export const CloseIconNav = styled(Image)`
   width: 25px;
   position: fixed;
   top: -5px;
-  right: 12px
+  right: 12px;
+  cursor: pointer;
 `
 
 export const Navigation = styled.nav<NavigationProps>`

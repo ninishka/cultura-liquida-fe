@@ -232,7 +232,7 @@ export const MailWrapper = styled.div`
   border: 1px solid #F2C94C;
   border-radius: 16px;
   width: -webkit-fill-available;
-  margin: 10px;
+  margin: 10px 15px;
   padding: 0 20px;
   display: flex;
   justify-content: flex-start;

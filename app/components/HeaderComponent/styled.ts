@@ -1,9 +1,10 @@
 "use client"
 
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { NavigationProps } from '@/types/types'
+import type { HTMLAttributes } from 'react'
 
 export const HeaderFull = styled.header<NavigationProps>`
   display: flex;
@@ -48,25 +49,48 @@ export const Cart = styled(Image)`
    ${reusedStyles}
 `
 
-export const CartWrap = styled.div`
+const pulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(242, 201, 76, 0.6);
+    border: 1px solid rgba(242, 201, 76, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 8px 4px rgba(242, 201, 76, 0);
+    border: 1px solid rgba(242, 201, 76, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(242, 201, 76, 0);
+    border: 1px solid rgba(242, 201, 76, 0);
+  }
+`
+interface CartWrapProps extends HTMLAttributes<HTMLDivElement> {
+  $highlight?: boolean
+}
+
+export const CartWrap = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== '$highlight'
+})<CartWrapProps>`
   height: 52px;
   width: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px 16px 16px 16px;
+  border-radius: 16px;
   background-color: #252525;
   margin-right: 30px;
   position: relative;
   cursor: pointer;
   border: 1px solid transparent;
-  /* position: fixed !important; */
 
   transition: all 0.3s ease;
   &:hover{
     background-color: #252525;
     border: 1px solid #9F9F9F;
   }
+
+  ${({ $highlight }) => $highlight && css`
+    animation: ${pulse} 0.5s ease-in-out;
+  `}
 `
 
 export const CounterCartWrap = styled.div`
@@ -87,7 +111,7 @@ export const Counter = styled.p`
   padding-top: 1px;
   color: black;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 `
 
 export const BurgerWrap = styled.div`

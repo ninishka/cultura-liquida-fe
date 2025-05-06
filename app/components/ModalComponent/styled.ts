@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Modal } from 'antd';
 import { Button } from 'antd';
-import type { ModalStyledProps } from '@/types/types'
+import type { ModalStyledProps, TotalBoxStyledProps } from '@/types/types'
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
@@ -53,7 +53,7 @@ export const TotalWrap = styled.div`
   }
 `
 
-export const TotalBox = styled.div`
+export const TotalBox = styled.div<TotalBoxStyledProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -66,6 +66,11 @@ export const TotalBox = styled.div`
   @media (max-width: 522px) {
     margin: 10px;
   }
+
+  ${({ $isMercado }) => $isMercado && css`
+    margin-bottom: 0px;
+    border-radius: 16px 16px 0 0;
+  `}
 `
 
 export const CartPayButton = styled(Button)`

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Select } from 'antd'
 import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
@@ -25,7 +25,11 @@ const Adm: FC = () => {
 
   const { data, isLoading, refetch, isFetching } = useGetOrderQuery({name: 'mockedUserId', page, pageSize});
 
-  if (isLoading) return 'Loading adm'
+  useEffect(() => {
+    refetch()
+  }, [])
+   
+   if (isLoading) return 'Loading adm'
 
   const displayingData = getSortingData(data, sortConfig)
   const handleRefetch = () => {

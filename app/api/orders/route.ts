@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createOrder, getOrdersByUser, getOrderById, updateOrder } from '@/app/actions/orders';
+import { createOrder, getOrdersByUser, getOrderById, updateOrder, deleteOrder } from '@/app/actions/orders';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -63,5 +63,25 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
   } catch (error) {
     console.error('Error updating api order:', error);
     return NextResponse.json({ error: 'Failed to update api order' }, { status: 500 });
+  }
+}
+
+
+export async function DELETE(request: NextRequest): Promise<NextResponse> {
+  const orderId = request.nextUrl.searchParams.get('orderId');
+
+  if (!orderId) {
+    return NextResponse.json({ error: 'Missing orderId' }, { status: 400 });
+  }
+
+  try {
+    const deletedOrder = await deleteOrder(orderId);
+    if (!deletedOrder) {
+      return NextResponse.json({ message: 'Order not found or could not be deleted' }, { status: 404 });
+    }
+    return NextResponse.json({ message: 'Order successfully deleted' }, { status: 200 });
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    return NextResponse.json({ error: 'Failed to delete order', details: error.message }, { status: 500 });
   }
 }
