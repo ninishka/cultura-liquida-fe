@@ -132,3 +132,20 @@ export const updateOrder = async (orderId: string, updatedData: UpdatedData) => 
     throw new Error('Failed to update method order');
   }
 };
+
+export const deleteOrder = async (orderId: string): Promise<IOrder | null> => {
+  try {
+    const deletedOrder = await Order.findByIdAndDelete(orderId).lean();
+
+    if (!deletedOrder) {
+      console.error('Order not found:', orderId);
+      return null;
+    }
+
+    console.log('Deleted order:', deletedOrder);
+    return deletedOrder;
+  } catch (error) {
+    console.error('Failed to delete order:', orderId, error);
+    throw new Error('Failed to delete order');
+  }
+};

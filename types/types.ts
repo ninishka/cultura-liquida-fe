@@ -108,6 +108,10 @@ export interface ModalStyledProps {
   $isEmpty: boolean;
 }
 
+export interface TotalBoxStyledProps {
+  $isMercado?: boolean;
+}
+
 export interface AmountItemProps {
   $bgc: boolean;
 }
@@ -134,7 +138,7 @@ export interface OrderLoadingStyledProps {
 }
 
 export interface ProductItemProps {
-  soldout?: boolean;
+  $soldout?: boolean;
   checked?: boolean;
 }
 

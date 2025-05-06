@@ -31,7 +31,6 @@ const cartSlice = createSlice({
         else existingItem.quantity += quantity // edit existing item from Formation -> Couneter
       
       } else {
-        console.log('new item')
         state.cartItems.push({ ...action.payload, quantity })
       }
     },

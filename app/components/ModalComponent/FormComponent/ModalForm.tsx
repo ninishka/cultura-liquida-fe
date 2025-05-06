@@ -66,7 +66,7 @@ const ModalForm: FC<ModalFormProps> = ({
     form.setFieldValue('city', undefined);
   }
 
-  console.log('preferenceId', preferenceId)
+  const isMercado = preferenceId && paymentOption === 'mercado'
   
   return (
     <div>
@@ -96,7 +96,7 @@ const ModalForm: FC<ModalFormProps> = ({
       )}
 
       {!isOrder && (
-        <TotalBox>
+        <TotalBox $isMercado={isMercado}>
           <TotalWrap>
             <LeftSideWrap>
               <PriceTextBox>
@@ -165,14 +165,15 @@ const ModalForm: FC<ModalFormProps> = ({
         </TotalBox>
       )}
     </StyledForm>
-                
-    {(preferenceId && paymentOption === 'mercado') && (
-      <Wallet
-        key={process.env.PUBLIC_KEY_BTN}
-        initialization={{ preferenceId }}
-        customization={{ texts:{ valueProp: 'smart_option'}}} 
-      />
-    )}
+      {isMercado && (
+        <div style={{margin: '-40px 15px 0px', backgroundColor: '#252525', borderRadius: '0px 0px 16px 16px', padding: '0 20px 10px'}}>
+          <Wallet
+            key={process.env.PUBLIC_KEY_BTN}
+            initialization={{ preferenceId }}
+            customization={{ texts:{ valueProp: 'smart_option'}}} 
+          />
+        </div>
+      )}
     </div>
   );
 };

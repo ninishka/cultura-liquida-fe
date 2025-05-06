@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC, useState, useEffect, useRef } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { toggleShowCart, toggleShowMenu } from '@/lib/redux/slices/cartSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
@@ -30,14 +30,21 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const { cartItems, showMenu } = useAppSelector(state => state.cart);
   const { data } = useGetProductQuery('');
   const [isSticky, setIsSticky] = useState(false);
+  const [highlightKey, setHighlightKey] = useState(0);
   
   useEffect(() => {
-    const handleScroll = () => setIsSticky(window.scrollY > window.innerHeight); // Если прокрутили больше 100vh, делаем fixed
+    const handleScroll = () => setIsSticky(window.scrollY > window.innerHeight);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  useEffect(() => {
+    if (totalAmount > 0) {
+      setHighlightKey(prev => prev + 1);
+    }
+  }, [totalAmount]);
 
   return (
     <HeaderFull>
@@ -56,7 +63,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
           />
         </BurgerWrap>
         
-        <CartWrap onClick={() => dispatch(toggleShowCart(true))}>
+        <CartWrap key={highlightKey} $highlight={highlightKey > 0} onClick={() => dispatch(toggleShowCart(true))}>
           <Cart src={CartIcon} alt="El icono del carrito" />
           <CounterCartWrap>
             <Counter>
