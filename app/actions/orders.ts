@@ -1,11 +1,7 @@
 'use server'
 
 import Order, { IOrder } from '@/models/Order';
-import OrderConfirmationEmail from "@/emails/OrderConfirmationEmail";
-import { Resend } from "resend";
 import { getShippingCost, getProductCost, getTotalCost } from '@/helpers/pricing'
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const createOrder = async (
   userId: string,
@@ -25,38 +21,6 @@ export const createOrder = async (
       form_data,
     });
     await order.save();
-
-    const { email } = form_data
-
-    console.log('email', email)
-
-    console.log("Created Order:", order);
-
-    // const { data: clientData, error: clientError } = 
-    resend.emails.send({
-      from: 'Cultura Liquida <mailer@cultura-liquida.com>',
-      to: email, // 'culturaliquidacol@gmail.com',
-      subject: "Confirmación de pedido",
-      react: OrderConfirmationEmail({ order }),
-    });
-
-
-    console.log('1st resend.emails')
-    // console.log('data, error', clientData, clientError)
-
-
-    // const { data: vendorData, error: vendorError } = 
-    resend.emails.send({
-      from: 'Cultura Liquida <mailer@cultura-liquida.com>',
-      to: 'culturaliquidacol@gmail.com',
-      subject: "Nuevo pedido",
-      react: OrderConfirmationEmail({ order }),
-    });
-
-    console.log('2nd resend.emails')
-
-    // console.log('data, error', vendorData, vendorError)
-
 
     return order
   } catch (error) {

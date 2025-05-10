@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart, toggleSetMercado } from '@/lib/redux/slices/cartSlice'
 import img55 from '@/app/icons/modalbackgroung.png'
 import { initMercadoPago } from '@mercadopago/sdk-react'
-import { updateExistingProduct, createNewOrder, handlePayment } from '@/helpers/data';
+import { updateExistingProduct, createNewOrder, sendOrderEmails, handlePayment } from '@/helpers/data';
 import CartItemComponent from './CartItemComponent/CartItemComponent'
 import ModalForm from './FormComponent/ModalForm'
 
@@ -44,7 +44,10 @@ const ModalComponent = ({data}) => {
       // 2. CREATE NEW ORDER BD
       const {orderData, filteredArray} = await createNewOrder(cartItems, formValues)
 
-      // 3. PAYMENT
+      // 3 emailing
+      sendOrderEmails(orderData.userId, orderData.products, formValues);
+
+      // 4. PAYMENT
       await handlePayment(orderData, filteredArray, formValues, paymentOption, router, setPreferenceId)
     } catch (error) {
       console.error('Error processing:', error);

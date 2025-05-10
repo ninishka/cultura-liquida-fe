@@ -160,7 +160,7 @@ const CheckoutPage: FC = () => {
               {data?.products?.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
             </ListItemsWrapperCheckout>
             <>
-              <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px' }}>{'Detalles de facturación'.toUpperCase()}</ModalTitleCheckout>
+              <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px', textTransform: 'uppercase' }}>Detalles de facturación</ModalTitleCheckout>
               <ModalForm loading={false} initialValues={formData} isOrder />
             </>
           </ScrolableZone>

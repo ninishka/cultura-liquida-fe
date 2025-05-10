@@ -23,6 +23,7 @@ import {
   MailDescription,
   MailImgWrapper,
   StyledLink,
+  WalletWrapper
 } from './styled'
 import Wa from '@/app/components/IconComponents/WaIcon'
 import Image from 'next/image'
@@ -166,13 +167,13 @@ const ModalForm: FC<ModalFormProps> = ({
       )}
     </StyledForm>
       {isMercado && (
-        <div style={{margin: '-40px 15px 0px', backgroundColor: '#252525', borderRadius: '0px 0px 16px 16px', padding: '0 20px 10px'}}>
+        <WalletWrapper>
           <Wallet
             key={process.env.PUBLIC_KEY_BTN}
             initialization={{ preferenceId }}
             customization={{ texts:{ valueProp: 'smart_option'}}} 
           />
-        </div>
+        </WalletWrapper>
       )}
     </div>
   );
