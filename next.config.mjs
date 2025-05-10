@@ -22,6 +22,8 @@ const nextConfig = {
     PATH_TO_API: process.env.PATH_TO_API,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     ADMIN_PWD: process.env.ADMIN_PWD,
+    BACK_URL: process.env.BACK_URL,
+    WEBHOOK_KEY: process.env.WEBHOOK_KEY,
   },
 
   async redirects() {
