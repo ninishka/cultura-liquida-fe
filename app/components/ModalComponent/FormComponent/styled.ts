@@ -316,3 +316,14 @@ export const StyledLink = styled(Link)`
    margin:  0px 4px;
   }
 `
+
+export const WalletWrapper = styled.div`
+  margin: -40px 15px 0px;
+  background-color: #252525; 
+  border-radius: 0px 0px 16px 16px; 
+  padding: 0 20px 10px;
+
+  @media (max-width: 522px) {
+    margin: -40px 10px 0px;
+  }
+`

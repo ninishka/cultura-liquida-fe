@@ -76,6 +76,19 @@ export const handlePayment = async (orderData, cartItems, values, paymentOption,
   }
 }
 
+export const sendOrderEmails = async (userId, products, form_data) => {
+  const emailRequestBody = JSON.stringify({
+    userId,
+    products,
+    form_data,
+  });
+
+  fetcher('POST', '/api/emails', emailRequestBody, 'send order emails')
+    .catch(err => {
+      console.error('Failed to send emails:', err.message);
+    });
+};
+
 // const mockedFormValues = {
 //   name: "One",
 //   surname: "One",
