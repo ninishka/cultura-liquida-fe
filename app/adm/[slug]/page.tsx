@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
+import { sendOrderEmails } from '@/helpers/data';
 
 const Adm: FC = () => {
   const [form] = Form.useForm()
@@ -32,7 +33,7 @@ const Adm: FC = () => {
         body: JSON.stringify({
           orderId: orderIdParam,
           updatedData: {
-            status
+            status,
           },
         }),
       });
@@ -40,6 +41,8 @@ const Adm: FC = () => {
       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
   
       const updatedOrder = await response.json();
+      sendOrderEmails({...data, status})
+
       console.log('Updated Order:', updatedOrder);
     } catch (error) {
       console.error('Error updating order:', error);
@@ -83,7 +86,7 @@ const Adm: FC = () => {
   return (
     <>
       {[data].map(order => { 
-        const { _id, status, totalCost, updatedAt, form_data: { name, surname }, products } = order;
+        const { _id, status, totalCost, updatedAt, form_data: { name, surname }, products, form_data } = order;
 
         return (
           <div key={status}>
@@ -92,6 +95,10 @@ const Adm: FC = () => {
               <InfoField>
                 <p>Order №</p>
                 <p>{_id}</p>
+              </InfoField>
+              <InfoField>
+                <p>Payment</p>
+                <p>{form_data?.payment_method}</p>
               </InfoField>
               <InfoField>
                 <p>Name:</p>
