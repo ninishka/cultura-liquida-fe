@@ -76,18 +76,20 @@ export const handlePayment = async (orderData, cartItems, values, paymentOption,
   }
 }
 
-export const sendOrderEmails = async (userId, products, form_data) => {
-  const emailRequestBody = JSON.stringify({
-    userId,
-    products,
-    form_data,
-  });
+export const sendOrderEmails = async (data) => {
+  const emailRequestBody = JSON.stringify({ data });
 
   fetcher('POST', '/api/emails', emailRequestBody, 'send order emails')
     .catch(err => {
       console.error('Failed to send emails:', err.message);
     });
 };
+
+
+export const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status', 'payment_type',
+  'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id', 
+  'external_reference' // - additional field
+]
 
 // const mockedFormValues = {
 //   name: "One",

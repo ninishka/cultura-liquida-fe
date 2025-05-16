@@ -45,7 +45,7 @@ const ModalComponent = ({data}) => {
       const {orderData, filteredArray} = await createNewOrder(cartItems, formValues)
 
       // 3 emailing
-      sendOrderEmails(orderData.userId, orderData.products, formValues);
+      sendOrderEmails(orderData);
 
       // 4. PAYMENT
       await handlePayment(orderData, filteredArray, formValues, paymentOption, router, setPreferenceId)

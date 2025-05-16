@@ -19,57 +19,7 @@ type OrderProps = {
   order: IOrder;
 };
 
-const mockOrder = {
-  _id: '679cde1fb3f0a5d1bda5eb2f',
-  userId: 'mockedUserId',
-  products: [
-    {
-      _id: '675ae82d9dc9fd8505068859',
-      title: 'Cola de Pavo',
-      ingredient: 'Trametes Versicolor',
-      type: 'extracts',
-      displayingType: 'Extracto',
-      quantity: 1,
-      price: 35888,
-      idCart: 'Cola de Pavoextracts30ml',
-      id: 'Cola de Pavoextracts30ml',
-      size: '30ml',
-      description: 'Cuerpo fructífero de hongos y micelio de Trametes Versicolor.',
-    },
-    {
-      _id: '675ae78c9dc9fd8505068857',
-      title: 'Reishi',
-      ingredient: 'Ganoderma lucidum',
-      type: 'extracts',
-      displayingType: 'Extracto',
-      quantity: 1,
-      price: 35555,
-      idCart: 'Reishiextracts30ml',
-      id: 'Reishiextracts30ml',
-      size: '30ml',
-      description: 'Cuerpo fructífero de hongos y micelio de Ganoderma lucidum.',
-    }
-  ],
-  shippingCost: 15000,
-  totalCost: 86443,
-  status: 'pending',
-  form_data: {
-    name: 'John',
-    surname: 'Smith',
-    document_type: 'CE',
-    id_number: '123456',
-    address: 'CRA 25',
-    state: 'CAL',
-    city: 'Manizales',
-    country: 'Colombia',
-    phone: '3107883758',
-    email: 'first@gmail.com',
-    notes: 'notesnotesnotesnotes'
-  },
-  createdAt: '2025-01-31T14:28:47.630Z',
-}
-
-const OrderConfirmationEmail: React.FC<OrderProps> = ({ order = mockOrder }) => {
+const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
   // console.log('order', order)
   const {
     _id,
@@ -77,19 +27,26 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order = mockOrder }) => 
     products,
     shippingCost,
     totalCost,
+    status,
     form_data: {
       name,
       surname,
       address,
       city,
       state,
-      phone
-    }
+      phone,
+      payment_method
+    },
+    mp_data
   } = order
 
   const orderId = _id.toString()
   const customerName = `${name} ${surname}`
   const orderDate = dayjs(createdAt).format('YYYY-MM-DD HH:mm')
+
+  let localStatus
+  if (payment_method === 'mercado' &&  mp_data?.status) localStatus = mp_data?.status
+  if (payment_method === 'transfer') localStatus = status
 
   return (
     <Html>
@@ -112,6 +69,19 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order = mockOrder }) => 
                 {orderId}
               </Link>
             </Text>
+
+            {localStatus && (
+              <Text style={{...textStyle, textTransform: 'capitalize' }}>
+                <strong>Status:</strong> {localStatus}
+              </Text>
+            )} 
+
+            {localStatus === 'rejected' && (
+              <Text style={textStyle}>
+                <strong>Su pago ha sido rechazado. Inténtelo de nuevo. Para ello, vaya a la página de pedidos.</strong>
+              </Text>
+            )}
+
             <Text style={textStyle}>
               <strong>Fecha:</strong> {orderDate}
             </Text>

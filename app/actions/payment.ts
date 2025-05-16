@@ -9,8 +9,8 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
   }
 
   const client = new MercadoPagoConfig({
-    accessToken: process.env.ACCESSTOKEN_TEST,
-    // accessToken: process.env.ACCESSTOKEN,
+    // accessToken: process.env.ACCESSTOKEN_TEST,
+    accessToken: process.env.ACCESSTOKEN,
     options: { timeout: 5000, idempotencyKey: orderId }
   });
   const preference = new Preference(client);
@@ -37,7 +37,7 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
       failure: `${process.env.BACK_URL}/checkout?order_id=${orderId}`,
       pending: `${process.env.BACK_URL}/checkout?order_id=${orderId}`,
     },
-    auto_return: "approved",
+    auto_return: "all",
     payer: {
       name, surname, email, date_created: now.toISOString(),
       phone: { area_code: '57', number: phone },
@@ -53,7 +53,7 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
     // notification_url: "https://www.your-site.com/ipn",
   };
 
-  console.log('preferenceBody', preferenceBody)
+  // console.log('preferenceBody', preferenceBody)
 
   return await preference.create({ body: preferenceBody });
 };

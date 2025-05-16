@@ -8,6 +8,7 @@ import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
 import { formatPrice } from '@/helpers/formats'
 import { formatDate } from '@/helpers/formats'
+import { sendOrderEmails, keysFromMP } from '@/helpers/data';
 
 import RightPanelComponent from './RightPanelComponent'
 
@@ -29,10 +30,6 @@ import {
   BankInfoNumber
  } from '@/app/components/ModalComponent/BankingBox/styled'
 
-const keysFromMP = ['collection_id', 'collection_status', 'payment_id', 'status', 'payment_type',
-  'merchant_order_id', 'preference_id', 'site_id', 'processing_mode', 'merchant_account_id', 
-  'external_reference' // - additional field
-]
 
 const CheckoutPage: FC = () => {
   const searchParams = useSearchParams();
@@ -60,17 +57,17 @@ const CheckoutPage: FC = () => {
       setRespStatus(data?.status)
     }
 
+    const mp_data = keysFromMP.reduce((acc, key) => {
+      acc[key] = searchParams?.get(key) || "Not provided";
+      return acc;
+    }, {} as Record<string, string>); 
+
     // after MP redirect back - it sends params in url
     // this params need to be delivered in db
     if (isInitialMercado) {
       console.log('isInitialMercado: ', isInitialMercado);
       const fetchData = async () => {
         try {
-          const mp_data = keysFromMP.reduce((acc, key) => {
-            acc[key] = searchParams?.get(key) || "Not provided";
-            return acc;
-          }, {} as Record<string, string>);     
-
           const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
             method: 'PUT',
             headers: {
@@ -93,9 +90,11 @@ const CheckoutPage: FC = () => {
           console.error('Error updating order:', error);
         }
       };
-      
+
       // if data exist, but mp_data absent or status mismatched
       if (data && typeof data === 'object') {
+        if (mp_data?.status) sendOrderEmails(data);
+
         const hasNoMercadoPagoData = !data?.mp_data;
         const isStatusMismatched = data.status !== data.mp_data?.status;
         
