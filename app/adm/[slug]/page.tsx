@@ -93,11 +93,11 @@ const Adm: FC = () => {
             <StyledForm key='order' form={form} initialValues={{ status }} onFinish={onFinish}>
               <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
               <InfoField>
-                <p>Order №</p>
-                <p>{_id}</p>
+                <p>Order №:</p>
+                <Link href={`${process.env.BACK_URL}/checkout?order_id=${_id}`}>{_id}</Link>
               </InfoField>
               <InfoField>
-                <p>Payment</p>
+                <p>Payment type:</p>
                 <p>{form_data?.payment_method}</p>
               </InfoField>
               <InfoField>
