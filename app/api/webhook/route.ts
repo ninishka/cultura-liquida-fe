@@ -7,7 +7,7 @@ export async function POST(request) {
     console.log(request)
     ///////////////
     const result = await request.json();
-    // console.log(result)
+    console.log(result)
 
     const { action, data, type, live_mode, date_created } = result;
 
@@ -65,12 +65,12 @@ export async function POST(request) {
     const sha = hmac.digest('hex');
 
     if (sha === hash) {
-      return NextResponse.json({ authenticated: true }, { status: 200 });
+      return NextResponse.json({ authenticated: true }, { status: 201 });
     } else {
-      return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
+      return NextResponse.json({ error: 'Invalid password' }, { status: 200 });
     }
 
   } catch (error) {
-    return NextResponse.json({ error: 'Authentication failed' }, { status: 500 });
+    return NextResponse.json({ error: 'Authentication failed' }, { status: 200 });
   }
 }
