@@ -145,6 +145,18 @@ const Adm: FC = () => {
                 ))}
               </InfoField>
             </StyledForm>
+            {order?.mp_data?.payment_ids?.length && (
+              <StyledForm key='payments' form={form} initialValues={{ status }} onFinish={onFinish}>
+                <InfoField style={{ display: 'flex', flexDirection: 'column' }}>
+                  <p>Payments ids</p>
+                  {order?.mp_data?.payment_ids.map(i => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between'}}>
+                      <p>{i}</p>
+                    </div>
+                  ))}
+                </InfoField>
+              </StyledForm>
+            )}
             <div style={{ display: 'flex', justifyContent: 'center', margin: '20px'}}>
               <Button onClick={deleteOrder} loading={deleting}> DELETE ORDER </Button>
             </div>

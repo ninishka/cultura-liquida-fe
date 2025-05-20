@@ -14,6 +14,8 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
     options: { timeout: 5000, idempotencyKey: orderId }
   });
   const preference = new Preference(client);
+  console.log('CLIENT', client)
+
 
   // All form fields: name, surname, document_type, id_number, country, address, state, city, phone, email, notes
   const { name, surname, email, phone, id_number, document_type } = formValues
@@ -50,7 +52,7 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
     },
     external_reference: `${orderId}`,
     statement_descriptor: 'Cultura Líquida',  // i do not see that in MP, maybe payer in his acc can
-    // notification_url: "https://www.your-site.com/ipn",
+    notification_url: `${process.env.BACK_URL}/api/webhook`,
   };
 
   // console.log('preferenceBody', preferenceBody)
