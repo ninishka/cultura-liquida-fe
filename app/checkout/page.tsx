@@ -36,7 +36,7 @@ const CheckoutPage: FC = () => {
   const orderIdParam = searchParams?.get('order_id')
   // const isInitialMercado = searchParams?.get('external_reference') 
   // just any param from MP show us that user was redirected from MP or he maybe copied link and used it again but it is ok
-  const isInitialMercado = searchParams?.get('site_id')
+  // // const isInitialMercado = searchParams?.get('site_id')
 
   // isLoading only for first request
   // isFetching for every request if using refetch()
@@ -51,58 +51,58 @@ const CheckoutPage: FC = () => {
 
   useEffect(() => {
     // setPaymentOption(data?.form_data?.payment_method) // TODO avoid stupid isInitialMercado const
-    console.log('useEffect')
+    console.log('useEffect ORDER DATA CHECKOUT', data)
     if(data?.status) {
       console.log('data?.status UE ', data?.status);
       setRespStatus(data?.status)
     }
 
-    const mp_data = keysFromMP.reduce((acc, key) => {
-      acc[key] = searchParams?.get(key) || "Not provided";
-      return acc;
-    }, {} as Record<string, string>); 
+    // // const mp_data = keysFromMP.reduce((acc, key) => {
+    // //   acc[key] = searchParams?.get(key) || "Not provided";
+    // //   return acc;
+    // // }, {} as Record<string, string>); 
 
     // after MP redirect back - it sends params in url
     // this params need to be delivered in db
-    if (isInitialMercado) {
-      console.log('isInitialMercado: ', isInitialMercado);
-      const fetchData = async () => {
-        try {
-          const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              orderId: orderIdParam,
-              updatedData: {
-                mp_data,
-                status: mp_data?.status
-              },
-            }),
-          });
+    // // if (isInitialMercado) {
+    // //   console.log('isInitialMercado: ', isInitialMercado);
+    // //   const fetchData = async () => {
+    // //     try {
+    // //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
+    // //         method: 'PUT',
+    // //         headers: {
+    // //           'Content-Type': 'application/json',
+    // //         },
+    // //         body: JSON.stringify({
+    // //           orderId: orderIdParam,
+    // //           updatedData: {
+    // //             mp_data,
+    // //             status: mp_data?.status
+    // //           },
+    // //         }),
+    // //       });
 
-          if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
+    // //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
 
-          const updatedOrder = await response.json();
-          setRespStatus(updatedOrder?.status)
-        } catch (error) {
-          console.error('Error updating order:', error);
-        }
-      };
+    // //       const updatedOrder = await response.json();
+    // //       setRespStatus(updatedOrder?.status)
+    // //     } catch (error) {
+    // //       console.error('Error updating order:', error);
+    // //     }
+    // //   };
 
-      // if data exist, but mp_data absent or status mismatched
-      if (data && typeof data === 'object') {
-        if (mp_data?.status) sendOrderEmails(data);
+    // //   // if data exist, but mp_data absent or status mismatched
+    // //   if (data && typeof data === 'object') {
+    // //     if (mp_data?.status) sendOrderEmails(data);
 
-        const hasNoMercadoPagoData = !data?.mp_data;
-        const isStatusMismatched = data.status !== data.mp_data?.status;
+    // //     const hasNoMercadoPagoData = !data?.mp_data;
+    // //     const isStatusMismatched = data.status !== data.mp_data?.status;
         
-        if (hasNoMercadoPagoData || isStatusMismatched) {
-          fetchData()
-        }
-      }
-    }
+    // //     if (hasNoMercadoPagoData || isStatusMismatched) {
+    // //       fetchData()
+    // //     }
+    // //   }
+    // // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]); 
   // searchParams is not dynamic, so no need to put it in dependencies

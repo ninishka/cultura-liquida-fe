@@ -93,11 +93,11 @@ const Adm: FC = () => {
             <StyledForm key='order' form={form} initialValues={{ status }} onFinish={onFinish}>
               <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
               <InfoField>
-                <p>Order №</p>
-                <p>{_id}</p>
+                <p>Order №:</p>
+                <Link href={`${process.env.BACK_URL}/checkout?order_id=${_id}`}>{_id}</Link>
               </InfoField>
               <InfoField>
-                <p>Payment</p>
+                <p>Payment type:</p>
                 <p>{form_data?.payment_method}</p>
               </InfoField>
               <InfoField>
@@ -145,6 +145,18 @@ const Adm: FC = () => {
                 ))}
               </InfoField>
             </StyledForm>
+            {order?.mp_data?.payment_ids?.length && (
+              <StyledForm key='payments' form={form} initialValues={{ status }} onFinish={onFinish}>
+                <InfoField style={{ display: 'flex', flexDirection: 'column' }}>
+                  <p>Payments ids</p>
+                  {order?.mp_data?.payment_ids.map(i => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between'}}>
+                      <p>{i}</p>
+                    </div>
+                  ))}
+                </InfoField>
+              </StyledForm>
+            )}
             <div style={{ display: 'flex', justifyContent: 'center', margin: '20px'}}>
               <Button onClick={deleteOrder} loading={deleting}> DELETE ORDER </Button>
             </div>
