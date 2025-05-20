@@ -6,7 +6,7 @@ import { useGetProductQuery } from "@/lib/redux/slices/api"
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
-import { updateOrderCheckout } from '@/helpers/network';
+import { processPaymentInfoAsync } from '@/helpers/network';
 import { formatPrice } from '@/helpers/formats'
 import { formatDate } from '@/helpers/formats'
 import { keysFromMP } from '@/helpers/data';
@@ -35,7 +35,7 @@ import {
 const CheckoutPage: FC = () => {
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
-  const isInitialMercado = searchParams?.get('external_reference') 
+  const orderPaid = searchParams?.get('payment_id') 
 
   const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery({ orderId: orderIdParam });
   const [respStatus, setRespStatus] = useState(data?.status)
@@ -50,11 +50,11 @@ const CheckoutPage: FC = () => {
       return acc;
     }, {} as Record<string, string>); 
 
-    if (isInitialMercado && data && typeof data === 'object') {
+    if (orderPaid && data && typeof data === 'object') {
       const hasNoMercadoPagoData = !data?.mp_data;
       const isStatusMismatched = data.status !== mp_data?.status;
-      
-      if (hasNoMercadoPagoData || isStatusMismatched) updateOrderCheckout(orderIdParam, mp_data, setRespStatus);
+       
+      if (hasNoMercadoPagoData && isStatusMismatched) processPaymentInfoAsync(orderPaid, setRespStatus)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]); 
