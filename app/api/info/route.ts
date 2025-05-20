@@ -13,7 +13,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.ACCESSTOKEN_TEST}`,
+        'Authorization': `Bearer ${process.env.ACCESSTOKEN}`,
       },
     });
 

@@ -29,16 +29,6 @@ const Formation: FC<FormationProps> = ({ formationData, error }) => {
 
   return (
     <FormationSection>
-      <button
-        onClick={async () => {
-          console.log('fetch info start');
-          const res = await fetch('/api/info?id=111941112578');
-          const data = await res.json();
-          console.log('data:', data);
-        }}
-      >
-        111941112578
-      </button>
       <ContentWrapper>
         <TitleFrame>
           {/* <p>{filterdContent?.[0]?.stock}</p> */}
