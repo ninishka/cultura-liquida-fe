@@ -6,9 +6,10 @@ import { useGetProductQuery } from "@/lib/redux/slices/api"
 import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
+import { updateOrderCheckout } from '@/helpers/network';
 import { formatPrice } from '@/helpers/formats'
 import { formatDate } from '@/helpers/formats'
-import { sendOrderEmails, keysFromMP } from '@/helpers/data';
+import { keysFromMP } from '@/helpers/data';
 
 import RightPanelComponent from './RightPanelComponent'
 
@@ -34,81 +35,31 @@ import {
 const CheckoutPage: FC = () => {
   const searchParams = useSearchParams();
   const orderIdParam = searchParams?.get('order_id')
-  // const isInitialMercado = searchParams?.get('external_reference') 
-  // just any param from MP show us that user was redirected from MP or he maybe copied link and used it again but it is ok
-  // // const isInitialMercado = searchParams?.get('site_id')
+  const isInitialMercado = searchParams?.get('external_reference') 
 
-  // isLoading only for first request
-  // isFetching for every request if using refetch()
-  // status also can be usefull here - shows refetch stages
   const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery({ orderId: orderIdParam });
   const [respStatus, setRespStatus] = useState(data?.status)
   
-  // const [paymentOption, setPaymentOption] = useState('') // TODO avoid stupid isInitialMercado const
-  // const isInitialMercado2 = paymentOption === 'mercado' && !data?.mp_data // TODO avoid stupid isInitialMercado const
-
   const { data: productData, isLoading: isLoadingProduct } = useGetProductQuery('');
 
   useEffect(() => {
-    // setPaymentOption(data?.form_data?.payment_method) // TODO avoid stupid isInitialMercado const
-    console.log('useEffect ORDER DATA CHECKOUT', data)
-    if(data?.status) {
-      console.log('data?.status UE ', data?.status);
-      setRespStatus(data?.status)
+    if (data?.status) setRespStatus(data?.status)
+
+    const mp_data = keysFromMP.reduce((acc, key) => {
+      acc[key] = searchParams?.get(key) || "Not provided";
+      return acc;
+    }, {} as Record<string, string>); 
+
+    if (isInitialMercado && data && typeof data === 'object') {
+      const hasNoMercadoPagoData = !data?.mp_data;
+      const isStatusMismatched = data.status !== mp_data?.status;
+      
+      if (hasNoMercadoPagoData || isStatusMismatched) updateOrderCheckout(orderIdParam, mp_data, setRespStatus);
     }
-
-    // // const mp_data = keysFromMP.reduce((acc, key) => {
-    // //   acc[key] = searchParams?.get(key) || "Not provided";
-    // //   return acc;
-    // // }, {} as Record<string, string>); 
-
-    // after MP redirect back - it sends params in url
-    // this params need to be delivered in db
-    // // if (isInitialMercado) {
-    // //   console.log('isInitialMercado: ', isInitialMercado);
-    // //   const fetchData = async () => {
-    // //     try {
-    // //       const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-    // //         method: 'PUT',
-    // //         headers: {
-    // //           'Content-Type': 'application/json',
-    // //         },
-    // //         body: JSON.stringify({
-    // //           orderId: orderIdParam,
-    // //           updatedData: {
-    // //             mp_data,
-    // //             status: mp_data?.status
-    // //           },
-    // //         }),
-    // //       });
-
-    // //       if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
-
-    // //       const updatedOrder = await response.json();
-    // //       setRespStatus(updatedOrder?.status)
-    // //     } catch (error) {
-    // //       console.error('Error updating order:', error);
-    // //     }
-    // //   };
-
-    // //   // if data exist, but mp_data absent or status mismatched
-    // //   if (data && typeof data === 'object') {
-    // //     if (mp_data?.status) sendOrderEmails(data);
-
-    // //     const hasNoMercadoPagoData = !data?.mp_data;
-    // //     const isStatusMismatched = data.status !== data.mp_data?.status;
-        
-    // //     if (hasNoMercadoPagoData || isStatusMismatched) {
-    // //       fetchData()
-    // //     }
-    // //   }
-    // // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]); 
-  // searchParams is not dynamic, so no need to put it in dependencies
-
+  
   if (isLoading || isLoadingProduct) return <div>Loading order...</div>;
-  // if (error) return <div>Error loading order: {error.message}</div>;
 
   const handleRefetch = () => {
     refetch()
@@ -171,21 +122,3 @@ const CheckoutPage: FC = () => {
 }
 
 export default CheckoutPage
-
-
-
-// collection_status: approved
-// payment_id: 1328778667
-// status: approved   
-// payment_type: prepaid_card
-// merchant_order_id: 25920426760
-// preference_id: 1700322474-0c961e86-e450-4eb7-ab35-0c93834e5ba0
-// site_id: MCO
-// processing_mode: aggregator
-// merchant_account_id: null
-// .... HOW TO MAKE addition fields MP https://www.mercadopago.com.co/developers/en/docs/checkout-pro/checkout-customization/preferences
-
-// success with init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c&collection_id=1330524669&collection_status=approved&payment_id=1330524669&status=approved&external_reference=678b5227247caa11d0df094c&payment_type=credit_card&merchant_order_id=27422355172&preference_id=1700322474-2e53f394-4c6d-40f3-a688-8ba69a953c8b&site_id=MCO&processing_mode=aggregator&merchant_account_id=null
-// success without init MP http://localhost:3000/checkout?order_id=678b5227247caa11d0df094c
-// failed (I just change status in db) http://localhost:3000/checkout?order_id=67865ffc4440e5466f9bcb0d
-// pending http://localhost:3000/checkout?order_id=6787cf02353ec4d4bf6c72ad 
