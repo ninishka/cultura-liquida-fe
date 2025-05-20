@@ -21,64 +21,54 @@ export const fetcher = async (method, path, body, action) => {
   }
 };
 
-const checkPaymentStatus = async (orderData) => {
-    try {
-      if (orderData?.mp_data?.payment_id) {
-        const paymentId = orderData.mp_data.payment_id;
-        console.log(`Checking payment status for payment ID: ${paymentId}`);
-        
-        const infoResponse = await fetch(`/api/info?id=${paymentId}`);
-        
-        if (!infoResponse.ok) {
-          console.error(`Error fetching payment info: ${infoResponse.status}`);
-          return;
-        }
-        
-        const info = await infoResponse.json();
-        console.log(`Payment info received:`, info);
-        
-        if (info?.status === 'approved') {
-          console.log('Payment approved, sending order email');
-          sendOrderEmails(orderData);
-          console.log('Order email sent successfully');
-        } else {
-          console.log(`Payment status is not approved: ${info?.status}`);
-        }
-      }
-    } catch (error) {
-      console.error('Error checking payment status:', error);
-    }
-};
-
-export const updateOrderCheckout = async (orderIdParam, mp_data, setRespStatus) => {
+export async function processPaymentInfoAsync(resourceId: string, setRespStatus) {
   try {
-    console.log('Updating order with MP data');
-    
-    const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
+    const infoResponse = await fetch(`/api/info?id=${resourceId}`);
+    if (!infoResponse.ok) {
+      throw new Error(`Failed to fetch payment info: ${infoResponse.status}`);
+    }
+    const info = await infoResponse.json();
+    console.log('INFO DATA', info)
+
+    const updateResponse = await fetch(`/api/orders?orderId=${info.external_reference}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        orderId: orderIdParam,
+        orderId: info.external_reference,
         updatedData: {
-          mp_data,
-          status: mp_data?.status
+          mp_data: {
+            amount: info.net_amount,
+            payment_id: info.id, 
+            status: info.status,
+            payment_type: info.payment_type_id,
+            collector_id: info.collector_id,
+            date_created: info.date_created,
+            merchant_account_id: info.merchant_account_id,
+            processing_mode: info.processing_mode,
+            merchant_order_id: info.order.id
+          },
+          status: info.status
         },
       }),
     });
 
-    if (!response.ok) {
-      throw new Error(`Failed to update order: ${response.status}`);
+    if (!updateResponse.ok) {
+      throw new Error(`Failed to update order: ${updateResponse.status}`);
     }
-
-    const updatedOrder = await response.json();
+    const updatedOrder = await updateResponse.json();
     setRespStatus(updatedOrder?.status);
     
-    console.log('Order updated, now checking payment status');
+    console.log(`Successfully processed payment ${info.id} for order ${info.external_reference}`);
     
-    await checkPaymentStatus(updatedOrder);
+    try {
+      const fullOrderResponse = await fetch(`/api/orders?orderId=${info.external_reference}`);
+      const data = await fullOrderResponse.json();
+      console.log('UPDATED ORDER DATA FOR EMAIL', data)
+      sendOrderEmails(data)
+    } catch (err) {
+      console.error('Error sending email from webhook:', err);
+    }
   } catch (error) {
-    console.error('Error in fetchData:', error);
+    console.error('Error in processPaymentInfoAsync:', error);
   }
-};
+}
