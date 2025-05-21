@@ -7,10 +7,11 @@ import img404 from '@/app/icons/404error.svg'
 import styled from 'styled-components'
 import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
+import LoadingComponent from '@/components/LoadingComponent';
 
 const NotFound: FC = () => {
   const { data, isLoading } = useGetProductQuery('');
-  if (isLoading) return ''
+  if (isLoading) return <LoadingComponent size="small" text="" />;
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center'}}>

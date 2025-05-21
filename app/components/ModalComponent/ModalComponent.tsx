@@ -51,8 +51,8 @@ const ModalComponent = ({data}) => {
       await handlePayment(orderData, filteredArray, formValues, paymentOption, router, setPreferenceId)
     } catch (error) {
       console.error('Error processing:', error);
-    } finally {
       setLoading(false);
+    } finally {
       setShouldShowBuyButton(false)
     }
   };

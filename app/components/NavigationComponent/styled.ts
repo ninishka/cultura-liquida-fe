@@ -8,11 +8,11 @@ import type { NavigationProps } from '@/types/types'
 export const UlItself = styled.ul<NavigationProps>`
   display: flex;
   align-items: center;
+  padding: 0px;
 
   @media (max-width: 850px) {
     display: ${({showMenu}) => showMenu ? 'block' : 'none'};
     flex-direction: ${({ isfooter }) => isfooter ? 'row' : 'column'};
-    padding: 0px;
   }
 `
 

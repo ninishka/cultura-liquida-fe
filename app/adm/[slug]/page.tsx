@@ -4,78 +4,56 @@ import React, { FC, useState } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import { Form, Select, Button } from 'antd'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Link from 'next/link'
-import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
+import { 
+  useGetOrderByIdQuery,
+  useDeleteOrderMutation,
+  useUpdateOrderMutation,
+  useSendOrderEmailMutation
+} from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
-import { sendOrderEmails } from '@/helpers/data';
+import { IOrder } from '@/models/Order';
+import LoadingComponent from '@/components/LoadingComponent';
 
 const Adm: FC = () => {
   const [form] = Form.useForm()
   const router = useRouter()
   const searchParams = useSearchParams();
-  const orderIdParam = searchParams?.get('order_id');
+  const orderIdParam = searchParams?.get('order_id') || '';
   const { data, isLoading, refetch, isFetching } = useGetOrderByIdQuery({ orderId: orderIdParam });
+  
+  const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();
+  const [deleteOrder, { isLoading: isDeleting }] = useDeleteOrderMutation();
+  const [sendOrderEmail, { isLoading: isSendingEmail }] = useSendOrderEmailMutation();
+  const [isDeletingOrder, setIsDeletingOrder] = useState(false);
 
-  const [updating, setUpdating] = useState(false)
-  const [deleting, setDeleting] = useState(false)
+  if (isLoading) return <LoadingComponent text="Cargando pedido..." />;
 
-  if (isLoading) return <div>Loading order...</div>;
-
-  const onFinish = async ({status}) => {
-    setUpdating(true)
+  const onFinish = async ({status}: {status: string}) => {
     try {
-      const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderId: orderIdParam,
-          updatedData: {
-            status,
-          },
-        }),
-      });
-  
-      if (!response.ok) throw new Error(`Failed to update order: ${response.status}`);
-  
-      const updatedOrder = await response.json();
-      sendOrderEmails({...data, status})
+      await updateOrder({
+        orderId: orderIdParam,
+        updatedData: { status }
+      }).unwrap();
 
-      console.log('Updated Order:', updatedOrder);
+      console.log('Order updated, sending email');
+      sendOrderEmail(orderIdParam);
     } catch (error) {
       console.error('Error updating order:', error);
-      throw new Error('Failed to update order');
-    } finally {
-      setUpdating(false)
     }
   }
 
-  const deleteOrder = async () => {
-    setDeleting(true)
+  const handleDelete = async () => {
     try {
-      const response = await fetch(`/api/orders?orderId=${orderIdParam}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.message || `Failed to delete order: ${response.status}`);
-      }
-  
-      const result = await response.json();
-      console.log('Order deleted:', result);
-  
-      router.push('/adm'); 
+      setIsDeletingOrder(true);
+      
+      await deleteOrder({ orderId: orderIdParam }).unwrap();
+      
+      router.push('/adm');
     } catch (error) {
       console.error('Error deleting order:', error);
-      throw new Error('Failed to delete order');
-    } finally {
-      setDeleting(false)
+      setIsDeletingOrder(false);
     }
   };
 
@@ -83,81 +61,79 @@ const Adm: FC = () => {
     refetch()
   };
   
+  if (!data) return <div>No order data found</div>;
+  const order = data as IOrder;
+  
+  const { _id, status, totalCost, updatedAt, form_data, products } = order;
+  const { name, surname } = form_data || {};
+  
   return (
-    <>
-      {[data].map(order => { 
-        const { _id, status, totalCost, updatedAt, form_data: { name, surname }, products, form_data } = order;
-
-        return (
-          <div key={status}>
-            <StyledForm key='order' form={form} initialValues={{ status }} onFinish={onFinish}>
-              <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
-              <InfoField>
-                <p>Order №:</p>
-                <Link href={`${process.env.BACK_URL}/checkout?order_id=${_id}`}>{_id}</Link>
-              </InfoField>
-              <InfoField>
-                <p>Payment type:</p>
-                <p style={{ textTransform: 'capitalize' }}>{form_data?.payment_method}</p>
-              </InfoField>
-              {order?.mp_data?.payment_id && (
-                <InfoField>
-                  <p>Payment id:</p>
-                  <p>{order?.mp_data?.payment_id}</p>
-                </InfoField>
-              )}
-              <InfoField>
-                <p>Name:</p>
-                <p>{name}</p>
-              </InfoField>
-              <InfoField>
-                <p>Surname:</p>
-                <p>{surname}</p>
-              </InfoField>
-              <Form.Item
-                label={<p style={{ color: 'white'}}>Status :</p>} 
-                name="status"
-                style={{ marginLeft: 5}}
-              >
-                <Select
-                  placeholder="Elige una opción..."
-                  style={{ marginLeft: 70, width: '80%'}}
-                  options={[
-                    { value: 'pending', label: 'Pending' },
-                    { value: 'approved', label: 'Approved' },
-                    { value: 'failed', label: 'Failed' },
-                  ]}
-                />
-              </Form.Item>
-              <InfoField>
-                <p>Total:</p>
-                <p>{totalCost}</p>
-              </InfoField>
-              <InfoField>
-                <p>Updated at:</p>
-                <p>{updatedAt}</p>
-              </InfoField>
-              <Button htmlType="submit" loading={updating}> UPDATE </Button>
-            </StyledForm>
-            <StyledForm key='products' form={form} initialValues={{ status }} onFinish={onFinish}>
-              <InfoField style={{ display: 'flex', flexDirection: 'column' }}>
-                <p>Ordered products</p>
-                {products.map(({id, quantity, title, type, size}) => (
-                  <div key={id} style={{ display: 'flex', justifyContent: 'space-between'}}>
-                    <p>Quantity: {quantity}</p>
-                    <p>{title}</p>
-                    <p>{size ? (type + ' ' + size) : type }</p>
-                  </div>
-                ))}
-              </InfoField>
-            </StyledForm>
-            <div style={{ display: 'flex', justifyContent: 'center', margin: '20px'}}>
-              <Button onClick={deleteOrder} loading={deleting}> DELETE ORDER </Button>
+    <div style={{ minHeight: '70.6vh' }} key={status}>
+      <StyledForm key='order' form={form} initialValues={{ status }} onFinish={onFinish}>
+        <SyncOutlinedStyled onClick={handleRefetch} loading={isFetching} style={{ margin: '0 auto 10px'}}/>
+        <InfoField style={{ alignItems: 'center' }}>
+          <p>Order №:</p>
+          <Link href={`${process.env.BACK_URL}/checkout?order_id=${_id}`}>{_id}</Link>
+        </InfoField>
+        <InfoField>
+          <p>Payment type:</p>
+          <p style={{ textTransform: 'capitalize' }}>{form_data?.payment_method}</p>
+        </InfoField>
+        {order.mp_data && order.mp_data.payment_id && (
+          <InfoField>
+            <p>Payment id:</p>
+            <p>{order.mp_data.payment_id}</p>
+          </InfoField>
+        )}
+        <InfoField>
+          <p>Name:</p>
+          <p>{name}</p>
+        </InfoField>
+        <InfoField>
+          <p>Surname:</p>
+          <p>{surname}</p>
+        </InfoField>
+        <Form.Item
+          label={<p style={{ color: 'white'}}>Status :</p>} 
+          name="status"
+          style={{ marginLeft: 5}}
+        >
+          <Select
+            placeholder="Elige una opción..."
+            style={{ marginLeft: 70, width: '80%'}}
+            options={[
+              { value: 'pending', label: 'Pending' },
+              { value: 'approved', label: 'Approved' },
+              { value: 'failed', label: 'Failed' },
+            ]}
+          />
+        </Form.Item>
+        <InfoField>
+          <p>Total:</p>
+          <p>{totalCost}</p>
+        </InfoField>
+        <InfoField>
+          <p>Updated at:</p>
+          <p>{updatedAt instanceof Date ? updatedAt.toLocaleDateString() : updatedAt}</p>
+        </InfoField>
+        <Button htmlType="submit" loading={isUpdating || isSendingEmail}> UPDATE </Button>
+      </StyledForm>
+      <ProductSection key='products'>
+        <p style={{margin: '10px auto 20px'}}>Ordered products</p>
+        <InfoField style={{ display: 'flex', flexDirection: 'column' }}>
+          {products && products.map((product: any) => (
+            <div key={product.id} style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid' }}>
+              <p>Quantity: {product.quantity}</p>
+              <p>{product.title}</p>
+              <p>{product.size ? (product.type + ' ' + product.size) : product.type }</p>
             </div>
-          </div>
-        )
-      })}
-    </>
+          ))}
+        </InfoField>
+      </ProductSection>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '20px'}}>
+        <Button onClick={handleDelete} loading={isDeleting || isDeletingOrder}> DELETE ORDER </Button>
+      </div>
+    </div>
   );
 }
 
@@ -169,18 +145,27 @@ const OrderItem = styled(Link)`
 `
 
 const InfoField = styled.div`
-  margin: 5px;
+  margin: 0 5px;
   color: white;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
 `
 
-const StyledForm = styled(Form)`
+const wrapper = css`
   display: flex;
   flex-direction: column;
   margin: 40px auto;
   max-width: 500px;
   border: 1px solid #F2C94C;
   padding: 30px;
+`
+
+const StyledForm = styled(Form)`
+  ${wrapper}
+`
+
+const ProductSection = styled.div`
+  ${wrapper}
+  max-width: 436.5px;
 `

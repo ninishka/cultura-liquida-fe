@@ -5,6 +5,7 @@ import { complexData2 } from '@/app/data'
 import Counter from '../Counter/Counter'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { uniqueTitles } from '@/app/components/helpers'
+import LoadingComponent from '@/components/LoadingComponent'
 
 import imgC9 from '@/app/icons/CL-703.png'
 import imgC10 from '@/app/icons/CL-71M.png'
@@ -46,7 +47,7 @@ const Complex: FC = () => {
   const { data, isLoading } = useGetProductQuery('');
   const router = useRouter()
   
-  if (isLoading) return ''
+  if (isLoading) return <LoadingComponent size="small" text="" />
 
   const filterdContent = complexData2.filter(({ id }) => id === checkedState)
   const idCart = filterdContent?.[0]?.title + filterdContent?.[0]?.id

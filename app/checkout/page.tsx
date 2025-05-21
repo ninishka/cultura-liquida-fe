@@ -3,10 +3,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { useGetProductQuery } from "@/lib/redux/slices/api"
-import { useGetOrderByIdQuery } from "@/lib/redux/slices/orderApi";
+import { useGetOrderByIdQuery, useProcessPaymentInfoMutation } from "@/lib/redux/slices/orderApi";
+import { IOrder } from '@/models/Order';
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
-import { processPaymentInfoAsync } from '@/helpers/network';
+import LoadingComponent from '@/components/LoadingComponent';
 import { formatPrice } from '@/helpers/formats'
 import { formatDate } from '@/helpers/formats'
 import { keysFromMP } from '@/helpers/data';
@@ -37,9 +38,12 @@ const CheckoutPage: FC = () => {
   const orderIdParam = searchParams?.get('order_id')
   const orderPaid = searchParams?.get('payment_id') 
 
-  const { data, isLoading, error , refetch, isFetching, status} = useGetOrderByIdQuery({ orderId: orderIdParam });
-  const [respStatus, setRespStatus] = useState(data?.status)
+  const { data: order, isLoading, error, refetch, isFetching } = useGetOrderByIdQuery({ orderId: orderIdParam });
+  const data = order as IOrder;
   
+  const [respStatus, setRespStatus] = useState<string | undefined>(undefined)
+  const [processPaymentInfo] = useProcessPaymentInfoMutation()
+
   const { data: productData, isLoading: isLoadingProduct } = useGetProductQuery('');
 
   useEffect(() => {
@@ -54,25 +58,28 @@ const CheckoutPage: FC = () => {
       const hasNoMercadoPagoData = !data?.mp_data;
       const isStatusMismatched = data.status !== mp_data?.status;
        
-      if (hasNoMercadoPagoData && isStatusMismatched) processPaymentInfoAsync(orderPaid, setRespStatus)
+      if (hasNoMercadoPagoData && isStatusMismatched) {
+        processPaymentInfo(orderPaid)
+          .unwrap()
+          .then(() => refetch())
+          .catch(error => console.error('Error proccessing order:', error))
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]); 
+  }, [order])
   
-  if (isLoading || isLoadingProduct) return <div>Loading order...</div>;
+  if (isLoading || isLoadingProduct) return <LoadingComponent fullScreen text="Cargando orden..." />;
 
   const handleRefetch = () => {
     refetch()
   };
 
-  // SHIPPING COST FROM ORDER
-
-  const formatedDate = formatDate(data?.updatedAt, 'es-ES')
+  const formatedDate = formatDate(String(data?.updatedAt), 'es-ES')
   const displayTotal = formatPrice(data?.totalCost, ' ')
 
   const formData = data?.form_data;
-  const t  = formData?.payment_method === 'transfer' && 'Transferencia a cuenta bancaria' 
-  const m  = formData?.payment_method === 'mercado' && 'Mercado Pago' 
+  const t = formData?.payment_method === 'transfer' && 'Transferencia a cuenta bancaria' 
+  const m = formData?.payment_method === 'mercado' && 'Mercado Pago' 
 
   return (
     <PageWrapper>
@@ -90,7 +97,6 @@ const CheckoutPage: FC = () => {
             <MPinfoItemsWrapper>
               <BankInfoBlockOrder>
                 <BankInfoText>Numero de pedido:</BankInfoText>
-                {/* <BankInfoNumber>{data?.mp_data?.payment_id}</BankInfoNumber> */}
                 <BankInfoNumber>{data?._id}</BankInfoNumber>
               </BankInfoBlockOrder>
               <BankInfoBlockOrder>
@@ -107,7 +113,7 @@ const CheckoutPage: FC = () => {
               </BankInfoBlockOrder>
             </MPinfoItemsWrapper>
             <ListItemsWrapperCheckout style={{ margin: '10px 20px 10px 10px'}}>
-              {data?.products?.map(props => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
+              {data?.products?.map((props: any) => <CartItemComponent key={props?.id || ''} {...props} isOrder /> )}
             </ListItemsWrapperCheckout>
             <>
               <ModalTitleCheckout style={{ textAlign: 'start', color: 'white', margin: '20px 0px 0px 10px', textTransform: 'uppercase' }}>Detalles de facturación</ModalTitleCheckout>
