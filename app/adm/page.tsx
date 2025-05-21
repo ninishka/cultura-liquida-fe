@@ -6,6 +6,7 @@ import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
 import { formatDate } from '@/helpers/formats'
 import { handleSort, getSortIndicator, getSortingData, fieldsForRender } from './admHelpers'
+import LoadingComponent from '@/components/LoadingComponent';
 import {
   AdmWrapper,
   Pagination,
@@ -29,7 +30,7 @@ const Adm: FC = () => {
     refetch()
   }, [])
    
-   if (isLoading) return 'Loading adm'
+  if (isLoading) return <LoadingComponent text="Cargando pedidos..." />;
 
   const displayingData = getSortingData(data, sortConfig)
   const handleRefetch = () => {

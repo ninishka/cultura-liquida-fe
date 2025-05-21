@@ -7,6 +7,7 @@ import { productContentComponents } from '@/app/data'
 import { getActiveComponent } from '@/app/components/helpers'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { toggleShowMenu } from '@/lib/redux/slices/cartSlice'
+import LoadingComponent from '@/components/LoadingComponent';
 
 import Formation from '@/app/components/Formation/Formation'
 import Benefits from '@/app/components/Benefits/Benefits'
@@ -29,7 +30,7 @@ const ProductSections: FC = () => {
 
   const staticData = productContentComponents.filter(({itemUrl}) => slug?.[0]?.includes(itemUrl))
 
-  if (!data) return 'Loading...'
+  if (!data) return <LoadingComponent fullScreen text="Cargando productos..." />
 
   const f = {...getActiveComponent(data, slug)}
 
