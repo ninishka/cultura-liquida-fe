@@ -5,7 +5,6 @@ import { ProductG, UpdateProductRequest } from '@/types/types';
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const products: ProductG[] = await getProduct();
-    console.log('NextResponse ROUTE /products')
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
     console.error('GET Error fetching products:', error);

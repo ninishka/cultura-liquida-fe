@@ -13,7 +13,7 @@ export const sendEmails = async (data): Promise<void> => {
         react: OrderConfirmationEmail({ order: data }),
       }).catch((err) => console.error('Error sending to client:', err));
   
-      console.log('1st resend.emails')
+      // console.log('1st resend.emails')
 
       resend.emails.send({
         from: 'Cultura Liquida <mailer@cultura-liquida.com>',
@@ -22,7 +22,7 @@ export const sendEmails = async (data): Promise<void> => {
         react: OrderConfirmationEmailDetailed({ order: data }),
       }).catch((err) => console.error('Error sending to vendor:', err));
 
-      console.log('2nd resend.emails')
+      // console.log('2nd resend.emails')
 
     } catch (error) {
       console.error('Unexpected error in sendEmails:', error);

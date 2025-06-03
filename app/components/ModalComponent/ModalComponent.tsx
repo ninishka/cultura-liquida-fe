@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
 import { toggleShowCart, toggleSetMercado } from '@/lib/redux/slices/cartSlice'
-import img55 from '@/app/icons/modalbackgroung.png'
+import img55 from '@/app/icons/modalbg.svg'
 import { initMercadoPago } from '@mercadopago/sdk-react'
 import { updateExistingProduct, createNewOrder, sendOrderEmails, handlePayment } from '@/helpers/data';
 import CartItemComponent from './CartItemComponent/CartItemComponent'

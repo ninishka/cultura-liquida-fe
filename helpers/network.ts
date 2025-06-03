@@ -28,7 +28,6 @@ export async function processPaymentInfoAsync(resourceId: string, setRespStatus)
       throw new Error(`Failed to fetch payment info: ${infoResponse.status}`);
     }
     const info = await infoResponse.json();
-    console.log('INFO DATA', info)
 
     const updateResponse = await fetch(`/api/orders?orderId=${info.external_reference}`, {
       method: 'PUT',
@@ -58,12 +57,11 @@ export async function processPaymentInfoAsync(resourceId: string, setRespStatus)
     const updatedOrder = await updateResponse.json();
     setRespStatus(updatedOrder?.status);
     
-    console.log(`Successfully processed payment ${info.id} for order ${info.external_reference}`);
+    // console.log(`Successfully processed payment ${info.id} for order ${info.external_reference}`);
     
     try {
       const fullOrderResponse = await fetch(`/api/orders?orderId=${info.external_reference}`);
       const data = await fullOrderResponse.json();
-      console.log('UPDATED ORDER DATA FOR EMAIL', data)
       sendOrderEmails(data)
     } catch (err) {
       console.error('Error sending email from webhook:', err);

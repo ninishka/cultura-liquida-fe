@@ -13,7 +13,7 @@ export const createPreference = async (orderId, shippingCost, cartItems, formVal
     options: { timeout: 5000, idempotencyKey: orderId }
   });
   const preference = new Preference(client);
-  console.log('CLIENT', client)
+  // console.log('CLIENT', client)
 
   // All form fields: name, surname, document_type, id_number, country, address, state, city, phone, email, notes
   const { name, surname, email, phone, id_number, document_type } = formValues

@@ -67,7 +67,6 @@ export const phoneNumberValidator = [
       }
 
       if (cleanedValue.length < 10 || cleanedValue.length > 12) {
-        console.log('if')
         // valid variands: 
         // 3107217798
         // 03107217798

@@ -1,5 +1,4 @@
 export const handleSort = (key, sortConfig, setSortConfig) => {
-    console.log('key: ', key);
     let direction = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
       direction = 'desc';
@@ -18,7 +17,6 @@ export const handleSort = (key, sortConfig, setSortConfig) => {
   export const getSortingData = (data, sortConfig): any[] => {
     return [...data].sort((a, b) => {
       if (sortConfig.key) {
-        console.log('sortConfig.key: ', sortConfig.key);
         let aValue
         let bValue
         

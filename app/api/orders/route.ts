@@ -5,7 +5,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const { userId, products, form_data } = await request.json();
     const newOrder = await createOrder(userId, products, form_data);
-    console.log('POST newOrder', newOrder);
 
     return NextResponse.json(newOrder, { status: 201 });
   } catch (error) {
@@ -51,7 +50,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 export async function PUT(request: NextRequest): Promise<NextResponse> {
   try {
     const { orderId, updatedData } = await request.json();
-    console.log('updatedData', updatedData)
 
     if (!orderId || !updatedData) {
       return NextResponse.json({ error: 'Missing orderId or updatedData' }, { status: 400 });

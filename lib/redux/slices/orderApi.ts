@@ -59,7 +59,6 @@ export const ordersAPI = createApi({
       async onQueryStarted(orderId, { queryFulfilled }) {
         try {
           const { data: orderData } = await queryFulfilled;
-          console.log('SENDING EMAIL FOR ORDER DATA', orderData);
           await sendOrderEmails(orderData);
         } catch (err) {
           console.error('Error sending email:', err);
@@ -75,7 +74,6 @@ export const ordersAPI = createApi({
       async onQueryStarted(resourceId, { dispatch, queryFulfilled }) {
         try {
           const { data: info } = await queryFulfilled;
-          console.log('INFO DATA', info);
 
           const orderId = info.external_reference;
           const updatedData = {

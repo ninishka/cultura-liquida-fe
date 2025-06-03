@@ -5,7 +5,6 @@ import Product, { IProduct } from '@/models/Product'
 type UpdateProductData = Partial<IProduct>;
 
 const getProduct = async (): Promise<IProduct[]>  => {
-  console.log('getProduct starts')
   try {
       const products = await Product?.find<IProduct>()?.lean();
       const plainProducts = products.map(product => ({
