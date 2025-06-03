@@ -31,6 +31,7 @@ const Adm: FC = () => {
   }, [])
    
   if (isLoading) return <LoadingComponent text="Cargando pedidos..." />;
+  if (data === undefined) return 'No orders'
 
   const displayingData = getSortingData(data, sortConfig)
   const handleRefetch = () => {

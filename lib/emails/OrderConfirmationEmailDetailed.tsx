@@ -25,7 +25,6 @@ type OrderProps = {
 };
 
 const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
-  // console.log('order', order)
   const {
     _id,
     createdAt,
@@ -59,7 +58,7 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
   return (
     <Html>
       <Head />
-      <Preview>Confirmación de pedido - ¡Gracias por su compra!</Preview>
+      <Preview>Detalles del pedido</Preview>
       <Body style={styles.mainStyle}>
         <Container style={styles.containerStyle}>
           <Section style={styles.headerStyle}>
@@ -71,9 +70,7 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
               style={styles.logoStyle}
             />
           </Section>
-          <Heading style={styles.headingStyle}>Confirmación de pedido</Heading>
-          <Text style={styles.textStyle}>Detalles del pedido</Text>
-          
+          <Heading style={styles.headingStyle}>Detalles del pedido</Heading>
           <Section style={styles.sectionStyle}>
             <Text style={styles.textStyle}>
               <strong>Pedido:</strong>{' '}
@@ -103,7 +100,7 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
               <strong>Método de pago:</strong> {payment_method}
             </Text>
 
-            <Text style={{...styles.textStyle, textTransform: 'uppercase' }}>
+            <Text style={styles.textStyle}>
               <strong>Tipo de documento:</strong> {document_type}
             </Text>
 
@@ -150,37 +147,6 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
           >
             Ver detalles del pedido
           </Button>
-          <Section style={styles.contactSectionStyle}>
-            <Text style={styles.contactHeaderStyle}>
-              Si tiene alguna pregunta, no dude en responder a este correo electrónico o ponerse en contacto con nosotros:
-            </Text>
-            <Row>
-              <Column style={styles.columnStyle}>
-                <Link href="mailto:culturaliquidacol@gmail.com" style={styles.contactLinkStyle}>
-                  culturaliquidacol@gmail.com
-                </Link>
-              </Column>
-            </Row>
-            <Row>
-              <Column style={styles.columnStyle}>
-                <Link href="https://wa.me/573117662419" style={styles.contactLinkStyle}>
-                  Whatsapp
-                </Link>
-              </Column>
-            </Row>
-            <Row>
-              <Column style={styles.columnStyle}>
-                <Link href="https://t.me/cultura_liquida" style={styles.contactLinkStyle}>
-                  Telegram
-                </Link>
-              </Column>
-            </Row>
-          </Section>
-          <Text style={styles.footerStyle}>
-            ¡Gracias por tu compra!
-            <br />
-            Cultura Líquida
-          </Text>
         </Container>
       </Body>
     </Html>
