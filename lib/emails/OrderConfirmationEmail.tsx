@@ -24,7 +24,6 @@ type OrderProps = {
 };
 
 const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
-  // console.log('order', order)
   const {
     _id,
     createdAt,
