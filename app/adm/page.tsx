@@ -6,7 +6,7 @@ import { useGetOrderQuery } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
 import { formatDate } from '@/helpers/formats'
 import { handleSort, getSortIndicator, getSortingData, fieldsForRender } from './admHelpers'
-import LoadingComponent from '@/components/LoadingComponent';
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 import {
   AdmWrapper,
   Pagination,

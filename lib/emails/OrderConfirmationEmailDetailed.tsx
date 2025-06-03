@@ -19,6 +19,7 @@ import {
 } from "@react-email/components";
 import * as styles from './styles';
 
+
 type OrderProps = {
   order: IOrder;
 };
@@ -39,7 +40,10 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
       city,
       state,
       phone,
-      payment_method
+      payment_method,
+      document_type,
+      id_number,
+      email
     },
     mp_data
   } = order
@@ -68,10 +72,8 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
             />
           </Section>
           <Heading style={styles.headingStyle}>Confirmación de pedido</Heading>
-          <Text style={styles.textStyle}>Hola {customerName},</Text>
-          <Text style={styles.textStyle}>
-            ¡Gracias por tu pedido! Nos complace informarte que hemos recibido tu pedido y que ya lo estamos procesando.
-          </Text>
+          <Text style={styles.textStyle}>Detalles del pedido</Text>
+          
           <Section style={styles.sectionStyle}>
             <Text style={styles.textStyle}>
               <strong>Pedido:</strong>{' '}
@@ -85,19 +87,34 @@ const OrderConfirmationEmail: React.FC<OrderProps> = ({ order }) => {
 
             {localStatus && (
               <Text style={{...styles.textStyle, textTransform: 'capitalize' }}>
-                <strong>Status:</strong> <span style={styles.getStatusStyle(localStatus)}>{localStatus}</span>
+                <strong>Status:</strong> {localStatus}
               </Text>
             )} 
-
-            {localStatus === 'rejected' && (
-              <Text style={styles.rejectedStyle}>
-                <strong>Su pago ha sido rechazado. Inténtelo de nuevo. Para ello, vaya a la página de pedidos.</strong>
-              </Text>
-            )}
 
             <Text style={styles.textStyle}>
               <strong>Fecha:</strong> {orderDate}
             </Text>
+
+            <Text style={styles.textStyle}>
+              <strong>Nombre del cliente:</strong> {customerName}
+            </Text>
+
+            <Text style={{...styles.textStyle, textTransform: 'capitalize' }}>
+              <strong>Método de pago:</strong> {payment_method}
+            </Text>
+
+            <Text style={{...styles.textStyle, textTransform: 'uppercase' }}>
+              <strong>Tipo de documento:</strong> {document_type}
+            </Text>
+
+            <Text style={styles.textStyle}>
+              <strong>Número de id:</strong> {id_number}
+            </Text>
+            
+            <Text style={styles.textStyle}>
+              <strong>Correo electrónico:</strong> {email}
+            </Text>      
+
             <Text style={styles.textStyle}>
               <strong>Direccion:</strong> {address}, {city}, {state}
             </Text>

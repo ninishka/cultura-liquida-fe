@@ -7,7 +7,7 @@ import img404 from '@/app/icons/404error.svg'
 import styled from 'styled-components'
 import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
-import LoadingComponent from '@/components/LoadingComponent';
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 
 const NotFound: FC = () => {
   const { data, isLoading } = useGetProductQuery('');

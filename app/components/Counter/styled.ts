@@ -81,6 +81,9 @@ export const AmountItem = styled.div<ModalStyledProps2>`
     margin: ${({$isModal}) => $isModal && '0px'};
   }
 
+  @media (max-width: 500px) {
+    margin-left: ${({$isModal}) => !$isModal && '20px'};
+  }
 `
 
 export const ArrowButtons = styled.button`
@@ -153,6 +156,12 @@ export const Price = styled.p<ModalStyledProps2>`
   @media (max-width: 620px) {
     /* font-size: 24px; */
     margin-top: ${({$isModal}) => !$isModal && 0};
+  }
+
+    @media (max-width: 500px) {
+    /* font-size: 24px; */
+    margin-top: ${({$isModal}) => !$isModal && '10px'};
+    margin-bottom: 0;
   }  
 `
 

@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import OrderConfirmationEmail from "@/lib/emails/OrderConfirmationEmail";
+import OrderConfirmationEmailDetailed from "@/lib/emails/OrderConfirmationEmailDetailed";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,7 +19,7 @@ export const sendEmails = async (data): Promise<void> => {
         from: 'Cultura Liquida <mailer@cultura-liquida.com>',
         to: 'culturaliquidacol@gmail.com',
         subject: "Nuevo pedido",
-        react: OrderConfirmationEmail({ order: data }),
+        react: OrderConfirmationEmailDetailed({ order: data }),
       }).catch((err) => console.error('Error sending to vendor:', err));
 
       console.log('2nd resend.emails')

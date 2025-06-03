@@ -5,7 +5,7 @@ import { complexData2 } from '@/app/data'
 import Counter from '../Counter/Counter'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { uniqueTitles } from '@/app/components/helpers'
-import LoadingComponent from '@/components/LoadingComponent'
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent'
 
 import imgC9 from '@/app/icons/CL-703.png'
 import imgC10 from '@/app/icons/CL-71M.png'

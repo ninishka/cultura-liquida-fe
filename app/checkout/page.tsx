@@ -7,7 +7,7 @@ import { useGetOrderByIdQuery, useProcessPaymentInfoMutation } from "@/lib/redux
 import { IOrder } from '@/models/Order';
 import CartItemComponent from '@/app/components/ModalComponent/CartItemComponent/CartItemComponent'
 import ModalForm from '@/app/components/ModalComponent/FormComponent/ModalForm'
-import LoadingComponent from '@/components/LoadingComponent';
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 import { formatPrice } from '@/helpers/formats'
 import { formatDate } from '@/helpers/formats'
 import { keysFromMP } from '@/helpers/data';
