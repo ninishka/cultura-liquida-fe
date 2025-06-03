@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const LOGO_URL = 'https://www.cultura-liquida.com/logo_full.svg';
+export const LOGO_URL = 'https://www.cultura-liquida.com/logo_fulll.png';
 
 const BACKGROUND_URL = 'https://www.cultura-liquida.com/modalbackgroung.png';
 

@@ -40,7 +40,6 @@ export const getOrdersByUser = async (userId: string, page: number, pageSize: nu
       .limit(pageSize)
       .lean();
 
-    // console.log('Fetched orders:', orders?.length);
     return orders;
   } catch (error) {
     console.error('Error fetching orders for user:', userId, error);
@@ -52,7 +51,6 @@ export const getOrdersByUser = async (userId: string, page: number, pageSize: nu
 export const getOrderById = async ({ orderId }: { orderId: string }): Promise<IOrder | null> => {
   try {
     const order = await Order.findById(orderId).lean();
-    // console.log('Fetched order:', order);
     return order;
   } catch (error) {
     console.error('Failed to fetch order by ID:', orderId, error);
@@ -106,7 +104,6 @@ export const deleteOrder = async (orderId: string): Promise<IOrder | null> => {
       return null;
     }
 
-    console.log('Deleted order:', deletedOrder);
     return deletedOrder;
   } catch (error) {
     console.error('Failed to delete order:', orderId, error);

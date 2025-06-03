@@ -91,7 +91,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
     if (paymentMethod === 'mercado') {
       // Если Mercado Pago выбран, инициализируем SDK
       if (!isMercadoInit && typeof window !== 'undefined') {
-        console.log('Инициализация SDK Mercado Pago');
+        // console.log('Инициализация SDK Mercado Pago');
         dispatch(toggleSetMercado(true));
         initMercadoPago(process.env.PUBLIC_KEY_BTN || '');
       }
@@ -120,7 +120,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
   // Функция для инициализации Mercado Pago, если необходимо
   const initMercadoIfNeeded = () => {
     if (!isMercadoInit && typeof window !== 'undefined') {
-      console.log('Инициализация SDK Mercado Pago');
+      // console.log('Инициализация SDK Mercado Pago');
       dispatch(toggleSetMercado(true));
       initMercadoPago(process.env.PUBLIC_KEY_BTN || '');
     }
@@ -180,7 +180,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
       
       // Получаем preferenceId через API
       const result = await handlePayment(data, data?.products, data?.form_data, 'mercado', router, setPreferenceId);
-      console.log('Получен preferenceId:', result);
+      // console.log('Получен preferenceId:', result);
       
       // Показываем Wallet после получения preferenceId
       // Дополнительная проверка, что не произошло переключение в процессе

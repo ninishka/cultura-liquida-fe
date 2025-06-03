@@ -10,7 +10,7 @@ import connectToDatabase from '@/lib/mongodb/db';
 export async function register() {
   try {
     await connectToDatabase();
-    console.log('Database connected successfully in instrumentation.js');
+    // console.log('Database connected successfully in instrumentation.js');
   } catch (error) {
     console.error('Error connecting to the database in instrumentation.js:', error);
   }

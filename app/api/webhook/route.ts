@@ -5,19 +5,19 @@ import crypto from 'crypto';
 
 export async function POST(request) {
   try {
-    console.log('request', request)
+    // console.log('request', request)
     ///////////////
     const result = await request.json();
-    console.log('result', result)
+    // console.log('result', result)
 
     const { action, data, type, live_mode, date_created } = result;
 
-    console.log('@@@@@@@@@@ Event received')
-    console.log('action', action)
-    console.log('data', data)
-    console.log('type', type)
-    console.log('live_mode', live_mode)
-    console.log('date_created', date_created)
+    // console.log('@@@@@@@@@@ Event received')
+    // console.log('action', action)
+    // console.log('data', data)
+    // console.log('type', type)
+    // console.log('live_mode', live_mode)
+    // console.log('date_created', date_created)
     /////////////////
 
     const headers = request.headers;
