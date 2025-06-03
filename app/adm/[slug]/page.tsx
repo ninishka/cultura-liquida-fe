@@ -14,7 +14,7 @@ import {
 } from "@/lib/redux/slices/orderApi";
 import { SyncOutlinedStyled } from '@/app/checkout/styled'
 import { IOrder } from '@/models/Order';
-import LoadingComponent from '@/components/LoadingComponent';
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 
 const Adm: FC = () => {
   const [form] = Form.useForm()

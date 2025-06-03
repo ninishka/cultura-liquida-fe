@@ -33,7 +33,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
   const [highlightKey, setHighlightKey] = useState(0);
   
   useEffect(() => {
-    const handleScroll = () => setIsSticky(window.scrollY > window.innerHeight);
+    const handleScroll = () => setIsSticky(window.scrollY > window.innerHeight / 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

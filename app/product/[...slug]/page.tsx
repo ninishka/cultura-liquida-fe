@@ -7,7 +7,7 @@ import { productContentComponents } from '@/app/data'
 import { getActiveComponent } from '@/app/components/helpers'
 import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { toggleShowMenu } from '@/lib/redux/slices/cartSlice'
-import LoadingComponent from '@/components/LoadingComponent';
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 
 import Formation from '@/app/components/Formation/Formation'
 import Benefits from '@/app/components/Benefits/Benefits'
