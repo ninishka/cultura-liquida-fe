@@ -32,7 +32,6 @@ export interface CartItemType {
   displayingType: string;
 
   icon: any;
-  // iconSrc: any;
   src: any;
   id: string;
   _id: string;
@@ -70,8 +69,6 @@ export interface FormationProps {
   error?: any;
   slogMain?: String[];
   formationData: CartItemType[]; 
-  // formationDataStatic: any;
-  // [propName: string]: any
 }
  
 export interface BenefitsProps {
@@ -140,5 +137,14 @@ export interface OrderLoadingStyledProps {
 export interface ProductItemProps {
   $soldout?: boolean;
   checked?: boolean;
+}
+
+export interface ContactsProps {
+  paymentOption?: string;
+  isColumn?: boolean;
+}
+
+export interface ContactsStyledProps {
+  isColumn?: boolean;
 }
 

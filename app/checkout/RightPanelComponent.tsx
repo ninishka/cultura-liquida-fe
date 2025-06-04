@@ -15,6 +15,7 @@ import falseIcon from '@/app/icons/icon_paid_false.svg'
 import { shippingCost } from '@/helpers/constants'
 import { fetcher } from '@/helpers/network'
 import { handlePayment } from '@/helpers/data';
+import Contacts from '@/app/components/Contacts/Contacts'
 
 import { useAppSelector, useAppDispatch } from '@/lib/redux/store/hooks'
 import { toggleSetMercado } from '@/lib/redux/slices/cartSlice'
@@ -363,6 +364,7 @@ const RightPanelComponent: FC<RightPanelInterface> = ({ data, respStatus, refetc
             )}
             
             {(paymentOption === 'transfer' && !showBuyButton) && <TransferBox isOrder />}
+            <Contacts paymentOption={paymentOption} isColumn />
           </>
         }
       </div>
