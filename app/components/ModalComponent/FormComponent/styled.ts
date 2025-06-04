@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import Link from 'next/link';
 import { Form, Input, Select, Checkbox } from 'antd'
 import { Button } from 'antd';
 import type { OrderStyledProps } from '@/types/types'
@@ -216,52 +215,6 @@ export const CartPayButton = styled(Button)`
   `}
 `
 
-export const MailLink = styled(Link)`
-  font-weight: 700;
-  margin: 10;
-  color: #F2C94C;
-  letter-spacing: 0.6px;
-  text-decoration: underline;
-
-  &:hover {
-    color: #F2C94C !important;
-  }
-`
-
-export const MailWrapper = styled.div`
-  border: 1px solid #F2C94C;
-  border-radius: 16px;
-  width: -webkit-fill-available;
-  margin: 10px 15px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: flex-start;
-
-  @media (max-width: 850px) {
-    flex-direction: column;
-  }
-`
-
-export const MailDescription = styled.p`
-  color: white;
-  max-width: 50%;
-  margin: 10px 0;
-  line-height: 1.2;
-  @media (max-width: 850px) {
-    max-width: none;
-  }
-`
-
-export const MailImgWrapper = styled.p`
-  margin: 6px 30% 0;
-  @media (max-width: 1000px) {
-    margin: 6px 20% 0;
-  }
-  @media (max-width: 850px) {
-    margin: 0;
-  }
-`
-
 export const BankingBoxesWrapper = styled.div<OrderStyledProps>`
   display: flex;
   @media (max-width: 650px) {
@@ -305,18 +258,6 @@ export const PriceTextBox = styled.div<PriceTextBoxStyledProps>`
   ` : ''}
 `
 
-export const StyledLink = styled(Link)`
-  margin: 5px 20px 0;
-
-  @media (max-width: 1000px) {
-    margin: 5px 10px 0;
-  }
-
-  @media (max-width: 850px) {
-   margin:  0px 4px;
-  }
-`
-
 export const WalletWrapper = styled.div`
   margin: -40px 15px 0px;
   background-color: #252525; 
@@ -327,3 +268,4 @@ export const WalletWrapper = styled.div`
     margin: -40px 10px 0px;
   }
 `
+
