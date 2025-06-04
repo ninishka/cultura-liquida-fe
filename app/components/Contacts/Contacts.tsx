@@ -12,6 +12,7 @@ import {
   MailContent,
   MailImgWrapper,
   StyledLink,
+  TransferNote
 } from './styled'
 
 const Contacts: FC<ContactsProps> = ({ paymentOption, isColumn }) => (
@@ -35,9 +36,9 @@ const Contacts: FC<ContactsProps> = ({ paymentOption, isColumn }) => (
       </MailContent>
     </MailWrapper>
     {paymentOption === 'transfer' && (
-      <p style={{ margin: '18px 13px 0', fontSize: 16, color: 'white' }}>
+      <TransferNote>
         Tu pedido será procesado y enviado tan pronto validemos el pago.
-      </p>
+      </TransferNote>
     )}
   </>
 )

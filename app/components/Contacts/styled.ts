@@ -40,7 +40,9 @@ export const MailDescription = styled.p<ContactsStyledProps>`
   @media (max-width: 850px) {
     max-width: none;
   }
-
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
   ${({ isColumn }) => isColumn && css`
     max-width: 100%;
   `}
@@ -72,4 +74,13 @@ export const StyledLink = styled(Link)`
   @media (max-width: 850px) {
    margin:  0px 4px;
   }
+`
+
+export const TransferNote = styled.p`
+  margin: 18px 13px 0;
+  font-size: 16px;
+  color: white;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
 `
