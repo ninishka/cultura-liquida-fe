@@ -104,6 +104,7 @@ export const Number = styled.h1`
   font-size: 16px;
   font-weight: 700;
   text-align: left;
+  cursor: default;
 `
 export const BuyButton = styled.button`
   display: flex;
