@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const sendEmails = async (data): Promise<void> => {
     try {
       resend.emails.send({
-        from: 'Cultura Liquida <mailer@cultura-liquida.com>',
+        from: 'Cultura Líquida <mailer@cultura-liquida.com>',
         to: data?.form_data?.email,
         subject: "Confirmación de pedido",
         react: OrderConfirmationEmail({ order: data }),
@@ -16,7 +16,7 @@ export const sendEmails = async (data): Promise<void> => {
       // console.log('1st resend.emails')
 
       resend.emails.send({
-        from: 'Cultura Liquida <mailer@cultura-liquida.com>',
+        from: 'Cultura Líquida <mailer@cultura-liquida.com>',
         to: 'culturaliquidacol@gmail.com',
         subject: "Nuevo pedido",
         react: OrderConfirmationEmailDetailed({ order: data }),
