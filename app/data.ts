@@ -295,7 +295,7 @@ export const howToCardsData = [
   },
   {
     img1: imgC8,
-    description: 'Recibe tu pedido y comienza a mejorar tu salud con Cultura Liquida!'
+    description: 'Recibe tu pedido y comienza a mejorar tu salud con Cultura Líquida!'
   },
 ];
 
