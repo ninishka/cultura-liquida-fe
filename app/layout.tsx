@@ -1,5 +1,6 @@
 import React from 'react';
 import localFont from "next/font/local";
+import Script from 'next/script';
 import { GlobalStyle } from '@/app/globalStyles';
 import StyledRegistry from '@/lib/registry';
 import { ReduxProvider } from "@/lib/redux/providers/ReduxProvider";
@@ -35,10 +36,32 @@ export const metadata = {
   //  Author and Copyright ?
   //  sitemap
 
+const isProd = process.env.NODE_ENV === 'production';
+
   
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  console.log('isProd', isProd)
+  console.log('env', process.env.NODE_ENV)
   return (
     <html lang="es">
+      <head>
+        {isProd && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=AW-17259177669"
+              strategy="afterInteractive"
+            />
+            <Script id="google-ads" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'AW-17259177669');
+              `}
+            </Script>
+          </>
+        )}
+      </head>
       <body className={`${mohave.variable}`} style={{ margin: 0 }}>
          <StyledRegistry>
            <GlobalStyle />
