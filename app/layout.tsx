@@ -44,7 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   console.log('env', process.env.NODE_ENV)
   return (
     <html lang="es">
-      <head>
+      <>
         {isProd && (
           <>
             <Script
@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Script>
           </>
         )}
-      </head>
+      </>
       <body className={`${mohave.variable}`} style={{ margin: 0 }}>
          <StyledRegistry>
            <GlobalStyle />
