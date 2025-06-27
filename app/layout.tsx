@@ -49,9 +49,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <>
             <Script
               src="https://www.googletagmanager.com/gtag/js?id=AW-17259177669"
-              strategy="afterInteractive"
+              strategy="beforeInteractive"
             />
-            <Script id="google-ads" strategy="afterInteractive">
+            <Script id="google-ads" strategy="beforeInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
