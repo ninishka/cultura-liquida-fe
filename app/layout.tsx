@@ -46,12 +46,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="es">
       <>
         {isProd && (
-          <>
+          <head>
             <Script
               src="https://www.googletagmanager.com/gtag/js?id=AW-17259177669"
-              strategy="afterInteractive"
+              strategy="beforeInteractive"
             />
-            <Script id="google-ads" strategy="afterInteractive">
+            <Script id="google-ads" strategy="beforeInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -59,7 +59,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 gtag('config', 'AW-17259177669');
               `}
             </Script>
-          </>
+          </head>
         )}
       </>
       <body className={`${mohave.variable}`} style={{ margin: 0 }}>
