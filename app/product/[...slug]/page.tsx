@@ -1,6 +1,8 @@
 'use client';
 
 import React, { FC, useEffect } from 'react'
+import dynamic from 'next/dynamic';
+
 import { useParams } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '@/lib/redux/store/hooks'
 import { productContentComponents } from '@/app/data'
@@ -9,10 +11,15 @@ import { useGetProductQuery } from "@/lib/redux/slices/api";
 import { toggleShowMenu } from '@/lib/redux/slices/cartSlice'
 import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 
-import Formation from '@/app/components/Formation/Formation'
+/*import Formation from '@/app/components/Formation/Formation'
 import Benefits from '@/app/components/Benefits/Benefits'
 import Indications from '@/app/components/Indications/Indications'
-import ModalComponent from '@/app/components/ModalComponent/ModalComponent'
+import ModalComponent from '@/app/components/ModalComponent/ModalComponent'*/
+const Formation = dynamic(() => import('@/app/components/Formation/Formation'));
+const Benefits = dynamic(() => import('@/app/components/Benefits/Benefits'));
+const Indications = dynamic(() => import('@/app/components/Indications/Indications'));
+const ModalComponent = dynamic(() => import('@/app/components/ModalComponent/ModalComponent'));
+
 
 const ProductSections: FC = () => {
   const { slug } = useParams();

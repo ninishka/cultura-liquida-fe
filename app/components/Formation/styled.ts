@@ -216,7 +216,7 @@ export const CheckBoxGroupInner = styled.div`
 export const Icon = styled(Image)`
   width: 50px;
   height: auto;
-  margin-left: 10px;
+  // margin-left: 10px;
 
   @media (max-width: 850px) {
     margin-left: 0
@@ -268,9 +268,13 @@ align-items: center;
 `
 
 export const LabelContent = styled.div`
- display: flex;
- flex-direction: row;
- align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  font-family: var(--font-mohave);
 
  @media (max-width: 620px) {
     flex-direction: column;

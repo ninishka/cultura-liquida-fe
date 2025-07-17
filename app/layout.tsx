@@ -13,6 +13,18 @@ const mohave = localFont({
   weight: "100 900",
 });
 
+const criticalCSS = `
+  body {
+    font-family: var(--font-mohave);
+    background-color: #333;
+    margin-top: 0;
+    overflow-x: hidden;
+  }
+  main {
+    background-color: #333;
+    color: #fff;
+  }
+`;
 
 export const metadata = {
   title: "Cultura Líquida",
@@ -40,13 +52,12 @@ const isProd = process.env.NODE_ENV === 'production';
 
   
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  console.log('isProd', isProd)
-  console.log('env', process.env.NODE_ENV)
   return (
     <html lang="es">
-      <>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         {isProd && (
-          <head>
+          <>
             <Script
               src="https://www.googletagmanager.com/gtag/js?id=AW-17259177669"
               strategy="beforeInteractive"
@@ -59,9 +70,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 gtag('config', 'AW-17259177669');
               `}
             </Script>
-          </head>
+          </>
         )}
-      </>
+      </head>
       <body className={`${mohave.variable}`} style={{ margin: 0 }}>
          <StyledRegistry>
            <GlobalStyle />

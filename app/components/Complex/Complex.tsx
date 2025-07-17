@@ -66,7 +66,7 @@ const Complex: FC = () => {
     <ComplexSection>
       <AllWrap>
         <ImgDesctopWrapper>
-          <Image sizes='100vw' src={imgC9} priority alt='El complejo de imágenes de los productos'/>
+          <Image sizes='100vw' src={imgC9} priority alt='El complejo de imágenes de los productos' width={400} height={560}/>
         </ImgDesctopWrapper>
         <RightContentWrap>
             <TitleWrap>
@@ -78,7 +78,7 @@ const Complex: FC = () => {
               </DiscountText>
             </TitleWrap>
             <ImgMobileWrapper> 
-              <ImgMobile sizes='100vw' src={imgC10} priority alt='El complejo de imágenes de los productos' />
+              <ImgMobile sizes='100vw' src={imgC10} priority alt='El complejo de imágenes de los productos' width={620} height={400}/>
             </ImgMobileWrapper>
             <TwoCardwrap>
               <ComplexItemsWrap>
@@ -103,19 +103,18 @@ const Complex: FC = () => {
                   <ButtonsWrapper >
                     {complexData2.map(({type, icon, id}) => (
                       <Item key={id} onClick={() => rechecking(id)} aria-label={`Elección del tamaño del producto`}> 
-                        <label htmlFor={id} aria-label={`Elección del tamaño del producto`}>
-                          <RadioButton 
-                            type="radio" 
-                            id={`${id}+${type}`}
-                            name="group1" 
-                            checked={id === checkedState}
-                            onChange={() => rechecking(id)}
-                          />
-                        </label>
-                        <LabelContent>
-                          <Icon src={icon} alt={type}/>
-                          <TextDesc>{type}</TextDesc>
-                        </LabelContent>
+                        <RadioButton 
+                          type="radio" 
+                          id={`${id}+${type}`}
+                          name="group1" 
+                          checked={id === checkedState}
+                          onChange={() => rechecking(id)}
+                        >
+                          <LabelContent>
+                            <Icon src={icon} alt={type}/>
+                            <TextDesc>{type}</TextDesc>
+                          </LabelContent>
+                        </RadioButton>
                       </Item>
                       ))}
                     </ButtonsWrapper>

@@ -1,14 +1,5 @@
-import { Country, State, City } from 'country-state-city';
 
-export const states = State.getStatesOfCountry('CO')?.map(({name, isoCode}) => ({
-    value: isoCode,
-    label: name
-  }))
 
-export const cities = (x?: string) => City.getCitiesOfState('CO', x)?.map(({name}) => ({
-value: name,
-label: name
-}));
 
 export const nameSurnameValidator = [
   {
