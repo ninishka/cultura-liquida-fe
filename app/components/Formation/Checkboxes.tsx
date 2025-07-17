@@ -21,18 +21,17 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
             <StyledLink key={id} href={slug}>
               <Tooltip title={availableStock <= 0 && soldoutText}>
                 <StyledItem {...(availableStock <= 0 && { $soldout: true })} checked={id === rInit} aria-label='Elección de la presentación del producto'> 
-                  <label htmlFor={id} aria-label='Elección de la presentación del producto'>
                     <RadioButton
                       id={id}
                       type="radio"
                       name="group1"
                       checked={id === rInit}
-                    />
-                  </label>  
-                  <LabelContent >
-                    <Icon src={icon} alt={type}/>
-                    <TextDesc>{displayingType}{size ? ` ${size}` : ''}</TextDesc>
-                  </LabelContent>
+                    >
+                      <LabelContent >
+                        <Icon src={icon} alt={type}/>
+                        <TextDesc>{displayingType}{size ? ` ${size}` : ''}</TextDesc>
+                      </LabelContent>
+                    </RadioButton>
                 </StyledItem>
               </Tooltip>
             </StyledLink>

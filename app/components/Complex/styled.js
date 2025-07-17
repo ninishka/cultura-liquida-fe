@@ -327,8 +327,13 @@ export const RadioButton = styled(Radio)`
 `
 
 export const LabelContent = styled.div`
- display: flex;
- flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  font-family: var(--font-mohave);
+
 `
 
 export const FormationWrap = styled.div`

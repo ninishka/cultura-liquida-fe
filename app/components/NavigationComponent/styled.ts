@@ -16,6 +16,11 @@ export const UlItself = styled.ul<NavigationProps>`
   }
 `
 
+export const LiWrap = styled.li `
+  all: unset;
+  display: inline;
+`
+
 export const CloseIconNav = styled(Image)`
   width: 25px;
   position: fixed;

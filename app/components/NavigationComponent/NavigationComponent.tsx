@@ -11,6 +11,7 @@ import CloseBurgerIcon from '@/app/icons/icon_close_burger.svg'
 import {
   Navigation,
   UlItself,
+  LiWrap,
   StyledLink,
   CloseIconNav
 } from './styled'
@@ -61,14 +62,15 @@ const NavigationComponent: FC<NavigationProps> = ({ isfooter, isSticky }) => {
       )}
       <UlItself {...(isfooter && { isfooter })} {...(showMenu && { showMenu })}> 
         {uni?.map(({ title, slug }) => (
-          <StyledLink
-            key={title}
-            href={`${pathPrefix}${slug}`}
-            isselected={slug.includes(product[0]) ? 'selected' : ''}
-            {...(isfooter && { isfooter })}
-          >
-            {title}
-          </StyledLink>
+          <LiWrap key={title}>
+            <StyledLink
+              href={`${pathPrefix}${slug}`}
+              isselected={slug.includes(product[0]) ? 'selected' : ''}
+              {...(isfooter && { isfooter })}
+            >
+              {title}
+            </StyledLink>
+          </LiWrap>
         ))} 
       </UlItself>
     </Navigation>

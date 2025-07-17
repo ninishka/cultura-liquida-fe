@@ -31,7 +31,7 @@ const Indications: FC<IndicationsProps> = ({ indicationsImg }) => (
       ))}
     </ContentWrapper>
     <IconWrapper>
-      <IconIndications src={indicationsImg} alt='La imagen de Indicaciones' />
+      <IconIndications src={indicationsImg} alt='La imagen de Indicaciones' width={300} height={300} />
     </IconWrapper>
   </IndicationsSection>
 );
