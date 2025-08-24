@@ -80,14 +80,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
-        {/* Preload critical images */}
-        <link rel="preload" as="image" href="/icons/main-me.webp" />
-        <link rel="preload" as="image" href="/icons/main-mc.webp" />
-        <link rel="preload" as="image" href="/icons/main-c.webp" />
-        <link rel="preload" as="image" href="/icons/main-r.webp" />
-        <link rel="preload" as="image" href="/icons/CL-703.png" />
-        <link rel="preload" as="image" href="/icons/CL-71M.png" />
-        
         {/* Critical CSS inline */}
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
