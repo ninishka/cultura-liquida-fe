@@ -1,12 +1,11 @@
 'use client'
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Suspense } from 'react'
 import Script from 'next/script'
-import { Suspense } from 'react'
+import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent'
+import { isProd } from '@/helpers/constants'
 
-const isProd = process.env.NODE_ENV === 'production';
-
-export default function Layout({ children }: { children: ReactNode } ) {
+export default function CheckoutLayout({ children }: { children: ReactNode }) {
   return (
     <>
       {isProd && (
@@ -19,9 +18,9 @@ export default function Layout({ children }: { children: ReactNode } ) {
           `}
         </Script>
       )}
-      <Suspense>
+      <Suspense fallback={<LoadingComponent fullScreen text="Cargando checkout..." />}>
         {children}
       </Suspense>
     </>
-  );
+  )
 }
