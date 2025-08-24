@@ -41,44 +41,58 @@ const criticalCSS = `
 
 export const metadata = {
   title: "Cultura Líquida",
-  description: "Potencia tu salud con hongos medicinales",
+  description: "Potencia tu salud con hongos medicinales de la más alta calidad. Descubre los beneficios de los hongos medicinales para tu bienestar físico y mental.",
+  keywords: "hongos medicinales, reishi, melena de león, chaga, cordyceps, salud natural, suplementos",
   author: "Cultura Líquida Team",
   copyright: "© 2025 Cultura Líquida. All rights reserved.",
   robots: {
     index: true,
     follow: true, 
   },
-  link:{
-    rel:"icon",
-    href:"./favicon.ico",
-    sizes:"any"
-  },
+  metadataBase: new URL('https://www.cultura-liquida.com'),
   alternates: {
-    canonical: 'https://www.cultura-liquida.com/product/melena-de-leon-capsules',
+    canonical: 'https://www.cultura-liquida.com',
   },
   openGraph: {
     title: "Cultura Líquida",
-    description: "Potencia tu salud con hongos medicinales",
+    description: "Potencia tu salud con hongos medicinales de la más alta calidad. Descubre los beneficios de los hongos medicinales para tu bienestar físico y mental.",
     url: 'https://www.cultura-liquida.com',
     siteName: 'Cultura Líquida',
     locale: 'es_ES',
     type: 'website',
+    images: [
+      {
+        url: '/icons/CL-703.png',
+        width: 1200,
+        height: 630,
+        alt: 'Cultura Líquida - Hongos Medicinales',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Cultura Líquida",
-    description: "Potencia tu salud con hongos medicinales",
+    description: "Potencia tu salud con hongos medicinales de la más alta calidad.",
+    images: ['/icons/CL-703.png'],
+  },
+  other: {
+    'theme-color': '#333333',
+    'color-scheme': 'dark',
   },
 };
   
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" dir="ltr">
       <head>
         {/* Preconnect to external domains for faster loading */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/icons/CL-703.png" />
         
         {/* Preload critical images */}
         <link rel="preload" as="image" href="/icons/main-me.webp" />

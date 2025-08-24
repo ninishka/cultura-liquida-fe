@@ -35,6 +35,5 @@ export const config = {
     '/_next/static/:path*',
     '/icons/:path*',
     '/public/:path*',
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }
