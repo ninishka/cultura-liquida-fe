@@ -130,8 +130,8 @@ export const BurgerWrap = styled.div`
   
   @media (max-width: 850px) {
     display: block;
-    width: 33px;
-    height: 33px;
+    // width: 33px;
+    // height: 33px;
   }
 `
 export const BurgerImage = styled(Image)`

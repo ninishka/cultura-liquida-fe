@@ -18,7 +18,7 @@ import {
 
 const pathPrefix = '/product/'
 
-const NavigationComponent: FC<NavigationProps> = ({ isfooter, isSticky }) => {
+const NavigationComponent: FC<NavigationProps> = ({ $isfooter, isSticky }) => {
   const pathname = usePathname();
   const dispatch = useAppDispatch()
   
@@ -48,7 +48,7 @@ const NavigationComponent: FC<NavigationProps> = ({ isfooter, isSticky }) => {
 
   return (
     <Navigation
-      {...(isfooter && { isfooter })}
+      {...($isfooter && { $isfooter })}
       {...(showMenu && { showMenu })}
       style={menuStyle}
     >
@@ -60,13 +60,13 @@ const NavigationComponent: FC<NavigationProps> = ({ isfooter, isSticky }) => {
           alt="Сerrar menú"
         />
       )}
-      <UlItself {...(isfooter && { isfooter })} {...(showMenu && { showMenu })}> 
+      <UlItself {...($isfooter && { $isfooter })} {...(showMenu && { showMenu })}> 
         {uni?.map(({ title, slug }) => (
           <LiWrap key={title}>
             <StyledLink
               href={`${pathPrefix}${slug}`}
               isselected={slug.includes(product[0]) ? 'selected' : ''}
-              {...(isfooter && { isfooter })}
+              {...($isfooter && { $isfooter })}
             >
               {title}
             </StyledLink>

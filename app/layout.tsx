@@ -9,6 +9,8 @@ import FooterComponent from '@/app/components/FooterComponent/FooterComponent'
 import ComponentPreloader from '@/app/components/ComponentPreloader/ComponentPreloader'
 import PerformanceMonitor from '@/app/components/PerformanceMonitor/PerformanceMonitor'
 import DataProvider from '@/app/components/DataProvider/DataProvider'
+import ErrorBoundary from '@/app/components/ErrorBoundary/ErrorBoundary'
+import ConsoleErrorHandler from '@/app/components/ConsoleErrorHandler/ConsoleErrorHandler'
 import { isProd } from '@/helpers/constants'
 
 const mohave = localFont({
@@ -52,7 +54,20 @@ export const metadata = {
     sizes:"any"
   },
   alternates: {
-    canonical: '/product/melena-de-leon-capsules',
+    canonical: 'https://www.cultura-liquida.com/product/melena-de-leon-capsules',
+  },
+  openGraph: {
+    title: "Cultura Líquida",
+    description: "Potencia tu salud con hongos medicinales",
+    url: 'https://www.cultura-liquida.com',
+    siteName: 'Cultura Líquida',
+    locale: 'es_ES',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Cultura Líquida",
+    description: "Potencia tu salud con hongos medicinales",
   },
 };
   
@@ -64,9 +79,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
-        {/* Preload critical resources */}
-        <link rel="preload" href="/_next/static/media/icon_LM1.062c1362.svg" as="image" type="image/svg+xml" />
         
         {/* Critical CSS inline */}
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
@@ -97,14 +109,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
            <GlobalStyle />
              <ReduxProvider>
                 <DataProvider>
-                  <ComponentPreloader>
-                    <HeaderComponent />
-                      <main style={{ maxWidth: '1920px', margin: '0 auto', padding: '0 20px' }}>
-                        {children}
-                      </main>
-                    <FooterComponent />
-                  </ComponentPreloader>
-                  <PerformanceMonitor enabled={!isProd} />
+                  <ErrorBoundary>
+                    <ConsoleErrorHandler />
+                    <ComponentPreloader>
+                      <HeaderComponent />
+                        <main style={{ maxWidth: '1920px', margin: '0 auto', padding: '0 20px' }}>
+                          {children}
+                        </main>
+                      <FooterComponent />
+                    </ComponentPreloader>
+                    <PerformanceMonitor enabled={!isProd} />
+                  </ErrorBoundary>
                 </DataProvider>
              </ReduxProvider>
          </StyledRegistry>

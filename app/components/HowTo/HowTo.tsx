@@ -38,7 +38,7 @@ const HowTo: FC = () => (
         )}
         {index < howToCardsData.length - 1 && index !== 1 && (
           <Second>
-            <Image src={arrowNext} alt='Luego' />
+            <Image src={arrowNext} alt='Luego' width={15} height={15}/>
           </Second>
         )}
       </Fragment> 

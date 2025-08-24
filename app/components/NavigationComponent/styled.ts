@@ -12,7 +12,7 @@ export const UlItself = styled.ul<NavigationProps>`
 
   @media (max-width: 850px) {
     display: ${({showMenu}) => showMenu ? 'block' : 'none'};
-    flex-direction: ${({ isfooter }) => isfooter ? 'row' : 'column'};
+    flex-direction: ${({ $isfooter }) => $isfooter ? 'row' : 'column'};
   }
 `
 
@@ -35,7 +35,7 @@ export const Navigation = styled.nav<NavigationProps>`
   flex-direction: row;
 
   @media (max-width: 850px) {
-    ${({ isfooter, showMenu }) => isfooter ? css`display: flex;` 
+    ${({ $isfooter, showMenu }) => $isfooter ? css`display: flex;` 
     : css`
       position: absolute;
       top: 80px;
@@ -80,7 +80,7 @@ export const StyledLink = styled(Link)<NavigationProps>`
 
  
   @media (max-width:850px) {
-    width: ${({ isfooter }) => isfooter ? 'auto' : '268px'};
+    width: ${({ $isfooter }) => $isfooter ? 'auto' : '268px'};
 
 
     margin: 12px;
@@ -92,7 +92,7 @@ export const StyledLink = styled(Link)<NavigationProps>`
   }
 
   @media (max-width: 412px) {
-    ${({ isfooter }) => isfooter ? css`
+    ${({ $isfooter }) => $isfooter ? css`
       height: 45px;
       display: flex;;
       align-items: center;

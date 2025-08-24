@@ -28,7 +28,13 @@ const Checkboxes = ({ rInit, formationData, filterdContent, preObj }) => (
                       checked={id === rInit}
                     >
                       <LabelContent >
-                        <Icon src={icon} alt={type}/>
+                        <Icon 
+                          src={icon} 
+                          alt={type}
+                          width={70} 
+                          height={70}
+                          style={{ objectFit: 'contain' }}
+                        />
                         <TextDesc>{displayingType}{size ? ` ${size}` : ''}</TextDesc>
                       </LabelContent>
                     </RadioButton>
