@@ -36,6 +36,9 @@ const StyledImage = styled(Image)<{ loaded: boolean }>`
   opacity: ${props => props.loaded ? 1 : 0};
   transition: opacity 0.3s ease-in-out;
   contain: layout style;
+  will-change: opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 `;
 
 const Skeleton = styled.div`
@@ -75,6 +78,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const aspectRatio = width / height;
 
   useEffect(() => {
+    // Reset state when src changes
+    setLoaded(false);
+    setError(false);
+    
     // Preload image for better performance
     if (priority) {
       const img = document.createElement('img');
@@ -131,6 +138,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         onError={handleError}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         style={{ width: 'auto', height: 'auto' }}
+        unoptimized={false}
+        loading={priority ? 'eager' : 'lazy'}
       />
     </ImageContainer>
   );
