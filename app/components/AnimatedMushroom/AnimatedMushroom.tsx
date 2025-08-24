@@ -39,7 +39,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  min-height: 80vh;
   gap: 30px;
   padding: 20px;
   contain: layout style;

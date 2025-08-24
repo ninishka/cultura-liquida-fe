@@ -209,8 +209,8 @@ export const LearnMoreText = styled.p`
 `
 
 export const ArrowIcon = styled(Image)`
-  width: auto;
-  margin-top: 16px;
+  // width: auto;
+  // margin-top: 16px;
 `
 
 export const ArrowButtons = styled.div`
@@ -278,7 +278,7 @@ export const Item = styled.div`
 `
 
 export const Icon = styled(Image)`
-  width: 50px;
+  // width: 50px;
   height: auto;
   margin-left: 10px;
 `

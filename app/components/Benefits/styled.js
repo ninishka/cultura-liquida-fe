@@ -125,13 +125,13 @@ export const Card = styled.div`
   }
 `
 export const BenefitIcon = styled(Image)`
-  width: 100%;
+  width: auto;
   height: auto
 `
 
 export const BenefitIconWrapper = styled.div`
-  width: 100px;
-  height: 100px;
+  // width: 100px;
+  // height: 100px;
   
   @media (max-width: 850px) {
     width: 76px;

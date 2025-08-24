@@ -31,10 +31,15 @@ const Indications: FC<IndicationsProps> = ({ indicationsImg }) => (
       ))}
     </ContentWrapper>
     <IconWrapper>
-      <IconIndications src={indicationsImg} alt='La imagen de Indicaciones' width={300} height={300} />
+      <IconIndications 
+        src={indicationsImg} 
+        alt='La imagen de Indicaciones' 
+        width={300} 
+        height={300}
+        style={{ objectFit: 'contain' }}
+      />
     </IconWrapper>
   </IndicationsSection>
 );
-
 
 export default Indications

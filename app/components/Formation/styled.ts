@@ -26,16 +26,16 @@ export const StyledItem = styled.div<ProductItemProps>`
     width: 168px;
   }
 
-  @media (max-width: 620px) {
-    width: 50px;
-    height: 105px;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 20px;
-    text-align: center;
-    margin-right: 15px;
-    margin: 10px 1vh;
-  }
+  // @media (max-width: 620px) {
+  //   width: 50px;
+  //   height: 105px;
+  //   flex-direction: column;
+  //   justify-content: space-evenly;
+  //   padding: 20px;
+  //   text-align: center;
+  //   margin-right: 15px;
+  //   margin: 10px 1vh;
+  // }
 
 
   transition: all 0.3s ease;
@@ -201,7 +201,7 @@ export const CheckBoxGroup = styled.div`
 
   @media (max-width: 945px) {
     justify-content: center;
-    flex-wrap: nowrap;
+    // flex-wrap: nowrap;
     min-width: auto;
   }
 `
@@ -221,12 +221,12 @@ export const CheckBoxGroupInner = styled.div`
 `
 
 export const Icon = styled(Image)`
-  width: 50px;
-  height: auto;
-  // margin-left: 10px;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 
   @media (max-width: 850px) {
-    margin-left: 0
+    margin-left: 0;
   }
 `
 export const TextDesc = styled.h4`
@@ -242,9 +242,9 @@ export const TextDesc = styled.h4`
 `
 
 export const RadioButton = styled(Radio)`
-display: flex;
-align-items: center;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 19px;
 
 .ant-radio-inner {
   border: 1px solid #FFFFFF; 
@@ -266,7 +266,7 @@ align-items: center;
 }
 
 .ant-radio-wrapper {
-  margin-left: 20px;
+  margin-left: 19px;
 }
 
 @media (max-width: 850px) {
@@ -283,7 +283,7 @@ export const LabelContent = styled.div`
   color: #fff;
   font-family: var(--font-mohave);
 
- @media (max-width: 620px) {
-    flex-direction: column;
-  }
+//  @media (max-width: 620px) {
+//     flex-direction: column;
+//   }
 `

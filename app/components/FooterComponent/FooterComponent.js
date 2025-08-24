@@ -24,7 +24,7 @@ const FooterComponent = () => {
       <LogoFull href="/product/melena-de-leon-capsules"> 
         <LogoItself src={Logo} alt="El logo de Cultura Líquida" priority />
       </LogoFull>
-      <NavigationComponent isfooter={true.toString()} />
+      <NavigationComponent $isfooter={true.toString()} />
       <ContactWrapper>
         <StyledLink href="https://t.me/cultura_liquida" target="_blank" aria-label="Telegram"><Tg  isDark /></StyledLink>
         <StyledLink href="https://wa.me/573117662419" target="_blank" aria-label="WhatsApp"><Wa isDark /></StyledLink>

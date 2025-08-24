@@ -66,7 +66,15 @@ const Complex: FC = () => {
     <ComplexSection>
       <AllWrap>
         <ImgDesctopWrapper>
-          <Image sizes='100vw' src={imgC9} priority alt='El complejo de imágenes de los productos' width={400} height={560}/>
+          <Image 
+            sizes='100vw' 
+            src={imgC9} 
+            priority 
+            alt='El complejo de imágenes de los productos' 
+            width={400} 
+            height={560}
+            style={{ objectFit: 'contain' }}
+          />
         </ImgDesctopWrapper>
         <RightContentWrap>
             <TitleWrap>
@@ -78,7 +86,15 @@ const Complex: FC = () => {
               </DiscountText>
             </TitleWrap>
             <ImgMobileWrapper> 
-              <ImgMobile sizes='100vw' src={imgC10} priority alt='El complejo de imágenes de los productos' width={620} height={400}/>
+              <ImgMobile 
+                sizes='100vw' 
+                src={imgC10} 
+                priority 
+                alt='El complejo de imágenes de los productos' 
+                width={600} 
+                height={400}
+                style={{ objectFit: 'contain' }}
+              />
             </ImgMobileWrapper>
             <TwoCardwrap>
               <ComplexItemsWrap>
@@ -90,7 +106,13 @@ const Complex: FC = () => {
                         <Title>{title}</Title>
                         <LearnMoreWrap key={title + `${index + 1}`.toString()}>
                           <LearnMoreText>Leer más</LearnMoreText>
-                          <ArrowIcon src={imgC} alt='La imagen del botón' />
+                          <ArrowIcon 
+                            src={imgC} 
+                            alt='La imagen del botón' 
+                            width={15} 
+                            height={15}
+                            style={{ objectFit: 'contain' }}
+                          />
                         </LearnMoreWrap>
                       </ArrowButtons>
                     </ThreeItemsWrap>
@@ -111,7 +133,13 @@ const Complex: FC = () => {
                           onChange={() => rechecking(id)}
                         >
                           <LabelContent>
-                            <Icon src={icon} alt={type}/>
+                            <Icon 
+                              src={icon} 
+                              alt={type}
+                              width={60} 
+                              height={60}
+                              style={{ objectFit: 'contain' }}
+                            />
                             <TextDesc>{type}</TextDesc>
                           </LabelContent>
                         </RadioButton>
@@ -129,7 +157,6 @@ const Complex: FC = () => {
     </ComplexSection>
   )
 }
-
 
 export default Complex
 

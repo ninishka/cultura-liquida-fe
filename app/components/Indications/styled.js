@@ -7,7 +7,6 @@ export const IndicationsSection = styled.section`
   flex-direction: row-reverse;
   border-radius: 16px;
   border: 1px solid #9F9F9F;
-
   background-color: #2D2D2D;
   line-height: 17.6px;
 
@@ -35,8 +34,10 @@ export const IconWrapper = styled.div`
 `
 
 export const IconIndications = styled(Image)`
-  height: 300px;
-  width: 300px;
+  // height: 300px;
+  // width: 300px;
+  object-fit: contain;
+  
   @media (max-width:500px) {
     height: 200px;
     width: 200px;
@@ -59,8 +60,9 @@ export const Title = styled.h2`
   font-size: 36px;
   font-weight: 500;
   line-height: 45px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
 `
-
 
 export const IndicationsWrapper = styled.div`
   display: flex;
@@ -75,12 +77,12 @@ export const IndicationsWrapper = styled.div`
   }
 `
 
-
 export const IndicationsDescription = styled.p`
   background-color: #333333;
   border-radius: 16px;
   margin: 0 20px 10px 0;
   padding: 20px;
+  color: #FFFFFF;
 
   @media (max-width: 850px) {
     margin: 0 0 15px;
