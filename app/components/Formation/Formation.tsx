@@ -4,6 +4,7 @@ import React, { FC } from 'react'
 import { useParams } from 'next/navigation';
 import type { FormationProps } from '@/types/types'
 import { init } from '@/app/components/helpers'
+import { IMAGE_OPTIMIZATION } from '@/helpers/constants'
 import {
   FormationSection,
   ContentWrapper,
@@ -41,11 +42,13 @@ const Formation: FC<FormationProps> = ({ formationData, error }) => {
             src={source} 
             height={558} 
             width={486} 
-            // sizes='fill'
             alt='La imagen del producto'
-            priority // hight loading priority
+            priority
+            fetchPriority="high"
             loading="eager"
-            sizes='(max-width: 850px) 100vw, 50vw'
+            //placeholder={IMAGE_OPTIMIZATION.placeholder}
+            blurDataURL={IMAGE_OPTIMIZATION.blurDataURL}
+            sizes={IMAGE_OPTIMIZATION.sizes.mobile}
           />
         </ImageWrapperMobile>
         <Release>Seleccione la presentación del producto:</Release>
@@ -55,9 +58,12 @@ const Formation: FC<FormationProps> = ({ formationData, error }) => {
         <ImageStyled 
           src={source} 
           alt='La imagen del producto'
+          priority
+          fetchPriority="high"
           loading="eager"
-          sizes="(max-width: 1200px) 100vw, 50vw" 
-          priority // hight loading priority
+          //placeholder={IMAGE_OPTIMIZATION.placeholder}
+          blurDataURL={IMAGE_OPTIMIZATION.blurDataURL}
+          sizes={IMAGE_OPTIMIZATION.sizes.desktop}
         />
       </ImageWrapperDesktop>
     </FormationSection>

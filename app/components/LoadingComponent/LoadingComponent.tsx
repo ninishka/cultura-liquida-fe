@@ -17,12 +17,12 @@ const LoadingComponent: React.FC<LoadingComponentProps> = ({
   text = 'Cargando...'
 }) => {
   return (
-    <Container fullScreen={fullScreen}>
+    <Container $fullScreen={fullScreen}>
       <Content>
         <SpinnerWrapper>
-          <Spinner size={size} color={color} />
+          <Spinner $size={size} $color={color} />
         </SpinnerWrapper>
-        {text && <LoadingText color={color}>{text}</LoadingText>}
+        {text && <LoadingText $color={color}>{text}</LoadingText>}
       </Content>
     </Container>
   );
@@ -48,11 +48,11 @@ const pulse = keyframes`
   }
 `;
 
-const Container = styled.div<{ fullScreen: boolean }>`
+const Container = styled.div<{ $fullScreen: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ fullScreen }) => fullScreen && `
+  ${({ $fullScreen }) => $fullScreen && `
     position: fixed;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@ const Container = styled.div<{ fullScreen: boolean }>`
     background: rgba(0, 0, 0, 0.7);
     z-index: 1000;
   `}
-  ${({ fullScreen }) => !fullScreen && `
+  ${({ $fullScreen }) => !$fullScreen && `
     min-height: 200px;
     width: 100%;
   `}
@@ -86,17 +86,17 @@ const getSpinnerSize = (size: string) => {
   }
 };
 
-const Spinner = styled.div<{ size: string, color: string }>`
-  width: ${props => getSpinnerSize(props.size)};
-  height: ${props => getSpinnerSize(props.size)};
+const Spinner = styled.div<{ $size: string, $color: string }>`
+  width: ${props => getSpinnerSize(props.$size)};
+  height: ${props => getSpinnerSize(props.$size)};
   border: 4px solid rgba(242, 201, 76, 0.3);
   border-radius: 50%;
-  border-top-color: ${props => props.color};
+  border-top-color: ${props => props.$color};
   animation: ${rotate} 1s ease-in-out infinite;
 `;
 
-const LoadingText = styled.div<{ color: string }>`
-  color: ${props => props.color};
+const LoadingText = styled.div<{ $color: string }>`
+  color: ${props => props.$color};
   font-size: 16px;
   font-weight: 500;
   animation: ${pulse} 1.5s ease-in-out infinite;

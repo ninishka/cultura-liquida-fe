@@ -6,7 +6,6 @@ import Wa from '@/app/components/IconComponents/WaIcon'
 import Ph from '@/app/components/IconComponents/PhIcon'
 import Inst from '@/app/components/IconComponents/InstIcon'
 import Logo from '@/app/icons/logo_full 1.svg'
-import { useGetProductQuery } from "@/lib/redux/slices/api";
 import {
   LogoFull,
   LogoItself,
@@ -19,12 +18,10 @@ import {
 } from './styled'
 
 const FooterComponent = () => {
-  const { data } = useGetProductQuery('');
-
   return (
     <FooterFull>
       <HeaderLikeFooter>
-      <LogoFull href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'} > 
+      <LogoFull href="/product/melena-de-leon-capsules"> 
         <LogoItself src={Logo} alt="El logo de Cultura Líquida" priority />
       </LogoFull>
       <NavigationComponent isfooter={true.toString()} />

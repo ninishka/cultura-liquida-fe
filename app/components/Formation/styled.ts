@@ -80,14 +80,15 @@ export const ContentWrapper = styled.div`
 
 export const ImageWrapperDesktop = styled.div`
   width: 45%;
-  height: 45%;
+  display: block;
+  min-height: 558px; /* Фиксированная высота */
+  position: relative;
 
   @media (max-width: 1200px) {
     margin: 2vw;
     width: 60%;
     height: 60%;
   }
-
   @media (max-width: 945px) {
     display: none;
   }
@@ -95,6 +96,8 @@ export const ImageWrapperDesktop = styled.div`
 export const ImageWrapperMobile = styled.div`
   width: 45%;
   display: none;
+  min-height: 558px; /* Фиксированная высота для предотвращения layout shifts */
+  position: relative;
 
   @media (max-width: 945px) {
     display: flex;
@@ -102,11 +105,13 @@ export const ImageWrapperMobile = styled.div`
     width: auto;
     max-width: 500px;
     margin: 0 auto;
+    min-height: 400px;
   }
 
   @media (max-width: 850px) {
     width: auto;
     display: flex;
+    min-height: 350px;
   }
 `
 
@@ -117,6 +122,8 @@ export const ImageStyled = styled(Image)`
   width: -webkit-fill-available;
   max-width: 750px;
   margin-bottom: 6vw;
+  /* Предотвращаем layout shifts */
+  aspect-ratio: 486/558;
 
   @media (max-width: 945px) {
     margin-bottom: auto;
