@@ -36,6 +36,8 @@ const Benefits: FC<BenefitsProps> = ({ benefitsHeaderData, benefitsCardsData, be
               src={src}
               sizes="100vw"
               alt={description}   
+              width={120}
+              height={120}
               // placeholder="blur" // just img hightlighting on loading time
             />
           </BenefitIconWrapper>

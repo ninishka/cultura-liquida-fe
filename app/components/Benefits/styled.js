@@ -124,7 +124,7 @@ export const Card = styled.div`
   }
 `
 export const BenefitIcon = styled(Image)`
-  width: 100%;
+  width: auto;
   height: auto
 `
 

@@ -95,7 +95,7 @@ export interface IconProps {
 
 export interface NavigationProps {
   showMenu?: boolean;
-  isfooter?: boolean;
+  $isfooter?: boolean;
   isselected?: boolean | string;
   isSticky?: boolean;
   style?: Record<string, string>;

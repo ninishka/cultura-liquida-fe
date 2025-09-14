@@ -80,7 +80,9 @@ const ModalComponent = ({data}) => {
             }}>
               <Image 
                 src={img55} 
-                fill={true} 
+                fill={true}
+                //width={800}
+                //height={300}
                 alt='Imagen de fondo del carrito' 
                 priority // hight loading priority
                 sizes='100vh'

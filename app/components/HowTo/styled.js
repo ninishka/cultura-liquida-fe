@@ -9,7 +9,7 @@ export const HowToSection = styled.section`
   }
 
   @media (max-width: 2560px) {
-    margin: 40vh 0;
+    margin: 20vh 0px 30vw;
   }
 
   @media (max-width: 1100px) {
@@ -129,8 +129,8 @@ export const SecondDesc = styled.p`
 `
 
  export const ArrowIcon = styled(Image)`
- width: auto;
- height: auto;
+  width: auto;
+  height: auto;
 `
 
 export const LeaveReview = styled.div`

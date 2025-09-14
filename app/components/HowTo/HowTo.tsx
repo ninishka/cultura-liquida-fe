@@ -25,7 +25,7 @@ const HowTo: FC = () => (
     {howToCardsData.map(({img1, description, description2 }, index) => (
       <Fragment key={description}>
         <CardsWrapper>
-          <HowToImage src={img1} alt={`Paso-${index + 1} del pedido`}/>
+          <HowToImage src={img1} alt={`Paso-${index + 1} del pedido`} width={160} height={160}/>
           <DescWrapper>
             <HowToDesc>{description}</HowToDesc>
             <SecondDesc>{description2}</SecondDesc>
@@ -33,12 +33,12 @@ const HowTo: FC = () => (
         </CardsWrapper>
         {index < howToCardsData.length - 1 && (
           <First>
-            <Image src={arrowNext} alt='Luego' />
+            <Image src={arrowNext} alt='Luego' width={15} height={15}/>
           </First>
         )}
         {index < howToCardsData.length - 1 && index !== 1 && (
           <Second>
-            <Image src={arrowNext} alt='Luego' />
+            <Image src={arrowNext} alt='Luego' width={15} height={15}/>
           </Second>
         )}
       </Fragment> 

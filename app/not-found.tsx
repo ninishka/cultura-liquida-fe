@@ -6,18 +6,14 @@ import Image from 'next/image'
 import img404 from '@/app/icons/404error.svg'
 import styled from 'styled-components'
 import ArrowPrev from '@/app/components/IconComponents/ArrowPrev'
-import { useGetProductQuery } from "@/lib/redux/slices/api";
-import LoadingComponent from '@/app/components/LoadingComponent/LoadingComponent';
 
 const NotFound: FC = () => {
-  const { data, isLoading } = useGetProductQuery('');
-  if (isLoading) return <LoadingComponent size="small" text="" />;
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center'}}>
       <Wrapper>
         <Title style={{ marginBottom: 10, textTransform: 'uppercase'}}>Página no encontrada</Title>
-        <BackLink href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
+        <BackLink href='/'>
           <ArrowPrev aria-label="Back" />
           <p style={{ marginLeft: 10, textTransform: 'uppercase'}}>Devolver</p>
         </BackLink>
@@ -27,7 +23,8 @@ const NotFound: FC = () => {
         src={img404} 
         alt='La imagen Página no encontrada'
         loading="eager"
-        // sizes="(max-width: 1200px) 100vw, 50vw" 
+        width={606}
+        height={606}
         priority // hight loading priority 
       />
     </div>

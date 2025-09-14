@@ -209,8 +209,8 @@ export const LearnMoreText = styled.p`
 `
 
 export const ArrowIcon = styled(Image)`
-  width: auto;
-  margin-top: 16px;
+  // width: auto;
+  // margin-top: 16px;
 `
 
 export const ArrowButtons = styled.div`
@@ -278,7 +278,7 @@ export const Item = styled.div`
 `
 
 export const Icon = styled(Image)`
-  width: 50px;
+  // width: 50px;
   height: auto;
   margin-left: 10px;
 `
@@ -327,8 +327,13 @@ export const RadioButton = styled(Radio)`
 `
 
 export const LabelContent = styled.div`
- display: flex;
- flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  font-family: var(--font-mohave);
+
 `
 
 export const FormationWrap = styled.div`

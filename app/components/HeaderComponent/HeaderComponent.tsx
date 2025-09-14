@@ -3,7 +3,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import { toggleShowCart, toggleShowMenu } from '@/lib/redux/slices/cartSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store/hooks'
-import { useGetProductQuery } from "@/lib/redux/slices/api";
 import type { NavigationProps } from '@/types/types'
 import NavigationComponent from '@/app/components/NavigationComponent'
 
@@ -28,7 +27,6 @@ import {
 const HeaderComponent: FC<NavigationProps> = () => {
   const dispatch = useAppDispatch()
   const { cartItems, showMenu } = useAppSelector(state => state.cart);
-  const { data } = useGetProductQuery('');
   const [isSticky, setIsSticky] = useState(false);
   const [highlightKey, setHighlightKey] = useState(0);
   
@@ -48,7 +46,7 @@ const HeaderComponent: FC<NavigationProps> = () => {
 
   return (
     <HeaderFull>
-      <LogoFull href={data?.[0]?.slug ? `/product/${data?.[0]?.slug}` : '/'}>
+      <LogoFull href="/product/melena-de-leon-capsules">
         <LogoItself src={Logo} alt="El logotipo de Cultura Líquida" priority />
       </LogoFull>
       

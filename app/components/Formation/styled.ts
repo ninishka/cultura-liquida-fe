@@ -26,16 +26,16 @@ export const StyledItem = styled.div<ProductItemProps>`
     width: 168px;
   }
 
-  @media (max-width: 620px) {
-    width: 50px;
-    height: 105px;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 20px;
-    text-align: center;
-    margin-right: 15px;
-    margin: 10px 1vh;
-  }
+  // @media (max-width: 620px) {
+  //   width: 50px;
+  //   height: 105px;
+  //   flex-direction: column;
+  //   justify-content: space-evenly;
+  //   padding: 20px;
+  //   text-align: center;
+  //   margin-right: 15px;
+  //   margin: 10px 1vh;
+  // }
 
 
   transition: all 0.3s ease;
@@ -80,14 +80,15 @@ export const ContentWrapper = styled.div`
 
 export const ImageWrapperDesktop = styled.div`
   width: 45%;
-  height: 45%;
+  display: block;
+  min-height: 558px; /* Фиксированная высота */
+  position: relative;
 
   @media (max-width: 1200px) {
     margin: 2vw;
     width: 60%;
     height: 60%;
   }
-
   @media (max-width: 945px) {
     display: none;
   }
@@ -95,6 +96,8 @@ export const ImageWrapperDesktop = styled.div`
 export const ImageWrapperMobile = styled.div`
   width: 45%;
   display: none;
+  min-height: 558px; /* Фиксированная высота для предотвращения layout shifts */
+  position: relative;
 
   @media (max-width: 945px) {
     display: flex;
@@ -102,11 +105,13 @@ export const ImageWrapperMobile = styled.div`
     width: auto;
     max-width: 500px;
     margin: 0 auto;
+    min-height: 400px;
   }
 
   @media (max-width: 850px) {
     width: auto;
     display: flex;
+    min-height: 350px;
   }
 `
 
@@ -117,6 +122,8 @@ export const ImageStyled = styled(Image)`
   width: -webkit-fill-available;
   max-width: 750px;
   margin-bottom: 6vw;
+  /* Предотвращаем layout shifts */
+  aspect-ratio: 486/558;
 
   @media (max-width: 945px) {
     margin-bottom: auto;
@@ -194,7 +201,7 @@ export const CheckBoxGroup = styled.div`
 
   @media (max-width: 945px) {
     justify-content: center;
-    flex-wrap: nowrap;
+    // flex-wrap: nowrap;
     min-width: auto;
   }
 `
@@ -214,12 +221,12 @@ export const CheckBoxGroupInner = styled.div`
 `
 
 export const Icon = styled(Image)`
-  width: 50px;
-  height: auto;
-  margin-left: 10px;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 
   @media (max-width: 850px) {
-    margin-left: 0
+    margin-left: 0;
   }
 `
 export const TextDesc = styled.h4`
@@ -235,9 +242,9 @@ export const TextDesc = styled.h4`
 `
 
 export const RadioButton = styled(Radio)`
-display: flex;
-align-items: center;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 19px;
 
 .ant-radio-inner {
   border: 1px solid #FFFFFF; 
@@ -259,7 +266,7 @@ align-items: center;
 }
 
 .ant-radio-wrapper {
-  margin-left: 20px;
+  margin-left: 19px;
 }
 
 @media (max-width: 850px) {
@@ -268,11 +275,15 @@ align-items: center;
 `
 
 export const LabelContent = styled.div`
- display: flex;
- flex-direction: row;
- align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  font-family: var(--font-mohave);
 
- @media (max-width: 620px) {
-    flex-direction: column;
-  }
+//  @media (max-width: 620px) {
+//     flex-direction: column;
+//   }
 `
