@@ -116,7 +116,6 @@ export const Card = styled.div`
 
   @media (max-width: 850px) {
     height: 166px;
-    /* width: 195px; */
   }
 
   @media (max-width: 500px) {
@@ -132,6 +131,8 @@ export const BenefitIcon = styled(Image)`
 export const BenefitIconWrapper = styled.div`
   width: 100px;
   height: 100px;
+  display: flex;
+  justify-content: center;
   
   @media (max-width: 850px) {
     width: 76px;
